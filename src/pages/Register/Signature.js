@@ -37,7 +37,7 @@ const Signature = () => {
 
         <div className="ml-16 w-1/2">
           <Button
-            buttonText="Upload Now"
+            buttonText="Upload Nowss"
             className="rounded-2xl"
             onClick={goToNext}
           />
