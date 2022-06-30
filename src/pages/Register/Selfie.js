@@ -12,8 +12,8 @@ const Selfie = () => {
   };
 
   return (
-    <>
-      <div className="m-auto md:w-[80%] lg:w-[70%] xl:w-[54%] md:mt-16 lg:mt-20 xl:mt-24">
+    <div className="w-full h-screen register-bg">
+      <div className="m-auto md:w-[80%] lg:w-[70%] xl:w-[54%] mt-16">
         <p className="text-redOne font-semibold md:text-4xl lg:text-5xl xl:text-[50px] pb-10">
           Upload Selfie
         </p>
@@ -43,7 +43,7 @@ const Selfie = () => {
           />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

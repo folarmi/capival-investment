@@ -2,3 +2,28 @@
   font-family: "Montserrat", sans-serif;
   /* overflow: hidden; */
 }
+
+* Hide scrollbar for Chrome,
+Safari and Opera */ .no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.login-bg {
+  background-image: url("./icons/loginBg.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.register-bg {
+  background-image: url("./icons/registerBg.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

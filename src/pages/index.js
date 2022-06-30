@@ -7,3 +7,5 @@ export * from "./Register/ContactDetails";
 export * from "./Register/ProfileInformation";
 export * from "./Register/Selfie";
 export * from "./Register/Signature";
+export * from "./Dashboard/index";
+export * from "./Wallet/index";

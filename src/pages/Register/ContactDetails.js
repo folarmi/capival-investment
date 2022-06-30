@@ -1,5 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import { CustomSelect } from "../../atoms";
 
 import { Button } from "../../atoms/Button";
 import { RegisterInput } from "../../atoms/RegisterInput";
@@ -12,9 +13,14 @@ const ContactDetails = () => {
     dispatch(handleNextButton());
   };
 
+  const maritalStatus = [
+    { value: "Single", label: "Single" },
+    { value: "Married", label: "Married" },
+  ];
+
   return (
-    <>
-      <div className="m-auto md:w-[80%] lg:w-[70%] xl:w-[54%] md:mt-16 lg:mt-20 xl:mt-24">
+    <div className="w-full h-screen register-bg">
+      <div className="m-auto md:w-[80%] lg:w-[70%] xl:w-[54%] mt-16">
         <p className="text-redOne font-semibold md:text-4xl lg:text-5xl xl:text-[50px] pb-10">
           Contact Details
         </p>
@@ -35,6 +41,17 @@ const ContactDetails = () => {
           icon={process.env.PUBLIC_URL + "assets/icons/home.svg"}
         />
 
+        <div className="mt-8 w-3/4">
+          <CustomSelect placeholder="State" options={maritalStatus} />
+        </div>
+
+        <div className="mt-8 w-3/4">
+          <CustomSelect
+            placeholder="Local Govt. Area"
+            options={maritalStatus}
+          />
+        </div>
+
         <div className="mt-16 w-1/2">
           <Button
             buttonText="Continue"
@@ -43,7 +60,7 @@ const ContactDetails = () => {
           />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -15,11 +15,12 @@ module.exports = {
         blueOne: "#A4B5E233",
         blueTwo: "#3B58A8",
         blueThree: "#8EA8DD",
+        blueFour: "#CBE1FD",
         redOne: "#C6211B",
       },
-      backgroundImage: {
-        unset: "unset",
-      },
+      // backgroundImage: {
+      //   login: "url('../../icons/loginBg.png')",
+      // },
     },
   },
   plugins: [],

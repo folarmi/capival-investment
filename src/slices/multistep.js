@@ -2,6 +2,17 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   value: 1,
+  // registerValues: {
+  //   first_name: null,
+  //   last_name: null,
+  //   email: null,
+  //   bvn: null,
+  //   gender: null,
+  //   date_of_birth: null,
+  //   phone: null,
+  //   address: null,
+  // },
+  bvn: null,
 };
 
 export const multiStepSlice = createSlice({
@@ -19,11 +30,18 @@ export const multiStepSlice = createSlice({
     handleNextByCount: (state, action) => {
       state.value += action.payload;
     },
+    handleBVN: (state, action) => {
+      state.bvn = action.payload;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
 const { reducer, actions } = multiStepSlice;
-export const { handleNextButton, handleBackButton, handleNextByCount } =
-  actions;
+export const {
+  handleNextButton,
+  handleBackButton,
+  handleNextByCount,
+  handleBVN,
+} = actions;
 export default reducer;

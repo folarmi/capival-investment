@@ -1,5 +1,8 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import * as Yup from "yup";
+import { useDispatch, useSelector } from "react-redux";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 import { Button } from "../../atoms/Button";
 import { RegisterInput } from "../../atoms/RegisterInput";
@@ -7,14 +10,28 @@ import { handleNextButton } from "../../slices/multistep";
 
 const CreateProfile = () => {
   const dispatch = useDispatch();
+  const bvnNumber = useSelector((state) => state.multiStep.registerValues);
 
-  const goToNext = () => {
+  const validationSchema = Yup.object().shape({
+    bvn: Yup.string()
+      .required("BVN is required")
+      .min(11, "The minimum digits of bvn is 11.")
+      .max(11, "The maximum digits of bvn is 11."),
+  });
+
+  const { register, handleSubmit, formState } = useForm({
+    resolver: yupResolver(validationSchema),
+  });
+
+  const submitForm = (values) => {
     dispatch(handleNextButton());
   };
 
+  const { errors } = formState;
+
   return (
-    <>
-      <div className="m-auto md:w-[80%] lg:w-[70%] xl:w-[54%] md:mt-16 lg:mt-20 xl:mt-24">
+    <div className="w-full h-screen register-bg">
+      <div className="m-auto md:w-[80%] lg:w-[70%] xl:w-[54%] mt-16">
         <p className="text-redOne font-semibold md:text-4xl lg:text-5xl xl:text-[50px] pb-10">
           Create your Profile
         </p>
@@ -36,22 +53,25 @@ const CreateProfile = () => {
         </div>
       </section>
 
-      <div className="m-auto mt-8 md:w-[80%] lg:w-[70%] xl:w-[54%]">
-        <RegisterInput placeholder="Enter your BVN" />
+      <form
+        onSubmit={handleSubmit(submitForm)}
+        className="m-auto mt-8 md:w-[80%] lg:w-[70%] xl:w-[54%]"
+      >
+        <RegisterInput
+          placeholder="Enter your BVN"
+          register={register("bvn")}
+          error={errors?.bvn?.message}
+        />
 
         <p className="text-blueTwo font-normal text-sm pt-2">
           You can also dial *565*0# from your mobile phone to get your BVN
         </p>
 
         <div className="mt-16 w-1/2">
-          <Button
-            buttonText="Continue"
-            className="rounded-2xl"
-            onClick={goToNext}
-          />
+          <Button buttonText="Continue" className="rounded-2xl" />
         </div>
-      </div>
-    </>
+      </form>
+    </div>
   );
 };
 
