@@ -6,17 +6,11 @@ const DashboardHeader = () => {
   return (
     <header className="flex items-center bg-blueOne py-4">
       <div className="ml-20 w-[10%] mr-[10%]">
-        <img
-          src={process.env.PUBLIC_URL + "assets/icons/logo.svg"}
-          alt="capival-logo"
-        />
+        <img src="/assets/icons/logo.svg" alt="capival-logo" />
       </div>
 
       <div className="flex items-center mr-[3%]">
-        <img
-          src={process.env.PUBLIC_URL + "assets/icons/avatar.svg"}
-          alt="avatar"
-        />
+        <img src="/assets/icons/avatar.svg" alt="avatar" />
         <p className="text-base text-blueTwo font-normal">
           Hi, <span className="font-semibold">Ayobami</span>{" "}
         </p>
@@ -24,28 +18,16 @@ const DashboardHeader = () => {
 
       <div className="flex items-center mr-[22%]">
         <p className="text-[15pxs] text-blueTwo font-normal w-fit">Show BVN</p>
-        <img
-          src={process.env.PUBLIC_URL + "assets/icons/rightArrow.svg"}
-          alt="avatar"
-        />
+        <img src="/assets/icons/rightArrow.svg" alt="avatar" />
       </div>
 
       <div className="flex items-center">
         <SearchBar />
 
         <div className="flex items-center ml-[5%]">
-          <img
-            src={process.env.PUBLIC_URL + "assets/icons/instagram.svg"}
-            alt="avatar"
-          />
-          <img
-            src={process.env.PUBLIC_URL + "assets/icons/twitter.svg"}
-            alt="avatar"
-          />
-          <img
-            src={process.env.PUBLIC_URL + "assets/icons/facebook.svg"}
-            alt="avatar"
-          />
+          <img src="/assets/icons/instagram.svg" alt="avatar" />
+          <img src="/assets/icons/twitter.svg" alt="avatar" />
+          <img src="/assets/icons/facebook.svg" alt="avatar" />
         </div>
       </div>
     </header>

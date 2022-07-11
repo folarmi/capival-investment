@@ -1,6 +1,6 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
-import { Dashboard, Login, Register, Wallet } from "../pages";
+import { Dashboard, Loans, Login, Register, Wallet } from "../pages";
 import { RequiredAuthDashboard } from "./RequiredAuth";
 
 const Index = () => {
@@ -12,6 +12,7 @@ const Index = () => {
         <Route element={<RequiredAuthDashboard />}>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/wallet" element={<Wallet />} />
+          <Route path="dashboard/loans" element={<Loans />} />
         </Route>
       </Routes>
     </Router>

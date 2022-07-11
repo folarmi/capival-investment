@@ -12,9 +12,9 @@ import { CustomSelect } from "../../atoms";
 const PersonalDetails = () => {
   const dispatch = useDispatch();
 
-  const goToNext = () => {
-    dispatch(handleNextButton());
-  };
+  // const goToNext = () => {
+  //   dispatch(handleNextButton());
+  // };
 
   const gender = [
     { value: "Male", label: "Male" },

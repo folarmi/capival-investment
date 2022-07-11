@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
+// import { useNavigate } from "react-router-dom";
 
 import { NavLink } from "react-router-dom";
 // import { Text } from "../components";
@@ -7,28 +7,28 @@ import { NavLink } from "react-router-dom";
 // import sideArrowDown from "../assets/icons/sideArrowDown.svg";
 
 const SubMenu = ({ item }) => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const [dropDown, setDropDown] = useState(false);
-  const [activeTab, setActiveTab] = useState("Data Consumers");
+  // const [dropDown, setDropDown] = useState(false);
+  // const [activeTab, setActiveTab] = useState("Data Consumers");
 
-  const toggleDropDown = () => {
-    setDropDown(!dropDown);
-  };
+  // const toggleDropDown = () => {
+  //   setDropDown(!dropDown);
+  // };
 
-  const goToPath = (item) => {
-    navigate(item?.path, { replace: true });
-  };
+  // const goToPath = (item) => {
+  //   navigate(item?.path, { replace: true });
+  // };
 
-  const changeActive = (item) => {
-    // console.log(item, "dododo");
-    setActiveTab(item?.item);
-    // console.log(activeTab);
-  };
+  // const changeActive = (item) => {
+  //   // console.log(item, "dododo");
+  //   setActiveTab(item?.item);
+  //   // console.log(activeTab);
+  // };
 
   const changeStroke = (item) => {
     item.useStroke = !item?.useStroke;
-    console.log("yyyy", item.useStroke);
+    // console.log("yyyy", item.useStroke);
   };
 
   return (

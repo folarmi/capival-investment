@@ -27,3 +27,24 @@ Safari and Opera */ .no-scrollbar::-webkit-scrollbar {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+.dashboard-bg {
+  background-image: url("./icons/dashboardTwo.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.sidebar-bg {
+  background-image: url("./icons/sidebarBg.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.wallet-bg {
+  background-image: url("./icons/greenCardBg.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

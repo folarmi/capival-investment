@@ -9,3 +9,4 @@ export * from "./Register/Selfie";
 export * from "./Register/Signature";
 export * from "./Dashboard/index";
 export * from "./Wallet/index";
+export * from "./Loans/index";

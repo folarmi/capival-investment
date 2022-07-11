@@ -1,21 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 // import { useNavigate } from "react-router-dom";
 // import { NavLink } from "react-router-dom";
 
 import { SidebarMenuItems } from "../data/Sidebar";
-import { Text } from "../components";
+// import { Text } from "../components";
 import { SubMenu } from "./SubMenu";
 
 const Sidebar = (props) => {
   // const navigate = useNavigate();
 
   // const [dropDown, setDropDown] = useState(false);
-  const [logoutModal, setLogoutModal] = useState(false);
+  // const [logoutModal, setLogoutModal] = useState(false);
 
-  const toggleLogoutModal = () => {
-    // navigate("/logout", { replace: true });
-    setLogoutModal(!logoutModal);
-  };
+  // const toggleLogoutModal = () => {
+  //   // navigate("/logout", { replace: true });
+  //   setLogoutModal(!logoutModal);
+  // };
 
   return (
     <div

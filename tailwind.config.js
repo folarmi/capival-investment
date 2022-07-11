@@ -16,7 +16,10 @@ module.exports = {
         blueTwo: "#3B58A8",
         blueThree: "#8EA8DD",
         blueFour: "#CBE1FD",
+        blueFive: "#699DEE",
         redOne: "#C6211B",
+        redTwo: "#AE1F24",
+        orange: "#C06B29",
       },
       // backgroundImage: {
       //   login: "url('../../icons/loginBg.png')",

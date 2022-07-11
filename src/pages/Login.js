@@ -25,12 +25,12 @@ const Login = () => {
 
 export { Login };
 
-{
-  /* <div
-className="w-full overflow-x-scroll md:overflow-x-hidden bg-contain bg-no-repeat pl-6 lg:pr-0 2xl:px-6 py-8 md:py-10 flex items-center mb-12 md:mb-16"
-style={{
-  backgroundImage: `url(${dashboardBgImage})`,
-  backgroundSize: "cover",
-}}
-> */
-}
+// {
+//   /* <div
+// className="w-full overflow-x-scroll md:overflow-x-hidden bg-contain bg-no-repeat pl-6 lg:pr-0 2xl:px-6 py-8 md:py-10 flex items-center mb-12 md:mb-16"
+// style={{
+//   backgroundImage: `url(${dashboardBgImage})`,
+//   backgroundSize: "cover",
+// }}
+// > */
+// }

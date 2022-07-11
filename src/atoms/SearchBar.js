@@ -14,7 +14,7 @@ const SearchBar = ({ placeholder }) => {
         className="py-1 pl-10 w-full bg-white rounded-3xl placeholder-blueTwo"
       />
       <img
-        src={process.env.PUBLIC_URL + "assets/icons/search.svg"}
+        src="/assets/icons/search.svg"
         alt="search"
         className="absolute ml-[9%] top-2"
       />

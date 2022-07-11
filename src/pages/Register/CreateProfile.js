@@ -1,6 +1,6 @@
 import React from "react";
 import * as Yup from "yup";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -10,7 +10,7 @@ import { handleNextButton } from "../../slices/multistep";
 
 const CreateProfile = () => {
   const dispatch = useDispatch();
-  const bvnNumber = useSelector((state) => state.multiStep.registerValues);
+  // const bvnNumber = useSelector((state) => state.multiStep.registerValues);
 
   const validationSchema = Yup.object().shape({
     bvn: Yup.string()

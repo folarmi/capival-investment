@@ -43,9 +43,7 @@ const Input = ({
           readOnly={readOnly}
         />
       </label>
-      {/* <input
-       
-      /> */}
+
       <span>
         <p className="text-red-500 text-xs"> {error}</p>
       </span>
