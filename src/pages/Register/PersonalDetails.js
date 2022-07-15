@@ -1,42 +1,96 @@
-import React from "react";
+import React, { useEffect } from "react";
 import * as Yup from "yup";
-import { useDispatch } from "react-redux";
-import { useForm } from "react-hook-form";
+import Select from "react-select";
+import { useDispatch, useSelector } from "react-redux";
+import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { components } from "react-select";
 
 import { Button } from "../../atoms/Button";
 import { RegisterInput } from "../../atoms/RegisterInput";
 import { handleNextButton } from "../../slices/multistep";
-import { CustomSelect } from "../../atoms";
+import { getGenderAsync, getMaritalStatusAsync } from "../../slices/utils";
+
+const { Option } = components;
+export const IconOption = (props) => (
+  <Option {...props}>
+    <div className="flex items-center cursor-pointer">
+      <div className="ml-2">{props.data.label}</div>
+    </div>
+  </Option>
+);
+
+const colourStyles = {
+  control: (styles) => ({
+    ...styles,
+    backgroundColor: "white",
+    borderRadius: "16px",
+    minHeight: 53,
+    border: "1px solid rgba(59, 88, 168, 0.5)",
+    paddingLeft: "40px",
+    color: "8EA8DD",
+  }),
+  placeholder: (styles) => ({
+    ...styles,
+    color: "#8EA8DD",
+    fontSize: "14px",
+  }),
+};
 
 const PersonalDetails = () => {
   const dispatch = useDispatch();
 
-  // const goToNext = () => {
-  //   dispatch(handleNextButton());
-  // };
+  const { bvnData } = useSelector((state) => state.register);
+  const { gender, maritalStatus } = useSelector((state) => state.utils);
 
-  const gender = [
-    { value: "Male", label: "Male" },
-    { value: "Female", label: "Female" },
-  ];
+  const genderData = gender.map((single) => {
+    return {
+      value: single.Gender,
+      label: single.Gender,
+    };
+  });
 
-  const maritalStatus = [
-    { value: "Single", label: "Single" },
-    { value: "Married", label: "Married" },
-  ];
+  const maritalStatusData = maritalStatus.map((single) => {
+    return {
+      value: single.ID,
+      label: single.Status,
+    };
+  });
 
   const validationSchema = Yup.object().shape({
-    first_name: Yup.string().required("First name is required"),
-    last_name: Yup.string().required("Last name is required"),
-    date_of_birth: Yup.string().required("Date of birth is required"),
+    // first_name: Yup.string().required("First name is required"),
+    // last_name: Yup.string().required("Last name is required"),
+    // date_of_birth: Yup.string().required("Date of birth is required"),
     // gender: Yup.string().required("Gender is required"),
     // marital_status: Yup.string().required("Marital Status is required"),
   });
 
-  const { register, handleSubmit, formState } = useForm({
+  const { register, handleSubmit, formState, reset, control } = useForm({
     resolver: yupResolver(validationSchema),
+    defaultValues: {
+      firstname: bvnData?.firstname,
+      lastname: bvnData?.lastname,
+      middlename: bvnData?.middlename,
+      phone: bvnData?.phone,
+      dob: bvnData?.dob,
+    },
   });
+
+  useEffect(() => {
+    const defaultValues = {
+      firstname: bvnData?.firstname,
+      lastname: bvnData?.lastname,
+      middlename: bvnData?.middlename,
+      phone: bvnData?.phone,
+      dob: bvnData?.dob,
+    };
+    reset(defaultValues);
+  }, [bvnData, reset]);
+
+  useEffect(() => {
+    dispatch(getGenderAsync());
+    dispatch(getMaritalStatusAsync());
+  }, []);
 
   const submitForm = (values) => {
     dispatch(handleNextButton());
@@ -44,7 +98,6 @@ const PersonalDetails = () => {
   };
 
   const { errors } = formState;
-  console.log("error", errors);
 
   return (
     <form
@@ -71,23 +124,26 @@ const PersonalDetails = () => {
       <div className="m-auto mt-8 md:w-[80%] lg:w-[70%] xl:w-[54%]">
         <RegisterInput
           placeholder="First Name"
-          register={register("first_name")}
-          error={errors?.first_name?.message}
+          register={register("firstname")}
+          error={errors?.firstname?.message}
+          readOnly
         />
 
         <div className="mt-8">
           <RegisterInput
             placeholder="Middle Name"
-            register={register("middle_name")}
-            error={errors?.middle_name?.message}
+            register={register("middlename")}
+            error={errors?.middlename?.message}
+            readOnly
           />
         </div>
 
         <div className="mt-8">
           <RegisterInput
             placeholder="Last Name"
-            register={register("last_name")}
-            error={errors?.last_name?.message}
+            register={register("lastname")}
+            error={errors?.lastname?.message}
+            readOnly
           />
         </div>
       </div>
@@ -109,29 +165,46 @@ const PersonalDetails = () => {
           <RegisterInput
             placeholder="Date of Birth"
             ifIcon
-            register={register("date_of_birth")}
-            error={errors?.date_of_birth?.message}
+            readOnly
+            register={register("dob")}
+            error={errors?.dob?.message}
             icon="/assets/icons/calendar.svg"
           />
         </div>
 
         <div className="mt-8 w-3/4">
-          <CustomSelect
-            // placeholder="Sex"
-            options={gender}
-            defaultValue="test"
-            // value="gender"
-            // register={register("gender")}
-            // error={errors?.gender?.message}
+          <Controller
+            control={control}
+            name="gender"
+            render={({ field: { onChange, onBlur, value, name, ref } }) => (
+              <Select
+                onBlur={onBlur} // notify when input is touched
+                onChange={onChange} // send value to hook form
+                checked={value}
+                inputRef={ref}
+                options={genderData}
+                placeholder="Gender"
+                styles={colourStyles}
+              />
+            )}
           />
         </div>
 
         <div className="mt-8 w-3/4">
-          <CustomSelect
-            placeholder="Marital Status"
-            options={maritalStatus}
-            register={register("marital_status")}
-            error={errors?.marital_status?.message}
+          <Controller
+            control={control}
+            name="maritalStatus"
+            render={({ field: { onChange, onBlur, value, name, ref } }) => (
+              <Select
+                onBlur={onBlur}
+                onChange={onChange}
+                checked={value}
+                inputRef={ref}
+                options={maritalStatusData}
+                placeholder="Marital Status"
+                styles={colourStyles}
+              />
+            )}
           />
         </div>
 

@@ -1,16 +1,19 @@
 import React from "react";
 import * as Yup from "yup";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { Button } from "../../atoms/Button";
 import { RegisterInput } from "../../atoms/RegisterInput";
 import { handleNextButton } from "../../slices/multistep";
+import { verifyBVNAsync } from "../../slices/register";
+import { toast } from "react-toastify";
 
 const CreateProfile = () => {
   const dispatch = useDispatch();
-  // const bvnNumber = useSelector((state) => state.multiStep.registerValues);
+
+  const { isVerifyBvnLoading } = useSelector((state) => state.register);
 
   const validationSchema = Yup.object().shape({
     bvn: Yup.string()
@@ -24,7 +27,17 @@ const CreateProfile = () => {
   });
 
   const submitForm = (values) => {
-    dispatch(handleNextButton());
+    dispatch(verifyBVNAsync(values?.bvn))
+      .unwrap()
+      .then((res) => {
+        if (res?.status === true) {
+          toast(res?.message);
+          dispatch(handleNextButton(values?.bvn));
+        }
+      })
+      .catch((err) => {
+        toast.error(err?.message);
+      });
   };
 
   const { errors } = formState;
@@ -68,7 +81,11 @@ const CreateProfile = () => {
         </p>
 
         <div className="mt-16 w-1/2">
-          <Button buttonText="Continue" className="rounded-2xl" />
+          <Button
+            buttonText="Continue"
+            className="rounded-2xl"
+            isLoading={isVerifyBvnLoading}
+          />
         </div>
       </form>
     </div>
@@ -76,3 +93,13 @@ const CreateProfile = () => {
 };
 
 export { CreateProfile };
+
+// bvn: "22154136352"
+// created_at: "2022-07-11T19:26:06.000000Z"
+// dob: "13-01-1994"
+// firstname: "IBRAHIM"
+// id: 2
+// lastname: "OGUNLEYE"
+// middlename: "KOLAWOLE"
+// phone: "07063816498"
+// updated_at: "2022-07-11T19:26:06.000000Z"

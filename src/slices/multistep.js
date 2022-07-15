@@ -2,16 +2,17 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   value: 1,
-  bvn: null,
+  bvnNumber: "",
 };
 
 export const multiStepSlice = createSlice({
   name: "multistep",
   initialState,
   reducers: {
-    handleNextButton: (state) => {
-      state.value < 7 ? (state.value += 1) : (window.location = "/dashboard");
-      state.value += 1;
+    handleNextButton: (state, action) => {
+      state.value <= 7 ? state.value++ : (window.location = "/dashboard");
+      state.bvnNumber = action.payload;
+      // state.value++;
     },
     handleBackButton: (state) => {
       //   state.value === 1 ? (state.value = 1) : (state.value -= 1);

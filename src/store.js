@@ -12,9 +12,13 @@ import {
 import storage from "redux-persist/lib/storage";
 
 import multiStepReducer from "./slices/multistep";
+import registerReducer from "./slices/register";
+import utilsReducer from "./slices/utils";
 
 const reducers = combineReducers({
   multiStep: multiStepReducer,
+  register: registerReducer,
+  utils: utilsReducer,
 });
 
 const persistConfig = {

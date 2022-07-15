@@ -1,15 +1,47 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import * as Yup from "yup";
+import { useDispatch, useSelector } from "react-redux";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 import { Button } from "../../atoms/Button";
 import { RegisterInput } from "../../atoms/RegisterInput";
 import { handleNextButton } from "../../slices/multistep";
+import { toast } from "react-toastify";
+import { bvnOtpVerificationAsync } from "../../slices/register";
 
 const OTPVerification = () => {
   const dispatch = useDispatch();
 
-  const goToNext = () => {
-    dispatch(handleNextButton());
+  const { bvnNumber } = useSelector((state) => state.multiStep);
+  const { isBvnOtpLoading } = useSelector((state) => state.register);
+
+  const validationSchema = Yup.object().shape({
+    otp: Yup.string().required("OTP is required"),
+  });
+
+  const { register, handleSubmit, formState } = useForm({
+    resolver: yupResolver(validationSchema),
+  });
+
+  const { errors } = formState;
+
+  const submitForm = (values) => {
+    const variables = {
+      bvn: bvnNumber,
+      otp: values?.otp,
+    };
+    dispatch(bvnOtpVerificationAsync(variables))
+      .unwrap()
+      .then((res) => {
+        if (res?.status === true) {
+          toast(res?.message);
+          dispatch(handleNextButton());
+        }
+      })
+      .catch((err) => {
+        toast.error(err?.message);
+      });
   };
 
   return (
@@ -32,8 +64,15 @@ const OTPVerification = () => {
         </div>
       </section>
 
-      <div className="m-auto mt-8 md:w-[80%] lg:w-[70%] xl:w-[54%]">
-        <RegisterInput placeholder="Enter OTP" />
+      <form
+        onSubmit={handleSubmit(submitForm)}
+        className="m-auto mt-8 md:w-[80%] lg:w-[70%] xl:w-[54%]"
+      >
+        <RegisterInput
+          placeholder="Enter OTP"
+          register={register("otp")}
+          error={errors?.otp?.message}
+        />
 
         <p className="text-blueTwo font-normal text-sm pt-2">
           Didn’t get a code? <span className="text-secondary">Resend</span>
@@ -43,10 +82,10 @@ const OTPVerification = () => {
           <Button
             buttonText="Continue"
             className="rounded-2xl"
-            onClick={goToNext}
+            isLoading={isBvnOtpLoading}
           />
         </div>
-      </div>
+      </form>
     </div>
   );
 };
