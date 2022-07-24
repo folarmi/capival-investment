@@ -1,10 +1,11 @@
-// import store from "../store";
-
 import axios from "axios";
 import TokenService from "./token.service";
+
 const baseURL = process.env.REACT_APP_BASE_URL_LIVE;
 
 const apiResource = () => {
+  // console.log(store);
+
   const api = axios.create({
     baseURL,
     headers: {
@@ -17,7 +18,8 @@ const apiResource = () => {
 
   api.interceptors.request.use(
     (config) => {
-      const token = localStorage.getItem("accessToken");
+      const token = JSON.parse(TokenService.getUser()?.auth)?.login?.user
+        ?.authorisation[0]?.original?.token;
 
       if (!token) return config;
       config.headers["Authorization"] = `Bearer ${token}`;

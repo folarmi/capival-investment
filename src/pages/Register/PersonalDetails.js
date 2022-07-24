@@ -8,7 +8,7 @@ import { components } from "react-select";
 
 import { Button } from "../../atoms/Button";
 import { RegisterInput } from "../../atoms/RegisterInput";
-import { handleNextButton } from "../../slices/multistep";
+import { handleNextButton, handleGender } from "../../slices/multistep";
 import { getGenderAsync, getMaritalStatusAsync } from "../../slices/utils";
 
 const { Option } = components;
@@ -40,7 +40,7 @@ const colourStyles = {
 const PersonalDetails = () => {
   const dispatch = useDispatch();
 
-  const { bvnData } = useSelector((state) => state.register);
+  const { bvnData } = useSelector((state) => state.auth);
   const { gender, maritalStatus } = useSelector((state) => state.utils);
 
   const genderData = gender.map((single) => {
@@ -57,13 +57,7 @@ const PersonalDetails = () => {
     };
   });
 
-  const validationSchema = Yup.object().shape({
-    // first_name: Yup.string().required("First name is required"),
-    // last_name: Yup.string().required("Last name is required"),
-    // date_of_birth: Yup.string().required("Date of birth is required"),
-    // gender: Yup.string().required("Gender is required"),
-    // marital_status: Yup.string().required("Marital Status is required"),
-  });
+  const validationSchema = Yup.object().shape({});
 
   const { register, handleSubmit, formState, reset, control } = useForm({
     resolver: yupResolver(validationSchema),
@@ -93,8 +87,8 @@ const PersonalDetails = () => {
   }, []);
 
   const submitForm = (values) => {
+    dispatch(handleGender(values?.gender?.value));
     dispatch(handleNextButton());
-    console.log(values);
   };
 
   const { errors } = formState;
@@ -176,7 +170,7 @@ const PersonalDetails = () => {
           <Controller
             control={control}
             name="gender"
-            render={({ field: { onChange, onBlur, value, name, ref } }) => (
+            render={({ field: { onChange, onBlur, value, ref } }) => (
               <Select
                 onBlur={onBlur} // notify when input is touched
                 onChange={onChange} // send value to hook form

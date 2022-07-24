@@ -1,16 +1,7 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { Button } from "../../atoms";
-
-import { handleNextButton } from "../../slices/multistep";
+import { WebcamSignature } from "../../components/WebcamSignature";
 
 const Signature = () => {
-  const dispatch = useDispatch();
-
-  const goToNext = () => {
-    dispatch(handleNextButton());
-  };
-
   return (
     <div className="w-full h-screen register-bg">
       <div className="m-auto md:w-[80%] lg:w-[70%] xl:w-[54%] mt-16">
@@ -28,18 +19,14 @@ const Signature = () => {
         </div>
       </section>
 
-      <div className="flex items-center justify-center m-auto mt-9 md:w-[80%] lg:w-[70%] xl:w-[54%]">
-        <img
-          src={process.env.PUBLIC_URL + "assets/images/signature.svg"}
-          alt="upload-avatar"
-          className="w-1/2 cursor-pointer"
-        />
+      <div className="">
+        <WebcamSignature />
 
-        <div className="ml-16 w-1/2">
+        {/* <div className="ml-16 w-1/2">
           <Button
-            buttonText="Upload Nows"
+            buttonText="Upload Now"
             className="rounded-2xl"
-            onClick={goToNext}
+            // onClick={goToNext}
           />
 
           <Button
@@ -47,7 +34,7 @@ const Signature = () => {
             className="rounded-2xl mt-6"
             onClick={goToNext}
           />
-        </div>
+        </div> */}
       </div>
     </div>
   );

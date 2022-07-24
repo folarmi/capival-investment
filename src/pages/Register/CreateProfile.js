@@ -3,17 +3,17 @@ import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { toast } from "react-toastify";
 
 import { Button } from "../../atoms/Button";
 import { RegisterInput } from "../../atoms/RegisterInput";
 import { handleNextButton } from "../../slices/multistep";
-import { verifyBVNAsync } from "../../slices/register";
-import { toast } from "react-toastify";
+import { verifyBVNAsync } from "../../slices/auth";
 
 const CreateProfile = () => {
   const dispatch = useDispatch();
 
-  const { isVerifyBvnLoading } = useSelector((state) => state.register);
+  const { isVerifyBvnLoading } = useSelector((state) => state.auth);
 
   const validationSchema = Yup.object().shape({
     bvn: Yup.string()

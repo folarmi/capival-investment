@@ -78,9 +78,9 @@ const Table = ({
           ) : (
             <table
               {...getTableProps()}
-              className="w-full overflow-x-auto bg-white rounded-xl"
+              className="w-full overflow-x-auto bg-white border-collapse rounded-2xl overflow-hidden"
             >
-              <thead className="">
+              <thead className="rounded-2xl">
                 {headerGroups.map((headerGroup) => (
                   <tr {...headerGroup.getHeaderGroupProps()}>
                     {headerGroup.headers.map((column) => (

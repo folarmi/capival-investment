@@ -4,13 +4,14 @@ const WalletCard = ({
   title,
   cardName,
   amount,
-  primaryColor,
+  onClick,
   secColor,
   ifAccountName = false,
 }) => {
   return (
     <div
-      className="rounded-lg mr-4 w-[33%] wallet-bg"
+      className="rounded-lg mr-4 w-[33%] wallet-bg cursor-pointer"
+      onClick={onClick}
       style={
         {
           // backgroundColor: primaryColor,

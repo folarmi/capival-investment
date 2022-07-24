@@ -7,6 +7,7 @@ import { SidebarMenuItems } from "../data/Sidebar";
 import { SubMenu } from "./SubMenu";
 
 const Sidebar = (props) => {
+  console.log(props);
   // const navigate = useNavigate();
 
   // const [dropDown, setDropDown] = useState(false);
@@ -23,7 +24,6 @@ const Sidebar = (props) => {
     >
       <div className="mb-8 pb-12">
         {SidebarMenuItems.map((item, index) => {
-          // return <p>tedd</p>;
           return <SubMenu item={item} key={index} props={props} />;
         })}
 

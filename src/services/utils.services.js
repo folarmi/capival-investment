@@ -16,10 +16,16 @@ const getAllStates = async () => {
   return response.data;
 };
 
+const getStateLga = async (id) => {
+  const response = await api.get(`${UrlRoute.getLGAs}/${id}`);
+  return response.data;
+};
+
 const utilsService = {
   getGender,
   getMaritalStatus,
   getAllStates,
+  getStateLga,
 };
 
 export default utilsService;

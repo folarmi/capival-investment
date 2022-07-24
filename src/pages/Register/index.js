@@ -10,7 +10,7 @@ import { Signature } from "./Signature";
 
 const Register = () => {
   const step = useSelector((state) => state.multiStep.value);
-  // let step = 3;
+  // let step = 7;
   return (
     <>
       {step === 1 && <CreateProfile />}

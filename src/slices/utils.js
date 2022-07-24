@@ -49,13 +49,31 @@ export const getAllStates = createAsyncThunk(
   }
 );
 
+export const getStateLGA = createAsyncThunk(
+  "utils/getStateLGA",
+
+  async (values, { rejectWithValue }) => {
+    try {
+      const response = await utilsService.getStateLga(values);
+      return response;
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 const initialState = {
   getGenderLoading: false,
   getMaritalStatusLoading: false,
   getAllStatesLoading: false,
+  getStateLGALoading: false,
   gender: [],
   maritalStatus: [],
   states: [],
+  lgas: [],
 };
 
 const utilsSlice = createSlice({
@@ -93,6 +111,17 @@ const utilsSlice = createSlice({
     },
     [getAllStates.rejected]: (state, action) => {
       state.getAllStatesLoading = false;
+      state.error = action.payload;
+    },
+    [getStateLGA.pending]: (state) => {
+      state.getStateLGALoading = true;
+    },
+    [getStateLGA.fulfilled]: (state, action) => {
+      state.getStateLGALoading = false;
+      state.lgas = action.payload.data;
+    },
+    [getStateLGA.rejected]: (state, action) => {
+      state.getStateLGALoading = false;
       state.error = action.payload;
     },
   },

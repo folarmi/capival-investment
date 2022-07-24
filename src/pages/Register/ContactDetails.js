@@ -1,22 +1,74 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { CustomSelect } from "../../atoms";
+import React, { useEffect } from "react";
+import * as Yup from "yup";
+import { useDispatch, useSelector } from "react-redux";
+import Select from "react-select";
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 import { Button } from "../../atoms/Button";
 import { RegisterInput } from "../../atoms/RegisterInput";
-import { handleNextButton } from "../../slices/multistep";
+import { handleAddress, handleNextButton } from "../../slices/multistep";
+import { getAllStates, getStateLGA } from "../../slices/utils";
+
+const colourStyles = {
+  control: (styles) => ({
+    ...styles,
+    backgroundColor: "white",
+    borderRadius: "16px",
+    minHeight: 53,
+    border: "1px solid rgba(59, 88, 168, 0.5)",
+    paddingLeft: "40px",
+    color: "8EA8DD",
+  }),
+  placeholder: (styles) => ({
+    ...styles,
+    color: "#8EA8DD",
+    fontSize: "14px",
+  }),
+};
 
 const ContactDetails = () => {
   const dispatch = useDispatch();
+  const { states, getStateLGALoading, lgas, getAllStatesLoading } = useSelector(
+    (state) => state.utils
+  );
 
-  const goToNext = () => {
+  const validationSchema = Yup.object().shape({
+    address: Yup.string().required("Address is required"),
+  });
+
+  const { register, handleSubmit, formState, control } = useForm({
+    resolver: yupResolver(validationSchema),
+  });
+
+  const allStatesData = states.map((state) => {
+    return {
+      value: state.Code,
+      label: state.State,
+    };
+  });
+
+  const stateLga = lgas.map((lga) => {
+    return {
+      value: lga,
+      label: lga,
+    };
+  });
+
+  useEffect(() => {
+    dispatch(getAllStates());
+  }, []);
+
+  const getStateValue = (value) => {
+    dispatch(getStateLGA(value?.label));
+  };
+
+  const submitForm = (values) => {
+    dispatch(handleAddress(values?.address));
     dispatch(handleNextButton());
   };
 
-  const maritalStatus = [
-    { value: "Single", label: "Single" },
-    { value: "Married", label: "Married" },
-  ];
+  const { errors } = formState;
 
   return (
     <div className="w-full h-screen register-bg">
@@ -34,32 +86,60 @@ const ContactDetails = () => {
         </div>
       </section>
 
-      <div className="m-auto mt-8 md:w-[80%] lg:w-[70%] xl:w-[54%]">
+      <form
+        onSubmit={handleSubmit(submitForm)}
+        className="m-auto mt-8 md:w-[80%] lg:w-[70%] xl:w-[54%]"
+      >
         <RegisterInput
           placeholder="Home Address"
           ifIcon
           icon={process.env.PUBLIC_URL + "assets/icons/home.svg"}
+          register={register("address")}
+          error={errors?.address?.message}
         />
 
         <div className="mt-8 w-3/4">
-          <CustomSelect placeholder="State" options={maritalStatus} />
+          <Controller
+            control={control}
+            name="state"
+            render={({ field: { onChange, onBlur, value, name, ref } }) => (
+              <Select
+                onBlur={onBlur}
+                onChange={getStateValue}
+                checked={value}
+                inputRef={ref}
+                isLoading={getAllStatesLoading}
+                options={allStatesData}
+                placeholder="States"
+                styles={colourStyles}
+              />
+            )}
+          />
         </div>
 
         <div className="mt-8 w-3/4">
-          <CustomSelect
-            placeholder="Local Govt. Area"
-            options={maritalStatus}
+          <Controller
+            control={control}
+            name="lga"
+            render={({ field: { onChange, onBlur, value, ref } }) => (
+              <Select
+                onBlur={onBlur}
+                onChange={onChange}
+                checked={value}
+                inputRef={ref}
+                options={stateLga}
+                isLoading={getStateLGALoading}
+                placeholder="Local Govt Area"
+                styles={colourStyles}
+              />
+            )}
           />
         </div>
 
         <div className="mt-16 w-1/2">
-          <Button
-            buttonText="Continue"
-            className="rounded-2xl"
-            onClick={goToNext}
-          />
+          <Button buttonText="Continue" className="rounded-2xl" />
         </div>
-      </div>
+      </form>
     </div>
   );
 };

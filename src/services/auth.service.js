@@ -13,21 +13,26 @@ const bvnOtpValidation = async (values) => {
   return response.data;
 };
 
-// const toggleLiveConsumers = async (values) => {
-//   const response = await api.post(
-//     `${UrlRoute.toggleLiveCustomer}/${values}/toggle-live`
-//   );
-//   return response.data;
-// };
+const registerUser = async (values) => {
+  const response = await api.post(UrlRoute.registerUser, values);
+  return response.data;
+};
+
+const loginUser = async (values) => {
+  const response = await api.post(UrlRoute.login, values);
+  return response.data;
+};
 
 // const deleteCustomer = async (values) => {
 //   const response = await api.delete(`${UrlRoute.getSingleCustomer}/${values}`);
 //   return response.data;
 // };
 
-const registerService = {
+const authService = {
   verifyBVN,
   bvnOtpValidation,
+  registerUser,
+  loginUser,
 };
 
-export default registerService;
+export default authService;

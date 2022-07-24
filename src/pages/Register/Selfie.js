@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Button } from "../../atoms";
+import { WebcamCapture } from "../../components/Webcam";
 
 import { handleNextButton } from "../../slices/multistep";
 
@@ -29,11 +30,7 @@ const Selfie = () => {
       </section>
 
       <div className="m-auto mt-9 md:w-[80%] lg:w-[70%] xl:w-[54%]">
-        <img
-          src={process.env.PUBLIC_URL + "assets/images/imageUpload.svg"}
-          alt="upload-avatar"
-          className="w-1/2 cursor-pointer"
-        />
+        <WebcamCapture />
 
         <div className="mt-8 w-1/2">
           <Button

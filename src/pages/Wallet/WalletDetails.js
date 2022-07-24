@@ -1,10 +1,10 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import { Table, TableHeader } from "../../components";
-import { WalletCard } from "../../components/WalletCard";
+import { Link } from "react-router-dom";
 
-const Wallet = () => {
-  const navigate = useNavigate();
+import { Table, TableHeader } from "../../components";
+import WalletDetailsHeader from "./WalletDetailsHeader";
+
+const WalletDetails = () => {
   const data = React.useMemo(
     () => [
       {
@@ -24,7 +24,14 @@ const Wallet = () => {
             CAPIVAL-WEB-90920280
           </p>
         ),
-        view: <p className="text-base text-blueTwo font-normal">view</p>,
+        view: (
+          <Link
+            to="/wallet/details/transaction-details"
+            className="text-base text-blueTwo font-normal"
+          >
+            view
+          </Link>
+        ),
       },
       {
         transactionType: (
@@ -48,7 +55,7 @@ const Wallet = () => {
       {
         transactionType: (
           <div className="flex items-center">
-            <img src="./assets/icons/redArrow.svg" alt="redArrow" />
+            <img src="/assets/icons/redArrow.svg" alt="redArrow" />
             <p className="text-base text-redTwo pl-2 font-medium">Debit</p>
           </div>
         ),
@@ -67,7 +74,7 @@ const Wallet = () => {
       {
         transactionType: (
           <div className="flex items-center">
-            <img src="./assets/icons/greenArrow.svg" alt="redArrow" />
+            <img src="/assets/icons/greenArrow.svg" alt="redArrow" />
             <p className="text-base text-redTwo pl-2 font-medium">Debit</p>
           </div>
         ),
@@ -117,50 +124,20 @@ const Wallet = () => {
     []
   );
 
-  const goToWallet = () => {
-    navigate("/wallet/details");
-  };
-
   return (
-    <>
-      <div className="flex items-center mt-8 mx-4">
-        <WalletCard
-          title="Investments"
-          primaryColor="#246362"
-          secColor="#111228"
-          cardName="Account Name"
-          amount="50,000.25"
-        />
+    <main className="mt-8">
+      <WalletDetailsHeader ifSearchBar />
 
-        <WalletCard
-          title="Wallet"
-          primaryColor="#246362"
-          secColor="#111228"
-          ifAccountName
-          cardName="Account Name"
-          amount="50,000.25"
-          onClick={goToWallet}
-        />
-
-        <WalletCard
-          title="Loans"
-          primaryColor="#246362"
-          secColor="#111228"
-          // cardName="Account Name"
-          amount="50,000.25"
-        />
-      </div>
-
-      <section className="my-8 mx-7">
+      <div className="my-8 mx-7">
         <TableHeader
           header="Recent Transactions"
           pageNumber="Showing 1-15 of 15 transactions"
         />
 
         <Table data={data} columns={columns} />
-      </section>
-    </>
+      </div>
+    </main>
   );
 };
 
-export { Wallet };
+export { WalletDetails };

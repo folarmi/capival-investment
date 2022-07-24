@@ -12,14 +12,8 @@ import {
 import storage from "redux-persist/lib/storage";
 
 import multiStepReducer from "./slices/multistep";
-import registerReducer from "./slices/register";
+import authReducer from "./slices/auth";
 import utilsReducer from "./slices/utils";
-
-const reducers = combineReducers({
-  multiStep: multiStepReducer,
-  register: registerReducer,
-  utils: utilsReducer,
-});
 
 const persistConfig = {
   key: "root",
@@ -27,6 +21,12 @@ const persistConfig = {
   whitelist: ["auth"],
   storage,
 };
+
+const reducers = combineReducers({
+  multiStep: multiStepReducer,
+  auth: authReducer,
+  utils: utilsReducer,
+});
 
 const persistedReducer = persistReducer(persistConfig, reducers);
 
@@ -42,3 +42,10 @@ const store = configureStore({
 });
 
 export default store;
+
+// const store = createStore(
+//   persistedReducer,
+//   composeWithDevTools(applyMiddleware(...middleware))
+// );
+
+// export default store;

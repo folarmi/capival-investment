@@ -2,7 +2,14 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   value: 1,
-  bvnNumber: "",
+  userInfo: {
+    gender: "",
+    address: "",
+    email: "",
+    password: "",
+    passport: "",
+    signature: "",
+  },
 };
 
 export const multiStepSlice = createSlice({
@@ -11,8 +18,7 @@ export const multiStepSlice = createSlice({
   reducers: {
     handleNextButton: (state, action) => {
       state.value <= 7 ? state.value++ : (window.location = "/dashboard");
-      state.bvnNumber = action.payload;
-      // state.value++;
+      state.userInfo.bvn = action.payload;
     },
     handleBackButton: (state) => {
       //   state.value === 1 ? (state.value = 1) : (state.value -= 1);
@@ -21,8 +27,21 @@ export const multiStepSlice = createSlice({
     handleNextByCount: (state, action) => {
       state.value += action.payload;
     },
-    handleBVN: (state, action) => {
-      state.bvn = action.payload;
+    handleGender: (state, action) => {
+      state.userInfo.gender = action.payload;
+    },
+    handleAddress: (state, action) => {
+      state.userInfo.address = action.payload;
+    },
+    handleEmailAndPassword: (state, action) => {
+      state.userInfo.email = action.payload.email;
+      state.userInfo.password = action.payload.password;
+    },
+    handlePassport: (state, action) => {
+      state.userInfo.passport = action.payload;
+    },
+    handleSignature: (state, action) => {
+      state.userInfo.signature = action.payload;
     },
   },
 });
@@ -33,6 +52,10 @@ export const {
   handleNextButton,
   handleBackButton,
   handleNextByCount,
-  handleBVN,
+  handleGender,
+  handleAddress,
+  handleEmailAndPassword,
+  handlePassport,
+  handleSignature,
 } = actions;
 export default reducer;

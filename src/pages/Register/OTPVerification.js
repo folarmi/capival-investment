@@ -8,13 +8,13 @@ import { Button } from "../../atoms/Button";
 import { RegisterInput } from "../../atoms/RegisterInput";
 import { handleNextButton } from "../../slices/multistep";
 import { toast } from "react-toastify";
-import { bvnOtpVerificationAsync } from "../../slices/register";
+import { bvnOtpVerificationAsync } from "../../slices/auth";
 
 const OTPVerification = () => {
   const dispatch = useDispatch();
 
-  const { bvnNumber } = useSelector((state) => state.multiStep);
-  const { isBvnOtpLoading } = useSelector((state) => state.register);
+  const { bvn } = useSelector((state) => state.multiStep.userInfo);
+  const { isBvnOtpLoading } = useSelector((state) => state.auth);
 
   const validationSchema = Yup.object().shape({
     otp: Yup.string().required("OTP is required"),
@@ -28,7 +28,7 @@ const OTPVerification = () => {
 
   const submitForm = (values) => {
     const variables = {
-      bvn: bvnNumber,
+      bvn: bvn,
       otp: values?.otp,
     };
     dispatch(bvnOtpVerificationAsync(variables))
@@ -91,3 +91,18 @@ const OTPVerification = () => {
 };
 
 export { OTPVerification };
+
+// const variablle = {
+// first_name: first_name,
+// middle_name: middle_name,
+// last_name: last_name,
+// bvn,
+// gender,
+// dob,
+// phone,
+// address,
+// email,
+// password,
+// passport,
+// signature,
+// };
