@@ -15,7 +15,15 @@ const Button = ({
       onClick={onClick}
       disabled={disabled}
       className={`${
-        type === "primary" ? "bg-primary text-white" : "bg-primary text-white"
+        type === "primary"
+          ? "bg-primary text-white"
+          : type === "secondary"
+          ? "bg-white border border-primary text-primary"
+          : type === "tertiary"
+          ? "bg-white text-grayFour border border-grayThree"
+          : type === "footer-btn"
+          ? "bg-white text-darkBlue font-medium"
+          : "bg-primary text-white"
       } px-4 py-4 rounded-[${borderRadius}px] ${className}`}
       style={{
         width:
@@ -52,7 +60,7 @@ const Button = ({
           </svg>
         </div>
       ) : (
-        <p className="text-xl font-semibold text-white">{buttonText}</p>
+        <p className="text-xl font-semibold">{buttonText}</p>
       )}
     </button>
   );

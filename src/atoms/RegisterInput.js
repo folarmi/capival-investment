@@ -19,7 +19,7 @@ const RegisterInput = ({
         {label}
       </label>
 
-      <label className="relative text-gray-400 focus-within:text-gray-600 block">
+      <label className="relative text-gray-400  block">
         {ifIcon && (
           <img
             className="pointer-events-none w-8 h-8 absolute top-1/2 transform -translate-y-1/2 left-[68%]"
@@ -36,10 +36,10 @@ const RegisterInput = ({
           {...register}
           placeholder={placeholder}
           {...inputProps}
-          className="border border-blueTwo/50 rounded-2xl w-3/4 py-3.5 placeholder-blueThree text-sm pl-12"
+          className="border border-blueTwo/50 rounded-2xl w-3/4 py-3.5 placeholder-blueThree text-sm pl-12 text-blueTwo"
           style={{
             border: error ? "1px solid red" : "",
-            backgroundColor: readOnly ? "#ACB5BD" : "",
+            backgroundColor: readOnly ? "#DCDCDC" : "",
           }}
           readOnly={readOnly}
         />

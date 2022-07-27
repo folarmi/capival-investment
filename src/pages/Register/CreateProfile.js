@@ -22,7 +22,7 @@ const CreateProfile = () => {
       .max(11, "The maximum digits of bvn is 11."),
   });
 
-  const { register, handleSubmit, formState } = useForm({
+  const { register, handleSubmit, formState, reset } = useForm({
     resolver: yupResolver(validationSchema),
   });
 
@@ -36,7 +36,8 @@ const CreateProfile = () => {
         }
       })
       .catch((err) => {
-        toast.error(err?.message);
+        toast.error(err[0].message);
+        reset();
       });
   };
 
@@ -93,13 +94,3 @@ const CreateProfile = () => {
 };
 
 export { CreateProfile };
-
-// bvn: "22154136352"
-// created_at: "2022-07-11T19:26:06.000000Z"
-// dob: "13-01-1994"
-// firstname: "IBRAHIM"
-// id: 2
-// lastname: "OGUNLEYE"
-// middlename: "KOLAWOLE"
-// phone: "07063816498"
-// updated_at: "2022-07-11T19:26:06.000000Z"

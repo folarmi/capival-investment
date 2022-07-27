@@ -7,7 +7,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import { Button } from "../../atoms/Button";
 import { RegisterInput } from "../../atoms/RegisterInput";
-import { handleAddress, handleNextButton } from "../../slices/multistep";
+import {
+  handleAddress,
+  handleNextButton,
+  handleBackButton,
+} from "../../slices/multistep";
 import { getAllStates, getStateLGA } from "../../slices/utils";
 
 const colourStyles = {
@@ -70,6 +74,10 @@ const ContactDetails = () => {
 
   const { errors } = formState;
 
+  const handleBackButton = () => {
+    dispatch(handleBackButton());
+  };
+
   return (
     <div className="w-full h-screen register-bg">
       <div className="m-auto md:w-[80%] lg:w-[70%] xl:w-[54%] mt-16">
@@ -87,7 +95,7 @@ const ContactDetails = () => {
       </section>
 
       <form
-        onSubmit={handleSubmit(submitForm)}
+        // onSubmit={handleSubmit(submitForm)}
         className="m-auto mt-8 md:w-[80%] lg:w-[70%] xl:w-[54%]"
       >
         <RegisterInput
@@ -136,8 +144,28 @@ const ContactDetails = () => {
           />
         </div>
 
-        <div className="mt-16 w-1/2">
-          <Button buttonText="Continue" className="rounded-2xl" />
+        <div className="flex justify-between mt-16 w-1/2">
+          {/* <Button buttonText="Continue" className="rounded-2xl" />
+           */}
+
+          <div className="w-1/2 mr-6">
+            <Button
+              size="md"
+              buttonText="Back"
+              className="rounded-2xl"
+              type="secondary"
+              onClick={handleBackButton}
+            />
+          </div>
+
+          <div className="w-1/2">
+            <Button
+              size="md"
+              buttonText="Continue"
+              className="rounded-2xl"
+              onClick={handleSubmit(submitForm)}
+            />
+          </div>
         </div>
       </form>
     </div>

@@ -94,6 +94,7 @@ const registerSlice = createSlice({
       state.user = null;
     },
   },
+
   extraReducers: {
     [verifyBVNAsync.pending]: (state) => {
       state.isVerifyBvnLoading = true;

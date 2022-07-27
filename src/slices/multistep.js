@@ -16,14 +16,20 @@ export const multiStepSlice = createSlice({
   name: "multistep",
   initialState,
   reducers: {
+    // handleNextButton: (state, action) => {
+    //   state.value < 7 ? (state.value += 1) : (window.location = "/dashboard");
+    //   state.userInfo.bvn = action.payload;
+    // },
     handleNextButton: (state, action) => {
-      state.value <= 7 ? state.value++ : (window.location = "/dashboard");
+      state.value < 7 ? (state.value += 1) : (window.location = "/dashboard");
       state.userInfo.bvn = action.payload;
     },
     handleBackButton: (state) => {
-      //   state.value === 1 ? (state.value = 1) : (state.value -= 1);
-      state.value = 1;
+      state.value === 1 ? (state.value = 1) : (state.value -= 1);
     },
+    // handleBackButton: (state) => {
+    //   state.value -= 1;
+    // },
     handleNextByCount: (state, action) => {
       state.value += action.payload;
     },

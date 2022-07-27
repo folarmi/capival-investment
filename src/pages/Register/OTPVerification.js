@@ -14,13 +14,16 @@ const OTPVerification = () => {
   const dispatch = useDispatch();
 
   const { bvn } = useSelector((state) => state.multiStep.userInfo);
-  const { isBvnOtpLoading } = useSelector((state) => state.auth);
+  const isBvnOtpLoading = useSelector((state) => state.auth.isBvnOtpLoading);
+
+  const { value } = useSelector((state) => state.multiStep);
+  console.log(isBvnOtpLoading, value);
 
   const validationSchema = Yup.object().shape({
     otp: Yup.string().required("OTP is required"),
   });
 
-  const { register, handleSubmit, formState } = useForm({
+  const { register, handleSubmit, formState, reset } = useForm({
     resolver: yupResolver(validationSchema),
   });
 
@@ -41,7 +44,12 @@ const OTPVerification = () => {
       })
       .catch((err) => {
         toast.error(err?.message);
+        reset();
       });
+  };
+
+  const handleBackButton = () => {
+    dispatch(handleBackButton());
   };
 
   return (
@@ -64,10 +72,7 @@ const OTPVerification = () => {
         </div>
       </section>
 
-      <form
-        onSubmit={handleSubmit(submitForm)}
-        className="m-auto mt-8 md:w-[80%] lg:w-[70%] xl:w-[54%]"
-      >
+      <form className="m-auto mt-8 md:w-[80%] lg:w-[70%] xl:w-[54%]">
         <RegisterInput
           placeholder="Enter OTP"
           register={register("otp")}
@@ -78,12 +83,26 @@ const OTPVerification = () => {
           Didn’t get a code? <span className="text-secondary">Resend</span>
         </p>
 
-        <div className="mt-24 w-1/2">
-          <Button
-            buttonText="Continue"
-            className="rounded-2xl"
-            isLoading={isBvnOtpLoading}
-          />
+        <div className="flex justify-between mt-20">
+          <div className="w-1/2 mr-6">
+            <Button
+              size="md"
+              buttonText="Back"
+              className="rounded-2xl"
+              type="secondary"
+              onClick={handleBackButton}
+            />
+          </div>
+
+          <div className="w-1/2">
+            <Button
+              size="md"
+              buttonText="Continue"
+              className="rounded-2xl"
+              isLoading={isBvnOtpLoading}
+              onClick={handleSubmit(submitForm)}
+            />
+          </div>
         </div>
       </form>
     </div>
@@ -91,18 +110,3 @@ const OTPVerification = () => {
 };
 
 export { OTPVerification };
-
-// const variablle = {
-// first_name: first_name,
-// middle_name: middle_name,
-// last_name: last_name,
-// bvn,
-// gender,
-// dob,
-// phone,
-// address,
-// email,
-// password,
-// passport,
-// signature,
-// };

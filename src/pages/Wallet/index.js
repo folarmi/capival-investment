@@ -5,6 +5,7 @@ import { WalletCard } from "../../components/WalletCard";
 
 const Wallet = () => {
   const navigate = useNavigate();
+
   const data = React.useMemo(
     () => [
       {
@@ -121,6 +122,10 @@ const Wallet = () => {
     navigate("/wallet/details");
   };
 
+  const goToInvestments = () => {
+    navigate("/wallet/investments");
+  };
+
   return (
     <>
       <div className="flex items-center mt-8 mx-4">
@@ -130,6 +135,7 @@ const Wallet = () => {
           secColor="#111228"
           cardName="Account Name"
           amount="50,000.25"
+          onClick={goToInvestments}
         />
 
         <WalletCard

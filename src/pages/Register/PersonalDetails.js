@@ -8,7 +8,11 @@ import { components } from "react-select";
 
 import { Button } from "../../atoms/Button";
 import { RegisterInput } from "../../atoms/RegisterInput";
-import { handleNextButton, handleGender } from "../../slices/multistep";
+import {
+  handleNextButton,
+  handleBackButton,
+  handleGender,
+} from "../../slices/multistep";
 import { getGenderAsync, getMaritalStatusAsync } from "../../slices/utils";
 
 const { Option } = components;
@@ -42,6 +46,9 @@ const PersonalDetails = () => {
 
   const { bvnData } = useSelector((state) => state.auth);
   const { gender, maritalStatus } = useSelector((state) => state.utils);
+
+  const value = useSelector((state) => state.multiStep.value);
+  console.log(value);
 
   const genderData = gender.map((single) => {
     return {
@@ -93,10 +100,14 @@ const PersonalDetails = () => {
 
   const { errors } = formState;
 
+  const handleBackButton = () => {
+    dispatch(handleBackButton());
+  };
+
   return (
     <form
       className="w-full h-screen register-bg"
-      onSubmit={handleSubmit(submitForm)}
+      // onSubmit={handleSubmit(submitForm)}
     >
       <div className="m-auto md:w-[80%] lg:w-[70%] xl:w-[54%] mt-16">
         <p className="text-redOne font-semibold md:text-4xl lg:text-5xl xl:text-[50px] pb-10">
@@ -202,8 +213,25 @@ const PersonalDetails = () => {
           />
         </div>
 
-        <div className="my-16 w-1/2">
-          <Button buttonText="Continue" className="rounded-2xl" />
+        <div className="flex justify-between my-16">
+          <div className="w-1/2 mr-6">
+            <Button
+              size="md"
+              buttonText="Back"
+              className="rounded-2xl"
+              type="secondary"
+              onClick={handleBackButton}
+            />
+          </div>
+
+          <div className="w-1/2">
+            <Button
+              size="md"
+              buttonText="Continue"
+              className="rounded-2xl"
+              onClick={handleSubmit(submitForm)}
+            />
+          </div>
         </div>
       </div>
     </form>
