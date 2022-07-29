@@ -23,12 +23,12 @@ const DashboardLayout = () => {
             </div>
 
             <div className="lg:ml-[16%] lg:w-[84%] w-full dashboard-bg h-screen">
-              <div className="m-auto w-[60%] text-center mt-6 border border-blueTwo rounded-3xl py-2">
+              {/* <div className="m-auto w-[60%] text-center mt-6 border border-blueTwo rounded-3xl py-2">
                 <p className="font-normal text-base text-blueTwo">
                   Congratulation, you are eligible to higher loan this month{" "}
                   <span className="text-redOne font-semibold">View Status</span>
                 </p>
-              </div>
+              </div> */}
               <Outlet />
             </div>
           </div>

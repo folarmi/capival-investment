@@ -48,7 +48,6 @@ const PersonalDetails = () => {
   const { gender, maritalStatus } = useSelector((state) => state.utils);
 
   const value = useSelector((state) => state.multiStep.value);
-  console.log(value);
 
   const genderData = gender.map((single) => {
     return {
@@ -56,6 +55,8 @@ const PersonalDetails = () => {
       label: single.Gender,
     };
   });
+
+  console.log(genderData);
 
   const maritalStatusData = maritalStatus.map((single) => {
     return {

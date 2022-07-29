@@ -20,7 +20,7 @@ const Button = ({
           : type === "secondary"
           ? "bg-white border border-primary text-primary"
           : type === "tertiary"
-          ? "bg-white text-grayFour border border-grayThree"
+          ? "bg-grayOne text-blueTwo"
           : type === "footer-btn"
           ? "bg-white text-darkBlue font-medium"
           : "bg-primary text-white"

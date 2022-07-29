@@ -1,7 +1,9 @@
 import { Route, Routes } from "react-router-dom";
 
 import { Dashboard, Loans, Login, Register, Wallet } from "../pages";
-import { Investments } from "../pages/Wallet/Investments";
+import { Investments } from "../pages/Wallet/investments/Investments";
+import { Savings } from "../pages/Wallet/investments/savings";
+import { SavingsConfirmation } from "../pages/Wallet/investments/savings/SavingsConfirmation";
 import { WalletDetails } from "../pages/Wallet/WalletDetails";
 import { WalletTransactionDetails } from "../pages/Wallet/WalletTransactionDetails";
 import { RequiredAuthDashboard } from "./RequiredAuth";
@@ -16,6 +18,11 @@ const Index = () => {
         <Route path="/wallet" element={<Wallet />} />
         <Route path="/wallet/details" element={<WalletDetails />} />
         <Route path="/wallet/investments" element={<Investments />} />
+        <Route path="/wallet/investments/new-saving" element={<Savings />} />
+        <Route
+          path="/wallet/investments/new-saving/confirm"
+          element={<SavingsConfirmation />}
+        />
         <Route
           path="/wallet/details/transaction-details"
           element={<WalletTransactionDetails />}
