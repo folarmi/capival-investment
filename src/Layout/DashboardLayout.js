@@ -18,7 +18,7 @@ const DashboardLayout = () => {
         <div>
           <DashboardHeader />
           <div className="w-full h-full flex gap-1">
-            <div className="lg:w-[16%] fixed lg:block hidden bg-blueTwo sidebar-bg">
+            <div className="lg:w-[16%] h-full fixed lg:block hidden sidebar-bg">
               <Sidebar />
             </div>
 

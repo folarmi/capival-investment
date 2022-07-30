@@ -37,7 +37,7 @@ const SubMenu = ({ item }) => {
         <>
           {item?.subMenu ? (
             <div
-              className="flex items-center mt-6 hover:text-lighterBlue cursor-pointer"
+              className="flex items-center mt-6 hover:text-lighterBlue cursor-pointer px-8 lg:px-4 xl:px-6 2xl:px-12"
               key={item?.id}
             >
               <item.Image
@@ -45,7 +45,7 @@ const SubMenu = ({ item }) => {
                   item?.useStroke ? "stroke-current" : "fill-current"
                 }`}
               />
-              <p className="font-normal pr-3 text-sm text-white">
+              <p className="font-normal pr-3 text-sm text-white ">
                 {item?.menuItem}
               </p>
               {dropDown ? (
@@ -72,8 +72,8 @@ const SubMenu = ({ item }) => {
           to={item?.path}
           className={({ isActive }) =>
             isActive
-              ? "bg-white py-2 rounded-tr-2xl rounded-br-2xl flex items-center mt-6 text-blueTwo"
-              : "flex items-center mt-6 text-white"
+              ? "bg-white py-2 rounded-tr-2xl rounded-br-2xl mr-10 flex items-center mt-6 text-blueTwo"
+              : "flex items-center mt-6 text-white px-8 lg:px-4 xl:px-6 2xl:px-12"
           }
           key={item?.id}
         >
@@ -94,7 +94,7 @@ const SubMenu = ({ item }) => {
                 <div
                   // onClick={() => goToPath(item)}
                   key={item?.item}
-                  className="cursor-pointer"
+                  className="cursor-pointer px-8 lg:px-4 xl:px-6 2xl:px-12"
                 >
                   <div className="flex items-center">
                     <img src={item?.icon} className="mr-2" alt="" />

@@ -29,7 +29,7 @@ const Sidebar = (props) => {
 
   return (
     <div
-      className={`${props.className} px-8 lg:px-4 xl:px-6 2xl:px-12 flex flex-col overflow-auto min-h-[calc(100vh-88px)] no-scrollbar`}
+      className={`${props.className}flex flex-col overflow-auto min-h-[calc(100vh-88px)] no-scrollbar`}
     >
       <div className="mb-8 pb-12">
         {SidebarMenuItems.map((item, index) => {
@@ -38,7 +38,7 @@ const Sidebar = (props) => {
 
         <div
           to="/"
-          className="flex items-center mt-6 cursor-pointer 2xl:text-lg xl:text-sm"
+          className="flex items-center mt-6 cursor-pointer 2xl:text-lg xl:text-sm px-8 lg:px-4 xl:px-6 2xl:px-12"
           key="logout"
           onClick={logoutUser}
         >
