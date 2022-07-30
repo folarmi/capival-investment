@@ -106,13 +106,10 @@ const PersonalDetails = () => {
   };
 
   return (
-    <form
-      className="w-full h-screen register-bg"
-      // onSubmit={handleSubmit(submitForm)}
-    >
+    <form className="w-full h-screen register-bg">
       <div className="m-auto md:w-[80%] lg:w-[70%] xl:w-[54%] mt-16">
         <p className="text-redOne font-semibold md:text-4xl lg:text-5xl xl:text-[50px] pb-10">
-          Personal Details
+          Personal Detailsssss
         </p>
       </div>
 
