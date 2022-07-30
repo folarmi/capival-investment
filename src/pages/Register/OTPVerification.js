@@ -20,7 +20,10 @@ const OTPVerification = () => {
   console.log(isBvnOtpLoading, value);
 
   const validationSchema = Yup.object().shape({
-    otp: Yup.string().required("OTP is required"),
+    otp: Yup.string()
+      .required("OTP is required")
+      .min(6, "Minimum value is 6")
+      .max(6, "Maximum value is 6."),
   });
 
   const { register, handleSubmit, formState, reset } = useForm({

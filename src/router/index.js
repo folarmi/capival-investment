@@ -1,6 +1,15 @@
 import { Route, Routes } from "react-router-dom";
 
-import { Dashboard, Loans, Login, Register, Wallet } from "../pages";
+import {
+  Dashboard,
+  ForgotPassword,
+  Loans,
+  Login,
+  Register,
+  Wallet,
+  ForgotPasswordOTP,
+  CreateNewPassword,
+} from "../pages";
 import { Investments } from "../pages/Wallet/investments/Investments";
 import { Savings } from "../pages/Wallet/investments/savings";
 import { SavingsConfirmation } from "../pages/Wallet/investments/savings/SavingsConfirmation";
@@ -13,6 +22,9 @@ const Index = () => {
     <Routes>
       <Route path="/" element={<Login />} />
       <Route path="/create-profile" element={<Register />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/forgot-password-otp" element={<ForgotPasswordOTP />} />
+      <Route path="/create-new-password" element={<CreateNewPassword />} />
       <Route element={<RequiredAuthDashboard />}>
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/wallet" element={<Wallet />} />

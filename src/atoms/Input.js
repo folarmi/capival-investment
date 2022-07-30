@@ -1,5 +1,6 @@
 const Input = ({
   icon,
+  ifIcon = true,
   placeholder,
   className,
   type,
@@ -20,14 +21,16 @@ const Input = ({
         {label}
       </label>
 
-      <label className="relative text-gray-400 focus-within:text-gray-600 block">
-        <img
-          className="pointer-events-none w-8 h-8 absolute top-1/2 transform -translate-y-1/2 left-3"
-          viewBox="0 0 20 20"
-          fill="currentColor"
-          src={icon}
-          alt={name}
-        />
+      <label className="relative text-gray-400 block">
+        {ifIcon && (
+          <img
+            className="pointer-events-none w-8 h-8 absolute top-1/2 transform -translate-y-1/2 left-3"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            src={icon}
+            alt={name}
+          />
+        )}
         <input
           type={type}
           name={name}
@@ -35,7 +38,7 @@ const Input = ({
           {...register}
           placeholder={placeholder}
           {...inputProps}
-          className="w-full rounded-2xl bg-blueTwo/[0.2] focus:outline-none font-medium text-[15px] placeholder-primary py-4 pl-14"
+          className="w-full rounded-2xl bg-blueTwo/[0.2] focus:outline-none font-medium text-[15px] text-primary py-4 pl-14"
           style={{
             border: error ? "1px solid red" : "",
             backgroundColor: readOnly ? "#ACB5BD" : "",

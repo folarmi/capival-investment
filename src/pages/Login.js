@@ -4,16 +4,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 import { Input, Button, Header } from "../atoms";
 import { loginUserAsync } from "../slices/auth";
 import tokenService from "../services/token.service";
-import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const dispatch = useDispatch();
-  const { isLoading } = useSelector((state) => state.auth.login);
   const navigate = useNavigate();
+  const { isLoading } = useSelector((state) => state.auth.login);
 
   const validationSchema = Yup.object().shape({
     email: Yup.string()
@@ -41,13 +41,16 @@ const Login = () => {
           toast("Login successful");
           tokenService.setUser(res);
           navigate("/dashboard");
-          // <Navigate to="/dashboard" replace={true} />;
         }
       })
       .catch((err) => {
         console.log(err);
         toast.error(err?.message);
       });
+  };
+
+  const gotToForgotPasswordPage = () => {
+    navigate("/forgot-password");
   };
 
   return (
@@ -75,7 +78,10 @@ const Login = () => {
             className="mt-6 rounded-[30px]"
             isLoading={isLoading}
           />
-          <p className="text-sm font-medium text-blueThree py-6 text-center">
+          <p
+            onClick={gotToForgotPasswordPage}
+            className="text-sm font-medium text-blueThree py-6 text-center"
+          >
             Forget Password?
           </p>
         </form>

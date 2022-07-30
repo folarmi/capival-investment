@@ -3,8 +3,6 @@ import TokenService from "./token.service";
 
 const baseURL = process.env.REACT_APP_BASE_URL_LIVE;
 
-console.log(baseURL);
-
 const apiResource = () => {
   // console.log(store);
 

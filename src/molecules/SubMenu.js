@@ -32,25 +32,6 @@ const SubMenu = ({ item }) => {
   // };
 
   return (
-    // <NavLink
-    //   to={item?.path}
-    //   className={({ isActive }) =>
-    //     isActive
-    //       ? "bg-white py-2 rounded-tr-2xl rounded-br-2xl flex items-center mt-6 text-blueTwo"
-    //       : "flex items-center mt-6 text-white"
-    //   }
-    //   key={item?.id}
-    //   onClick={() => changeStroke(item)}
-    // >
-    //   {/* <img src={item?.Image} alt={item?.menuItem} /> */}
-    //   <item.Image
-    //     className={`mr-4  ${
-    //       item?.useStroke ? "stroke-blueTwo" : "stroke-white"
-    //     }`}
-    //   />
-    //   <p className="font-normal text-[15px] pl-4">{item?.menuItem}</p>
-    // </NavLink>
-
     <div>
       {item?.subMenu ? (
         <>

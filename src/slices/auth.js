@@ -62,10 +62,63 @@ export const loginUserAsync = createAsyncThunk(
   }
 );
 
+export const forgotPasswordAsync = createAsyncThunk(
+  "auth/forgotPassword",
+  async (values, { rejectWithValue }) => {
+    try {
+      const response = await AuthService.forgotPassword(values);
+      return response;
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const forgotPasswordAsyncOTP = createAsyncThunk(
+  "auth/forgotPasswordOTP",
+  async (values, { rejectWithValue }) => {
+    try {
+      const response = await AuthService.forgotPasswordOTP(values);
+      return response;
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const changePasswordAsync = createAsyncThunk(
+  "auth/changePassword",
+  async (values, { rejectWithValue }) => {
+    try {
+      const response = await AuthService.changePassword(values);
+      return response;
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const logoutAsync = createAsyncThunk("auth/logout", async () => {
+  AuthService.logout();
+});
+
 const initialState = {
   isVerifyBvnLoading: false,
   isBvnOtpLoading: false,
   registerUserIsLoading: false,
+  forgotPasswordLoading: false,
+  forgotPasswordLoadingOTP: false,
+  changePasswordLoading: false,
+  forgotPasswordEmail: "",
   bvnData: [],
   login: {
     isLoading: false,
@@ -75,26 +128,15 @@ const initialState = {
   },
 };
 
-// extraReducers: (builder) => {
-//   builder.addMatcher(
-//     api.endpoints.login.matchFulfilled,
-//     (state, { payload }) => {
-//       state.token = payload.token
-//       state.user = payload.user
-//     }
-//   )
-// },
 const registerSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    resetInitialState: (state) => {
-      state.isLoading = false;
-      state.isLoggedIn = false;
-      state.user = null;
+    handleForgotPasswordEmail: (state, action) => {
+      console.log(state.forgotPasswordEmail);
+      state.forgotPasswordEmail = action.payload;
     },
   },
-
   extraReducers: {
     [verifyBVNAsync.pending]: (state) => {
       state.isVerifyBvnLoading = true;
@@ -132,7 +174,6 @@ const registerSlice = createSlice({
       state.login.isLoading = true;
     },
     [loginUserAsync.fulfilled]: (state, action) => {
-      // console.log(action.payload);
       state.login.isLoggedIn = true;
       state.login.isLoading = false;
       state.login.user = action.payload;
@@ -141,16 +182,46 @@ const registerSlice = createSlice({
       state.login.isLoading = false;
       state.error = action.payload;
     },
+    [forgotPasswordAsync.pending]: (state) => {
+      state.forgotPasswordLoading = true;
+    },
+    [forgotPasswordAsync.fulfilled]: (state, action) => {
+      state.forgotPasswordEmail = action.payload.data;
+      state.forgotPasswordLoading = false;
+    },
+    [forgotPasswordAsync.rejected]: (state, action) => {
+      state.forgotPasswordLoading = false;
+      state.error = action.payload;
+    },
+    [forgotPasswordAsyncOTP.pending]: (state) => {
+      state.forgotPasswordLoadingOTP = true;
+    },
+    [forgotPasswordAsyncOTP.fulfilled]: (state) => {
+      state.forgotPasswordLoadingOTP = false;
+    },
+    [forgotPasswordAsyncOTP.rejected]: (state, action) => {
+      state.forgotPasswordLoadingOTP = false;
+      state.error = action.payload;
+    },
+    [changePasswordAsync.pending]: (state) => {
+      state.changePasswordLoading = true;
+    },
+    [changePasswordAsync.fulfilled]: (state) => {
+      state.changePasswordLoading = false;
+    },
+    [changePasswordAsync.rejected]: (state, action) => {
+      state.changePasswordLoading = false;
+      state.error = action.payload;
+    },
+    [logoutAsync.fulfilled]: (state) => {
+      state.login.isLoggedIn = false;
+      state.login.isLoading = false;
+      state.login.user = null;
+    },
   },
 });
 
 const { reducer, actions } = registerSlice;
-export const { resetInitialState } = actions;
+export const { handleForgotPasswordEmail } = actions;
 
 export default reducer;
-// login: {
-//   isLoading: false,
-//   isLoggedIn: false,
-//   user: null,
-//   error: null,
-// },

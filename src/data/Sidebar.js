@@ -89,32 +89,4 @@ export const SidebarMenuItems = [
       },
     ],
   },
-  {
-    id: "5",
-    menuItem: "Logout",
-    Image: logout,
-    path: "",
-    useStroke: false,
-  },
-  // {
-  //   id: "6",
-  //   menuItem: "Change Pin",
-  //   Image: process.env.PUBLIC_URL + "assets/icons/pin.svg",
-  //   path: "/settings",
-  //   useStroke: false,
-  // },
-  // {
-  //   id: "7",
-  //   menuItem: "Update Security Question",
-  //   Image: process.env.PUBLIC_URL + "assets/icons/security.svg",
-  //   path: "/settings",
-  //   useStroke: false,
-  // },
-  // {
-  //   id: "7",
-  //   menuItem: "Logout",
-  //   Image: process.env.PUBLIC_URL + "assets/icons/logout.svg",
-  //   path: "/settings",
-  //   useStroke: false,
-  // },
 ];

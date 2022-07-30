@@ -1,13 +1,22 @@
 import React from "react";
+import logout from "../icons/logout.svg";
+import { useDispatch } from "react-redux";
+
 // import { useNavigate } from "react-router-dom";
 // import { NavLink } from "react-router-dom";
 
 import { SidebarMenuItems } from "../data/Sidebar";
 // import { Text } from "../components";
 import { SubMenu } from "./SubMenu";
+import { logoutAsync } from "../slices/auth";
 
 const Sidebar = (props) => {
-  console.log(props);
+  const dispatch = useDispatch();
+
+  const logoutUser = () => {
+    dispatch(logoutAsync());
+  };
+
   // const navigate = useNavigate();
 
   // const [dropDown, setDropDown] = useState(false);
@@ -27,12 +36,15 @@ const Sidebar = (props) => {
           return <SubMenu item={item} key={index} props={props} />;
         })}
 
-        {/* <div
+        <div
           to="/"
           className="flex items-center mt-6 cursor-pointer 2xl:text-lg xl:text-sm"
           key="logout"
-          onClick={toggleLogoutModal}
-        ></div> */}
+          onClick={logoutUser}
+        >
+          <img src={logout} alt="logout" className="mr-4" />
+          <p className="font-normal text-sm text-white">Logout</p>
+        </div>
       </div>
 
       {/* <ModalPopup

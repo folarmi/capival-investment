@@ -23,6 +23,25 @@ const loginUser = async (values) => {
   return response.data;
 };
 
+const forgotPassword = async (values) => {
+  const response = await api.post(UrlRoute.forgotPassword, values);
+  return response.data;
+};
+
+const forgotPasswordOTP = async (values) => {
+  const response = await api.post(UrlRoute.forgotPasswordOTP, values);
+  return response.data;
+};
+
+const changePassword = async (values) => {
+  const response = await api.post(UrlRoute.changePassword, values);
+  return response.data;
+};
+
+const logout = () => {
+  localStorage.clear();
+};
+
 // const deleteCustomer = async (values) => {
 //   const response = await api.delete(`${UrlRoute.getSingleCustomer}/${values}`);
 //   return response.data;
@@ -33,6 +52,10 @@ const authService = {
   bvnOtpValidation,
   registerUser,
   loginUser,
+  forgotPassword,
+  forgotPasswordOTP,
+  changePassword,
+  logout,
 };
 
 export default authService;
