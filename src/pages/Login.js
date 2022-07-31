@@ -80,7 +80,7 @@ const Login = () => {
           />
           <p
             onClick={gotToForgotPasswordPage}
-            className="text-sm font-medium text-blueThree py-6 text-center"
+            className="text-sm font-medium text-blueThree py-6 text-center cursor-pointer"
           >
             Forget Password?
           </p>
