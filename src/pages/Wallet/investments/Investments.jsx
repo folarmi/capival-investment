@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 import { TableHeader, WalletCard } from "../../../components";
+import investmentBg from "../../../icons/investmentBg.svg";
 
 const Investments = () => {
   const navigate = useNavigate();
@@ -31,11 +32,11 @@ const Investments = () => {
   ];
 
   const goToSavingsPage = () => {
-    navigate("/wallet/investments/new-saving");
+    navigate("/dashboard/wallet/investments/new-saving");
   };
 
   const goToFixedDepositsPage = () => {
-    navigate("/wallet/investments/new-fixed-deposits");
+    navigate("/dashboard/wallet/investments/new-fixed-deposits");
   };
 
   return (
@@ -43,11 +44,10 @@ const Investments = () => {
       <section className="flex justify-center items-center mt-8">
         <WalletCard
           title="Investments"
-          primaryColor="#246362"
-          secColor="linear-gradient(165.82deg, #33458D -121.49%, #C06B29 13.24%, #21093A 138.23%)"
           ifAccountName
           cardName="Account Name"
           amount="50,000.25"
+          bgImage={investmentBg}
         />
       </section>
       {/* bg-blueTwo/20 */}

@@ -6,9 +6,12 @@ const Dashboard = () => {
     <>
       <section className="grid grid-cols-4 mt-8 px-24">
         <CircularIcon icon="/assets/icons/loan.svg" path="loans" />
-        <CircularIcon icon="/assets/icons/wallet.svg" path="loans" />
+        <CircularIcon icon="/assets/icons/wallet.svg" path="wallet" />
         <CircularIcon icon="/assets/icons/billPayment.svg" path="loans" />
-        <CircularIcon icon="/assets/icons/investments.svg" path="loans" />
+        <CircularIcon
+          icon="/assets/icons/investments.svg"
+          path="wallet/investments"
+        />
         <CircularIcon icon="/assets/icons/mobileTopUp.svg" path="loans" />
         <CircularIcon icon="/assets/icons/rewards.svg" path="loans" />
         <CircularIcon icon="/assets/icons/flights.svg" path="loans" />

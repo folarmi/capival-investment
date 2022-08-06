@@ -9,6 +9,11 @@ import {
   Wallet,
   ForgotPasswordOTP,
   CreateNewPassword,
+  NewLoan,
+  Repayment,
+  NextRepayment,
+  LoanDetails,
+  SettleLoan,
 } from "../pages";
 import { FixedDeposits } from "../pages/Wallet/investments/fixedDeposit";
 import { Confirmation } from "../pages/Wallet/investments/fixedDeposit/Confirmation";
@@ -29,27 +34,38 @@ const Index = () => {
       <Route path="/create-new-password" element={<CreateNewPassword />} />
       <Route element={<RequiredAuthDashboard />}>
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/wallet" element={<Wallet />} />
-        <Route path="/wallet/details" element={<WalletDetails />} />
-        <Route path="/wallet/investments" element={<Investments />} />
-        <Route path="/wallet/investments/new-saving" element={<Savings />} />
+        <Route path="dashboard/wallet" element={<Wallet />} />
+        <Route path="dashboard/wallet/details" element={<WalletDetails />} />
+        <Route path="dashboard/wallet/investments" element={<Investments />} />
         <Route
-          path="/wallet/investments/new-saving/confirm"
+          path="dashboard/wallet/investments/new-saving"
+          element={<Savings />}
+        />
+        <Route
+          path="dashboard/wallet/investments/new-saving/confirm"
           element={<SavingsConfirmation />}
         />
         <Route
-          path="/wallet/investments/new-fixed-deposits"
+          path="dashboard/wallet/investments/new-fixed-deposits"
           element={<FixedDeposits />}
         />
         <Route
-          path="/wallet/investments/new-fixed-deposits/confirm"
+          path="dashboard/wallet/investments/new-fixed-deposits/confirm"
           element={<Confirmation />}
         />
         <Route
-          path="/wallet/details/transaction-details"
+          path="dashboard/wallet/details/transaction-details"
           element={<WalletTransactionDetails />}
         />
         <Route path="dashboard/loans" element={<Loans />} />
+        <Route path="dashboard/loans/new-loan" element={<NewLoan />} />
+        <Route path="dashboard/loans/repayment" element={<Repayment />} />
+        <Route
+          path="dashboard/loans/next-repayment"
+          element={<NextRepayment />}
+        />
+        <Route path="dashboard/loans/details" element={<LoanDetails />} />
+        <Route path="dashboard/loans/settle-loan" element={<SettleLoan />} />
       </Route>
     </Routes>
   );

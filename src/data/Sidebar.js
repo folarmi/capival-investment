@@ -23,7 +23,7 @@ export const SidebarMenuItems = [
     id: "2",
     menuItem: "Wallet",
     Image: wallet,
-    path: "/wallet",
+    path: "dashboard/wallet",
     useStroke: true,
   },
   {

@@ -13,3 +13,8 @@ export * from "./Register/Signature";
 export * from "./Dashboard/index";
 export * from "./Wallet/index";
 export * from "./Loans/index";
+export * from "./Loans/NewLoan";
+export * from "./Loans/Repayment";
+export * from "./Loans/NextRepayment";
+export * from "./Loans/LoanDetails";
+export * from "./Loans/SettleLoan";

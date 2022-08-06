@@ -1,21 +1,67 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { ProgressBar, TableHeader } from "../../components";
 
 const Loans = () => {
+  const navigate = useNavigate();
+
+  const goToNewLoanPage = () => {
+    navigate("/dashboard/loans/new-loan");
+  };
+
+  const gotToRepaymentPage = () => {
+    navigate("/dashboard/loans/repayment");
+  };
+
+  const gotToLoanDetailsPage = () => {
+    navigate("/dashboard/loans/details");
+  };
+
+  const gotToSettleLoanPage = () => {
+    navigate("/dashboard/loans/settle-loan");
+  };
+
   return (
     <>
       <div className="m-auto w-[70%] mt-8">
-        <img src="/assets/images/card.svg" alt="" />
+        <div
+          className="flex items-center justify-around bg-center bg-no-repeat py-12 rounded-xl"
+          style={{ backgroundImage: `url(${"/assets/images/card.svg"})` }}
+        >
+          <p className="text-white font-semibold text-xl">
+            You are now qualified for loans up to N 500,000
+          </p>
+          <p
+            onClick={goToNewLoanPage}
+            className="cursor-pointer font-normal text-xl rounded-lg bg-white py-4 px-6 shadow-lg"
+          >
+            Apply Now
+          </p>
+        </div>
 
         <div className="flex mt-10 mb-8 justify-center">
-          <div className="">
-            <img src="/assets/images/repayment.svg" alt="repayment icon" />
+          <div className="cursor-pointer">
+            <img
+              src="/assets/images/repayment.svg"
+              alt="repayment icon"
+              onClick={gotToRepaymentPage}
+            />
           </div>
-          <div className="">
-            <img src="/assets/images/loanDetails.svg" alt="loan detail" />
+
+          <div className="cursor-pointer">
+            <img
+              src="/assets/images/loanDetails.svg"
+              alt="loan detail"
+              onClick={gotToLoanDetailsPage}
+            />
           </div>
+
           <div className="">
-            <img src="/assets/images/settleLoan.svg" alt="settle loan" />
+            <img
+              src="/assets/images/settleLoan.svg"
+              alt="settle loan"
+              onClick={gotToSettleLoanPage}
+            />
           </div>
         </div>
       </div>

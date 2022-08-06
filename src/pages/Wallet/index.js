@@ -121,11 +121,11 @@ const Wallet = () => {
   );
 
   const goToWallet = () => {
-    navigate("/wallet/details");
+    navigate("/dashboard/wallet/details");
   };
 
   const goToInvestments = () => {
-    navigate("/wallet/investments");
+    navigate("/dashboard/wallet/investments");
   };
 
   return (
@@ -136,7 +136,7 @@ const Wallet = () => {
           ifAccountName
           cardName="Account Name"
           amount="50,000.25"
-          onClick={goToWallet}
+          onClick={goToInvestments}
           bgImage={investmentBg}
         />
 

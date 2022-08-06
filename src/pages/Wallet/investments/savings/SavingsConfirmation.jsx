@@ -43,7 +43,6 @@ const SavingsConfirmation = () => {
   return (
     <div>
       <main className="my-10 bg-blueSix rounded-lg px-6 mx-7">
-        {/* <section> */}
         {transactionDetails?.map((item) => {
           return (
             <div

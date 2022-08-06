@@ -30,7 +30,7 @@ const FixedDeposits = () => {
   });
 
   const goToConfirmationPage = () => {
-    navigate("/wallet/investments/new-fixed-deposits/confirm");
+    navigate("/dashboard/wallet/investments/new-fixed-deposits/confirm");
   };
 
   return (

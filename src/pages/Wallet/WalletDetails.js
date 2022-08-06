@@ -26,7 +26,7 @@ const WalletDetails = () => {
         ),
         view: (
           <Link
-            to="/wallet/details/transaction-details"
+            to="dashboard/wallet/details/transaction-details"
             className="text-base text-blueTwo font-normal"
           >
             view

@@ -73,7 +73,7 @@ const SubMenu = ({ item }) => {
           className={({ isActive }) =>
             isActive
               ? "bg-white py-2 rounded-tr-2xl rounded-br-2xl mr-10 flex items-center mt-6 text-blueTwo px-8 lg:px-4 xl:px-6 2xl:px-12"
-              : "flex items-center py-2 mt-6 text-white px-8 lg:px-4 xl:px-6 2xl:px-12"
+              : "flex items-center mt-6 text-white px-8 lg:px-4 xl:px-6 2xl:px-12"
           }
           key={item?.id}
         >

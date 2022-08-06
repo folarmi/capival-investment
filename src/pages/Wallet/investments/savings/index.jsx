@@ -1,8 +1,8 @@
 import React from "react";
 import { useForm, Controller } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-
 import Select from "react-select";
+
 import { Button, SavingsInput } from "../../../../atoms";
 
 const colourStyles = {
@@ -30,7 +30,7 @@ const Savings = () => {
   });
 
   const goToConfirmationPage = () => {
-    navigate("/wallet/investments/new-saving/confirm");
+    navigate("/dashboard/wallet/investments/new-saving/confirm");
   };
 
   return (

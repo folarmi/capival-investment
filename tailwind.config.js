@@ -22,7 +22,9 @@ module.exports = {
         redOne: "#C6211B",
         redTwo: "#AE1F24",
         orange: "#C06B29",
+        blackTwo: "#111228",
         grayOne: "rgba(255, 255, 255, 1)",
+        grayTwo: "#9dacd3",
       },
       // backgroundImage: {
       //   login: "url('../../icons/loginBg.png')",

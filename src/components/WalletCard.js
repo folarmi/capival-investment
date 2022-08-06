@@ -12,7 +12,7 @@ const WalletCard = ({
   return (
     <>
       <div
-        class="wallet-bg p-10 max-w-sm rounded-xl shadow-md bg-center bg-no-repeat cursor-pointer"
+        className="wallet-bg p-10 max-w-sm rounded-xl shadow-md bg-center bg-no-repeat cursor-pointer"
         onClick={onClick}
         style={{ backgroundImage: `url(${bgImage})` }}
       >
