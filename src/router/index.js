@@ -10,6 +10,8 @@ import {
   ForgotPasswordOTP,
   CreateNewPassword,
 } from "../pages";
+import { FixedDeposits } from "../pages/Wallet/investments/fixedDeposit";
+import { Confirmation } from "../pages/Wallet/investments/fixedDeposit/Confirmation";
 import { Investments } from "../pages/Wallet/investments/Investments";
 import { Savings } from "../pages/Wallet/investments/savings";
 import { SavingsConfirmation } from "../pages/Wallet/investments/savings/SavingsConfirmation";
@@ -34,6 +36,14 @@ const Index = () => {
         <Route
           path="/wallet/investments/new-saving/confirm"
           element={<SavingsConfirmation />}
+        />
+        <Route
+          path="/wallet/investments/new-fixed-deposits"
+          element={<FixedDeposits />}
+        />
+        <Route
+          path="/wallet/investments/new-fixed-deposits/confirm"
+          element={<Confirmation />}
         />
         <Route
           path="/wallet/details/transaction-details"

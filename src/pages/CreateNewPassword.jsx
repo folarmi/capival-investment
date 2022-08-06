@@ -25,6 +25,10 @@ const CreateNewPassword = () => {
         /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/,
         "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
       ),
+    confirm_password: Yup.string().oneOf(
+      [Yup.ref("password"), null],
+      "Passwords must match"
+    ),
   });
 
   const { register, handleSubmit, formState } = useForm({
@@ -69,6 +73,15 @@ const CreateNewPassword = () => {
             ifIcon={false}
             register={register("password")}
             error={errors?.password?.message}
+            type="password"
+          />
+
+          <Input
+            placeholder="Confirm Password"
+            ifIcon={false}
+            register={register("confirm_password")}
+            error={errors?.confirm_password?.message}
+            type="password"
           />
 
           <Button

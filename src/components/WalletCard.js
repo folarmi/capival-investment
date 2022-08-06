@@ -1,43 +1,39 @@
 import React from "react";
 
 const WalletCard = ({
-  title,
+  bgImage,
   cardName,
   amount,
   onClick,
-  secColor,
   ifAccountName = false,
+  ifAccountNumber = false,
+  accountNumber,
 }) => {
   return (
-    <div
-      className="rounded-lg mr-4 w-[33%] wallet-bg cursor-pointer"
-      onClick={onClick}
-      style={
-        {
-          // backgroundColor: primaryColor,
-        }
-      }
-    >
+    <>
       <div
-        className="mt-4 mx-4 rounded-xl"
-        style={{
-          backgroundColor: secColor,
-        }}
+        class="wallet-bg p-10 max-w-sm rounded-xl shadow-md bg-center bg-no-repeat cursor-pointer"
+        onClick={onClick}
+        style={{ backgroundImage: `url(${bgImage})` }}
       >
-        <p className="uppercase text-white font-medium text-xl text-center py-4">
-          {title}
-        </p>
-      </div>
-
-      <section className="my-10">
         {ifAccountName && (
-          <p className="text-white font-medium text-xl text-center">
+          <p className="text-white font-medium px-10 text-base pt-4 text-center">
             {cardName}
           </p>
         )}
-        <p className="text-white font-medium text-4xl text-center">₦{amount}</p>
-      </section>
-    </div>
+        <p className="text-white font-medium px-10 text-3xl text-center">
+          ₦{amount}
+        </p>
+        {ifAccountNumber && (
+          <div className="flex justify-end items-center cursor-pointer">
+            <p className="font-normal text-sm text-white pr-2">
+              Acc No: <span className="font-medium">{accountNumber}</span>
+            </p>
+            <img src="/assets/icons/copyIcon.svg" alt="copyIcon" />
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 

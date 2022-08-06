@@ -2,6 +2,8 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Table, TableHeader } from "../../components";
 import { WalletCard } from "../../components/WalletCard";
+import walletBg from "../../icons/walletBg.svg";
+import investmentBg from "../../icons/investmentBg.svg";
 
 const Wallet = () => {
   const navigate = useNavigate();
@@ -128,32 +130,36 @@ const Wallet = () => {
 
   return (
     <>
-      <div className="flex items-center mt-8 mx-4">
-        <WalletCard
-          title="Investments"
-          primaryColor="#246362"
-          secColor="#111228"
-          cardName="Account Name"
-          amount="50,000.25"
-          onClick={goToInvestments}
-        />
-
+      <div className="flex justify-between items-center mt-12 mx-4">
         <WalletCard
           title="Wallet"
-          primaryColor="#246362"
-          secColor="#111228"
           ifAccountName
           cardName="Account Name"
           amount="50,000.25"
           onClick={goToWallet}
+          bgImage={investmentBg}
         />
 
         <WalletCard
-          title="Loans"
-          primaryColor="#246362"
-          secColor="#111228"
-          // cardName="Account Name"
+          title="Wallet"
+          ifAccountName
+          cardName="Account Name"
           amount="50,000.25"
+          onClick={goToWallet}
+          bgImage={walletBg}
+          ifAccountNumber
+          accountNumber="0046378932"
+        />
+
+        <WalletCard
+          title="Wallet"
+          ifAccountName
+          cardName="Account Name"
+          amount="50,000.25"
+          onClick={goToWallet}
+          bgImage={walletBg}
+          ifAccountNumber
+          accountNumber="0046378932"
         />
       </div>
 

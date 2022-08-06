@@ -2,17 +2,19 @@ import React from "react";
 
 import { WalletCard } from "../../components";
 import { SearchBar } from "../../components/SearchBar";
+import walletBg from "../../icons/walletBg.svg";
 
 const WalletDetailsHeader = ({ ifSearchBar }) => {
   return (
     <div className="flex flex-col justify-center items-center">
       <WalletCard
         title="Wallet"
-        primaryColor="#246362"
-        secColor="#111228"
         ifAccountName
         cardName="Account Name"
         amount="50,000.25"
+        bgImage={walletBg}
+        ifAccountNumber
+        accountNumber="0046378932"
       />
 
       <section className="flex items-center mt-5">

@@ -38,10 +38,11 @@ const Input = ({
           {...register}
           placeholder={placeholder}
           {...inputProps}
-          className="w-full rounded-2xl bg-blueTwo/[0.2] focus:outline-none font-medium text-[15px] text-primary py-4 pl-14"
+          className="w-full rounded-2xl bg-blueTwo/[0.2] focus:outline-none font-medium text-[15px] text-primary py-4"
           style={{
             border: error ? "1px solid red" : "",
             backgroundColor: readOnly ? "#ACB5BD" : "",
+            paddingLeft: ifIcon ? "44px" : "24px",
           }}
           readOnly={readOnly}
         />

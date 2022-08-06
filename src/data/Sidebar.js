@@ -2,9 +2,6 @@ import { ReactComponent as homeIcon } from "../icons/homeIcon.svg";
 import { ReactComponent as wallet } from "../icons/wallet.svg";
 import { ReactComponent as support } from "../icons/support.svg";
 import { ReactComponent as profile } from "../icons/dashboardProfile.svg";
-import { ReactComponent as logout } from "../icons/logout.svg";
-// import { ReactComponent as security } from "../icons/security.svg";
-// import { ReactComponent as pin } from "../icons/pin.svg";
 import security from "../icons/security.svg";
 import pin from "../icons/pin.svg";
 import issue from "../icons/issue.svg";
@@ -20,21 +17,21 @@ export const SidebarMenuItems = [
     // Image: "/assets/icons/homeIcon.svg",
     Image: homeIcon,
     path: "/dashboard",
-    useStroke: false,
+    useStroke: true,
   },
   {
     id: "2",
     menuItem: "Wallet",
     Image: wallet,
     path: "/wallet",
-    useStroke: false,
+    useStroke: true,
   },
   {
     id: "3",
     menuItem: "Support",
     Image: support,
     path: "/wallet",
-    useStroke: false,
+    useStroke: true,
     subMenu: [
       {
         id: "1",
@@ -67,7 +64,7 @@ export const SidebarMenuItems = [
     menuItem: "Profile",
     Image: profile,
     path: "/wallet",
-    useStroke: false,
+    useStroke: true,
     subMenu: [
       {
         id: "1",
