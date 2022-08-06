@@ -128,6 +128,10 @@ const Wallet = () => {
     navigate("/dashboard/wallet/investments");
   };
 
+  const goToLoansPage = () => {
+    navigate("/dashboard/loans");
+  };
+
   return (
     <>
       <div className="flex justify-between items-center mt-12 mx-4">
@@ -156,7 +160,7 @@ const Wallet = () => {
           ifAccountName
           cardName="Account Name"
           amount="50,000.25"
-          onClick={goToWallet}
+          onClick={goToLoansPage}
           bgImage={walletBg}
           ifAccountNumber
           accountNumber="0046378932"

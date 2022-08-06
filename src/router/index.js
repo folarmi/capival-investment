@@ -14,7 +14,15 @@ import {
   NextRepayment,
   LoanDetails,
   SettleLoan,
+  BillPayment,
+  CableTV,
+  MobileTopUp,
+  ConfirmationPage,
+  Rewards,
+  CapivalHomes,
+  CapivalPension,
 } from "../pages";
+import CapivalTransfer from "../pages/CapivalTransfers";
 import { FixedDeposits } from "../pages/Wallet/investments/fixedDeposit";
 import { Confirmation } from "../pages/Wallet/investments/fixedDeposit/Confirmation";
 import { Investments } from "../pages/Wallet/investments/Investments";
@@ -66,6 +74,20 @@ const Index = () => {
         />
         <Route path="dashboard/loans/details" element={<LoanDetails />} />
         <Route path="dashboard/loans/settle-loan" element={<SettleLoan />} />
+        <Route path="dashboard/bill-payment" element={<BillPayment />} />
+        <Route path="dashboard/bill-payment/cable" element={<CableTV />} />
+        <Route path="dashboard/mobile-top-up" element={<MobileTopUp />} />
+        <Route
+          path="dashboard/mobile-top-up/confirm"
+          element={<ConfirmationPage />}
+        />
+        <Route path="dashboard/rewards" element={<Rewards />} />
+        <Route path="dashboard/capival-homes" element={<CapivalHomes />} />
+        <Route
+          path="dashboard/capival-transfers"
+          element={<CapivalTransfer />}
+        />
+        <Route path="dashboard/capival-pension" element={<CapivalPension />} />
       </Route>
     </Routes>
   );

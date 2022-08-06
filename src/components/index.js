@@ -5,3 +5,5 @@ export * from "./TableHeader";
 export * from "./ProgressBar";
 export * from "./TableTwo";
 export * from "./LoanHeader";
+export * from "./BillCard";
+export * from "./RewardHeader";

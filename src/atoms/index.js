@@ -10,3 +10,4 @@ export * from "./SearchBar";
 export * from "./CircularIcon";
 export * from "./CustomSelect";
 export * from "./SavingsInput";
+export * from "./UserAvatar";
