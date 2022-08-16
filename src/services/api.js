@@ -21,7 +21,10 @@ const apiResource = () => {
       // const token = JSON.parse(TokenService.getUser()?.auth)?.login?.user
       //   ?.authorisation[0]?.original?.token;
       // const test = JSON.parse(TokenService.getUser());
-      const token = localStorage.getItem("accessToken");
+      // const token = localStorage.getItem("accessToken");
+      const token = window.sessionStorage.getItem("accessToken");
+
+      // console.log(test);
 
       if (!token) return config;
       config.headers["Authorization"] = `Bearer ${token}`;

@@ -40,7 +40,7 @@ const Login = () => {
         if (res?.status === true) {
           toast("Login successful");
           tokenService.setUser(res?.authorisation[0]?.original?.token);
-          // navigate("/dashboard");
+          navigate("/dashboard");
         }
       })
       .catch((err) => {

@@ -37,6 +37,7 @@ class TokenService {
 
   setUser(user) {
     localStorage.setItem("accessToken", user);
+    window.sessionStorage.setItem("accessToken", user);
   }
 
   removeUser() {
