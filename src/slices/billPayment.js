@@ -43,3 +43,9 @@ export const billPaymentSlice = createSlice({
 const { reducer, actions } = billPaymentSlice;
 // export const { handleNextButton } = actions;
 export default reducer;
+
+// {
+//   "categoryId": "1",
+//   "categoryName": "Airtime & Data",
+//   "categoryDescription": "Airtime & Data"
+// }

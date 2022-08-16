@@ -135,6 +135,11 @@ const registerSlice = createSlice({
     handleForgotPasswordEmail: (state, action) => {
       state.forgotPasswordEmail = action.payload;
     },
+    resetInitialState: (state) => {
+      state.login.isLoading = false;
+      state.login.isLoggedIn = false;
+      state.login.user = null;
+    },
   },
   extraReducers: {
     [verifyBVNAsync.pending]: (state) => {
@@ -221,6 +226,6 @@ const registerSlice = createSlice({
 });
 
 const { reducer, actions } = registerSlice;
-export const { handleForgotPasswordEmail } = actions;
+export const { handleForgotPasswordEmail, resetInitialState } = actions;
 
 export default reducer;

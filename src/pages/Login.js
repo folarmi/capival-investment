@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 import { Input, Button, Header } from "../atoms";
-import { loginUserAsync } from "../slices/auth";
+import { loginUserAsync, resetInitialState } from "../slices/auth";
 import tokenService from "../services/token.service";
 
 const Login = () => {
@@ -39,12 +39,11 @@ const Login = () => {
       .then((res) => {
         if (res?.status === true) {
           toast("Login successful");
-          tokenService.setUser(res);
+          tokenService.setUser(res?.authorisation[0]?.original?.token);
           navigate("/dashboard");
         }
       })
       .catch((err) => {
-        console.log(err);
         toast.error(err?.message);
       });
   };
@@ -52,6 +51,10 @@ const Login = () => {
   const gotToForgotPasswordPage = () => {
     navigate("/forgot-password");
   };
+
+  React.useEffect(() => {
+    dispatch(resetInitialState());
+  }, []);
 
   return (
     <div className="w-full h-screen login-bg">
