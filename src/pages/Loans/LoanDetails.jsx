@@ -35,22 +35,22 @@ const LoanDetails = () => {
   ];
 
   return (
-    <div className="mt-8">
-      <p className="font-normal text-xl text-blueTwo pb-8 pl-12">
+    <div className="mt-4 md:mt-8">
+      <p className="font-normal text-xl text-blueTwo pb-4 md:pb-8 pl-6 md:pl-12">
         Loan Details
       </p>
 
-      <main className=" bg-blueSix rounded-lg px-6 mx-7">
+      <main className=" bg-blueSix rounded-lg px-0 md:px-6 mx-7">
         {loanDetails?.map((item) => {
           return (
             <div
               className="w-full flex items-center pt-8 pb-4 border-b border-blueTwo/30"
               key={item?.id}
             >
-              <p className="text-base font-normal text-blueTwo w-[40%] pl-[10%]">
+              <p className="text-base font-normal text-blueTwo md:w-[40%] pl-[10%]">
                 {item?.name}
               </p>
-              <p className="text-base font-normal text-blueTwo w-[60%]">
+              <p className="text-base font-normal text-blueTwo md:w-[60%]">
                 {item?.value}
               </p>
             </div>

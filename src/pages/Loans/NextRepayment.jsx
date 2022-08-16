@@ -26,18 +26,18 @@ const NextRepayment = () => {
 
   return (
     <div className="mt-8">
-      <div className="rounded-2xl">
+      <div className="mx-4 rounded-2xl">
         <LoanHeader amount="N52,250" title="Next Repayment" />
       </div>
 
-      <div className="mt-8 mx-7">
+      <div className="mt-8 mx-4 md:mx-7">
         <TableHeader
           header="Repayment History"
           pageNumber="Showing 1-3 of 3 active loans"
         />
 
-        <main className="bg-blueTwo/10 rounded-xl">
-          <section className="bg-blueTwo/20 rounded-xl py-4 pr-[40%] grid grid-cols-3 gap-4">
+        <main className="mt-4 md:mt-0 bg-blueTwo/10 rounded-xl overflow-scroll">
+          <section className="bg-blueTwo/20 rounded-xl py-4 md:pr-[40%] grid grid-cols-3 gap-32 md:gap-4">
             <p className="font-medium whitespace-nowrap text-base text-blueTwo pl-6">
               Amount Paid
             </p>
@@ -49,11 +49,11 @@ const NextRepayment = () => {
             </p>
           </section>
 
-          <div className="bg-blueTwo/10">
+          <div className="bg-blueTwo/10 overflow-scroll">
             {data.map((item) => {
               return (
                 <div
-                  className="w-full grid grid-cols-3 gap-4 mt-4 mb-4 bg-blueTwo/5 py-3 pr-[40%]"
+                  className="w-full grid grid-cols-3 gap-32 md:gap-4 mt-4 mb-4 bg-blueTwo/5 py-3 md:pr-[40%]"
                   key={item?.id}
                 >
                   <p className="whitespace-nowrap text-base text-blueTwo pl-6 font-normal ">
@@ -71,7 +71,7 @@ const NextRepayment = () => {
           </div>
         </main>
 
-        <div className="m-auto w-[30%] mt-12">
+        <div className="m-auto md:w-[30%] mt-12">
           <Button buttonText="Make Repayment" className="rounded-2xl" />
         </div>
       </div>

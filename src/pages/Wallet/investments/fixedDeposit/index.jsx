@@ -39,12 +39,12 @@ const FixedDeposits = () => {
         Start Investing
       </p>
 
-      <p className="text-blueTwo font-normal text-base text-center bg-blueThree rounded-2xl py-2 m-auto w-[30%]">
+      <p className="text-blueTwo font-normal text-base text-center bg-blueThree rounded-2xl py-2 m-auto w-[90%] md:w-[30%]">
         Interest rate: <span className="text-black">2.34% Per Annum</span>
       </p>
 
-      <form className="mt-10 mx-[15%]">
-        <div className="grid grid-cols-2 gap-16">
+      <form className="mt-10 mx-[5%] md:mx-[10%] lg:mx-[15%]">
+        <div className="md:grid md:grid-cols-2 gap-16">
           <Controller
             control={control}
             name="gender"
@@ -64,7 +64,7 @@ const FixedDeposits = () => {
             )}
           />
 
-          <div>
+          <div className="my-8 md:my-0">
             <SavingsInput
               placeholder="Enter Amount"
               ifIcon
@@ -75,8 +75,8 @@ const FixedDeposits = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-2  gap-16 mt-8">
-          <div>
+        <div className="md:grid md:grid-cols-2 gap-16 mt-8">
+          <div className="mt-8 md:mt-0">
             <SavingsInput
               placeholder="N0.0"
               //   label="How much would you like to save?"
@@ -85,7 +85,7 @@ const FixedDeposits = () => {
           </div>
         </div>
 
-        <div className="m-auto mt-20 w-1/3">
+        <div className="m-auto mt-10 md:mt-20 w-full md:w-1/3">
           <Button
             buttonText="Continue"
             className="rounded-xl"

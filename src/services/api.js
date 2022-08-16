@@ -34,9 +34,10 @@ const apiResource = () => {
         resolve(response);
       }),
     async (error) => {
+      console.log("error from api", error);
       if (error?.response?.status === 403) {
         TokenService.removeUser();
-        // window.location = "/";
+        window.location = "/";
       } else if (error?.response?.status === 401) {
         // call refresh token
         // localStorage.removeUser();

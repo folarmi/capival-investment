@@ -33,10 +33,12 @@ const Repayment = () => {
 
   return (
     <>
-      <div className="m-auto w-[70%] mt-8">
+      <div className="m-auto w-full md:w-[70%] mt-8">
+        {/* <div className="mx-2"> */}
         <LoanHeader amount="N500,000" title="Outstanding" />
+        {/* </div> */}
 
-        <div className="flex items-center justify-between px-10 bg-grayTwo py-3 rounded-bl-xl rounded-br-xl">
+        <div className="flex items-center justify-between px-4 md:px-10 bg-grayTwo py-3 rounded-bl-xl rounded-br-xl">
           <RepaymentCard title="Amount Paid" amount="N102500" />
           <RepaymentCard title="Total Amount" amount="N102500" />
           <RepaymentCard title="Loan Tenure" amount="N500000" />
@@ -58,14 +60,14 @@ const Repayment = () => {
           </div>
         </div>
       </div>
-      <div className="mt-8 mx-7">
+      <div className="mt-8 mx-4 md:mx-7">
         <TableHeader
           header="Repayment History"
           pageNumber="Showing 1-3 of 3 transactions"
         />
 
-        <main className="bg-blueTwo/10 rounded-xl">
-          <section className="bg-blueTwo/20 rounded-xl py-4 pr-[40%] grid grid-cols-3 gap-4">
+        <main className="mt-4 md:mt-0 bg-blueTwo/10 rounded-xl overflow-scroll">
+          <section className="bg-blueTwo/20 rounded-xl py-4 md:pr-[40%] grid grid-cols-3 gap-32 md:gap-4">
             <p className="font-medium whitespace-nowrap text-base text-blueTwo pl-6">
               Amount Paid
             </p>
@@ -77,11 +79,11 @@ const Repayment = () => {
             </p>
           </section>
 
-          <div className="bg-blueTwo/10">
+          <div className="bg-blueTwo/10 overflow-scroll">
             {data.map((item) => {
               return (
                 <div
-                  className="w-full grid grid-cols-3 gap-4 mt-4 mb-4 bg-blueTwo/5 py-3 pr-[40%]"
+                  className="w-full grid grid-cols-3 gap-32 md:gap-4 mt-4 mb-4 bg-blueTwo/5 py-3 md:pr-[40%]"
                   key={item?.id}
                 >
                   <p className="whitespace-nowrap text-base text-blueTwo pl-6 font-normal ">

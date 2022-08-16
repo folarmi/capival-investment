@@ -60,7 +60,9 @@ const Button = ({
           </svg>
         </div>
       ) : (
-        <p className="text-xl font-semibold">{buttonText}</p>
+        <p className="text-lg md:text-xl font-normal lg:font-semibold">
+          {buttonText}
+        </p>
       )}
     </button>
   );

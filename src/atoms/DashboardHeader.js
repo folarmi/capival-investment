@@ -8,9 +8,13 @@ const DashboardHeader = () => {
 
   console.log(userObject?.accounts?.AccountTitle);
   return (
-    <header className="flex items-center bg-blueOne py-4">
+    <header className="hidden md:flex items-start lg:items-center bg-blueOne py-4">
       <div className="ml-6 w-[10%] mr-[10%]">
-        <img src="/assets/icons/logo.svg" alt="capival-logo" />
+        <img
+          src="/assets/icons/logo.svg"
+          alt="capival-logo"
+          className="hidden md:block"
+        />
       </div>
 
       <div className="flex whitespace-nowrap items-center mr-[3%]">

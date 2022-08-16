@@ -52,7 +52,7 @@ const Investments = () => {
       </section>
       {/* bg-blueTwo/20 */}
 
-      <div className="m-auto w-[40%] bg-blueTwo/50 rounded-xl mt-3">
+      <div className="m-auto md:w-[40%] bg-blueTwo/50 rounded-xl mt-3">
         {/* <img src="/assets/icons/newAsset.svg" alt="new asset" /> */}
         <div className="flex items-center justify-center">
           <svg

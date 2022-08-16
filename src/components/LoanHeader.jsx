@@ -9,7 +9,9 @@ const LoanHeader = ({ title, amount }) => {
       }}
     >
       <p className="text-white font-medium text-xl">{title}</p>
-      <p className="text-blackTwo font-semibold text-2xl py-1">{amount}</p>
+      <p className="text-blackTwo font-medium md:font-semibold text-2xl py-1">
+        {amount}
+      </p>
     </div>
   );
 };

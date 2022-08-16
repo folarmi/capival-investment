@@ -27,36 +27,38 @@ const NewLoan = () => {
   });
 
   return (
-    <div className="mt-8">
-      <p className="font-normal text-xl text-blueTwo pl-12">New Loan</p>
+    <div className="mt-4 lg:mt-8">
+      <p className="font-normal text-xl text-blueTwo pl-6 md:pl-12">New Loan</p>
 
-      <main className="grid grid-cols-2 gap-16 bg-blueSix rounded-xl mx-10 px-[6%] py-6 mt-8">
+      <main className="md:grid md:grid-cols-2 gap-16 bg-blueSix rounded-xl mx-4 md:mx-10 px-[6%] py-6 mt-8">
         <div>
           <SavingsInput placeholder="First Name" label="Loan Amount" />
         </div>
 
-        <Controller
-          control={control}
-          name="gender"
-          render={({ field: { onChange, onBlur, value, ref } }) => (
-            <div>
-              <label className="text-sm font-normal text-blueTwo">
-                Investment Type?
-              </label>
-              <Select
-                onBlur={onBlur} // notify when input is touched
-                onChange={onChange} // send value to hook form
-                checked={value}
-                inputRef={ref}
-                // options={genderData}
-                placeholder="O months"
-                styles={colourStyles}
-              />
-            </div>
-          )}
-        />
+        <div className="mt-8">
+          <Controller
+            control={control}
+            name="gender"
+            render={({ field: { onChange, onBlur, value, ref } }) => (
+              <div>
+                <label className="text-sm font-normal text-blueTwo">
+                  Investment Type?
+                </label>
+                <Select
+                  onBlur={onBlur} // notify when input is touched
+                  onChange={onChange} // send value to hook form
+                  checked={value}
+                  inputRef={ref}
+                  // options={genderData}
+                  placeholder="O months"
+                  styles={colourStyles}
+                />
+              </div>
+            )}
+          />
+        </div>
 
-        <div className="w-[40%] justify-self-center col-span-2">
+        <div className="w-full md:w-[40%] justify-self-center col-span-2 mt-8">
           <Controller
             control={control}
             name="gender"
@@ -79,7 +81,7 @@ const NewLoan = () => {
           />
         </div>
 
-        <div className="w-[40%] justify-self-center col-span-2">
+        <div className="w-full mt-8 md:mt-0 md:w-[40%] justify-self-center col-span-2">
           <Button buttonText="Apply Now" className="rounded-xl" size="lg" />
         </div>
       </main>

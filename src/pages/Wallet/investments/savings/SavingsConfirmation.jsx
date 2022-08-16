@@ -46,13 +46,13 @@ const SavingsConfirmation = () => {
         {transactionDetails?.map((item) => {
           return (
             <div
-              className="w-full flex items-center pt-8 pb-4 border-b border-blueTwo/30"
+              className="w-full whitespace-nowrap flex items-center pt-8 pb-4 border-b border-blueTwo/30"
               key={item?.id}
             >
-              <p className="text-base font-normal text-blueTwo w-[40%] pl-[10%]">
+              <p className="text-base font-normal text-blueTwo md:w-[40%] md:pl-[10%]">
                 {item?.name}
               </p>
-              <p className="text-base font-normal text-blueTwo w-[60%]">
+              <p className="text-base font-normal text-blueTwo md:w-[60%]">
                 {item?.value}
               </p>
             </div>
@@ -60,8 +60,8 @@ const SavingsConfirmation = () => {
         })}
       </main>
 
-      <div className="m-auto w-1/3">
-        <div class="flex justify-center items-center my-10">
+      <div className="m-auto w-full md:w-1/3">
+        <div class="flex justify-center items-center my-4 md:my-10">
           <input
             id="default-checkbox"
             type="checkbox"
@@ -76,7 +76,10 @@ const SavingsConfirmation = () => {
             <span className="text-blueThree">Terms & Conditions</span>
           </label>
         </div>
-        <Button buttonText="Continue" className="rounded-xl" size="lg" />
+
+        <div className="mx-6 md:mx-0">
+          <Button buttonText="Continue" className="rounded-xl" size="lg" />
+        </div>
       </div>
     </div>
   );
