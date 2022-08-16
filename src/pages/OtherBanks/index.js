@@ -2,7 +2,7 @@ import React from "react";
 import { Button, SavingsInput, UserAvatar } from "../../atoms";
 import WalletDetailsHeader from "../Wallet/WalletDetailsHeader";
 
-const CapivalTransfer = () => {
+const OtherBanksTransfer = () => {
   return (
     <div className="mt-8">
       <WalletDetailsHeader />
@@ -22,7 +22,7 @@ const CapivalTransfer = () => {
         </div>
 
         <p className="font-medium text-blueTwo text-base uppercase py-5">
-          Capival Transfer
+          Other Bank Transfer
         </p>
 
         <form className="grid grid-cols-2 gap-10 px-20">
@@ -45,4 +45,4 @@ const CapivalTransfer = () => {
   );
 };
 
-export default CapivalTransfer;
+export { OtherBanksTransfer };

@@ -9,6 +9,8 @@ const login = "auth/login";
 const forgotPassword = "auth/forgot-password";
 const forgotPasswordOTP = "auth/forgot-password/validate-otp";
 const changePassword = "auth/change-password";
+const getBillPaymentCategories = "bills-payment/get-categories";
+const getTransactionHistory = "transactions/recent-transactions";
 
 const UrlRoute = {
   verifyBVN,
@@ -22,6 +24,8 @@ const UrlRoute = {
   forgotPassword,
   forgotPasswordOTP,
   changePassword,
+  getBillPaymentCategories,
+  getTransactionHistory,
 };
 
 export default UrlRoute;

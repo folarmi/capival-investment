@@ -10,7 +10,7 @@ import { Button } from "../../atoms/Button";
 import { RegisterInput } from "../../atoms/RegisterInput";
 import {
   handleNextButton,
-  handleBackButton,
+  // handleBackButton,
   handleGender,
 } from "../../slices/multistep";
 import { getGenderAsync, getMaritalStatusAsync } from "../../slices/utils";

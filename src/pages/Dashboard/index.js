@@ -31,10 +31,13 @@ const Dashboard = () => {
           icon="/assets/icons/capivalTransfer.svg"
           path="capival-transfers"
         />
-        <CircularIcon icon="/assets/icons/otherBank.svg" path="loans" />
-        <CircularIcon icon="/assets/icons/debitCard.svg" path="loans" />
-        <CircularIcon icon="/assets/icons/history.svg" path="loans" />
-        <CircularIcon icon="/assets/icons/bets.svg" path="loans" />
+        <CircularIcon icon="/assets/icons/otherBank.svg" path="other-banks" />
+        <CircularIcon icon="/assets/icons/debitCard.svg" path="debit-card" />
+        <CircularIcon
+          icon="/assets/icons/history.svg"
+          path="transaction-history"
+        />
+        <CircularIcon icon="/assets/icons/bets.svg" path="bets-and-lotteries" />
         <CircularIcon icon="/assets/icons/add.svg" path="loans" />
       </section>
 

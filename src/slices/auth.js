@@ -133,7 +133,6 @@ const registerSlice = createSlice({
   initialState,
   reducers: {
     handleForgotPasswordEmail: (state, action) => {
-      console.log(state.forgotPasswordEmail);
       state.forgotPasswordEmail = action.payload;
     },
   },

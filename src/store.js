@@ -14,6 +14,8 @@ import storage from "redux-persist/lib/storage";
 import multiStepReducer from "./slices/multistep";
 import authReducer from "./slices/auth";
 import utilsReducer from "./slices/utils";
+import billPaymentReducer from "./slices/billPayment";
+import transactionHistoryReducer from "./slices/transactionHistory";
 
 const persistConfig = {
   key: "root",
@@ -26,6 +28,8 @@ const reducers = combineReducers({
   multiStep: multiStepReducer,
   auth: authReducer,
   utils: utilsReducer,
+  billPayment: billPaymentReducer,
+  transactionHistory: transactionHistoryReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);

@@ -26,3 +26,7 @@ export * from "./Rewards/index";
 export * from "./CapivalHomes/index";
 export * from "./CapivalTransfers/index";
 export * from "./CapivalPension/index";
+export * from "./TransactionHistory/index";
+export * from "./BetsAndLorries/index";
+export * from "./DebitCards/index";
+export * from "./OtherBanks/index";

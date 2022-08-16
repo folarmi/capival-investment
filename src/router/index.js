@@ -21,7 +21,12 @@ import {
   Rewards,
   CapivalHomes,
   CapivalPension,
+  TransactionHistory,
+  BetsAndLotteries,
+  DebitCard,
+  OtherBanksTransfer,
 } from "../pages";
+import { BetTransactionDetail } from "../pages/BetsAndLorries/BetTransactionDetail";
 import CapivalTransfer from "../pages/CapivalTransfers";
 import { FixedDeposits } from "../pages/Wallet/investments/fixedDeposit";
 import { Confirmation } from "../pages/Wallet/investments/fixedDeposit/Confirmation";
@@ -88,6 +93,20 @@ const Index = () => {
           element={<CapivalTransfer />}
         />
         <Route path="dashboard/capival-pension" element={<CapivalPension />} />
+        <Route
+          path="dashboard/transaction-history"
+          element={<TransactionHistory />}
+        />
+        <Route
+          path="dashboard/bets-and-lotteries"
+          element={<BetsAndLotteries />}
+        />
+        <Route
+          path="dashboard/bets-and-lotteries/confirm"
+          element={<BetTransactionDetail />}
+        />
+        <Route path="dashboard/debit-card" element={<DebitCard />} />
+        <Route path="dashboard/other-banks" element={<OtherBanksTransfer />} />
       </Route>
     </Routes>
   );

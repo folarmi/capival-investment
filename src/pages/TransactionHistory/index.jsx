@@ -1,12 +1,15 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import { Table, TableHeader } from "../../components";
-import { WalletCard } from "../../components/WalletCard";
-import walletBg from "../../icons/walletBg.svg";
-import investmentBg from "../../icons/investmentBg.svg";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
-const Wallet = () => {
-  const navigate = useNavigate();
+import { getTransactionHistoryAsync } from "../../slices/transactionHistory";
+import { Table, TableHeader } from "../../components";
+
+const TransactionHistory = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getTransactionHistoryAsync());
+  }, []);
 
   const data = React.useMemo(
     () => [
@@ -82,53 +85,8 @@ const Wallet = () => {
     []
   );
 
-  const goToWallet = () => {
-    navigate("/dashboard/wallet/details");
-  };
-
-  const goToInvestments = () => {
-    navigate("/dashboard/wallet/investments");
-  };
-
-  const goToLoansPage = () => {
-    navigate("/dashboard/loans");
-  };
-
   return (
-    <>
-      <div className="flex justify-between items-center mt-12 mx-4">
-        <WalletCard
-          title="Wallet"
-          ifAccountName
-          cardName="Account Name"
-          amount="50,000.25"
-          onClick={goToInvestments}
-          bgImage={investmentBg}
-        />
-
-        <WalletCard
-          title="Wallet"
-          ifAccountName
-          cardName="Account Name"
-          amount="50,000.25"
-          onClick={goToWallet}
-          bgImage={walletBg}
-          ifAccountNumber
-          accountNumber="0046378932"
-        />
-
-        <WalletCard
-          title="Wallet"
-          ifAccountName
-          cardName="Account Name"
-          amount="50,000.25"
-          onClick={goToLoansPage}
-          bgImage={walletBg}
-          ifAccountNumber
-          accountNumber="0046378932"
-        />
-      </div>
-
+    <div>
       <section className="my-8 mx-7">
         <TableHeader
           header="Recent Transactions"
@@ -137,8 +95,8 @@ const Wallet = () => {
 
         <Table data={data} columns={columns} />
       </section>
-    </>
+    </div>
   );
 };
 
-export { Wallet };
+export { TransactionHistory };
