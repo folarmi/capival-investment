@@ -36,7 +36,7 @@ class TokenService {
   }
 
   setUser(user) {
-    localStorage.setItem("userObject", JSON.stringify(user));
+    localStorage.setItem("accessToken", user);
   }
 
   removeUser() {

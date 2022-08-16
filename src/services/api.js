@@ -18,8 +18,10 @@ const apiResource = () => {
 
   api.interceptors.request.use(
     (config) => {
-      const token = JSON.parse(TokenService.getUser()?.auth)?.login?.user
-        ?.authorisation[0]?.original?.token;
+      // const token = JSON.parse(TokenService.getUser()?.auth)?.login?.user
+      //   ?.authorisation[0]?.original?.token;
+      // const test = JSON.parse(TokenService.getUser());
+      const token = localStorage.getItem("accessToken");
 
       if (!token) return config;
       config.headers["Authorization"] = `Bearer ${token}`;
