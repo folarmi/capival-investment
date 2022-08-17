@@ -5,6 +5,7 @@ import "aos/dist/aos.css";
 import AOS from "aos";
 import Routers from "./router";
 import { ToastContainer } from "react-toastify";
+import SessionTimeout from "./utils/SessionTimeout";
 
 AOS.init();
 
@@ -13,6 +14,7 @@ function App() {
     <>
       <Routers />
       <ToastContainer />
+      <SessionTimeout />
     </>
   );
 }

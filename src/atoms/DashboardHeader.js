@@ -6,7 +6,6 @@ import { SearchBar } from "./SearchBar";
 const DashboardHeader = () => {
   const userObject = useSelector((state) => state.auth.login.user.user);
 
-  console.log(userObject?.accounts?.AccountTitle);
   return (
     <header className="hidden md:flex items-start lg:items-center bg-blueOne py-4">
       <div className="ml-6 w-[10%] mr-[10%]">

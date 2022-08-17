@@ -39,7 +39,7 @@ const changePassword = async (values) => {
 };
 
 const logout = () => {
-  localStorage.clear();
+  sessionStorage.clear();
 };
 
 // const deleteCustomer = async (values) => {

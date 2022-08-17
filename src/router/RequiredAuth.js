@@ -9,7 +9,7 @@ export function RequiredAuthDashboard() {
   const isAuthenticated = useSelector((state) => state.auth?.login?.isLoggedIn);
   const token = window.sessionStorage.getItem("accessToken");
 
-  // console.log("required auth", auth);
+  // console.log("required auth",token, auth);
   return isAuthenticated && token ? (
     <DashboardLayout>
       <Outlet />
