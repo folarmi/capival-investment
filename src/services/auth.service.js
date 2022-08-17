@@ -19,6 +19,7 @@ const registerUser = async (values) => {
 };
 
 const loginUser = async (values) => {
+  console.log("service file");
   const response = await api.post(UrlRoute.login, values);
   return response.data;
 };

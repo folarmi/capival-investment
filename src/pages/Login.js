@@ -34,6 +34,7 @@ const Login = () => {
   const { errors } = formState;
 
   const submitForm = (values) => {
+    console.log("login page", values);
     dispatch(loginUserAsync(values))
       .unwrap()
       .then((res) => {

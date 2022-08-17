@@ -52,6 +52,8 @@ export const loginUserAsync = createAsyncThunk(
   async (values, { rejectWithValue }) => {
     try {
       const response = await AuthService.loginUser(values);
+      console.log("");
+
       return response;
     } catch (error) {
       if (!error.response) {
@@ -183,7 +185,7 @@ const registerSlice = createSlice({
       state.login.user = action.payload;
     },
     [loginUserAsync.rejected]: (state, action) => {
-      state.login.isLoading = false;
+      // state.login.isLoading = false;
       state.error = action.payload;
     },
     [forgotPasswordAsync.pending]: (state) => {
