@@ -20,7 +20,7 @@ import transactionHistoryReducer from "./slices/transactionHistory";
 const persistConfig = {
   key: "root",
   version: 1,
-  whitelist: ["auth"],
+  // whitelist: ["auth"],
   storage,
 };
 

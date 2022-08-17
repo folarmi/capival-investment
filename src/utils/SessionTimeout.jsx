@@ -69,6 +69,7 @@ const SessionTimeout = () => {
         onIdle={onIdle}
         debounce={250}
         timeout={300000}
+        // timeout={5000}
       />
     </>
   );

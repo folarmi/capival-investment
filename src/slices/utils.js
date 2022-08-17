@@ -128,6 +128,6 @@ const utilsSlice = createSlice({
 });
 
 const { reducer, actions } = utilsSlice;
-export const { resetInitialState } = actions;
+// export const { resetInitialState } = actions;
 
 export default reducer;

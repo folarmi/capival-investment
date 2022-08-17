@@ -1,7 +1,6 @@
 // import store from "../store";
 class TokenService {
   // getLocalRefreshToken() {
-  //   let localStore = localStorage.getItem("auth");
   //   let user;
   //   try {
   //     user = JSON.parse(localStore);
@@ -12,7 +11,6 @@ class TokenService {
   // }
 
   // getLocalAccessToken() {
-  //   let localStore = localStorage.getItem("persist:root");
   //   // console.log("admin-login", getAdminLogin);
   //   let auth;
   //   try {
@@ -26,23 +24,19 @@ class TokenService {
   // }
 
   // updateLocalAccessToken(token) {
-  //   let user = JSON.parse(localStorage.getItem("user"));
   //   user.accessToken = token;
-  //   localStorage.setItem("user", JSON.stringify(user));
   // }
 
-  getUser() {
-    return JSON.parse(localStorage.getItem("persist:root"));
-  }
+  // getUser() {
+  //   return JSON.parse(localStorage.getItem("persist:root"));
+  // }
 
   setUser(user) {
-    // localStorage.setItem("accessToken", user);
     window.sessionStorage.setItem("accessToken", user);
   }
 
   removeUser() {
-    // localStorage.removeItem("user");
-    localStorage.clear();
+    sessionStorage.clear();
   }
 }
 

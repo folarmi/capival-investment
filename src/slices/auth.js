@@ -138,12 +138,12 @@ const initialState = {
   changePasswordLoading: false,
   forgotPasswordEmail: "",
   bvnData: [],
-  // login: {
-  //   isLoading: false,
-  //   isLoggedIn: false,
-  //   user: null,
-  //   error: null,
-  // },
+  login: {
+    isLoading: false,
+    isLoggedIn: false,
+    user: null,
+    error: null,
+  },
 };
 
 const registerSlice = createSlice({
@@ -153,11 +153,11 @@ const registerSlice = createSlice({
     handleForgotPasswordEmail: (state, action) => {
       state.forgotPasswordEmail = action.payload;
     },
-    // resetInitialState: (state) => {
-    //   state.login.isLoading = false;
-    //   state.login.isLoggedIn = false;
-    //   state.login.user = null;
-    // },
+    resetInitialState: (state) => {
+      state.login.isLoading = false;
+      state.login.isLoggedIn = false;
+      state.login.user = null;
+    },
   },
   extraReducers: {
     [verifyBVNAsync.pending]: (state) => {
@@ -197,12 +197,11 @@ const registerSlice = createSlice({
     },
     [loginUserAsync.fulfilled]: (state, action) => {
       state.login.isLoggedIn = true;
-      // state.login.isLoading = false;
+      state.login.isLoading = false;
       state.login.user = action.payload;
     },
     [loginUserAsync.rejected]: (state, action) => {
-      console.log(action);
-      // state.login.isLoading = false;
+      state.login.isLoading = false;
       state.error = action.payload;
     },
     [forgotPasswordAsync.pending]: (state) => {

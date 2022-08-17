@@ -21,7 +21,6 @@ const apiResource = () => {
       // const token = JSON.parse(TokenService.getUser()?.auth)?.login?.user
       //   ?.authorisation[0]?.original?.token;
       // const test = JSON.parse(TokenService.getUser());
-      // const token = localStorage.getItem("accessToken");
       const token = window.sessionStorage.getItem("accessToken");
 
       // console.log(test);
@@ -45,7 +44,6 @@ const apiResource = () => {
         window.location = "/";
       } else if (error?.response?.status === 401) {
         // call refresh token
-        // localStorage.removeUser();
         // window.location = "/";
         const originalConfig = error.config;
         if (originalConfig.url !== "/v1/admin/login" && error?.response) {
