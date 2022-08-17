@@ -30,7 +30,7 @@ const BillPayment = () => {
     <div className="mt-8">
       <WalletDetailsHeader ifTransaction={false} />
 
-      <main className="px-20 w-full grid grid-cols-4 gap-12 mt-16">
+      <main className="px-4 md:px-10 lg:px-20 w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12 mt-16">
         {billPaymentCategories &&
           billPaymentCategories?.map((item) => {
             return (

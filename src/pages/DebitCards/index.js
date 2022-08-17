@@ -5,13 +5,17 @@ const DebitCard = () => {
   return (
     <>
       <div className="flex flex-col justify-between items-center mt-8 mx-4">
-        <img src="/assets/images/atmCard.svg" alt="atmCard" className="w-1/3" />
-        <p className="text-base font-normal text-blueTwo py-6">
+        <img
+          src="/assets/images/atmCard.svg"
+          alt="atmCard"
+          className="w-full md:w-1/3"
+        />
+        <p className="text-base font-normal text-blueTwo py-6 text-center md:text-left">
           Add your debit and credit cards to perform multiple transactions{" "}
         </p>
       </div>
 
-      <div className="flex items-center justify-between m-auto w-[60%]">
+      <div className="grid grid-cols-2 lg:grid-cols-3 place-content-center items-center mx-2 lg:mx-10  w-full">
         <DebitButton text="Update Card Limit" icon="/assets/icons/star.svg" />
         <DebitButton
           text="Add New Card"

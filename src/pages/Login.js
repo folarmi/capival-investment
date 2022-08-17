@@ -7,13 +7,13 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 import { Input, Button, Header } from "../atoms";
-import { loginUserAsync, resetInitialState } from "../slices/auth";
+import { loginUserAsync } from "../slices/auth";
 import tokenService from "../services/token.service";
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isLoading } = useSelector((state) => state.auth.login);
+  // const { isLoading } = useSelector((state) => state?.auth?.login);
 
   const validationSchema = Yup.object().shape({
     email: Yup.string()
@@ -44,6 +44,7 @@ const Login = () => {
         }
       })
       .catch((err) => {
+        console.log(err);
         toast.error(err?.message);
       });
   };
@@ -52,14 +53,14 @@ const Login = () => {
     navigate("/forgot-password");
   };
 
-  React.useEffect(() => {
-    dispatch(resetInitialState());
-  }, []);
+  // React.useEffect(() => {
+  //   dispatch(resetInitialState());
+  // }, []);
 
   return (
     <div className="w-full h-screen login-bg">
       <Header />
-      <div className="bg-blueOne m-auto md:w-[50%] lg:w-[40%] xl:w-[34%] mt-16 rounded-3xl">
+      <div className="bg-blueOne m-auto w-[92%] md:w-[50%] lg:w-[40%] xl:w-[34%] mt-16 rounded-3xl">
         <p className="text-2xl text-redOne py-8 text-center">
           Login to your Account
         </p>
@@ -79,7 +80,7 @@ const Login = () => {
           <Button
             buttonText="Login"
             className="mt-6 rounded-[30px]"
-            isLoading={isLoading}
+            // isLoading={isLoading}
           />
           <p
             onClick={gotToForgotPasswordPage}

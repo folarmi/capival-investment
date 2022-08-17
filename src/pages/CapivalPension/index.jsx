@@ -3,7 +3,7 @@ import { RewardHeader } from "../../components";
 
 const CapivalPension = () => {
   return (
-    <div className="px-20 mt-8">
+    <div className="px-6 lg:px-20 mt-4 md:mt-8">
       <RewardHeader
         title="Pension Plan"
         pageTitle="Welcome to Capival Pension"

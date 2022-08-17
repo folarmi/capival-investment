@@ -3,11 +3,8 @@ import { RewardHeader } from "../../components";
 
 const Rewards = () => {
   return (
-    <div className="px-20 mt-8">
-      <RewardHeader
-        title="Pension Plan"
-        pageTitle="Welcome to Capival Pension"
-      />
+    <div className="px-6 lg:px-20 mt-4 md:mt-8">
+      <RewardHeader title="Rewards" pageTitle="Welcome to Capival Rewards" />
 
       <p className="py-4 text-blueTwo font-normal text-lg text-justify  leading-8">
         When our customers succeed, so do we. We are invested in every one of

@@ -3,7 +3,7 @@ import { RewardHeader } from "../../components";
 
 const CapivalHomes = () => {
   return (
-    <div className="px-20 mt-8">
+    <div className="px-6 lg:px-20 mt-4 md:mt-8">
       <RewardHeader title="Homes" pageTitle="Welcome to Capival Homes" />
       <p className="py-4 text-blueTwo font-normal text-lg text-justify  leading-8">
         When our customers succeed, so do we. We are invested in every one of

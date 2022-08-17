@@ -7,7 +7,11 @@ const RewardHeader = ({ title, pageTitle }) => {
         {pageTitle}
       </p>
       <div className="py-2 flex justify-center items-center bg-[#d8deee] rounded-lg">
-        <img src="/assets/icons/logoIcon.svg" alt="logo" />
+        <img
+          src="/assets/icons/logoIcon.svg"
+          alt="logo"
+          className="w-20 h-20"
+        />
         <div>
           <img src="/assets/icons/logoText.svg" alt="logoText" />
           <p className="text-redOne font-medium text-sm uppercase">{title}</p>
