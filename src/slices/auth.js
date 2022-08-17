@@ -47,13 +47,29 @@ export const registerUserAsync = createAsyncThunk(
   }
 );
 
+// export const loginUserAsync = createAsyncThunk(
+//   "auth/login",
+//   async (values, { rejectWithValue }) => {
+//     console.log("reach here", values);
+//     try {
+//       const response = await AuthService.loginUser(values);
+//       console.log("reach here");
+
+//       return response;
+//     } catch (error) {
+//       if (!error.response) {
+//         throw error;
+//       }
+//       return rejectWithValue(error.response.data);
+//     }
+//   }
+// );
+
 export const loginUserAsync = createAsyncThunk(
-  "auth/login",
+  "auth/loginUser",
   async (values, { rejectWithValue }) => {
     try {
       const response = await AuthService.loginUser(values);
-      console.log("");
-
       return response;
     } catch (error) {
       if (!error.response) {
@@ -122,12 +138,12 @@ const initialState = {
   changePasswordLoading: false,
   forgotPasswordEmail: "",
   bvnData: [],
-  login: {
-    isLoading: false,
-    isLoggedIn: false,
-    user: null,
-    error: null,
-  },
+  // login: {
+  //   isLoading: false,
+  //   isLoggedIn: false,
+  //   user: null,
+  //   error: null,
+  // },
 };
 
 const registerSlice = createSlice({
@@ -137,11 +153,11 @@ const registerSlice = createSlice({
     handleForgotPasswordEmail: (state, action) => {
       state.forgotPasswordEmail = action.payload;
     },
-    resetInitialState: (state) => {
-      state.login.isLoading = false;
-      state.login.isLoggedIn = false;
-      state.login.user = null;
-    },
+    // resetInitialState: (state) => {
+    //   state.login.isLoading = false;
+    //   state.login.isLoggedIn = false;
+    //   state.login.user = null;
+    // },
   },
   extraReducers: {
     [verifyBVNAsync.pending]: (state) => {
@@ -181,10 +197,11 @@ const registerSlice = createSlice({
     },
     [loginUserAsync.fulfilled]: (state, action) => {
       state.login.isLoggedIn = true;
-      state.login.isLoading = false;
+      // state.login.isLoading = false;
       state.login.user = action.payload;
     },
     [loginUserAsync.rejected]: (state, action) => {
+      console.log(action);
       // state.login.isLoading = false;
       state.error = action.payload;
     },
