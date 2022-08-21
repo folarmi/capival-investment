@@ -6,8 +6,14 @@ const getRecentTransactionHistory = async () => {
   return response.data;
 };
 
+const capivalTransfer = async (values) => {
+  const response = await api.post(UrlRoute.capivalTransfer, values);
+  return response.data;
+};
+
 const transactionHistoryService = {
   getRecentTransactionHistory,
+  capivalTransfer,
 };
 
 export default transactionHistoryService;

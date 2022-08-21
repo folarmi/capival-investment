@@ -17,16 +17,16 @@ const Dashboard = () => {
         />
         <CircularIcon
           icon="/assets/icons/mobileTopUp.svg"
-          path="mobile-top-up"
+          path="Airtime__Data"
         />
-        <CircularIcon icon="/assets/icons/rewards.svg" path="rewards" />
-        <CircularIcon icon="/assets/icons/flights.svg" path="loans" />
-        <CircularIcon
+        {/* <CircularIcon icon="/assets/icons/rewards.svg" path="rewards" /> */}
+        {/* <CircularIcon icon="/assets/icons/flights.svg" path="loans" /> */}
+        {/* <CircularIcon
           icon="/assets/icons/capivalHomes.svg"
           path="capival-homes"
-        />
+        /> */}
         <CircularIcon icon="/assets/icons/statement.svg" path="loans" />
-        <CircularIcon icon="/assets/icons/pension.svg" path="capival-pension" />
+        {/* <CircularIcon icon="/assets/icons/pension.svg" path="capival-pension" /> */}
         <CircularIcon
           icon="/assets/icons/capivalTransfer.svg"
           path="capival-transfers"
@@ -38,7 +38,7 @@ const Dashboard = () => {
           path="transaction-history"
         />
         <CircularIcon icon="/assets/icons/bets.svg" path="bets-and-lotteries" />
-        <CircularIcon icon="/assets/icons/add.svg" path="loans" />
+        {/* <CircularIcon icon="/assets/icons/add.svg" path="loans" /> */}
       </section>
 
       <img src="/assets/icons/loanThree.svg" alt="" />

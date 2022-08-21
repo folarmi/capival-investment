@@ -18,25 +18,25 @@ const WalletDetailsHeader = ({ ifSearchBar, ifTransaction = true }) => {
       />
 
       {ifTransaction && (
-        <section className="flex items-center mt-5">
-          <div className="flex items-center">
+        <section className="flex items-center mt-5 px-4 md:px-0">
+          <div className="flex whitespace-nowrap items-center">
             <img
               src="/assets/icons/refresh.svg"
               alt="refresh"
               className="mr-1"
             />
-            <p className="text-base font-medium text-blueTwo">
+            <p className="text-sm md:text-base font-normal md:font-medium text-blueTwo">
               Transaction History
             </p>
           </div>
 
-          <div className="flex items-center ml-5">
+          <div className="whitespace-nowrap flex items-center ml-5">
             <img
               src="/assets/icons/downloadIcon.svg"
               alt="refresh"
               className="mr-1"
             />
-            <p className="text-base font-medium text-blueTwo">
+            <p className="text-sm md:text-base font-normal md:font-medium text-blueTwo">
               Download Statement
             </p>
           </div>

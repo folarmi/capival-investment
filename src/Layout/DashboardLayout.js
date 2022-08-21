@@ -1,41 +1,29 @@
 import React from "react";
-import { useSelector } from "react-redux";
 
-import { Navigate, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { DashboardHeader } from "../atoms";
 import { Sidebar } from "../molecules";
 
 const DashboardLayout = () => {
-  const checkAuthStatus = useSelector((state) => state.auth.login);
-  const isAuthenticated =
-    checkAuthStatus?.isLoggedIn &&
-    checkAuthStatus?.user?.authorisation[0]?.original?.token &&
-    checkAuthStatus?.user?.status;
-
   return (
     <>
-      {isAuthenticated ? (
-        <div>
-          <DashboardHeader />
-          <div className="w-full h-full flex gap-1">
-            <div className="lg:w-[16%] h-full fixed lg:block hidden sidebar-bg">
-              <Sidebar />
-            </div>
+      <div>
+        <DashboardHeader />
+        <div className="w-full h-full flex gap-1">
+          <div className="mt-[88px] lg:w-[16%] h-full fixed lg:block hidden sidebar-bg">
+            <Sidebar />
+          </div>
 
-            <div className="lg:ml-[16%] lg:w-[84%] w-full dashboard-bg h-screen">
-              {/* <div className="m-auto w-[60%] text-center mt-6 border border-blueTwo rounded-3xl py-2">
-                <p className="font-normal text-base text-blueTwo">
-                  Congratulation, you are eligible to higher loan this month{" "}
-                  <span className="text-redOne font-semibold">View Status</span>
-                </p>
-              </div> */}
-              <Outlet />
-            </div>
+          <div
+            className="mt-[88px ] lg:ml-[16%] lg:w-[84%] w-full dashboard-bg h-screen"
+            style={{
+              zIndex: 50,
+            }}
+          >
+            <Outlet />
           </div>
         </div>
-      ) : (
-        <Navigate to="/" replace={true} />
-      )}
+      </div>
     </>
   );
 };

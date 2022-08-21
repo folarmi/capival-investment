@@ -1,7 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getDebitCardsAsync } from "../../slices/debitCard";
+
 import { DebitButton } from "./DebitButton";
 
 const DebitCard = () => {
+  const dispatch = useDispatch();
+  const customerId = useSelector(
+    (state) => state?.auth?.login?.user?.user?.customer_data?.CustomerID
+  );
+
+  // console.log(isLoading);
+
+  useEffect(() => {
+    dispatch(getDebitCardsAsync());
+  }, []);
+
   return (
     <>
       <div className="flex flex-col justify-between items-center mt-8 mx-4">

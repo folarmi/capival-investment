@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 import { Input, Button, Header } from "../atoms";
 import { loginUserAsync, resetInitialState } from "../slices/auth";
@@ -15,12 +15,11 @@ const Login = () => {
   const navigate = useNavigate();
   const { isLoading } = useSelector((state) => state?.auth?.login);
 
-  // console.log(isLoading);
-
   const validationSchema = Yup.object().shape({
     email: Yup.string()
-      .email("Invalid email format")
-      .required("Email is Required"),
+      .email("Must be a valid email")
+      .max(255)
+      .required("Email is required"),
     password: Yup.string()
       .required("Please enter a password")
       .min(8, "Password too short")
@@ -40,8 +39,9 @@ const Login = () => {
       .unwrap()
       .then((res) => {
         if (res?.status === true) {
+          // console.log(res?.status);
           toast("Login successful");
-          tokenService.setUser(res?.authorisation[0]?.original?.token);
+          tokenService.setUser(res?.authorisation?.token);
           navigate("/dashboard");
         }
       })
@@ -57,8 +57,23 @@ const Login = () => {
 
   React.useEffect(() => {
     dispatch(resetInitialState());
-    console.log("ran");
   }, []);
+
+  //   <Controller
+  //   name="ReactSelect"
+  //   control={control}
+  //   render={({ field }) => (
+  // <ReactSelect
+  //   isClearable
+  //   {...field}
+  //   options={[
+  //     { value: "chocolate", label: "Chocolate" },
+  //     { value: "strawberry", label: "Strawberry" },
+  //     { value: "vanilla", label: "Vanilla" }
+  //   ]}
+  // />
+  //   )}
+  // />
 
   return (
     <div className="w-full h-screen login-bg">

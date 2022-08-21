@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { NavLink } from "react-router-dom";
 // import { Text } from "../components";
@@ -7,7 +7,7 @@ import { NavLink } from "react-router-dom";
 // import sideArrowDown from "../assets/icons/sideArrowDown.svg";
 
 const SubMenu = ({ item }) => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [dropDown, setDropDown] = useState(false);
   const [activeTab, setActiveTab] = useState("Data Consumers");
@@ -16,9 +16,9 @@ const SubMenu = ({ item }) => {
     setDropDown(!dropDown);
   };
 
-  // const goToPath = (item) => {
-  //   navigate(item?.path, { replace: true });
-  // };
+  const goToPath = (item) => {
+    navigate(item?.path, { replace: true });
+  };
 
   const changeActive = (item) => {
     console.log(item?.icon, "dododo");
@@ -39,6 +39,7 @@ const SubMenu = ({ item }) => {
             <div
               className="flex items-center mt-6 hover:text-lighterBlue cursor-pointer px-8 lg:px-4 xl:px-6 2xl:px-12"
               key={item?.id}
+              onClick={toggleDropDown}
             >
               <item.Image
                 className={`mr-4  ${
@@ -53,14 +54,12 @@ const SubMenu = ({ item }) => {
                   src="/assets/icons/whiteArrowDown.svg"
                   alt="arrowDown"
                   className="pr-9 cursor-pointer"
-                  onClick={toggleDropDown}
                 />
               ) : (
                 <img
                   src="/assets/icons/whiteArrowDown.svg"
                   alt="arrowDown"
                   className="pr-9 cursor-pointer"
-                  onClick={toggleDropDown}
                 />
               )}
             </div>
@@ -92,7 +91,7 @@ const SubMenu = ({ item }) => {
             return (
               <div className="py-4">
                 <div
-                  // onClick={() => goToPath(item)}
+                  onClick={() => goToPath(item)}
                   key={item?.item}
                   className="cursor-pointer px-8 lg:px-4 xl:px-6 2xl:px-12"
                 >

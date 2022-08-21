@@ -69,7 +69,7 @@ export const SidebarMenuItems = [
       {
         id: "1",
         item: "Change Password",
-        path: "/customers/oystr-smart-costumers",
+        path: "dashboard/profile/change-password",
         icon: changePassword,
       },
       {
@@ -78,12 +78,12 @@ export const SidebarMenuItems = [
         path: "/customers/oystr-smart-costumers",
         icon: pin,
       },
-      {
-        id: "3",
-        item: "Update Security Question",
-        path: "/customers/oystr-smart-costumers",
-        icon: security,
-      },
+      // {
+      //   id: "3",
+      //   item: "Update Security Question",
+      //   path: "/customers/oystr-smart-costumers",
+      //   icon: security,
+      // },
     ],
   },
 ];

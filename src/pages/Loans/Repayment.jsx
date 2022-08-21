@@ -10,6 +10,14 @@ const Repayment = () => {
     navigate("/dashboard/loans/next-repayment");
   };
 
+  const gotToLoanDetailsPage = () => {
+    navigate("/dashboard/loans/details");
+  };
+
+  const gotToSettleLoanPage = () => {
+    navigate("/dashboard/loans/settle-loan");
+  };
+
   const data = [
     {
       id: "1",
@@ -45,18 +53,26 @@ const Repayment = () => {
         </div>
 
         <div className="flex mt-10 mb-8 justify-center">
-          <div className="cursor-pointer">
+          {/* <div className="cursor-pointer">
             <img
               src="/assets/images/repayment.svg"
               alt="repayment icon"
               onClick={gotToNextRepaymentPage}
             />
+          </div> */}
+          <div className="cursor-pointer mr-6" onClick={gotToLoanDetailsPage}>
+            <img
+              src="/assets/images/loanDetails.svg"
+              alt="loan detail"
+              className="w-40 h-40"
+            />
           </div>
-          <div className="">
-            <img src="/assets/images/loanDetails.svg" alt="loan detail" />
-          </div>
-          <div className="">
-            <img src="/assets/images/settleLoan.svg" alt="settle loan" />
+          <div className="cursor-pointer" onClick={gotToSettleLoanPage}>
+            <img
+              src="/assets/images/settleLoan.svg"
+              alt="settle loan"
+              className="w-40 h-40"
+            />
           </div>
         </div>
       </div>

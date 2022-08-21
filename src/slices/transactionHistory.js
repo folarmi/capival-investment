@@ -18,8 +18,25 @@ export const getTransactionHistoryAsync = createAsyncThunk(
   }
 );
 
+export const capivalTransferAsync = createAsyncThunk(
+  "transactionHistory/capivalTransfer",
+  async (values, { rejectWithValue }) => {
+    try {
+      const response = await TransactionHistoryService.capivalTransfer(values);
+      return response;
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 const initialState = {
   getTransactionHistoryLoading: false,
+  transactionHistory: "",
+  capivalTransferLoading: false,
 };
 
 export const transactionHistorySlice = createSlice({
@@ -30,11 +47,21 @@ export const transactionHistorySlice = createSlice({
       state.getTransactionHistoryLoading = true;
     },
     [getTransactionHistoryAsync.fulfilled]: (state, action) => {
-      console.log(action.payload.data);
-      state.getTransactionHistoryLoading = true;
+      state.transactionHistory = action.payload.data;
+      state.getTransactionHistoryLoading = false;
     },
     [getTransactionHistoryAsync.rejected]: (state) => {
-      state.getTransactionHistoryLoading = true;
+      state.getTransactionHistoryLoading = false;
+    },
+    [capivalTransferAsync.pending]: (state) => {
+      state.capivalTransferLoading = true;
+    },
+    [capivalTransferAsync.fulfilled]: (state, action) => {
+      state.transactionHistory = action.payload.data;
+      state.capivalTransferLoading = false;
+    },
+    [capivalTransferAsync.rejected]: (state) => {
+      state.capivalTransferLoading = false;
     },
   },
 });

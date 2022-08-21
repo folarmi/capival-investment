@@ -30,3 +30,4 @@ export * from "./TransactionHistory/index";
 export * from "./BetsAndLorries/index";
 export * from "./DebitCards/index";
 export * from "./OtherBanks/index";
+export * from "./Profile/ChangePassword";

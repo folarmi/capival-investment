@@ -25,6 +25,7 @@ import {
   BetsAndLotteries,
   DebitCard,
   OtherBanksTransfer,
+  ChangePassword,
 } from "../pages";
 import { BetTransactionDetail } from "../pages/BetsAndLorries/BetTransactionDetail";
 import CapivalTransfer from "../pages/CapivalTransfers";
@@ -80,8 +81,15 @@ const Index = () => {
         <Route path="dashboard/loans/details" element={<LoanDetails />} />
         <Route path="dashboard/loans/settle-loan" element={<SettleLoan />} />
         <Route path="dashboard/bill-payment" element={<BillPayment />} />
-        <Route path="dashboard/bill-payment/cable" element={<CableTV />} />
-        <Route path="dashboard/mobile-top-up" element={<MobileTopUp />} />
+        {/* <Route
+          path="dashboard/bill-payment/Airtime__Data"
+          element={<CableTV />}
+        /> */}
+        <Route path="dashboard/Airtime__Data" element={<MobileTopUp />} />
+        <Route
+          path="dashboard/bill-payment/Airtime__Data"
+          element={<MobileTopUp />}
+        />
         <Route
           path="dashboard/mobile-top-up/confirm"
           element={<ConfirmationPage />}
@@ -107,6 +115,10 @@ const Index = () => {
         />
         <Route path="dashboard/debit-card" element={<DebitCard />} />
         <Route path="dashboard/other-banks" element={<OtherBanksTransfer />} />
+        <Route
+          path="dashboard/profile/change-password"
+          element={<ChangePassword />}
+        />
       </Route>
     </Routes>
   );

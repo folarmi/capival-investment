@@ -5,7 +5,7 @@ const BillCard = ({ cardName, onClick, path, id }) => {
   return (
     <Link
       to={path}
-      className="bg-[#CBE1FD]/50 rounded-2xl min-w-[192px]"
+      className="py-4 max-w-[192px] bg-[#CBE1FD]/50 rounded-2xl h-[70px]"
       onClick={onClick}
       id={id}
       style={{
@@ -13,7 +13,7 @@ const BillCard = ({ cardName, onClick, path, id }) => {
         boxShadow: "0px 4px 4px 0px rgba(59, 88, 168, 1)",
       }}
     >
-      <p className="font-normal text-base text-blueTwo py-8 flex justify-center items-center px-4">
+      <p className="text-center font-normal text-sm text-blueTwo flex justify-center items-center px-4 max-w-xl">
         {cardName}
       </p>
     </Link>

@@ -9,49 +9,39 @@ const BillPayment = () => {
   const dispatch = useDispatch();
 
   const { billPaymentCategories } = useSelector((state) => state.billPayment);
-  console.log("from billPage", billPaymentCategories);
 
-  var string = "my name";
-  string = string.replace(/ /g, "_");
-
-  //  const test = billPaymentCategories.map((item) => {
-  //   return {
-  // item?.categoryDescription
-  //   }
-  //  })
-
-  console.log(string);
+  const formattedValues =
+    billPaymentCategories &&
+    billPaymentCategories?.map((item) => {
+      return {
+        value: item?.categoryName?.replace(/ /g, "_").replace(/&/g, ""),
+        label: item?.categoryName,
+      };
+    });
 
   useEffect(() => {
     dispatch(getBillPaymentCategories());
   }, []);
 
   return (
-    <div className="mt-8">
-      <WalletDetailsHeader ifTransaction={false} />
+    <>
+      <div className="mt-8">
+        <WalletDetailsHeader ifTransaction={false} />
 
-      <main className="px-4 md:px-10 lg:px-20 w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12 mt-16">
-        {billPaymentCategories &&
-          billPaymentCategories?.map((item) => {
-            return (
-              <BillCard
-                cardName={item?.categoryName}
-                path="cable"
-                id={item?.categoryId}
-              />
-            );
-          })}
-        {/* <BillCard cardName="Medical Services" path="cable" />
-        <BillCard cardName="Internet Service" path="cable" />
-        <BillCard cardName="Bill Power & Electricity" path="cable" />
-        <BillCard cardName="Taxes & Levies" path="cable" />
-        <BillCard cardName="Insurance" path="cable" />
-        <BillCard cardName="Transport & Toll Payment" path="cable" />
-        <BillCard cardName="Education" path="cable" />
-        <BillCard cardName="Data Purchase" path="cable" />
-        <BillCard cardName="Others" path="cable" /> */}
-      </main>
-    </div>
+        <main className="px-4 md:px-10 lg:px-20 w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-16">
+          {billPaymentCategories &&
+            formattedValues?.map((item) => {
+              return (
+                <BillCard
+                  cardName={item?.label}
+                  path={item?.value}
+                  id={item?.categoryId}
+                />
+              );
+            })}
+        </main>
+      </div>
+    </>
   );
 };
 

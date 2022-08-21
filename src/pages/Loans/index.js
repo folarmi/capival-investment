@@ -13,14 +13,6 @@ const Loans = () => {
     navigate("/dashboard/loans/repayment");
   };
 
-  const gotToLoanDetailsPage = () => {
-    navigate("/dashboard/loans/details");
-  };
-
-  const gotToSettleLoanPage = () => {
-    navigate("/dashboard/loans/settle-loan");
-  };
-
   return (
     <>
       <div className="m-auto w-[95%] lg:w-[70%] mt-8">
@@ -39,7 +31,7 @@ const Loans = () => {
           </p>
         </div>
 
-        <div className="flex mt-10 mb-8 justify-center">
+        {/* <div className="flex mt-10 mb-8 justify-center">
           <div className="cursor-pointer">
             <img
               src="/assets/images/repayment.svg"
@@ -63,7 +55,7 @@ const Loans = () => {
               onClick={gotToSettleLoanPage}
             />
           </div>
-        </div>
+        </div> */}
       </div>
 
       <div className="mt-8 mx-4 md:mx-7">
@@ -99,10 +91,11 @@ const Loans = () => {
                 <ProgressBar width="30%" />
               </div>
               <p
-                className="font-medium text-sm pl-6"
+                className="font-medium text-sm pl-6 cursor-pointer"
                 style={{
                   color: "#699DEE",
                 }}
+                onClick={gotToRepaymentPage}
               >
                 See More
               </p>
@@ -149,6 +142,51 @@ const Loans = () => {
             </div>
           </div>
         </main>
+
+        <div className="my-10">
+          <TableHeader
+            header="Pending Loans"
+            pageNumber="Showing 1-3 of 3 transactions"
+          />
+
+          <main className="mt-4 bg-blueTwo/10 rounded-xl">
+            <section className="bg-blueTwo/20 rounded-xl py-4 overflow-scroll">
+              <div className="w-1/2 flex items-center justify-between">
+                <p className="font-medium whitespace-nowrap text-base text-redTwo px-6 md:w-[20%]">
+                  Pending
+                </p>
+                <p className="font-medium whitespace-nowrap text-base text-blueTwo md:w-[20%]">
+                  Amount Applied
+                </p>
+                <p className="font-medium whitespace-nowrap text-base text-blueTwo pl-6 md:pl-0">
+                  Loan Details
+                </p>
+              </div>
+            </section>
+
+            <div className="bg-blueTwo/10 overflow-scroll">
+              <div className="flex whitespace-nowrap items-center mt-4 mb-4 bg-blueTwo/5 py-3">
+                <p className="text-base text-redTwo font-medium pl-6 md:w-[20%]">
+                  N 350,000
+                </p>
+                <p className="text-base pl-6 md:pl-0 text-orange font-normal md:w-[20%]">
+                  N105,000
+                </p>
+                <div className="md:w-[40%] bg-blueTwo/20 py-2 px-3 rounded-md">
+                  <ProgressBar width="30%" />
+                </div>
+                <p
+                  className="font-medium text-sm pl-6"
+                  style={{
+                    color: "#699DEE",
+                  }}
+                >
+                  Processing Loan Approval
+                </p>
+              </div>
+            </div>
+          </main>
+        </div>
 
         {/* <Table data={data} columns={columns} /> */}
       </div>

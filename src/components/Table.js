@@ -78,7 +78,7 @@ const Table = ({
           ) : (
             <table
               {...getTableProps()}
-              className="w-full overflow-x-auto bg-white border-collapse rounded-2xl overflow-hidden"
+              className="w-full overflow-scroll bg-white border-collapse rounded-2xl"
             >
               <thead className="rounded-2xl">
                 {headerGroups.map((headerGroup) => (
@@ -94,11 +94,11 @@ const Table = ({
                   </tr>
                 ))}
               </thead>
-              <tbody {...getTableBodyProps()} className="bg-blueTwo/5">
+              <tbody {...getTableBodyProps()} className="bg-blueTwo/5 ">
                 {rows.map((row) => {
                   prepareRow(row);
                   return (
-                    <tr {...row.getRowProps()}>
+                    <tr {...row.getRowProps()} className="">
                       {row.cells.map((cell) => {
                         return (
                           <td

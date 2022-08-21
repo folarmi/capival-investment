@@ -196,6 +196,7 @@ const registerSlice = createSlice({
       state.login.isLoading = true;
     },
     [loginUserAsync.fulfilled]: (state, action) => {
+      console.log(action.payload);
       state.login.isLoggedIn = true;
       state.login.isLoading = false;
       state.login.user = action.payload;

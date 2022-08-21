@@ -56,8 +56,6 @@ const PersonalDetails = () => {
     };
   });
 
-  console.log(genderData);
-
   const maritalStatusData = maritalStatus.map((single) => {
     return {
       value: single.ID,

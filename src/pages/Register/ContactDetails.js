@@ -68,6 +68,7 @@ const ContactDetails = () => {
   };
 
   const submitForm = (values) => {
+    console.log(values);
     dispatch(handleAddress(values?.address));
     dispatch(handleNextButton());
   };

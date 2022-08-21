@@ -11,11 +11,12 @@ const SavingsInput = ({
   error,
   readOnly,
   register,
+  className,
   ...inputProps
 }) => {
   return (
-    <>
-      <label htmlFor={name} className="text-sm font-normal text-blueTwo">
+    <div className={`${className}`}>
+      <label htmlFor={name} className={`text-sm font-normal text-blueTwo`}>
         {label}
       </label>
 
@@ -36,7 +37,7 @@ const SavingsInput = ({
           {...register}
           placeholder={placeholder}
           {...inputProps}
-          className="border border-blueTwo/50 rounded-[20px] w-full py-3.5 placeholder-blueThree text-sm pl-[10px] text-blueTwo bg-blueTwo/20"
+          className={`border border-blueTwo/50 rounded-[20px] w-full py-3.5 placeholder-blueThree text-sm pl-[10px] text-blueTwo bg-blueTwo/20`}
           style={{
             border: error ? "1px solid red" : "",
             backgroundColor: readOnly ? "#DCDCDC" : "",
@@ -48,7 +49,7 @@ const SavingsInput = ({
       <span>
         <p className="text-red-500 text-xs"> {error}</p>
       </span>
-    </>
+    </div>
   );
 };
 

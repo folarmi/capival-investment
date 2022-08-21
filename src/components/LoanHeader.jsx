@@ -3,7 +3,7 @@ import React from "react";
 const LoanHeader = ({ title, amount }) => {
   return (
     <div
-      className="flex flex-col items-center justify-center bg-center bg-no-repeat py-2 rounded-tl-xl rounded-tr-xl"
+      className="flex flex-col items-center justify-center bg-center bg-no-repeat py-2 rounded-xl mx-[25%]"
       style={{
         backgroundImage: `url(${"/assets/images/repaymentBg.svg"})`,
       }}

@@ -1,81 +1,100 @@
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import React, { useCallback, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import { getTransactionHistoryAsync } from "../../slices/transactionHistory";
 import { Table, TableHeader } from "../../components";
+import { FormattedCurrency } from "../../atoms/FormattedCurrency";
 
 const TransactionHistory = () => {
   const dispatch = useDispatch();
+  const { transactionHistory } = useSelector(
+    (state) => state.transactionHistory
+  );
 
   useEffect(() => {
     dispatch(getTransactionHistoryAsync());
   }, []);
 
-  const data = React.useMemo(
-    () => [
-      {
-        transactionType: (
-          <div className="flex items-center">
-            <img src="/assets/icons/redArrow.svg" alt="redArrow" />
-            <p className="text-base text-redTwo pl-2 font-medium">Debit</p>
-          </div>
-        ),
-        amount: <p className="text-base text-blueTwo font-normal">N 105,000</p>,
-        reference: (
-          <p className="text-base text-orange font-medium">Adelani Ifeanyi</p>
-        ),
-        date: <p className="text-base text-blueTwo font-medium">26 Apr 2022</p>,
-        narration: (
-          <p className="text-base text-blueTwo font-normal">
-            CAPIVAL-WEB-90920280
-          </p>
-        ),
-        view: <p className="text-base text-blueTwo font-normal">view</p>,
-      },
-      {
-        transactionType: (
-          <div className="flex items-center">
-            <img src="/assets/icons/greenArrow.svg" alt="redArrow" />
-            <p className="text-base text-redTwo pl-2 font-medium">Debit</p>
-          </div>
-        ),
-        amount: <p className="text-base text-blueTwo font-normal">N 105,000</p>,
-        reference: (
-          <p className="text-base text-orange font-medium">Adelani Ifeanyi</p>
-        ),
-        date: <p className="text-base text-blueTwo font-medium">26 Apr 2022</p>,
-        narration: (
-          <p className="text-base text-blueTwo font-normal">
-            CAPIVAL-WEB-90920280
-          </p>
-        ),
-        view: <p className="text-base text-blueTwo font-normal">view</p>,
-      },
-    ],
-    []
-  );
+  const getData = useCallback(() => {
+    const result =
+      transactionHistory &&
+      transactionHistory?.map((item, i) => {
+        return {
+          transactionType: (
+            <div className="flex items-center">
+              {item?.credit === "0.00" ? (
+                <img src="/assets/icons/redArrow.svg" alt="redArrow" />
+              ) : (
+                <img src="/assets/icons/greenArrow.svg" alt="greenArrow" />
+              )}
+              {item?.credit === "0.00" ? (
+                <p className="text-sm text-redTwo pl-2 font-normal">Debit</p>
+              ) : (
+                <p className="text-sm text-greenOne pl-2 font-normal">Credit</p>
+              )}
+            </div>
+          ),
+          amount: <p className="text-sm text-blueTwo font-normal">N 105,000</p>,
+          reference: (
+            <p className="text-sm text-orange font-medium">{item?.reference}</p>
+          ),
+          date: (
+            <p className="text-sm text-blueTwo font-medium">
+              {" "}
+              {item?.dat_post &&
+                new Date(item?.dat_post)?.toISOString().substring(0, 10)}
+            </p>
+          ),
+          dateValue: (
+            <p className="text-sm text-blueTwo font-medium">
+              {" "}
+              {item?.dat_value &&
+                new Date(item?.dat_value)?.toISOString().substring(0, 10)}
+            </p>
+          ),
+          balance: (
+            <p className="text-sm text-blueTwo font-medium">
+              <FormattedCurrency value={item?.balance} />
+            </p>
+          ),
+          narration: (
+            <p className="text-sm text-blueTwo font-normal">
+              {item?.txt_txn_desc.length > 20
+                ? `${item?.txt_txn_desc.slice(0, 20)}....`
+                : item?.txt_txn_desc}
+            </p>
+          ),
+          view: <p className="text-sm text-blueTwo font-normal">view</p>,
+        };
+      });
+    return [...(result || [])];
+  }, [transactionHistory]);
 
   const columns = React.useMemo(
     () => [
       {
         Header: "Transaction Type",
-        accessor: "transactionType", // accessor is the "key" in the data
-      },
-      {
-        Header: "Amount",
-        accessor: "amount",
+        accessor: "transactionType",
       },
       {
         Header: "Reference",
         accessor: "reference",
       },
       {
-        Header: "Date",
+        Header: "Date Posted",
         accessor: "date",
+      },
+      {
+        Header: "Date Value",
+        accessor: "dateValue",
       },
       {
         Header: "Narration",
         accessor: "narration",
+      },
+      {
+        Header: "Balance",
+        accessor: "balance",
       },
       {
         Header: "",
@@ -85,15 +104,19 @@ const TransactionHistory = () => {
     []
   );
 
+  const data = React.useMemo(() => getData(), [getData]);
+
   return (
     <div>
-      <section className="my-8 mx-7">
+      <section className="mt-8 mx-4 md:mx-7">
         <TableHeader
           header="Recent Transactions"
-          pageNumber="Showing 1-15 of 15 transactions"
+          pageNumber={`Showing 1-${transactionHistory.length} of ${transactionHistory.length} transactions`}
         />
 
-        <Table data={data} columns={columns} />
+        <div className="mt-2">
+          <Table data={data} columns={columns} />
+        </div>
       </section>
     </div>
   );
