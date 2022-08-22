@@ -35,7 +35,7 @@ const reducers = combineReducers({
   transactionHistory: transactionHistoryReducer,
   debitCard: debitCardReducer,
   mobileTopUp: mobileTopUpReducer,
-  loan: loanReducer,
+  loans: loanReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);
@@ -52,10 +52,3 @@ const store = configureStore({
 });
 
 export default store;
-
-// const store = createStore(
-//   persistedReducer,
-//   composeWithDevTools(applyMiddleware(...middleware))
-// );
-
-// export default store;

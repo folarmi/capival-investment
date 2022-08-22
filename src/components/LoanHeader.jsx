@@ -1,4 +1,4 @@
-import React from "react";
+import CurrencyFormat from "react-currency-format";
 
 const LoanHeader = ({ title, amount }) => {
   return (
@@ -10,7 +10,12 @@ const LoanHeader = ({ title, amount }) => {
     >
       <p className="text-white font-medium text-xl">{title}</p>
       <p className="text-blackTwo font-medium md:font-semibold text-2xl py-1">
-        {amount}
+        <CurrencyFormat
+          value={amount}
+          displayType={"text"}
+          thousandSeparator={true}
+          prefix="₦"
+        />
       </p>
     </div>
   );

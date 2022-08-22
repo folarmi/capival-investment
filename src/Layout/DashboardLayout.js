@@ -15,7 +15,7 @@ const DashboardLayout = () => {
           </div>
 
           <div
-            className="mt-[88px ] lg:ml-[16%] lg:w-[84%] w-full dashboard-bg h-screen"
+            className="mt-[88px] lg:ml-[16%] lg:w-[84%] w-full dashboard-bg h-screen"
             style={{
               zIndex: 50,
             }}

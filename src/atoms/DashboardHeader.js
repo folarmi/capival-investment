@@ -4,9 +4,9 @@ import { useSelector } from "react-redux";
 import { SearchBar } from "./SearchBar";
 
 const DashboardHeader = () => {
-  // const userObject = useSelector((state) => state.auth.login.user.user);
-  // const test = useSelector((state) => state.auth.login);
-  // console.log(test);
+  const userObject = useSelector((state) => state.auth.login.user.user);
+  const test = useSelector((state) => state.auth.login);
+  console.log(test);
 
   return (
     <header
@@ -25,15 +25,15 @@ const DashboardHeader = () => {
 
       <div className="flex whitespace-nowrap items-center mr-[3%]">
         <img src="/assets/icons/avatar.svg" alt="avatar" />
-        {/* <p className="text-base text-blueTwo font-normal pl-4">
+        <p className="text-base text-blueTwo font-normal pl-4">
           Hi,{" "}
           <span className="font-semibold">
             {userObject?.customer_data?.Firstname}
           </span>{" "}
-        </p> */}
+        </p>
       </div>
 
-      <div className="flex items-center mr-[22%]">
+      <div className="flex items-center mr-[42%]">
         <p className="text-[15pxs] text-blueTwo font-normal w-fit">Show BVN</p>
         <img src="/assets/icons/rightArrow.svg" alt="avatar" />
       </div>
@@ -41,14 +41,27 @@ const DashboardHeader = () => {
       <div className="flex items-center  justify-self-end">
         {/* <SearchBar /> */}
 
-        <div className="flex items-center ml-[5%]">
-          <img
-            src="/assets/icons/instagram.svg"
-            alt="avatar"
-            className="mr-4"
-          />
-          <img src="/assets/icons/twitter.svg" alt="avatar" className="mr-4" />
-          <img src="/assets/icons/facebook.svg" alt="avatar" />
+        <div className="flex items-center ml-[5%] cursor-pointer">
+          <a
+            href="https://instagram.com/capivalinvestment?igshid=YmMyMTA2M2Y="
+            target="_blank"
+          >
+            <img
+              src="/assets/icons/instagram.svg"
+              alt="avatar"
+              className="mr-4"
+            />
+          </a>
+          <a href="https://twitter.com/capivalinvest" target="_blank">
+            <img
+              src="/assets/icons/twitter.svg"
+              alt="avatar"
+              className="mr-4"
+            />
+          </a>
+          <a href="https://facebook.com/CapivalInvestment/" target="_blank">
+            <img src="/assets/icons/facebook.svg" alt="avatar" />
+          </a>
         </div>
       </div>
     </header>

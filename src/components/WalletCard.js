@@ -1,5 +1,7 @@
 import React from "react";
 
+import CurrencyFormat from "react-currency-format";
+
 const WalletCard = ({
   bgImage,
   cardName,
@@ -22,7 +24,12 @@ const WalletCard = ({
           </p>
         )}
         <p className="text-white font-medium px-10 text-3xl text-center">
-          ₦{amount}
+          <CurrencyFormat
+            value={amount}
+            displayType={"text"}
+            thousandSeparator={true}
+            prefix={"₦"}
+          />
         </p>
         {ifAccountNumber && (
           <div className="flex justify-end items-center cursor-pointer">

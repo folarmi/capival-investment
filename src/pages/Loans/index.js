@@ -1,17 +1,45 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import CurrencyFormat from "react-currency-format";
+
 import { ProgressBar, TableHeader } from "../../components";
+import { getActiveLoans, getPendingLoansAsync } from "../../slices/loan";
 
 const Loans = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { activeLoans, pendingLoans } = useSelector((state) => state.loans);
+
+  console.log(pendingLoans);
+  const activeLoanHeader = [
+    { id: "1", name: "Outstanding" },
+    { id: "2", name: "Amount Paid" },
+    { id: "3", name: "Loan Details" },
+  ];
+
+  const pendingLoanHeader = [
+    { id: "1", name: "Pending" },
+    { id: "2", name: "Amount Applied" },
+    { id: "3", name: "Loan Details" },
+  ];
 
   const goToNewLoanPage = () => {
     navigate("/dashboard/loans/new-loan");
   };
 
-  const gotToRepaymentPage = () => {
-    navigate("/dashboard/loans/repayment");
+  const gotToRepaymentPage = (item) => {
+    navigate("/dashboard/loans/repayment", {
+      state: {
+        loan: item,
+      },
+    });
   };
+
+  useEffect(() => {
+    dispatch(getActiveLoans());
+    dispatch(getPendingLoansAsync());
+  }, []);
 
   return (
     <>
@@ -66,80 +94,69 @@ const Loans = () => {
 
         <main className="mt-4 bg-blueTwo/10 rounded-xl">
           <section className="bg-blueTwo/20 rounded-xl py-4 overflow-scroll">
-            <div className="w-1/2 flex items-center justify-between">
-              <p className="font-medium whitespace-nowrap text-base text-redTwo px-6 md:w-[20%]">
-                Outstanding
-              </p>
-              <p className="font-medium whitespace-nowrap text-base text-blueTwo md:w-[20%]">
-                Amount Paid
-              </p>
-              <p className="font-medium whitespace-nowrap text-base text-blueTwo pl-6 md:pl-0">
-                Loan Details
-              </p>
+            <div className="grid grid-cols-5 gap-5 items-center">
+              {activeLoanHeader.map((header) => {
+                return (
+                  <div>
+                    <p className="font-medium first:text-redTwo whitespace-nowrap text-base text-blueTwo px-6 md:w-[20%]">
+                      {header?.name}
+                    </p>
+                  </div>
+                );
+              })}
             </div>
           </section>
 
           <div className="bg-blueTwo/10 overflow-scroll">
-            <div className="flex whitespace-nowrap items-center mt-4 mb-4 bg-blueTwo/5 py-3">
-              <p className="text-base text-redTwo font-medium pl-6 md:w-[20%]">
-                N 350,000
+            {activeLoans?.length === 0 ? (
+              <p className="text-center my-10 text-blueTwo text-xl">
+                No Active Loan
               </p>
-              <p className="text-base pl-6 md:pl-0 text-orange font-normal md:w-[20%]">
-                N105,000
-              </p>
-              <div className="md:w-[40%] bg-blueTwo/20 py-2 px-3 rounded-md">
-                <ProgressBar width="30%" />
-              </div>
-              <p
-                className="font-medium text-sm pl-6 cursor-pointer"
-                style={{
-                  color: "#699DEE",
-                }}
-                onClick={gotToRepaymentPage}
-              >
-                See More
-              </p>
-            </div>
-
-            <div className="flex whi items-center mt-4 mb-4 bg-blueTwo/5 py-3">
-              <p className="text-base text-redTwo font-medium pl-6 w-[20%]">
-                N 350,000
-              </p>
-              <p className="text-base text-orange font-normal w-[20%]">
-                N105,000
-              </p>
-              <div className="w-[40%] bg-blueTwo/20 py-2 px-3 rounded-md">
-                <ProgressBar width="30%" />
-              </div>
-              <p
-                className="font-medium text-sm pl-6"
-                style={{
-                  color: "#699DEE",
-                }}
-              >
-                See More
-              </p>
-            </div>
-
-            <div className="flex items-center mt-4 mb-4 bg-blueTwo/5 py-3">
-              <p className="text-base text-redTwo font-medium pl-6 w-[20%]">
-                N 350,000
-              </p>
-              <p className="text-base text-orange font-normal w-[20%]">
-                N105,000
-              </p>
-              <div className="w-[40%] bg-blueTwo/20 py-2 px-3 rounded-md">
-                <ProgressBar width="30%" />
-              </div>
-              <p
-                className="font-medium text-sm pl-6"
-                style={{
-                  color: "#699DEE",
-                }}
-              >
-                See More
-              </p>
-            </div>
+            ) : (
+              <>
+                {" "}
+                {activeLoans?.map((item) => {
+                  return (
+                    <div className="mt-4 mb-4 whitespace-nowrap grid grid-cols-5  bg-blueTwo/5 py-3">
+                      <p className="text-base text-[#AE1F24] font-medium pl-6 col-span-1">
+                        <CurrencyFormat
+                          value={item?.AmountLeft}
+                          displayType={"text"}
+                          thousandSeparator={true}
+                          prefix={"₦"}
+                        />
+                      </p>
+                      <p className="text-base text-orange font-medium pl-6 col-span-1">
+                        <CurrencyFormat
+                          value={item?.AmountPaid}
+                          displayType={"text"}
+                          thousandSeparator={true}
+                          prefix={"₦"}
+                        />
+                      </p>
+                      <div className="col-span-3 flex items-center">
+                        <div className="md:w-[67%] bg-blueTwo/20 py-2 px-3 rounded-md">
+                          <ProgressBar
+                            width={`${Math.round(
+                              (item?.AmountPaid / item?.Loan_Amount) * 100
+                            )}%`}
+                          />
+                        </div>
+                        <p
+                          className="font-medium text-sm pl-6 cursor-pointer"
+                          style={{
+                            color: "#699DEE",
+                          }}
+                          onClick={() => gotToRepaymentPage(item)}
+                        >
+                          See More
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </>
+            )}
           </div>
         </main>
 
@@ -151,44 +168,72 @@ const Loans = () => {
 
           <main className="mt-4 bg-blueTwo/10 rounded-xl">
             <section className="bg-blueTwo/20 rounded-xl py-4 overflow-scroll">
-              <div className="w-1/2 flex items-center justify-between">
-                <p className="font-medium whitespace-nowrap text-base text-redTwo px-6 md:w-[20%]">
-                  Pending
-                </p>
-                <p className="font-medium whitespace-nowrap text-base text-blueTwo md:w-[20%]">
-                  Amount Applied
-                </p>
-                <p className="font-medium whitespace-nowrap text-base text-blueTwo pl-6 md:pl-0">
-                  Loan Details
-                </p>
+              <div className="grid grid-cols-5 gap-5 items-center">
+                {pendingLoanHeader.map((header) => {
+                  return (
+                    <div>
+                      <p className="font-medium first:text-redTwo whitespace-nowrap text-base text-blueTwo px-6 md:w-[20%]">
+                        {header?.name}
+                      </p>
+                    </div>
+                  );
+                })}
               </div>
             </section>
 
             <div className="bg-blueTwo/10 overflow-scroll">
-              <div className="flex whitespace-nowrap items-center mt-4 mb-4 bg-blueTwo/5 py-3">
-                <p className="text-base text-redTwo font-medium pl-6 md:w-[20%]">
-                  N 350,000
+              {pendingLoans?.length === 0 ? (
+                <p className="text-center my-10 text-blueTwo text-xl">
+                  No Pending Loan
                 </p>
-                <p className="text-base pl-6 md:pl-0 text-orange font-normal md:w-[20%]">
-                  N105,000
-                </p>
-                <div className="md:w-[40%] bg-blueTwo/20 py-2 px-3 rounded-md">
-                  <ProgressBar width="30%" />
-                </div>
-                <p
-                  className="font-medium text-sm pl-6"
-                  style={{
-                    color: "#699DEE",
-                  }}
-                >
-                  Processing Loan Approval
-                </p>
-              </div>
+              ) : (
+                <>
+                  {" "}
+                  {pendingLoans?.map((item) => {
+                    return (
+                      <div className="mt-4 mb-4 whitespace-nowrap grid grid-cols-5  bg-blueTwo/5 py-3">
+                        <p className="text-base text-[#AE1F24] font-medium pl-6 col-span-1">
+                          <CurrencyFormat
+                            value={item?.AmountLeft}
+                            displayType={"text"}
+                            thousandSeparator={true}
+                            prefix={"₦"}
+                          />
+                        </p>
+                        <p className="text-base text-orange font-medium pl-6 col-span-1">
+                          <CurrencyFormat
+                            value={item?.AmountPaid}
+                            displayType={"text"}
+                            thousandSeparator={true}
+                            prefix={"₦"}
+                          />
+                        </p>
+                        <div className="col-span-3 flex items-center">
+                          <div className="md:w-[67%] bg-blueTwo/20 py-2 px-3 rounded-md">
+                            <ProgressBar
+                              width={`${Math.round(
+                                (item?.AmountPaid / item?.Loan_Amount) * 100
+                              )}%`}
+                            />
+                          </div>
+                          <p
+                            className="font-medium text-sm pl-6 cursor-pointer"
+                            style={{
+                              color: "#699DEE",
+                            }}
+                            onClick={gotToRepaymentPage}
+                          >
+                            See More
+                          </p>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </>
+              )}
             </div>
           </main>
         </div>
-
-        {/* <Table data={data} columns={columns} /> */}
       </div>
     </>
   );

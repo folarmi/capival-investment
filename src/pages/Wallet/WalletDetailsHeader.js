@@ -1,20 +1,31 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 import { WalletCard } from "../../components";
 import { SearchBar } from "../../components/SearchBar";
 import walletBg from "../../icons/walletBg.svg";
 
 const WalletDetailsHeader = ({ ifSearchBar, ifTransaction = true }) => {
+  const accountNumber = useSelector(
+    (state) => state.auth.login?.user?.user?.accounts?.AccountNo
+  );
+
+  const AccountBalance = useSelector(
+    (state) => state.auth.login?.user?.user?.accounts?.AccountBalance
+  );
+
+  // console.log(test);
+
   return (
     <div className="flex flex-col justify-center items-center">
       <WalletCard
         title="Wallet"
         ifAccountName
         cardName="Account Name"
-        amount="50,000.25"
+        amount={AccountBalance}
         bgImage={walletBg}
         ifAccountNumber
-        accountNumber="0046378932"
+        accountNumber={accountNumber}
       />
 
       {ifTransaction && (

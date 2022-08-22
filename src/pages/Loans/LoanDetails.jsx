@@ -1,6 +1,12 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 
 const LoanDetails = () => {
+  const location = useLocation();
+  const loanDetail = location?.state;
+
+  // console.log(loanDetail);
+
   const loanDetails = [
     {
       id: "1",

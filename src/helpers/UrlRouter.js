@@ -19,6 +19,9 @@ const getTransactionHistory = "transactions/recent-transactions";
 const getDebitCards = "payments/get_cards";
 const getAirtimeBillers = "bills-payment/get-airtime-billers";
 const capivalTransfer = "transactions/intra/transfer-fund";
+const activeLoans = "loans/active-loans";
+const getPendingLoans = "loans/pending-loans";
+const getLoanDetails = "loans/loan-details";
 
 const UrlRoute = {
   verifyBVN,
@@ -42,6 +45,9 @@ const UrlRoute = {
   repaymentChannels,
   bankStatementType,
   getAllBanks,
+  activeLoans,
+  getPendingLoans,
+  getLoanDetails,
 };
 
 export default UrlRoute;

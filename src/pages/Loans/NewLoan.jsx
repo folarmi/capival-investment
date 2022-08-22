@@ -140,238 +140,238 @@ const NewLoan = () => {
     { value: "Todxs", label: "Todxs" },
   ];
 
-  return (
-    <div className="cad-form">
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="cad-tit-container">
-          <span className="cad-titulo"> Edit Here</span>
-        </div>
-
-        <div className="cad-container">
-          <label htmlFor="targetAudience">Audience</label>
-          <Controller
-            name="targetAudience"
-            control={control}
-            // defaultValue={[audienceOptions[0], audienceOptions[1]]}
-            // rules={{ required: "Campo obrigatório", validate: isOnly3Values }}
-            render={({ field: { onChange, value } }) => (
-              <Select
-                value={value}
-                onChange={onChange}
-                // isMulti
-                placeholder="Select Itens"
-                options={audienceOptions}
-                className="basic-multi-select selectCustom"
-                classNamePrefix="select"
-              />
-            )}
-          />
-          {errors?.targetAudience && <p>{errors.targetAudience.message}</p>}
-        </div>
-
-        <div className="btn-container">
-          <div className="cad-btn">
-            <button type="submit" className="btn waves-effect yellow darken-2">
-              submit
-            </button>
-          </div>
-        </div>
-      </form>
-    </div>
-  );
   // return (
-  //   <div className="mt-4 lg:mt-8">
-  //     <p className="font-normal text-xl text-blueTwo text-center pb-2 uppercase">
-  //       Loan Details
-  //     </p>
-  //     <form
-  //       onSubmit={handleSubmit((data) =>
-  //         console.log("form was submitted", data)
-  //       )}
-  //     >
-  //       {/* <Controller
-  //         control={control}
-  //         name="itemType"
-  //         register={register("loan_amount")}
-  //         error={errors?.loan_amount?.message}
-  //         render={({ field: { onChange, value, ref, name } }) => (
-  //           <Select
-  //             placeholder={"Item type"}
-  //             options={loanTypesData}
-  //             onChange={(val) => {
-  //               onChange(val.value);
-  //               getLoanType(val);
-  //             }}
-  //           />
-  //         )}
-  //       />
-  //       {errors.item?.message && (
-  //         <div class="validationText">{errors.item?.message}</div>
-  //       )} */}
-
-  //       <Controller
-  //         name="targetAudience"
-  //         control={control}
-  //         // defaultValue={[audienceOptions[0], audienceOptions[1]]}
-  //         // rules={{ required: "Campo obrigatório", validate: isOnly3Values }}
-  //         render={({ field: { onChange, value } }) => (
-  //           <Select
-  //             value={value}
-  //             onChange={onChange}
-  //             // isMulti
-  //             placeholder="Select Itens"
-  //             options={loanTypesData}
-  //             // className="basic-multi-select selectCustom"
-  //             // classNamePrefix="select"
-  //           />
-  //         )}
-  //       />
-
-  //       <input type="submit" />
-  //     </form>
-  //     {/* <form
-  //       onSubmit={handleSubmit(submitForm)}
-  //       className="rounded-xl m-auto w-[90%] md:w-[80%] lg:w-[50%]"
-  //     >
-  //       <div>
-
-  //       <div className="mt-4">
-  //         <SavingsInput
-  //           placeholder="N0.0"
-  //           label="Loan Amount"
-  //           register={register("loan_amount")}
-  //           error={errors?.loan_amount?.message}
-  //         />
+  //   <div className="cad-form">
+  //     <form onSubmit={handleSubmit(onSubmit)}>
+  //       <div className="cad-tit-container">
+  //         <span className="cad-titulo"> Edit Here</span>
   //       </div>
 
-  //       <div className="mt-4">
+  //       <div className="cad-container">
+  //         <label htmlFor="targetAudience">Audience</label>
   //         <Controller
+  //           name="targetAudience"
   //           control={control}
-  //           name="tenor"
-  //           render={({ field: { onChange, onBlur, value, ref } }) => (
-  //             <div>
-  //               <label className="text-sm font-normal text-blueTwo">
-  //                 Tenure
-  //               </label>
-  //               <Select
-  //                 onBlur={onBlur}
-  //                 onChange={onChange}
-  //                 checked={value}
-  //                 inputRef={ref}
-  //                 options={loanTenureData}
-  //                 placeholder="O month(s)"
-  //                 styles={colourStyles}
-  //               />
-  //             </div>
+  //           // defaultValue={[audienceOptions[0], audienceOptions[1]]}
+  //           // rules={{ required: "Campo obrigatório", validate: isOnly3Values }}
+  //           render={({ field: { onChange, value } }) => (
+  //             <Select
+  //               value={value}
+  //               onChange={onChange}
+  //               // isMulti
+  //               placeholder="Select Itens"
+  //               options={audienceOptions}
+  //               className="basic-multi-select selectCustom"
+  //               classNamePrefix="select"
+  //             />
   //           )}
   //         />
+  //         {errors?.targetAudience && <p>{errors.targetAudience.message}</p>}
   //       </div>
 
-  //       <div className="mt-4">
-  //         <Controller
-  //           control={control}
-  //           name="repayment_channel"
-  //           render={({ field: { onChange, onBlur, value, ref } }) => (
-  //             <div>
-  //               <label className="text-sm font-normal text-blueTwo">
-  //                 Select repayment method
-  //               </label>
-  //               <Select
-  //                 onBlur={onBlur}
-  //                 onChange={onChange}
-  //                 checked={value}
-  //                 inputRef={ref}
-  //                 options={repaymentChannelData}
-  //                 placeholder="Standard repayment"
-  //                 styles={colourStyles}
-  //               />
-  //             </div>
-  //           )}
-  //         />
-  //       </div>
-
-  //       <div className="mt-4">
-  //         <Controller
-  //           control={control}
-  //           name="statement_type"
-  //           render={({ field: { onChange, onBlur, value, ref } }) => (
-  //             <div>
-  //               <label className="text-sm font-normal text-blueTwo">
-  //                 Bank Statement type
-  //               </label>
-  //               <Select
-  //                 onBlur={onBlur}
-  //                 onChange={onChange}
-  //                 checked={value}
-  //                 inputRef={ref}
-  //                 options={bankStatementData}
-  //                 placeholder="My bank statement"
-  //                 styles={colourStyles}
-  //               />
-  //             </div>
-  //           )}
-  //         />
-  //       </div>
-
-  //       {showDisbursement && (
-  //         <div className="mt-10">
-  //           <p className="font-normal text-xl text-blueTwo text-center pb-6 uppercase">
-  //             Disbursement Details
-  //           </p>
-
-  //           <div className="">
-  //             <Controller
-  //               control={control}
-  //               name="disbursement_bank_code"
-  //               render={({ field: { onChange, onBlur, value, ref } }) => (
-  //                 <div>
-  //                   <label className="text-sm font-normal text-blueTwo">
-  //                     Select repayment method
-  //                   </label>
-  //                   <Select
-  //                     onBlur={onBlur}
-  //                     onChange={onChange}
-  //                     checked={value}
-  //                     inputRef={ref}
-  //                     options={allBanksData}
-  //                     placeholder="Access Bank"
-  //                     styles={colourStyles}
-  //                   />
-  //                 </div>
-  //               )}
-  //             />
-  //           </div>
-
-  //           <div className="mt-4">
-  //             <SavingsInput
-  //               placeholder="0123456789"
-  //               label="Account Number"
-  //               register={register("disbursement_account_no")}
-  //               error={errors?.disbursement_account_no?.message}
-  //             />
-  //           </div>
-
-  //           <div className="mt-4">
-  //             <SavingsInput
-  //               placeholder="Ayobami olagoke"
-  //               label="Account Name"
-  //               register={register("disbursement_account_name")}
-  //               error={errors?.disbursement_account_name?.message}
-  //             />
-  //           </div>
+  //       <div className="btn-container">
+  //         <div className="cad-btn">
+  //           <button type="submit" className="btn waves-effect yellow darken-2">
+  //             submit
+  //           </button>
   //         </div>
-  //       )}
-
-  //       <div className="w-full mt-10 md:w-[40%] m-auto">
-  //         <Button
-  //           buttonText="Apply Now"
-  //           className="rounded-xl mb-10"
-  //           size="lg"
-  //         />
   //       </div>
-  //     </form> */}
+  //     </form>
   //   </div>
   // );
+  return (
+    <div className="mt-4 lg:mt-8">
+      <p className="font-normal text-xl text-blueTwo text-center pb-2 uppercase">
+        Loan Details
+      </p>
+      <form
+        onSubmit={handleSubmit((data) =>
+          console.log("form was submitted", data)
+        )}
+      >
+        {/* <Controller
+          control={control}
+          name="itemType"
+          register={register("loan_amount")}
+          error={errors?.loan_amount?.message}
+          render={({ field: { onChange, value, ref, name } }) => (
+            <Select
+              placeholder={"Item type"}
+              options={loanTypesData}
+              onChange={(val) => {
+                onChange(val.value);
+                getLoanType(val);
+              }}
+            />
+          )}
+        />
+        {errors.item?.message && (
+          <div class="validationText">{errors.item?.message}</div>
+        )} */}
+
+        <Controller
+          name="targetAudience"
+          control={control}
+          // defaultValue={[audienceOptions[0], audienceOptions[1]]}
+          // rules={{ required: "Campo obrigatório", validate: isOnly3Values }}
+          render={({ field: { onChange, value } }) => (
+            <Select
+              value={value}
+              onChange={onChange}
+              // isMulti
+              placeholder="Select Itens"
+              options={loanTypesData}
+              // className="basic-multi-select selectCustom"
+              // classNamePrefix="select"
+            />
+          )}
+        />
+
+        <input type="submit" />
+      </form>
+      {/* <form
+        onSubmit={handleSubmit(submitForm)}
+        className="rounded-xl m-auto w-[90%] md:w-[80%] lg:w-[50%]"
+      >
+        <div>
+
+        <div className="mt-4">
+          <SavingsInput
+            placeholder="N0.0"
+            label="Loan Amount"
+            register={register("loan_amount")}
+            error={errors?.loan_amount?.message}
+          />
+        </div>
+
+        <div className="mt-4">
+          <Controller
+            control={control}
+            name="tenor"
+            render={({ field: { onChange, onBlur, value, ref } }) => (
+              <div>
+                <label className="text-sm font-normal text-blueTwo">
+                  Tenure
+                </label>
+                <Select
+                  onBlur={onBlur}
+                  onChange={onChange}
+                  checked={value}
+                  inputRef={ref}
+                  options={loanTenureData}
+                  placeholder="O month(s)"
+                  styles={colourStyles}
+                />
+              </div>
+            )}
+          />
+        </div>
+
+        <div className="mt-4">
+          <Controller
+            control={control}
+            name="repayment_channel"
+            render={({ field: { onChange, onBlur, value, ref } }) => (
+              <div>
+                <label className="text-sm font-normal text-blueTwo">
+                  Select repayment method
+                </label>
+                <Select
+                  onBlur={onBlur}
+                  onChange={onChange}
+                  checked={value}
+                  inputRef={ref}
+                  options={repaymentChannelData}
+                  placeholder="Standard repayment"
+                  styles={colourStyles}
+                />
+              </div>
+            )}
+          />
+        </div>
+
+        <div className="mt-4">
+          <Controller
+            control={control}
+            name="statement_type"
+            render={({ field: { onChange, onBlur, value, ref } }) => (
+              <div>
+                <label className="text-sm font-normal text-blueTwo">
+                  Bank Statement type
+                </label>
+                <Select
+                  onBlur={onBlur}
+                  onChange={onChange}
+                  checked={value}
+                  inputRef={ref}
+                  options={bankStatementData}
+                  placeholder="My bank statement"
+                  styles={colourStyles}
+                />
+              </div>
+            )}
+          />
+        </div>
+
+        {showDisbursement && (
+          <div className="mt-10">
+            <p className="font-normal text-xl text-blueTwo text-center pb-6 uppercase">
+              Disbursement Details
+            </p>
+
+            <div className="">
+              <Controller
+                control={control}
+                name="disbursement_bank_code"
+                render={({ field: { onChange, onBlur, value, ref } }) => (
+                  <div>
+                    <label className="text-sm font-normal text-blueTwo">
+                      Select repayment method
+                    </label>
+                    <Select
+                      onBlur={onBlur}
+                      onChange={onChange}
+                      checked={value}
+                      inputRef={ref}
+                      options={allBanksData}
+                      placeholder="Access Bank"
+                      styles={colourStyles}
+                    />
+                  </div>
+                )}
+              />
+            </div>
+
+            <div className="mt-4">
+              <SavingsInput
+                placeholder="0123456789"
+                label="Account Number"
+                register={register("disbursement_account_no")}
+                error={errors?.disbursement_account_no?.message}
+              />
+            </div>
+
+            <div className="mt-4">
+              <SavingsInput
+                placeholder="Ayobami olagoke"
+                label="Account Name"
+                register={register("disbursement_account_name")}
+                error={errors?.disbursement_account_name?.message}
+              />
+            </div>
+          </div>
+        )}
+
+        <div className="w-full mt-10 md:w-[40%] m-auto">
+          <Button
+            buttonText="Apply Now"
+            className="rounded-xl mb-10"
+            size="lg"
+          />
+        </div>
+      </form> */}
+    </div>
+  );
 };
 
 export { NewLoan };

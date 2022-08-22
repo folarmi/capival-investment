@@ -1,17 +1,23 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import { LoanHeader, ProgressBar, TableHeader } from "../../components";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+import { LoanHeader, TableHeader } from "../../components";
+import { getLoanDetailsAsync } from "../../slices/loan";
 import { RepaymentCard } from "./RepaymentCard";
 
 const Repayment = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const dispatch = useDispatch();
+  const { loanDetails } = useSelector((state) => state.loans);
+  const singleLoanDetails = location?.state.loan;
 
-  const gotToNextRepaymentPage = () => {
-    navigate("/dashboard/loans/next-repayment");
-  };
-
-  const gotToLoanDetailsPage = () => {
-    navigate("/dashboard/loans/details");
+  const gotToLoanDetailsPage = (item) => {
+    navigate("/dashboard/loans/details", {
+      state: {
+        loan: item,
+      },
+    });
   };
 
   const gotToSettleLoanPage = () => {
@@ -39,17 +45,34 @@ const Repayment = () => {
     },
   ];
 
+  useEffect(() => {
+    dispatch(getLoanDetailsAsync(singleLoanDetails?.LoanID));
+  }, []);
+
   return (
     <>
       <div className="m-auto w-full md:w-[70%] mt-8">
         {/* <div className="mx-2"> */}
-        <LoanHeader amount="N500,000" title="Outstanding" />
+        <LoanHeader
+          amount={singleLoanDetails?.AmountLeft}
+          title="Outstanding"
+        />
         {/* </div> */}
 
         <div className="flex items-center justify-between px-4 md:px-10 bg-grayTwo py-3 rounded-bl-xl rounded-br-xl">
-          <RepaymentCard title="Amount Paid" amount="N102500" />
-          <RepaymentCard title="Total Amount" amount="N102500" />
-          <RepaymentCard title="Loan Tenure" amount="N500000" />
+          <RepaymentCard
+            title="Amount Paid"
+            amount={singleLoanDetails?.AmountPaid}
+          />
+          <RepaymentCard
+            title="Total Amount"
+            amount={singleLoanDetails?.Loan_Amount}
+          />
+          <RepaymentCard
+            title="Loan Tenure"
+            ifAmount={false}
+            amount={`${singleLoanDetails?.Loan_Tenure} months`}
+          />
         </div>
 
         <div className="flex mt-10 mb-8 justify-center">
@@ -60,7 +83,10 @@ const Repayment = () => {
               onClick={gotToNextRepaymentPage}
             />
           </div> */}
-          <div className="cursor-pointer mr-6" onClick={gotToLoanDetailsPage}>
+          <div
+            className="cursor-pointer mr-6"
+            onClick={() => gotToLoanDetailsPage(singleLoanDetails)}
+          >
             <img
               src="/assets/images/loanDetails.svg"
               alt="loan detail"

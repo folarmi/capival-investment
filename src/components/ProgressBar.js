@@ -1,6 +1,6 @@
 import React from "react";
 
-const ProgressBar = ({ width = "10%" }) => {
+const ProgressBar = ({ width = "10%", ifPercent = true }) => {
   return (
     <div className="flex items-center">
       <div className="w-3/5  rounded-full h-2.5">
@@ -12,9 +12,11 @@ const ProgressBar = ({ width = "10%" }) => {
         </div>
       </div>
 
-      <p className="font-medium whitespace-nowrap text-blueTwo text-xs pl-3">
-        {width} complete
-      </p>
+      {ifPercent && (
+        <p className="font-medium whitespace-nowrap text-blueTwo text-xs pl-3">
+          {width} complete
+        </p>
+      )}
     </div>
   );
 };
