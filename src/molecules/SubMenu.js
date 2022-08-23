@@ -21,7 +21,6 @@ const SubMenu = ({ item }) => {
   };
 
   const changeActive = (item) => {
-    console.log(item?.icon, "dododo");
     setActiveTab(item?.item);
     // console.log(activeTab);
   };
@@ -60,6 +59,7 @@ const SubMenu = ({ item }) => {
                   src="/assets/icons/whiteArrowDown.svg"
                   alt="arrowDown"
                   className="pr-9 cursor-pointer"
+                  onClick={toggleDropDown}
                 />
               )}
             </div>

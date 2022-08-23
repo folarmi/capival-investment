@@ -46,10 +46,26 @@ export const getLoanDetailsAsync = createAsyncThunk(
   }
 );
 
+export const createLoanAsync = createAsyncThunk(
+  "loan/createLoan",
+  async (values, { rejectWithValue }) => {
+    try {
+      const response = await LoanService.createLoan(values);
+      return response;
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 const initialState = {
   getActiveLoanLoading: false,
   getPendingLoanLoading: false,
   getLoanDetailsLoading: false,
+  createLoanIsLoading: false,
   activeLoans: "",
   pendingLoans: "",
   loanDetails: "",
@@ -90,24 +106,19 @@ const loanSlice = createSlice({
     [getLoanDetailsAsync.rejected]: (state) => {
       state.getLoanDetailsLoading = false;
     },
+    [createLoanAsync.pending]: (state) => {
+      state.createLoanIsLoading = true;
+    },
+    [createLoanAsync.fulfilled]: (state) => {
+      // state.loanDetails = action.payload.data;
+      state.createLoanIsLoading = false;
+    },
+    [createLoanAsync.rejected]: (state) => {
+      state.createLoanIsLoading = false;
+    },
   },
 });
 
 const { reducer } = loanSlice;
 
 export default reducer;
-
-// {
-//   "CustomerID": "20201000027",
-//   "LoanID": "3257",
-//   "Loan_Amount": "500000.00",
-//   "Loan_Tenure": "6",
-//   "Interest": "36.6000",
-//   "Loan_Type": "Capival Staff",
-//   "Monthly_Repayments": "92452.00",
-//   "AmountPaid": "156759.00",
-//   "AmountLeft": "343243.00",
-//   "Status": "Active",
-//   "DateDisbursed": "2022-05-12 10:15:12",
-//   "DateLiquidated": ""
-// }

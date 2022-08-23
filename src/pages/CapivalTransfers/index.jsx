@@ -7,9 +7,11 @@ import { Button, SavingsInput, UserAvatar } from "../../atoms";
 import WalletDetailsHeader from "../Wallet/WalletDetailsHeader";
 import { useDispatch, useSelector } from "react-redux";
 import { capivalTransferAsync } from "../../slices/transactionHistory";
+import { useNavigate } from "react-router-dom";
 
 const CapivalTransfer = () => {
   const dispatch = useDispatch();
+  const nagivate = useNavigate();
   const { capivalTransferLoading } = useSelector(
     (state) => state.transactionHistory
   );
@@ -31,13 +33,17 @@ const CapivalTransfer = () => {
   const { errors } = formState;
 
   const submitForm = (values) => {
-    console.log(values);
     dispatch(capivalTransferAsync(values))
       .unwrap()
       .then((res) => {
-        console.log(res);
         if (res?.status === true) {
           toast(res.message);
+          reset();
+          nagivate("/dashboard/capival-transfers/receipt", {
+            state: {
+              transferDetails: res?.data,
+            },
+          });
         }
       })
       .catch((err) => {
@@ -94,6 +100,13 @@ const CapivalTransfer = () => {
               error={errors?.narration?.message}
             />
           </div>
+          <div>
+            <SavingsInput
+              placeholder="PIN"
+              register={register("pin")}
+              error={errors?.pin?.message}
+            />
+          </div>
 
           <div className="w-[100%] md:w-[30%] mt-6 md:mb-0 justify-self-center col-span-2">
             <Button
@@ -110,3 +123,14 @@ const CapivalTransfer = () => {
 };
 
 export default CapivalTransfer;
+
+// {
+//   "trans_date": "2022-08-23T05:03:20.000000Z",
+//   "trans_type": "Internal Transfer",
+//   "ref_number": "23082278794374",
+//   "sender": "HARRY   CHARLES",
+//   "beneficiary": "FAWOLE  LOLA  OLUWAMUYIWA",
+//   "bank": "Capival",
+//   "amount": "20.00 NGN",
+//   "narration": "testing"
+// }

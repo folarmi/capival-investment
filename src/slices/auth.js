@@ -125,6 +125,36 @@ export const changePasswordAsync = createAsyncThunk(
   }
 );
 
+export const setTransactionPinAsync = createAsyncThunk(
+  "auth/setTransactionPin",
+  async (values, { rejectWithValue }) => {
+    try {
+      const response = await AuthService.setTransactionPin(values);
+      return response;
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const resetTransactionPinAsync = createAsyncThunk(
+  "auth/resetTransactionPin",
+  async (values, { rejectWithValue }) => {
+    try {
+      const response = await AuthService.resetTransactionPin(values);
+      return response;
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 export const logoutAsync = createAsyncThunk("auth/logout", async () => {
   AuthService.logout();
 });
@@ -136,6 +166,8 @@ const initialState = {
   forgotPasswordLoading: false,
   forgotPasswordLoadingOTP: false,
   changePasswordLoading: false,
+  isTransactionPinLoading: false,
+  isresetTransactionPinLoading: false,
   forgotPasswordEmail: "",
   bvnData: [],
   login: {
@@ -196,7 +228,6 @@ const registerSlice = createSlice({
       state.login.isLoading = true;
     },
     [loginUserAsync.fulfilled]: (state, action) => {
-      console.log(action.payload);
       state.login.isLoggedIn = true;
       state.login.isLoading = false;
       state.login.user = action.payload;
@@ -234,6 +265,27 @@ const registerSlice = createSlice({
     },
     [changePasswordAsync.rejected]: (state, action) => {
       state.changePasswordLoading = false;
+      state.error = action.payload;
+    },
+    [setTransactionPinAsync.pending]: (state) => {
+      state.isTransactionPinLoading = true;
+    },
+    [setTransactionPinAsync.fulfilled]: (state, action) => {
+      state.isTransactionPinLoading = false;
+      state.login.user = action.data;
+    },
+    [setTransactionPinAsync.rejected]: (state, action) => {
+      state.isTransactionPinLoading = false;
+      state.error = action.payload;
+    },
+    [resetTransactionPinAsync.pending]: (state) => {
+      state.isresetTransactionPinLoading = true;
+    },
+    [resetTransactionPinAsync.fulfilled]: (state, action) => {
+      state.isresetTransactionPinLoading = false;
+    },
+    [resetTransactionPinAsync.rejected]: (state, action) => {
+      state.isresetTransactionPinLoading = false;
       state.error = action.payload;
     },
     [logoutAsync.fulfilled]: (state) => {

@@ -14,12 +14,7 @@ const DashboardLayout = () => {
             <Sidebar />
           </div>
 
-          <div
-            className="mt-[88px] lg:ml-[16%] lg:w-[84%] w-full dashboard-bg h-screen"
-            style={{
-              zIndex: 50,
-            }}
-          >
+          <div className="mt-[88px] lg:ml-[16%] lg:w-[84%] w-full dashboard-bg h-screen">
             <Outlet />
           </div>
         </div>

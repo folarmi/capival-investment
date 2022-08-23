@@ -4,15 +4,15 @@ import { useSelector } from "react-redux";
 import { SearchBar } from "./SearchBar";
 
 const DashboardHeader = () => {
-  const userObject = useSelector((state) => state.auth.login.user.user);
-  const test = useSelector((state) => state.auth.login);
-  console.log(test);
+  const userObject = useSelector((state) => state.auth.login?.user?.user);
+  // const test = useSelector((state) => state.auth);
+  // console.log(test);
 
   return (
     <header
       className="hidden w-full fixed md:flex items-start lg:items-center bg-white py-4 shadow-md"
       style={{
-        zIndex: 9999,
+        zIndex: 20,
       }}
     >
       <div className="ml-6 w-[10%] mr-[10%]">

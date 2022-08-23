@@ -46,12 +46,6 @@ const Sidebar = (props) => {
           <p className="font-normal text-sm text-white">Logout</p>
         </div>
       </div>
-
-      {/* <ModalPopup
-        modalHeight="400px"
-        children={<LogoutModal closeDetailsModal={toggleLogoutModal} />}
-        isOpen={logoutModal}
-      /> */}
     </div>
   );
 };

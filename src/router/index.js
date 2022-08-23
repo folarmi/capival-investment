@@ -26,6 +26,8 @@ import {
   DebitCard,
   OtherBanksTransfer,
   ChangePassword,
+  ChangePin,
+  TransferReceipt,
 } from "../pages";
 import { BetTransactionDetail } from "../pages/BetsAndLorries/BetTransactionDetail";
 import CapivalTransfer from "../pages/CapivalTransfers";
@@ -100,6 +102,10 @@ const Index = () => {
           path="dashboard/capival-transfers"
           element={<CapivalTransfer />}
         />
+        <Route
+          path="dashboard/capival-transfers/receipt"
+          element={<TransferReceipt />}
+        />
         <Route path="dashboard/capival-pension" element={<CapivalPension />} />
         <Route
           path="dashboard/transaction-history"
@@ -119,6 +125,7 @@ const Index = () => {
           path="dashboard/profile/change-password"
           element={<ChangePassword />}
         />
+        <Route path="dashboard/profile/change-pin" element={<ChangePin />} />
       </Route>
     </Routes>
   );

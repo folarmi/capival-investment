@@ -140,6 +140,21 @@ export const getAllBanksAsync = createAsyncThunk(
   }
 );
 
+export const getWalletBalanceAsync = createAsyncThunk(
+  "utils/getWalletBalance",
+  async (values, { rejectWithValue }) => {
+    try {
+      const response = await utilsService.getWalletBalance(values);
+      return response;
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 const initialState = {
   getGenderLoading: false,
   getLoanTypesLoading: false,
@@ -150,6 +165,7 @@ const initialState = {
   getStateLGALoading: false,
   getLoanTenureLoading: false,
   getAllBanksLoading: false,
+  getWalletBalanceLoading: false,
   gender: [],
   maritalStatus: [],
   states: [],
@@ -264,20 +280,19 @@ const utilsSlice = createSlice({
       state.getAllBanksLoading = false;
       state.error = action.payload;
     },
+    [getWalletBalanceAsync.pending]: (state) => {
+      state.getWalletBalanceLoading = true;
+    },
+    [getWalletBalanceAsync.fulfilled]: (state) => {
+      state.getWalletBalanceLoading = false;
+    },
+    [getWalletBalanceAsync.rejected]: (state, action) => {
+      state.getWalletBalanceLoading = false;
+      state.error = action.payload;
+    },
   },
 });
 
 const { reducer } = utilsSlice;
 
 export default reducer;
-
-// "loan_type_id": "1",
-// "loan_amount": "800000.00",
-// "tenor": "8",
-// "repayment_channel": "remita",
-// "statement_type": "mbs",
-// "mbs_ticket_no": "12345-00",
-// "mbs_ticket_password": "123456",
-// "disbursement_account_no": "1234567890",
-// "disbursement_account_name": "Okoro Hassan Opeyemi",
-// "disbursement_bank_code": "000013"

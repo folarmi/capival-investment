@@ -75,7 +75,7 @@ export const SidebarMenuItems = [
       {
         id: "2",
         item: "Change Pin",
-        path: "/customers/oystr-smart-costumers",
+        path: "dashboard/profile/change-pin",
         icon: pin,
       },
       // {

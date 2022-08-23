@@ -1,7 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { CircularIcon } from "../../atoms";
+import ModalPopup from "../../components/ModalPopup";
+import { SetTransactionPin } from "./SetTransactionPin";
 
 const Dashboard = () => {
+  const isTransactionPinSet = useSelector(
+    (state) => state.auth.login?.user?.authorisation?.trans_pin
+  );
+
+  // const test = useSelector((state) => state.auth.login?.user?.authorisation);
+
+  const [showTransactionPinModal, setShowTransactionPinModal] = useState(false);
+
+  const toggleTransactionPinModal = () => {
+    setShowTransactionPinModal(!showTransactionPinModal);
+  };
+
+  useEffect(() => {
+    if (isTransactionPinSet === false) {
+      setShowTransactionPinModal(true);
+    } else {
+      setShowTransactionPinModal(false);
+    }
+  }, [showTransactionPinModal]);
+
   return (
     <>
       <section className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-8 px-6 md:px-10 lg:px-24">
@@ -42,6 +65,16 @@ const Dashboard = () => {
       </section>
 
       <img src="/assets/icons/loanThree.svg" alt="" />
+      <ModalPopup
+        modalHeight="300px"
+        modalWidth="400px"
+        children={
+          <SetTransactionPin
+            toggleTransactionPinModal={toggleTransactionPinModal}
+          />
+        }
+        isOpen={showTransactionPinModal}
+      />
     </>
   );
 };

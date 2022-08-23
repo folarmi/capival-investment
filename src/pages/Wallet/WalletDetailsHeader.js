@@ -1,20 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
 import { WalletCard } from "../../components";
 import { SearchBar } from "../../components/SearchBar";
 import walletBg from "../../icons/walletBg.svg";
+import { getWalletBalanceAsync } from "../../slices/utils";
 
 const WalletDetailsHeader = ({ ifSearchBar, ifTransaction = true }) => {
+  const [accountBalance, setAccountBalance] = useState("");
+  const dispatch = useDispatch();
   const accountNumber = useSelector(
     (state) => state.auth.login?.user?.user?.accounts?.AccountNo
   );
 
-  const AccountBalance = useSelector(
-    (state) => state.auth.login?.user?.user?.accounts?.AccountBalance
-  );
+  const getWalletBalance = async (num) => {
+    const data = await dispatch(getWalletBalanceAsync());
+    setAccountBalance(data?.payload?.balance);
+  };
 
-  // console.log(test);
+  useEffect(() => {
+    getWalletBalance();
+  }, []);
 
   return (
     <div className="flex flex-col justify-center items-center">
@@ -22,7 +29,7 @@ const WalletDetailsHeader = ({ ifSearchBar, ifTransaction = true }) => {
         title="Wallet"
         ifAccountName
         cardName="Account Name"
-        amount={AccountBalance}
+        amount={accountBalance}
         bgImage={walletBg}
         ifAccountNumber
         accountNumber={accountNumber}

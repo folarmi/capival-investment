@@ -1,5 +1,8 @@
 const verifyBVN = "accounts/bvn-verification";
+const setTransactionPin = "accounts/set-transaction-pin";
+const resetTransactionPin = "accounts/reset-transaction-pin";
 const bvnOtpValidation = "accounts/bvn-verification/validate";
+const getWalletBalance = "accounts/wallet-balance";
 const getGender = "utils/gender";
 const getMaritalStatus = "utils/marital-status";
 const getStates = "utils/states";
@@ -22,6 +25,7 @@ const capivalTransfer = "transactions/intra/transfer-fund";
 const activeLoans = "loans/active-loans";
 const getPendingLoans = "loans/pending-loans";
 const getLoanDetails = "loans/loan-details";
+const createLoan = "loans/create";
 
 const UrlRoute = {
   verifyBVN,
@@ -48,6 +52,10 @@ const UrlRoute = {
   activeLoans,
   getPendingLoans,
   getLoanDetails,
+  setTransactionPin,
+  resetTransactionPin,
+  createLoan,
+  getWalletBalance,
 };
 
 export default UrlRoute;

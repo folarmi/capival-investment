@@ -16,10 +16,16 @@ const getLoanDetails = async (loanId) => {
   return response.data;
 };
 
+const createLoan = async (values) => {
+  const response = await api.post(UrlRoute.createLoan, values);
+  return response.data;
+};
+
 const loanService = {
   getActiveLoans,
   getPendingLoans,
   getLoanDetails,
+  createLoan,
 };
 
 export default loanService;

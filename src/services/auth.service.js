@@ -23,6 +23,8 @@ const loginUser = async (values) => {
   return response.data;
 };
 
+// const setTransactionPin
+
 // const loginUser = async (values) => {
 //   console.log("service file");
 //   const response = await api.post(UrlRoute.login, values);
@@ -48,6 +50,16 @@ const logout = () => {
   sessionStorage.clear();
 };
 
+const setTransactionPin = async (pin) => {
+  const response = await api.post(UrlRoute.setTransactionPin, pin);
+  return response.data;
+};
+
+const resetTransactionPin = async (pin) => {
+  const response = await api.post(UrlRoute.resetTransactionPin, pin);
+  return response.data;
+};
+
 // const deleteCustomer = async (values) => {
 //   const response = await api.delete(`${UrlRoute.getSingleCustomer}/${values}`);
 //   return response.data;
@@ -62,6 +74,8 @@ const authService = {
   forgotPasswordOTP,
   changePassword,
   logout,
+  setTransactionPin,
+  resetTransactionPin,
 };
 
 export default authService;

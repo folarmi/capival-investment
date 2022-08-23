@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "react-toastify";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { Input, Button, Header } from "../atoms";
 import { loginUserAsync, resetInitialState } from "../slices/auth";
@@ -59,22 +59,6 @@ const Login = () => {
     dispatch(resetInitialState());
   }, []);
 
-  //   <Controller
-  //   name="ReactSelect"
-  //   control={control}
-  //   render={({ field }) => (
-  // <ReactSelect
-  //   isClearable
-  //   {...field}
-  //   options={[
-  //     { value: "chocolate", label: "Chocolate" },
-  //     { value: "strawberry", label: "Strawberry" },
-  //     { value: "vanilla", label: "Vanilla" }
-  //   ]}
-  // />
-  //   )}
-  // />
-
   return (
     <div className="w-full h-screen login-bg">
       <Header />
@@ -104,7 +88,7 @@ const Login = () => {
             onClick={gotToForgotPasswordPage}
             className="text-sm font-medium text-blueThree py-6 text-center cursor-pointer"
           >
-            Forget Password?
+            Forgot Password?
           </p>
         </form>
       </div>

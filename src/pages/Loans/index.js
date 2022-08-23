@@ -19,9 +19,11 @@ const Loans = () => {
   ];
 
   const pendingLoanHeader = [
-    { id: "1", name: "Pending" },
-    { id: "2", name: "Amount Applied" },
+    { id: "1", name: "Amount Applied" },
+    { id: "2", name: "Tenure" },
     { id: "3", name: "Loan Details" },
+    { id: "4", name: "Mode" },
+    { id: "5", name: "Status" },
   ];
 
   const goToNewLoanPage = () => {
@@ -168,11 +170,11 @@ const Loans = () => {
 
           <main className="mt-4 bg-blueTwo/10 rounded-xl">
             <section className="bg-blueTwo/20 rounded-xl py-4 overflow-scroll">
-              <div className="grid grid-cols-5 gap-5 items-center">
+              <div className="grid grid-cols-5 gap-5 items-center pl-6">
                 {pendingLoanHeader.map((header) => {
                   return (
                     <div>
-                      <p className="font-medium first:text-redTwo whitespace-nowrap text-base text-blueTwo px-6 md:w-[20%]">
+                      <p className="font-medium whitespace-nowrap text-base text-blueTwo">
                         {header?.name}
                       </p>
                     </div>
@@ -191,24 +193,29 @@ const Loans = () => {
                   {" "}
                   {pendingLoans?.map((item) => {
                     return (
-                      <div className="mt-4 mb-4 whitespace-nowrap grid grid-cols-5  bg-blueTwo/5 py-3">
-                        <p className="text-base text-[#AE1F24] font-medium pl-6 col-span-1">
+                      <div className="mt-4 mb-4 whitespace-nowrap grid grid-cols-5 gap-5  bg-blueTwo/5 py-3 pl-6">
+                        <p className="text-base text-[#AE1F24] font-medium  col-span-1">
                           <CurrencyFormat
-                            value={item?.AmountLeft}
+                            value={item?.loan_amount}
                             displayType={"text"}
                             thousandSeparator={true}
                             prefix={"₦"}
                           />
                         </p>
-                        <p className="text-base text-orange font-medium pl-6 col-span-1">
-                          <CurrencyFormat
-                            value={item?.AmountPaid}
-                            displayType={"text"}
-                            thousandSeparator={true}
-                            prefix={"₦"}
-                          />
+                        <p className="text-base text-blueTwo font-medium col-span-1">
+                          {`${item?.tenor} months`}
                         </p>
-                        <div className="col-span-3 flex items-center">
+                        <p className="text-base text-blueTwo font-medium  col-span-1">
+                          {item?.repayment_channel}
+                        </p>
+                        <p className="text-base text-blueTwo font-medium  col-span-1">
+                          {item?.mode}
+                        </p>
+                        <p className="text-base text-blueTwo font-medium col-span-1">
+                          {item?.status === 0 ? "Inactive" : "Active"}
+                        </p>
+
+                        {/* <div className="col-span-3 flex items-center">
                           <div className="md:w-[67%] bg-blueTwo/20 py-2 px-3 rounded-md">
                             <ProgressBar
                               width={`${Math.round(
@@ -225,7 +232,7 @@ const Loans = () => {
                           >
                             See More
                           </p>
-                        </div>
+                        </div> */}
                       </div>
                     );
                   })}

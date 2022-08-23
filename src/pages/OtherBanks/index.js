@@ -1,8 +1,34 @@
 import React from "react";
+import * as Yup from "yup";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 import { Button, SavingsInput, UserAvatar } from "../../atoms";
 import WalletDetailsHeader from "../Wallet/WalletDetailsHeader";
 
 const OtherBanksTransfer = () => {
+  const dispatch = useDispatch();
+  const nagivate = useNavigate();
+
+  const validationSchema = Yup.object().shape({
+    destination_account: Yup.string()
+      .required("Destination Account is required")
+      .matches(/^[0-9]+$/, "Must be only digits")
+      .min(10, "Must be exactly 10 digits")
+      .max(10, "Must be exactly 10 digits"),
+    amount: Yup.string()
+      .required()
+      .matches(/^[0-9]+$/, "Must be only digits"),
+  });
+
+  const { register, handleSubmit, formState, reset } = useForm({
+    resolver: yupResolver(validationSchema),
+  });
+  const { errors } = formState;
+
   return (
     <div className="mt-8">
       <WalletDetailsHeader />
