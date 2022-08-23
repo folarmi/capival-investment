@@ -23,7 +23,7 @@ import loanReducer from "./slices/loan";
 const persistConfig = {
   key: "root",
   version: 1,
-  // whitelist: ["auth"],
+  whitelist: ["auth"],
   storage,
 };
 

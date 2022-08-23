@@ -33,3 +33,5 @@ export * from "./DebitCards/index";
 export * from "./OtherBanks/index";
 export * from "./Profile/ChangePassword";
 export * from "./Profile/ChangePin";
+export * from "./relationship/index";
+export * from "./issues/index";

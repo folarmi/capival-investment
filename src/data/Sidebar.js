@@ -36,21 +36,21 @@ export const SidebarMenuItems = [
       {
         id: "1",
         item: "Relationship Officer",
-        path: "/customers/oystr-smart-costumers",
+        path: "dashboard/wallet/relationship-officer",
         icon: relationship,
       },
       {
         id: "2",
         item: "Report an Issue",
-        path: "/customers/oystr-smart-costumers",
+        path: "dashboard/wallet/report-an-issue",
         icon: issue,
       },
-      {
-        id: "3",
-        item: "Send Feedback",
-        path: "/customers/oystr-smart-costumers",
-        icon: feedback,
-      },
+      // {
+      //   id: "3",
+      //   item: "Send Feedback",
+      //   path: "/customers/oystr-smart-costumers",
+      //   icon: feedback,
+      // },
       {
         id: "4",
         item: "FAQ",

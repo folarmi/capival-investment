@@ -28,6 +28,8 @@ import {
   ChangePassword,
   ChangePin,
   TransferReceipt,
+  RelationshipOfficer,
+  Issue,
 } from "../pages";
 import { BetTransactionDetail } from "../pages/BetsAndLorries/BetTransactionDetail";
 import CapivalTransfer from "../pages/CapivalTransfers";
@@ -126,6 +128,11 @@ const Index = () => {
           element={<ChangePassword />}
         />
         <Route path="dashboard/profile/change-pin" element={<ChangePin />} />
+        <Route
+          path="dashboard/wallet/relationship-officer"
+          element={<RelationshipOfficer />}
+        />
+        <Route path="dashboard/wallet/report-an-issue" element={<Issue />} />
       </Route>
     </Routes>
   );

@@ -1,29 +1,39 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { CircularIcon } from "../../atoms";
 import ModalPopup from "../../components/ModalPopup";
+import { checkTransactionPinStatusAsync } from "../../slices/transactionHistory";
 import { SetTransactionPin } from "./SetTransactionPin";
 
 const Dashboard = () => {
-  const isTransactionPinSet = useSelector(
-    (state) => state.auth.login?.user?.authorisation?.trans_pin
-  );
-
+  const dispatch = useDispatch();
   // const test = useSelector((state) => state.auth.login?.user?.authorisation);
 
   const [showTransactionPinModal, setShowTransactionPinModal] = useState(false);
+  const [transactionPinStatus, setTransactionPinStatus] = useState("");
 
   const toggleTransactionPinModal = () => {
     setShowTransactionPinModal(!showTransactionPinModal);
   };
 
+  const getTransactionPinStatus = async () => {
+    const data = await dispatch(checkTransactionPinStatusAsync());
+    setTransactionPinStatus(data?.payload?.status);
+  };
+
+  console.log(transactionPinStatus);
+
   useEffect(() => {
-    if (isTransactionPinSet === false) {
+    getTransactionPinStatus();
+  }, []);
+
+  useEffect(() => {
+    if (transactionPinStatus === false) {
       setShowTransactionPinModal(true);
     } else {
       setShowTransactionPinModal(false);
     }
-  }, [showTransactionPinModal]);
+  }, [showTransactionPinModal, transactionPinStatus]);
 
   return (
     <>

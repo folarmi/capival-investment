@@ -270,9 +270,9 @@ const registerSlice = createSlice({
     [setTransactionPinAsync.pending]: (state) => {
       state.isTransactionPinLoading = true;
     },
-    [setTransactionPinAsync.fulfilled]: (state, action) => {
+    [setTransactionPinAsync.fulfilled]: (state) => {
       state.isTransactionPinLoading = false;
-      state.login.user = action.data;
+      // state.login.user = action.data;
     },
     [setTransactionPinAsync.rejected]: (state, action) => {
       state.isTransactionPinLoading = false;

@@ -210,7 +210,7 @@ const PersonalDetails = () => {
         </div>
 
         <div className="flex justify-between my-16">
-          <div className="w-1/2 mr-6">
+          {/* <div className="w-1/2 mr-6">
             <Button
               size="md"
               buttonText="Back"
@@ -218,7 +218,7 @@ const PersonalDetails = () => {
               type="secondary"
               onClick={handleBackButton}
             />
-          </div>
+          </div> */}
 
           <div className="w-1/2">
             <Button

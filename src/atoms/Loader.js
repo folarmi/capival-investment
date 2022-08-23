@@ -2,21 +2,16 @@ import React from "react";
 
 const Loader = () => {
   return (
-    <div className="fixed flex justify-center w-full">
-      <div className="pt-[60px] md:pt-[120px] md:pr-64">
-        <div className="flex justify-center"></div>
-        <div className=" w-full flex justify-center items-center h-52">
-          <div className="lds-roller">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
-        </div>
+    <div className="w-full flex items-center justify-center mt-[15%]">
+      <div>
+        <img
+          src="/assets/icons/loading.svg"
+          alt="spinner"
+          className="flex justify-center items-center ml-[20%]"
+        />
+        <p className="font-normal text-base flex items-center justify-center">
+          Loading, Please Wait.
+        </p>
       </div>
     </div>
   );

@@ -4,12 +4,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { getTransactionHistoryAsync } from "../../slices/transactionHistory";
 import { Table, TableHeader } from "../../components";
 import { FormattedCurrency } from "../../atoms/FormattedCurrency";
+import { Loader } from "../../atoms";
 
 const TransactionHistory = () => {
   const dispatch = useDispatch();
-  const { transactionHistory } = useSelector(
+  const { transactionHistory, getTransactionHistoryLoading } = useSelector(
     (state) => state.transactionHistory
   );
+
+  console.log(transactionHistory);
 
   useEffect(() => {
     dispatch(getTransactionHistoryAsync());
@@ -108,16 +111,20 @@ const TransactionHistory = () => {
 
   return (
     <div>
-      <section className="mt-8 mx-4 md:mx-7">
-        <TableHeader
-          header="Recent Transactions"
-          pageNumber={`Showing 1-${transactionHistory.length} of ${transactionHistory.length} transactions`}
-        />
+      {getTransactionHistoryLoading ? (
+        <Loader />
+      ) : (
+        <section className="mt-8 mx-4 md:mx-7">
+          <TableHeader
+            header="Recent Transactions"
+            pageNumber={`Showing 1-${transactionHistory.length} of ${transactionHistory.length} transactions`}
+          />
 
-        <div className="mt-2">
-          <Table data={data} columns={columns} />
-        </div>
-      </section>
+          <div className="mt-2">
+            <Table data={data} columns={columns} />
+          </div>
+        </section>
+      )}
     </div>
   );
 };

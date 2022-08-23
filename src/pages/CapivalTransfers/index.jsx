@@ -25,6 +25,11 @@ const CapivalTransfer = () => {
     amount: Yup.string()
       .required()
       .matches(/^[0-9]+$/, "Must be only digits"),
+    pin: Yup.string()
+      .required("Transaction Pin is required")
+      .matches(/^[0-9]+$/, "Must be only digits")
+      .min(4, "Must be exactly 4 digits")
+      .max(4, "Must be exactly 4 digits"),
   });
 
   const { register, handleSubmit, formState, reset } = useForm({
@@ -125,12 +130,12 @@ const CapivalTransfer = () => {
 export default CapivalTransfer;
 
 // {
-//   "trans_date": "2022-08-23T05:03:20.000000Z",
-//   "trans_type": "Internal Transfer",
-//   "ref_number": "23082278794374",
-//   "sender": "HARRY   CHARLES",
-//   "beneficiary": "FAWOLE  LOLA  OLUWAMUYIWA",
-//   "bank": "Capival",
-//   "amount": "20.00 NGN",
-//   "narration": "testing"
+//   {
+//     "destination_account_no" : "1010000265",
+//      "destination_bank" : "000013",
+//      "destination_account_name" : "Osagie Tomori",
+//      "amount":"3000",
+//      "narration": "Api Test Transfer",
+//      "pin": "1234"
+//  }
 // }

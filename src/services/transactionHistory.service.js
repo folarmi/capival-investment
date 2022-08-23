@@ -11,9 +11,21 @@ const capivalTransfer = async (values) => {
   return response.data;
 };
 
+const otherBanksTransfer = async (values) => {
+  const response = await api.post(UrlRoute.otherBanksTransfer, values);
+  return response.data;
+};
+
+const getTransactionPinStatus = async () => {
+  const response = await api.get(UrlRoute.checkTransactionPinStatus);
+  return response.data;
+};
+
 const transactionHistoryService = {
   getRecentTransactionHistory,
   capivalTransfer,
+  otherBanksTransfer,
+  getTransactionPinStatus,
 };
 
 export default transactionHistoryService;

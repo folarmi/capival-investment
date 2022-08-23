@@ -155,6 +155,36 @@ export const getWalletBalanceAsync = createAsyncThunk(
   }
 );
 
+export const getRelationshipOfficerAsync = createAsyncThunk(
+  "utils/getWalletBalance",
+  async (values, { rejectWithValue }) => {
+    try {
+      const response = await utilsService.getRelationshipOfficer(values);
+      return response;
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const getHelpTopics = createAsyncThunk(
+  "utils/getHelpTopics",
+  async (values, { rejectWithValue }) => {
+    try {
+      const response = await utilsService.getHelpTopics(values);
+      return response;
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 const initialState = {
   getGenderLoading: false,
   getLoanTypesLoading: false,
@@ -166,6 +196,8 @@ const initialState = {
   getLoanTenureLoading: false,
   getAllBanksLoading: false,
   getWalletBalanceLoading: false,
+  getRelationShipOfficerLoading: false,
+  gethelpTopicsLoading: false,
   gender: [],
   maritalStatus: [],
   states: [],
@@ -175,6 +207,8 @@ const initialState = {
   repaymentChannels: [],
   bankStatementType: [],
   allBanks: [],
+  helpTopics: [],
+  officerDetails: "",
 };
 
 const utilsSlice = createSlice({
@@ -288,6 +322,28 @@ const utilsSlice = createSlice({
     },
     [getWalletBalanceAsync.rejected]: (state, action) => {
       state.getWalletBalanceLoading = false;
+      state.error = action.payload;
+    },
+    [getRelationshipOfficerAsync.pending]: (state) => {
+      state.getRelationShipOfficerLoading = true;
+    },
+    [getRelationshipOfficerAsync.fulfilled]: (state, action) => {
+      state.getRelationShipOfficerLoading = false;
+      state.officerDetails = action.payload.data;
+    },
+    [getRelationshipOfficerAsync.rejected]: (state, action) => {
+      state.getRelationShipOfficerLoading = false;
+      state.error = action.payload;
+    },
+    [getHelpTopics.pending]: (state) => {
+      state.gethelpTopicsLoading = true;
+    },
+    [getHelpTopics.fulfilled]: (state, action) => {
+      state.gethelpTopicsLoading = false;
+      state.helpTopics = action.payload.data;
+    },
+    [getHelpTopics.rejected]: (state, action) => {
+      state.gethelpTopicsLoading = false;
       state.error = action.payload;
     },
   },

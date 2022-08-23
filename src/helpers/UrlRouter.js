@@ -3,6 +3,8 @@ const setTransactionPin = "accounts/set-transaction-pin";
 const resetTransactionPin = "accounts/reset-transaction-pin";
 const bvnOtpValidation = "accounts/bvn-verification/validate";
 const getWalletBalance = "accounts/wallet-balance";
+const checkTransactionPinStatus = "accounts/check-pin-status";
+const getRelationshipOfficer = "accounts/relationship-officer";
 const getGender = "utils/gender";
 const getMaritalStatus = "utils/marital-status";
 const getStates = "utils/states";
@@ -22,10 +24,12 @@ const getTransactionHistory = "transactions/recent-transactions";
 const getDebitCards = "payments/get_cards";
 const getAirtimeBillers = "bills-payment/get-airtime-billers";
 const capivalTransfer = "transactions/intra/transfer-fund";
+const otherBanksTransfer = "transactions/inter/transfer-fund";
 const activeLoans = "loans/active-loans";
 const getPendingLoans = "loans/pending-loans";
 const getLoanDetails = "loans/loan-details";
 const createLoan = "loans/create";
+const helpTopics = "support/help-topics";
 
 const UrlRoute = {
   verifyBVN,
@@ -56,6 +60,10 @@ const UrlRoute = {
   resetTransactionPin,
   createLoan,
   getWalletBalance,
+  otherBanksTransfer,
+  checkTransactionPinStatus,
+  getRelationshipOfficer,
+  helpTopics,
 };
 
 export default UrlRoute;

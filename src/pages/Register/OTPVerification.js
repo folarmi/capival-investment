@@ -87,7 +87,7 @@ const OTPVerification = () => {
         </p>
 
         <div className="flex justify-between mt-20">
-          <div className="w-1/2 mr-6">
+          {/* <div className="w-1/2 mr-6">
             <Button
               size="md"
               buttonText="Back"
@@ -95,7 +95,7 @@ const OTPVerification = () => {
               type="secondary"
               onClick={handleBackButton}
             />
-          </div>
+          </div> */}
 
           <div className="w-1/2">
             <Button
