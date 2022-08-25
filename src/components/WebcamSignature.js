@@ -94,7 +94,7 @@ export const WebcamSignature = () => {
               videoConstraints={videoConstraints}
             />
           ) : (
-            <img src={image} />
+            <img src={image} loading="lazy" />
           )}
         </div>
 

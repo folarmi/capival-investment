@@ -15,15 +15,36 @@ const BetsAndLotteries = () => {
       <WalletDetailsHeader ifTransaction={false} />
 
       <div className="grid grid-cols-5 m-auto w-[50%] -gap-10 mt-8">
-        <img src="/assets/icons/sporty.svg" alt="sporty" className="w-20" />
-        <img src="/assets/icons/bet.svg" alt="bet" className="w-20" />
+        <img
+          src="/assets/icons/sporty.svg"
+          alt="sporty"
+          className="w-20"
+          loading="lazy"
+        />
+        <img
+          src="/assets/icons/bet.svg"
+          alt="bet"
+          className="w-20"
+          loading="lazy"
+        />
         <img
           src="/assets/icons/babaIjebu.svg"
           alt="babaIjebu"
           className="w-20"
+          loading="lazy"
         />
-        <img src="/assets/icons/nairabet.svg" alt="nairabet" className="w-20" />
-        <img src="/assets/icons/lotto.svg" alt="lotto" className="w-20" />
+        <img
+          src="/assets/icons/nairabet.svg"
+          alt="nairabet"
+          className="w-20"
+          loading="lazy"
+        />
+        <img
+          src="/assets/icons/lotto.svg"
+          alt="lotto"
+          className="w-20"
+          loading="lazy"
+        />
       </div>
 
       <form className="grid grid-cols-2 gap-10 mt-12 m-auto w-[70%]">

@@ -27,6 +27,7 @@ const RegisterInput = ({
             fill="currentColor"
             src={icon}
             alt={name}
+            loading="lazy"
           />
         )}
         <input

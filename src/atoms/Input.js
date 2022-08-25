@@ -29,6 +29,7 @@ const Input = ({
             fill="currentColor"
             src={icon}
             alt={name}
+            loading="lazy"
           />
         )}
         <input

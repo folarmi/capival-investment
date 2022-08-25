@@ -23,6 +23,7 @@ const DebitCard = () => {
           src="/assets/images/atmCard.svg"
           alt="atmCard"
           className="w-full md:w-1/3"
+          loading="lazy"
         />
         <p className="text-base font-normal text-blueTwo py-6 text-center md:text-left">
           Add your debit and credit cards to perform multiple transactions{" "}
@@ -44,16 +45,19 @@ const DebitCard = () => {
           src="/assets/icons/realAtmCard.svg"
           alt="realAtmCard"
           className="w-1/4"
+          loading="lazy"
         />
         <img
           src="/assets/icons/realAtmCard.svg"
           alt="realAtmCard"
           className="w-1/4"
+          loading="lazy"
         />
         <img
           src="/assets/icons/realAtmCard.svg"
           alt="realAtmCard"
           className="w-1/4"
+          loading="lazy"
         />
       </div>
     </>

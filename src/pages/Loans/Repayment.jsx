@@ -91,6 +91,7 @@ const Repayment = () => {
               src="/assets/images/loanDetails.svg"
               alt="loan detail"
               className="w-40 h-40"
+              loading="lazy"
             />
           </div>
           <div className="cursor-pointer" onClick={gotToSettleLoanPage}>
@@ -98,6 +99,7 @@ const Repayment = () => {
               src="/assets/images/settleLoan.svg"
               alt="settle loan"
               className="w-40 h-40"
+              loading="lazy"
             />
           </div>
         </div>

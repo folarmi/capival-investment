@@ -32,11 +32,15 @@ const WalletCard = ({
           />
         </p>
         {ifAccountNumber && (
-          <div className="flex justify-end items-center cursor-pointer">
+          <div className="mt-2 flex justify-center items-center cursor-pointer">
             <p className="font-normal text-sm text-white pr-2">
               Acc No: <span className="font-medium">{accountNumber}</span>
             </p>
-            <img src="/assets/icons/copyIcon.svg" alt="copyIcon" />
+            <img
+              src="/assets/icons/copyIcon.svg"
+              alt="copyIcon"
+              loading="lazy"
+            />
           </div>
         )}
       </div>

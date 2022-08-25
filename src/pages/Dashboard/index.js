@@ -74,7 +74,7 @@ const Dashboard = () => {
         {/* <CircularIcon icon="/assets/icons/add.svg" path="loans" /> */}
       </section>
 
-      <img src="/assets/icons/loanThree.svg" alt="" />
+      <img src="/assets/icons/loanThree.svg" alt="" loading="lazy" />
       <ModalPopup
         modalHeight="300px"
         modalWidth="400px"

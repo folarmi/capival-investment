@@ -25,6 +25,7 @@ const getDebitCards = "payments/get_cards";
 const getAirtimeBillers = "bills-payment/get-airtime-billers";
 const capivalTransfer = "transactions/intra/transfer-fund";
 const otherBanksTransfer = "transactions/inter/transfer-fund";
+const validateAccount = "transactions/intra/validate-account";
 const activeLoans = "loans/active-loans";
 const getPendingLoans = "loans/pending-loans";
 const getLoanDetails = "loans/loan-details";
@@ -64,6 +65,7 @@ const UrlRoute = {
   checkTransactionPinStatus,
   getRelationshipOfficer,
   helpTopics,
+  validateAccount,
 };
 
 export default UrlRoute;

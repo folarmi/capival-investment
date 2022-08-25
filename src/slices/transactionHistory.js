@@ -67,9 +67,25 @@ export const checkTransactionPinStatusAsync = createAsyncThunk(
   }
 );
 
+export const validateAccountAsync = createAsyncThunk(
+  "transactionHistory/validateAccount",
+  async (values, { rejectWithValue }) => {
+    try {
+      const response = await TransactionHistoryService.validateAccount(values);
+      return response;
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 const initialState = {
   isLoading: false,
   getTransactionHistoryLoading: false,
+  validateAccountLoading: false,
   transactionHistory: "",
   capivalTransferLoading: false,
   otherBankTransferLoading: false,
@@ -116,6 +132,15 @@ export const transactionHistorySlice = createSlice({
     },
     [checkTransactionPinStatusAsync.rejected]: (state) => {
       state.isLoading = false;
+    },
+    [validateAccountAsync.pending]: (state) => {
+      state.validateAccountLoading = true;
+    },
+    [validateAccountAsync.fulfilled]: (state) => {
+      state.validateAccountLoading = false;
+    },
+    [validateAccountAsync.rejected]: (state) => {
+      state.validateAccountLoading = false;
     },
   },
 });

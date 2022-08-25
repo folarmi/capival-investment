@@ -31,7 +31,7 @@ export const SidebarMenuItems = [
     menuItem: "Support",
     Image: support,
     path: "/wallet",
-    useStroke: true,
+    useStroke: false,
     subMenu: [
       {
         id: "1",
@@ -64,7 +64,7 @@ export const SidebarMenuItems = [
     menuItem: "Profile",
     Image: profile,
     path: "/wallet",
-    useStroke: true,
+    useStroke: false,
     subMenu: [
       {
         id: "1",
@@ -78,12 +78,12 @@ export const SidebarMenuItems = [
         path: "dashboard/profile/change-pin",
         icon: pin,
       },
-      // {
-      //   id: "3",
-      //   item: "Update Security Question",
-      //   path: "/customers/oystr-smart-costumers",
-      //   icon: security,
-      // },
+      {
+        id: "3",
+        item: "Update KYC",
+        path: "/customers/oystr-smart-costumers",
+        icon: security,
+      },
     ],
   },
 ];

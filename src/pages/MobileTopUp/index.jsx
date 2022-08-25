@@ -72,6 +72,7 @@ const MobileTopUp = () => {
                   src="/assets/images/airtel.svg"
                   alt={item?.label}
                   className="w-20"
+                  loading="lazy"
                 />
                 <p className="text-sm pl-4 text-primary">{item?.label}</p>
               </div>

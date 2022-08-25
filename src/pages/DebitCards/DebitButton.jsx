@@ -9,7 +9,7 @@ const DebitButton = ({ icon, text, ifPrimary = true }) => {
         dropShadow: "0 4 4 rgba(0,0,0,0.25)",
       }}
     >
-      <img src={icon} alt="icon" className="mr-1" />
+      <img src={icon} alt="icon" className="mr-1" loading="lazy" />
       <p className="text-sm font-medium text-blueTwo">{text}</p>
     </div>
   );

@@ -8,6 +8,7 @@ const Header = () => {
         src={process.env.PUBLIC_URL + "assets/icons/logo.svg"}
         alt="capival-logo"
         className="w-36"
+        loading="lazy"
       />
       {/* w-40 h-40 md:w-full md:h-full */}
       {/* <Button buttonText="Open an Account" /> */}

@@ -31,6 +31,7 @@ const DashboardHeader = () => {
             src="/assets/icons/logo.svg"
             alt="capival-logo"
             className="hidden md:block"
+            loading="lazy"
           />
         </div>
 
@@ -40,6 +41,7 @@ const DashboardHeader = () => {
               src={userAvatar}
               alt="avatar"
               className="w-12 h-12 rounded-full"
+              loading="lazy"
             />
           ) : (
             <div class="inline-flex overflow-hidden relative justify-center items-center w-12 h-12 bg-gray-100 rounded-full dark:bg-gray-600">
@@ -61,7 +63,7 @@ const DashboardHeader = () => {
           onClick={toggleBVNModal}
         >
           <p className="text-[15px] text-blueTwo font-normal w-fit">Show BVN</p>
-          <img src="/assets/icons/rightArrow.svg" alt="avatar" />
+          <img src="/assets/icons/rightArrow.svg" alt="avatar" loading="lazy" />
         </div>
 
         <div className="flex items-center  justify-self-end">
@@ -76,6 +78,7 @@ const DashboardHeader = () => {
                 src="/assets/icons/instagram.svg"
                 alt="avatar"
                 className="mr-4"
+                loading="lazy"
               />
             </a>
             <a href="https://twitter.com/capivalinvest" target="_blank">
@@ -83,10 +86,15 @@ const DashboardHeader = () => {
                 src="/assets/icons/twitter.svg"
                 alt="avatar"
                 className="mr-4"
+                loading="lazy"
               />
             </a>
             <a href="https://facebook.com/CapivalInvestment/" target="_blank">
-              <img src="/assets/icons/facebook.svg" alt="avatar" />
+              <img
+                src="/assets/icons/facebook.svg"
+                alt="avatar"
+                loading="lazy"
+              />
             </a>
           </div>
         </div>

@@ -21,11 +21,17 @@ const getTransactionPinStatus = async () => {
   return response.data;
 };
 
+const validateAccount = async (acctNo) => {
+  const response = await api.get(`${UrlRoute.validateAccount}/${acctNo}`);
+  return response.data;
+};
+
 const transactionHistoryService = {
   getRecentTransactionHistory,
   capivalTransfer,
   otherBanksTransfer,
   getTransactionPinStatus,
+  validateAccount,
 };
 
 export default transactionHistoryService;

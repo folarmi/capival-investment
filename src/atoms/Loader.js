@@ -5,6 +5,7 @@ const Loader = () => {
     <div className="w-full flex items-center justify-center mt-[15%]">
       <div>
         <img
+          loading="lazy"
           src="/assets/icons/loading.svg"
           alt="spinner"
           className="flex justify-center items-center ml-[20%]"

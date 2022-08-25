@@ -53,6 +53,7 @@ const SubMenu = ({ item }) => {
                   src="/assets/icons/whiteArrowDown.svg"
                   alt="arrowDown"
                   className="pr-9 cursor-pointer"
+                  loading="lazy"
                 />
               ) : (
                 <img
@@ -60,6 +61,7 @@ const SubMenu = ({ item }) => {
                   alt="arrowDown"
                   className="pr-9 cursor-pointer"
                   onClick={toggleDropDown}
+                  loading="lazy"
                 />
               )}
             </div>
@@ -96,7 +98,12 @@ const SubMenu = ({ item }) => {
                   className="cursor-pointer px-8 lg:px-4 xl:px-6 2xl:px-12"
                 >
                   <div className="flex items-center">
-                    <img src={item?.icon} className="mr-2" alt="" />
+                    <img
+                      src={item?.icon}
+                      className="mr-2"
+                      alt=""
+                      loading="lazy"
+                    />
                     <p
                       onClick={() => changeActive(item)}
                       className={`font-normal text-xs ${

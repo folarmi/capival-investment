@@ -12,8 +12,6 @@ const TransactionHistory = () => {
     (state) => state.transactionHistory
   );
 
-  console.log(transactionHistory);
-
   useEffect(() => {
     dispatch(getTransactionHistoryAsync());
   }, []);
@@ -26,9 +24,17 @@ const TransactionHistory = () => {
           transactionType: (
             <div className="flex items-center">
               {item?.credit === "0.00" ? (
-                <img src="/assets/icons/redArrow.svg" alt="redArrow" />
+                <img
+                  src="/assets/icons/redArrow.svg"
+                  alt="redArrow"
+                  loading="lazy"
+                />
               ) : (
-                <img src="/assets/icons/greenArrow.svg" alt="greenArrow" />
+                <img
+                  src="/assets/icons/greenArrow.svg"
+                  alt="greenArrow"
+                  loading="lazy"
+                />
               )}
               {item?.credit === "0.00" ? (
                 <p className="text-sm text-redTwo pl-2 font-normal">Debit</p>
@@ -55,9 +61,9 @@ const TransactionHistory = () => {
                 new Date(item?.dat_value)?.toISOString().substring(0, 10)}
             </p>
           ),
-          balance: (
+          amount: (
             <p className="text-sm text-blueTwo font-medium">
-              <FormattedCurrency value={item?.balance} />
+              <FormattedCurrency value={item?.credit} />
             </p>
           ),
           narration: (
@@ -67,7 +73,7 @@ const TransactionHistory = () => {
                 : item?.txt_txn_desc}
             </p>
           ),
-          view: <p className="text-sm text-blueTwo font-normal">view</p>,
+          // view: <p className="text-sm text-blueTwo font-normal">view</p>,
         };
       });
     return [...(result || [])];
@@ -96,8 +102,8 @@ const TransactionHistory = () => {
         accessor: "narration",
       },
       {
-        Header: "Balance",
-        accessor: "balance",
+        Header: "Amount",
+        accessor: "amount",
       },
       {
         Header: "",

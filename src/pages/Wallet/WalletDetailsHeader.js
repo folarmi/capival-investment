@@ -42,6 +42,7 @@ const WalletDetailsHeader = ({ ifSearchBar, ifTransaction = true }) => {
               src="/assets/icons/refresh.svg"
               alt="refresh"
               className="mr-1"
+              loading="lazy"
             />
             <p className="text-sm md:text-base font-normal md:font-medium text-blueTwo">
               Transaction History
@@ -53,6 +54,7 @@ const WalletDetailsHeader = ({ ifSearchBar, ifTransaction = true }) => {
               src="/assets/icons/downloadIcon.svg"
               alt="refresh"
               className="mr-1"
+              loading="lazy"
             />
             <p className="text-sm md:text-base font-normal md:font-medium text-blueTwo">
               Download Statement

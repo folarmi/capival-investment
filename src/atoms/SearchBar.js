@@ -17,6 +17,7 @@ const SearchBar = ({ placeholder }) => {
         src="/assets/icons/search.svg"
         alt="search"
         className="absolute ml-[9%] top-2"
+        loading="lazy"
       />
     </div>
   );

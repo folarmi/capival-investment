@@ -1,20 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import * as Yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { toast } from "react-toastify";
 import { Button, SavingsInput, UserAvatar } from "../../atoms";
 import WalletDetailsHeader from "../Wallet/WalletDetailsHeader";
+
+import ModalPopup from "../../components/ModalPopup";
+import { PinModal } from "./PinModal";
 import { useDispatch, useSelector } from "react-redux";
-import { capivalTransferAsync } from "../../slices/transactionHistory";
-import { useNavigate } from "react-router-dom";
+import { validateAccountAsync } from "../../slices/transactionHistory";
 
 const CapivalTransfer = () => {
   const dispatch = useDispatch();
-  const nagivate = useNavigate();
-  const { capivalTransferLoading } = useSelector(
+  const { validateAccountLoading } = useSelector(
     (state) => state.transactionHistory
   );
+
+  const [showTransactionPinModal, setShowTransactionPinModal] = useState(false);
+  const [formValues, setFormValues] = useState("");
+
+  const toggleTransactionPinModal = () => {
+    setShowTransactionPinModal(!showTransactionPinModal);
+  };
 
   const validationSchema = Yup.object().shape({
     destination_account: Yup.string()
@@ -25,11 +32,6 @@ const CapivalTransfer = () => {
     amount: Yup.string()
       .required()
       .matches(/^[0-9]+$/, "Must be only digits"),
-    pin: Yup.string()
-      .required("Transaction Pin is required")
-      .matches(/^[0-9]+$/, "Must be only digits")
-      .min(4, "Must be exactly 4 digits")
-      .max(4, "Must be exactly 4 digits"),
   });
 
   const { register, handleSubmit, formState, reset } = useForm({
@@ -38,24 +40,9 @@ const CapivalTransfer = () => {
   const { errors } = formState;
 
   const submitForm = (values) => {
-    dispatch(capivalTransferAsync(values))
-      .unwrap()
-      .then((res) => {
-        if (res?.status === true) {
-          toast(res.message);
-          reset();
-          nagivate("/dashboard/capival-transfers/receipt", {
-            state: {
-              transferDetails: res?.data,
-            },
-          });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        reset();
-        toast.error(err?.message);
-      });
+    dispatch(validateAccountAsync(values?.destination_account));
+    // toggleTransactionPinModal();
+    setFormValues(values);
   };
 
   return (
@@ -105,23 +92,23 @@ const CapivalTransfer = () => {
               error={errors?.narration?.message}
             />
           </div>
-          <div>
-            <SavingsInput
-              placeholder="PIN"
-              register={register("pin")}
-              error={errors?.pin?.message}
-            />
-          </div>
 
           <div className="w-[100%] md:w-[30%] mt-6 md:mb-0 justify-self-center col-span-2">
-            <Button
-              buttonText="Continue"
-              className="rounded-xl"
-              size="lg"
-              isLoading={capivalTransferLoading}
-            />
+            <Button buttonText="Continue" className="rounded-xl" size="lg" />
           </div>
         </form>
+
+        <ModalPopup
+          modalHeight="250px"
+          modalWidth="300px"
+          children={
+            <PinModal
+              toggleTransactionPinModal={toggleTransactionPinModal}
+              formValues={formValues}
+            />
+          }
+          isOpen={showTransactionPinModal}
+        />
       </main>
     </div>
   );

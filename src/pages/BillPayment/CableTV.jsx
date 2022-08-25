@@ -12,6 +12,7 @@ const CableTV = () => {
             src="/assets/images/dstv.svg"
             alt="repayment icon"
             className="w-3/4"
+            loading="lazy"
             //   onClick={gotToRepaymentPage}
           />
         </div>
@@ -21,6 +22,7 @@ const CableTV = () => {
             src="/assets/images/gotv.svg"
             alt="loan detail"
             className="w-3/4"
+            loading="lazy"
             //   onClick={gotToLoanDetailsPage}
           />
         </div>
@@ -30,6 +32,7 @@ const CableTV = () => {
             src="/assets/images/startimes.svg"
             alt="settle loan"
             className="w-3/4"
+            loading="lazy"
             //   onClick={gotToSettleLoanPage}
           />
         </div>

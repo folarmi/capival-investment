@@ -42,7 +42,7 @@ const Sidebar = (props) => {
           key="logout"
           onClick={logoutUser}
         >
-          <img src={logout} alt="logout" className="mr-4" />
+          <img src={logout} alt="logout" className="mr-4" loading="lazy" />
           <p className="font-normal text-sm text-white">Logout</p>
         </div>
       </div>

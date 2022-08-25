@@ -32,15 +32,15 @@ const Wallet = () => {
 
   return (
     <>
-      <div className="flex justify-between items-center mt-12 mx-4">
-        <WalletCard
+      <div className="flex justify-center items-center mt-12 mx-4">
+        {/* <WalletCard
           title="Wallet"
           ifAccountName
           cardName="Account Name"
           amount="50,000.25"
           onClick={goToInvestments}
           bgImage={investmentBg}
-        />
+        /> */}
 
         <WalletCard
           title="Wallet"
@@ -53,7 +53,7 @@ const Wallet = () => {
           accountNumber={accountNumber}
         />
 
-        <WalletCard
+        {/* <WalletCard
           title="Wallet"
           ifAccountName
           cardName="Account Name"
@@ -62,7 +62,7 @@ const Wallet = () => {
           bgImage={walletBg}
           ifAccountNumber
           accountNumber="0046378932"
-        />
+        /> */}
       </div>
 
       <section className="">

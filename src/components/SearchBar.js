@@ -20,6 +20,7 @@ const SearchBar = ({ placeholder }) => {
         src="/assets/icons/search.svg"
         alt="search"
         className="absolute mx-[3%] top-4"
+        loading="lazy"
       />
     </div>
   );
