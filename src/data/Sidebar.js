@@ -54,7 +54,7 @@ export const SidebarMenuItems = [
       {
         id: "4",
         item: "FAQ",
-        path: "/customers/oystr-smart-costumers",
+        path: "dashboard/update-kyc",
         icon: faq,
       },
     ],
@@ -81,7 +81,7 @@ export const SidebarMenuItems = [
       {
         id: "3",
         item: "Update KYC",
-        path: "/customers/oystr-smart-costumers",
+        path: "dashboard/update-kyc",
         icon: security,
       },
     ],

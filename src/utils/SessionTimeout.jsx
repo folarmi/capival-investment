@@ -3,6 +3,7 @@ import IdleTimer from "react-idle-timer";
 
 import { useDispatch } from "react-redux";
 import { logoutAsync } from "../slices/auth";
+// import { logoutAsync } from "../slices/auth";
 
 // import SessionTimeoutDialog from "./SessionTimeoutDialog";
 

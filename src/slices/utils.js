@@ -185,6 +185,21 @@ export const getHelpTopics = createAsyncThunk(
   }
 );
 
+export const getAllEmployers = createAsyncThunk(
+  "utils/getEmployers",
+  async (values, { rejectWithValue }) => {
+    try {
+      const response = await utilsService.getAllCompanies(values);
+      return response;
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 const initialState = {
   getGenderLoading: false,
   getLoanTypesLoading: false,
@@ -198,6 +213,7 @@ const initialState = {
   getWalletBalanceLoading: false,
   getRelationShipOfficerLoading: false,
   gethelpTopicsLoading: false,
+  getAllEmployersLoading: false,
   gender: [],
   maritalStatus: [],
   states: [],
@@ -208,6 +224,7 @@ const initialState = {
   bankStatementType: [],
   allBanks: [],
   helpTopics: [],
+  employers: [],
   officerDetails: "",
 };
 
@@ -344,6 +361,17 @@ const utilsSlice = createSlice({
     },
     [getHelpTopics.rejected]: (state, action) => {
       state.gethelpTopicsLoading = false;
+      state.error = action.payload;
+    },
+    [getAllEmployers.pending]: (state) => {
+      state.getAllEmployersLoading = true;
+    },
+    [getAllEmployers.fulfilled]: (state, action) => {
+      state.getAllEmployersLoading = false;
+      state.employers = action.payload.data;
+    },
+    [getAllEmployers.rejected]: (state, action) => {
+      state.getAllEmployersLoading = false;
       state.error = action.payload;
     },
   },

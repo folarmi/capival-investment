@@ -101,8 +101,8 @@ const DashboardHeader = () => {
       </header>
 
       <ModalPopup
-        modalHeight="300px"
-        modalWidth="400px"
+        modalHeight="150px"
+        modalWidth="200px"
         children={<BvnModal toggleBVNModal={toggleBVNModal} />}
         isOpen={showBVN}
       />

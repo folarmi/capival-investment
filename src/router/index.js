@@ -30,9 +30,12 @@ import {
   TransferReceipt,
   RelationshipOfficer,
   Issue,
+  GenerateStatement,
+  UpdateKYC,
 } from "../pages";
 import { BetTransactionDetail } from "../pages/BetsAndLorries/BetTransactionDetail";
 import CapivalTransfer from "../pages/CapivalTransfers";
+import { SelectedTransactionHistory } from "../pages/TransactionHistory/SelectedTransactionHistory";
 import { FixedDeposits } from "../pages/Wallet/investments/fixedDeposit";
 import { Confirmation } from "../pages/Wallet/investments/fixedDeposit/Confirmation";
 import { Investments } from "../pages/Wallet/investments/Investments";
@@ -111,7 +114,7 @@ const Index = () => {
         <Route path="dashboard/capival-pension" element={<CapivalPension />} />
         <Route
           path="dashboard/transaction-history"
-          element={<TransactionHistory />}
+          element={<SelectedTransactionHistory />}
         />
         <Route
           path="dashboard/bets-and-lotteries"
@@ -133,6 +136,11 @@ const Index = () => {
           element={<RelationshipOfficer />}
         />
         <Route path="dashboard/wallet/report-an-issue" element={<Issue />} />
+        <Route
+          path="dashboard/generate-statement"
+          element={<GenerateStatement />}
+        />
+        <Route path="dashboard/update-kyc" element={<UpdateKYC />} />
       </Route>
     </Routes>
   );

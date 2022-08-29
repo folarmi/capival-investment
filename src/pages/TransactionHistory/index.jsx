@@ -63,7 +63,9 @@ const TransactionHistory = () => {
           ),
           amount: (
             <p className="text-sm text-blueTwo font-medium">
-              <FormattedCurrency value={item?.credit} />
+              <FormattedCurrency
+                value={item?.credit === "0.00" ? item?.debit : item?.credit}
+              />
             </p>
           ),
           narration: (

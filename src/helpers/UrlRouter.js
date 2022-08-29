@@ -5,6 +5,9 @@ const bvnOtpValidation = "accounts/bvn-verification/validate";
 const getWalletBalance = "accounts/wallet-balance";
 const checkTransactionPinStatus = "accounts/check-pin-status";
 const getRelationshipOfficer = "accounts/relationship-officer";
+const generateAccountStatement = "accounts/generate-statement";
+const uploadKYCDocuments = "accounts/kyc_documents";
+const employerInfo = "accounts/employer-details";
 const getGender = "utils/gender";
 const getMaritalStatus = "utils/marital-status";
 const getStates = "utils/states";
@@ -14,13 +17,15 @@ const tenure = "utils/tenor";
 const repaymentChannels = "utils/repayment-channels";
 const bankStatementType = "utils/bank-statement-type";
 const getAllBanks = "utils/bank-lists";
+const getAllEmployers = "utils/all-companies";
 const registerUser = "auth/register";
 const login = "auth/login";
 const forgotPassword = "auth/forgot-password";
 const forgotPasswordOTP = "auth/forgot-password/validate-otp";
-const changePassword = "auth/change-password";
+const changePassword = "accounts/change-password";
 const getBillPaymentCategories = "bills-payment/get-categories";
 const getTransactionHistory = "transactions/recent-transactions";
+const datedTransactionHistory = "transactions/transaction-history";
 const getDebitCards = "payments/get_cards";
 const getAirtimeBillers = "bills-payment/get-airtime-billers";
 const capivalTransfer = "transactions/intra/transfer-fund";
@@ -31,6 +36,8 @@ const getPendingLoans = "loans/pending-loans";
 const getLoanDetails = "loans/loan-details";
 const createLoan = "loans/create";
 const helpTopics = "support/help-topics";
+const createNextOfKin = "accounts/next-of-kin";
+const reportIssue = "support/report-issue";
 
 const UrlRoute = {
   verifyBVN,
@@ -66,6 +73,13 @@ const UrlRoute = {
   getRelationshipOfficer,
   helpTopics,
   validateAccount,
+  generateAccountStatement,
+  datedTransactionHistory,
+  createNextOfKin,
+  getAllEmployers,
+  employerInfo,
+  uploadKYCDocuments,
+  reportIssue,
 };
 
 export default UrlRoute;

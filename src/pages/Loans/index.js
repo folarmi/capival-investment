@@ -10,8 +10,27 @@ const Loans = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { activeLoans, pendingLoans } = useSelector((state) => state.loans);
+  const kycStatus = useSelector(
+    (state) => state.auth?.login?.user?.authorisation
+  );
 
-  console.log(pendingLoans);
+  console.log(kycStatus);
+
+  const kycObject = {
+    bank_account: kycStatus?.bank_account,
+    employer_details: kycStatus?.employer_details,
+    next_of_kin: kycStatus?.next_of_kin,
+    kyc_document: kycStatus?.kyc_document,
+  };
+
+  const ifEligibleForLoan =
+    kycStatus?.bank_account &&
+    kycStatus?.employer_details &&
+    kycStatus?.next_of_kin &&
+    kycStatus?.kyc_document;
+
+  console.log(kycObject);
+
   const activeLoanHeader = [
     { id: "1", name: "Outstanding" },
     { id: "2", name: "Amount Paid" },
@@ -27,7 +46,11 @@ const Loans = () => {
   ];
 
   const goToNewLoanPage = () => {
-    navigate("/dashboard/loans/new-loan");
+    if (ifEligibleForLoan) {
+      navigate("/dashboard/loans/new-loan");
+    } else {
+      navigate("/dashboard/update-kyc");
+    }
   };
 
   const gotToRepaymentPage = (item) => {
@@ -89,10 +112,10 @@ const Loans = () => {
       </div>
 
       <div className="mt-8 mx-4 md:mx-7">
-        <TableHeader
+        {/* <TableHeader
           header="Active Loans"
           pageNumber="Showing 1-3 of 3 transactions"
-        />
+        /> */}
 
         <main className="mt-4 bg-blueTwo/10 rounded-xl">
           <section className="bg-blueTwo/20 rounded-xl py-4 overflow-scroll">
@@ -163,10 +186,10 @@ const Loans = () => {
         </main>
 
         <div className="my-10">
-          <TableHeader
+          {/* <TableHeader
             header="Pending Loans"
             pageNumber="Showing 1-3 of 3 transactions"
-          />
+          /> */}
 
           <main className="mt-4 bg-blueTwo/10 rounded-xl">
             <section className="bg-blueTwo/20 rounded-xl py-4 overflow-scroll">

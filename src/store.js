@@ -19,6 +19,7 @@ import transactionHistoryReducer from "./slices/transactionHistory";
 import debitCardReducer from "./slices/debitCard";
 import mobileTopUpReducer from "./slices/mobileTopup";
 import loanReducer from "./slices/loan";
+import accountReducer from "./slices/accounts";
 
 const persistConfig = {
   key: "root",
@@ -36,6 +37,7 @@ const reducers = combineReducers({
   debitCard: debitCardReducer,
   mobileTopUp: mobileTopUpReducer,
   loans: loanReducer,
+  accounts: accountReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);

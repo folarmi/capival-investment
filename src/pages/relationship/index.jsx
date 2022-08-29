@@ -24,7 +24,7 @@ const RelationshipOfficer = () => {
         <Loader />
       ) : (
         <div className="mt-10">
-          <p className="text-base text-center text-blueTwo uppercase">
+          <p className="text-base font-medium text-center text-blueTwo uppercase">
             Relationship officer
           </p>
 

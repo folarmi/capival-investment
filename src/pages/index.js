@@ -35,3 +35,5 @@ export * from "./Profile/ChangePassword";
 export * from "./Profile/ChangePin";
 export * from "./relationship/index";
 export * from "./issues/index";
+export * from "./generateStatement/index";
+export * from "./kyc/index";

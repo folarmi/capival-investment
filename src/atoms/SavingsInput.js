@@ -12,6 +12,7 @@ const SavingsInput = ({
   readOnly,
   register,
   className,
+  onChange,
   ...inputProps
 }) => {
   return (
@@ -35,6 +36,7 @@ const SavingsInput = ({
           type={type}
           name={name}
           id={id}
+          onChange={onChange}
           {...register}
           placeholder={placeholder}
           {...inputProps}

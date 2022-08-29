@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -12,7 +12,7 @@ import { validateAccountAsync } from "../../slices/transactionHistory";
 
 const CapivalTransfer = () => {
   const dispatch = useDispatch();
-  const { validateAccountLoading } = useSelector(
+  const { validateAccountLoading, isAccountValidated } = useSelector(
     (state) => state.transactionHistory
   );
 
@@ -34,16 +34,42 @@ const CapivalTransfer = () => {
       .matches(/^[0-9]+$/, "Must be only digits"),
   });
 
-  const { register, handleSubmit, formState, reset } = useForm({
+  const { register, handleSubmit, formState, reset, watch } = useForm({
     resolver: yupResolver(validationSchema),
+    defaultValues: {
+      account_name: isAccountValidated?.account_name,
+    },
   });
   const { errors } = formState;
+
+  const watchFields = watch(["destination_account"]);
+
+  useEffect(() => {
+    let mounted = false;
+    (async () => {
+      mounted = true;
+      if (mounted && watchFields[0]?.length === 10) {
+        // Run Function
+        dispatch(validateAccountAsync(watchFields[0]));
+      }
+    })();
+    return () => {
+      mounted = false;
+    };
+  }, [watchFields[0]]);
 
   const submitForm = (values) => {
     dispatch(validateAccountAsync(values?.destination_account));
     // toggleTransactionPinModal();
     setFormValues(values);
   };
+
+  useEffect(() => {
+    const defaultValues = {
+      account_name: isAccountValidated?.account_name,
+    };
+    reset(defaultValues);
+  }, [isAccountValidated, reset]);
 
   return (
     <div className="md:mt-8">
@@ -75,12 +101,28 @@ const CapivalTransfer = () => {
             <SavingsInput
               placeholder="Beneficiary Account Number"
               register={register("destination_account")}
+              label="Account Number"
+              onInput={handleSubmit((data) => null)}
               error={errors?.destination_account?.message}
+              // onChange={(e) => validateAccountNumber(e.target.value)}
             />
           </div>
           <div className="mb-8 md:mb-0">
             <SavingsInput
+              placeholder="Beneficiary Account Name"
+              label="Account Name"
+              readOnly
+              register={register("account_name")}
+              error={errors?.account_name?.message}
+            />
+            {validateAccountLoading && (
+              <p className="text-sm text-red-200 font-medium">Validating...</p>
+            )}
+          </div>
+          <div className="mb-8 md:mb-0">
+            <SavingsInput
               placeholder="Amount"
+              label="Amount"
               register={register("amount")}
               error={errors?.amount?.message}
             />
@@ -88,6 +130,7 @@ const CapivalTransfer = () => {
           <div>
             <SavingsInput
               placeholder="Narration"
+              label="Narration"
               register={register("narration")}
               error={errors?.narration?.message}
             />
@@ -115,14 +158,3 @@ const CapivalTransfer = () => {
 };
 
 export default CapivalTransfer;
-
-// {
-//   {
-//     "destination_account_no" : "1010000265",
-//      "destination_bank" : "000013",
-//      "destination_account_name" : "Osagie Tomori",
-//      "amount":"3000",
-//      "narration": "Api Test Transfer",
-//      "pin": "1234"
-//  }
-// }

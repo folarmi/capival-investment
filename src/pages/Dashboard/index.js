@@ -21,8 +21,6 @@ const Dashboard = () => {
     setTransactionPinStatus(data?.payload?.status);
   };
 
-  console.log(transactionPinStatus);
-
   useEffect(() => {
     getTransactionPinStatus();
   }, []);
@@ -58,7 +56,10 @@ const Dashboard = () => {
           icon="/assets/icons/capivalHomes.svg"
           path="capival-homes"
         /> */}
-        <CircularIcon icon="/assets/icons/statement.svg" path="loans" />
+        <CircularIcon
+          icon="/assets/icons/statement.svg"
+          path="generate-statement"
+        />
         {/* <CircularIcon icon="/assets/icons/pension.svg" path="capival-pension" /> */}
         <CircularIcon
           icon="/assets/icons/capivalTransfer.svg"

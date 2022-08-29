@@ -82,11 +82,48 @@ export const validateAccountAsync = createAsyncThunk(
   }
 );
 
+export const getdatedTransactionHistoryAsync = createAsyncThunk(
+  "transactionHistory/getdatedTransactionHistory",
+  async (values, { rejectWithValue }) => {
+    try {
+      const response =
+        await TransactionHistoryService.getDatedTransactionHistory(values);
+      return response;
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const generateAccountStatementAsync = createAsyncThunk(
+  "transactionHistory/generateAccountStatement",
+  async (values, { rejectWithValue }) => {
+    try {
+      const response = await TransactionHistoryService.generateAccountStatement(
+        values
+      );
+      return response;
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 const initialState = {
   isLoading: false,
   getTransactionHistoryLoading: false,
+  getDatedTransactionHistoryLoading: false,
   validateAccountLoading: false,
+  generateStatementLoading: false,
   transactionHistory: "",
+  isAccountValidated: "",
+  datedTransactionHistory: "",
   capivalTransferLoading: false,
   otherBankTransferLoading: false,
 };
@@ -136,11 +173,31 @@ export const transactionHistorySlice = createSlice({
     [validateAccountAsync.pending]: (state) => {
       state.validateAccountLoading = true;
     },
-    [validateAccountAsync.fulfilled]: (state) => {
+    [validateAccountAsync.fulfilled]: (state, action) => {
       state.validateAccountLoading = false;
+      state.isAccountValidated = action.payload.data;
     },
     [validateAccountAsync.rejected]: (state) => {
       state.validateAccountLoading = false;
+    },
+    [generateAccountStatementAsync.pending]: (state) => {
+      state.generateStatementLoading = true;
+    },
+    [generateAccountStatementAsync.fulfilled]: (state) => {
+      state.generateStatementLoading = false;
+    },
+    [generateAccountStatementAsync.rejected]: (state) => {
+      state.generateStatementLoading = false;
+    },
+    [getdatedTransactionHistoryAsync.pending]: (state) => {
+      state.getDatedTransactionHistoryLoading = true;
+    },
+    [getdatedTransactionHistoryAsync.fulfilled]: (state, action) => {
+      state.getDatedTransactionHistoryLoading = false;
+      state.datedTransactionHistory = action.payload.data;
+    },
+    [getdatedTransactionHistoryAsync.rejected]: (state) => {
+      state.getDatedTransactionHistoryLoading = false;
     },
   },
 });

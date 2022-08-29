@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import { WalletCard } from "../../components";
 import { SearchBar } from "../../components/SearchBar";
@@ -8,8 +9,10 @@ import walletBg from "../../icons/walletBg.svg";
 import { getWalletBalanceAsync } from "../../slices/utils";
 
 const WalletDetailsHeader = ({ ifSearchBar, ifTransaction = true }) => {
-  const [accountBalance, setAccountBalance] = useState("");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [accountBalance, setAccountBalance] = useState("");
   const accountNumber = useSelector(
     (state) => state.auth.login?.user?.user?.accounts?.AccountNo
   );
@@ -17,6 +20,14 @@ const WalletDetailsHeader = ({ ifSearchBar, ifTransaction = true }) => {
   const getWalletBalance = async (num) => {
     const data = await dispatch(getWalletBalanceAsync());
     setAccountBalance(data?.payload?.balance);
+  };
+
+  const goToTransactionPage = () => {
+    navigate("/dashboard/transaction-history");
+  };
+
+  const goToGenerateStatementPage = () => {
+    navigate("/dashboard/generate-statement");
   };
 
   useEffect(() => {
@@ -37,7 +48,10 @@ const WalletDetailsHeader = ({ ifSearchBar, ifTransaction = true }) => {
 
       {ifTransaction && (
         <section className="flex items-center mt-5 px-4 md:px-0">
-          <div className="flex whitespace-nowrap items-center">
+          <div
+            className="flex whitespace-nowrap items-center cursor-pointer"
+            onClick={goToTransactionPage}
+          >
             <img
               src="/assets/icons/refresh.svg"
               alt="refresh"
@@ -49,7 +63,10 @@ const WalletDetailsHeader = ({ ifSearchBar, ifTransaction = true }) => {
             </p>
           </div>
 
-          <div className="whitespace-nowrap flex items-center ml-5">
+          <div
+            className="whitespace-nowrap flex items-center ml-5 cursor-pointer"
+            onClick={goToGenerateStatementPage}
+          >
             <img
               src="/assets/icons/downloadIcon.svg"
               alt="refresh"

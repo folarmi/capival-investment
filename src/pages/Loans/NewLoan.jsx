@@ -39,7 +39,7 @@ const NewLoan = () => {
   //   loan_type_id: Yup.string().required("Loan enter a password"),
   // });
 
-  const { register, handleSubmit, formState, reset } = useForm({
+  const { register, handleSubmit, formState, reset, control } = useForm({
     // resolver: yupResolver(validationSchema),
   });
   const { errors } = formState;
@@ -76,10 +76,6 @@ const NewLoan = () => {
 
   const [showDisbursement, setShowDisbursement] = useState(false);
   const [showMbs, setShowMbs] = useState(false);
-
-  const { control } = useForm({
-    // resolver: yupResolver(validationSchema),
-  });
 
   useEffect(() => {
     dispatch(getLoanTypesAsync());
@@ -238,7 +234,7 @@ const NewLoan = () => {
             render={({ field: { onChange, onBlur, value, ref } }) => (
               <div>
                 <label className="text-sm font-normal text-blueTwo">
-                  Select repayment method
+                  Select Repayment Method
                 </label>
                 <Select
                   onBlur={onBlur}

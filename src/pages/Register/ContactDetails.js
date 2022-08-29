@@ -119,7 +119,7 @@ const ContactDetails = () => {
                 inputRef={ref}
                 isLoading={getAllStatesLoading}
                 options={allStatesData}
-                placeholder="States"
+                placeholder="State"
                 styles={colourStyles}
               />
             )}

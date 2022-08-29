@@ -67,3 +67,15 @@ thead th:last-child {
 tr:last-child td:last-child {
   border-bottom-right-radius: 15px;
 }
+
+/* date picker styles */
+/* .react-datepicker-wrapper {
+  background-color: yellow;
+  display: flex;rgba(59 88 168/0.2)
+} */
+
+.react-datepicker__input-container input {
+  background-color: #d5dbed;
+  border: none;
+  cursor: pointer;
+}
