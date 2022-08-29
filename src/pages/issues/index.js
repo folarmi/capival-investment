@@ -52,7 +52,6 @@ const Issue = () => {
       message: values?.message,
     };
 
-    console.log(variables);
     dispatch(reportIssueAsync(variables))
       .unwrap()
       .then((res) => {

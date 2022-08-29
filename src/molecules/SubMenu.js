@@ -9,7 +9,7 @@ import { NavLink } from "react-router-dom";
 const SubMenu = ({ item }) => {
   const navigate = useNavigate();
 
-  const [dropDown, setDropDown] = useState(false);
+  const [dropDown, setDropDown] = useState(null);
   const [activeTab, setActiveTab] = useState("Data Consumers");
 
   const toggleDropDown = () => {
@@ -25,11 +25,6 @@ const SubMenu = ({ item }) => {
     // console.log(activeTab);
   };
 
-  // const changeStroke = (item) => {
-  //   item.useStroke = !item?.useStroke;
-  //   // console.log("yyyy", item.useStroke);
-  // };
-
   return (
     <div>
       {item?.subMenu ? (
@@ -39,6 +34,10 @@ const SubMenu = ({ item }) => {
               className="flex items-center mt-6 hover:text-lighterBlue cursor-pointer px-8 lg:px-4 xl:px-6 2xl:px-12"
               key={item?.id}
               onClick={toggleDropDown}
+              onBlur={() => {
+                setDropDown(false);
+              }}
+              tabIndex={item?.id}
             >
               <item.Image
                 className={`mr-4  ${
@@ -47,6 +46,7 @@ const SubMenu = ({ item }) => {
               />
               <p className="font-normal pr-3 text-sm text-white ">
                 {item?.menuItem}
+                {console.log("the id", item?.id)}
               </p>
               {dropDown ? (
                 <img
