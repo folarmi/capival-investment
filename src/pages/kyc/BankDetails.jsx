@@ -98,7 +98,7 @@ const BankDetails = ({ setActiveTab }) => {
 
   useEffect(() => {
     const defaultValues = {
-      account_name: validatedAccountDetails?.account_name || "",
+      account_name: validatedAccountDetails?.account_name,
     };
     reset(defaultValues);
   }, [validatedAccountDetails, reset]);

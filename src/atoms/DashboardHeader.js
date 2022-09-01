@@ -21,12 +21,12 @@ const DashboardHeader = () => {
   return (
     <>
       <header
-        className="hidden w-full fixed md:flex items-start lg:items-center bg-white py-4 shadow-md"
+        className="w-full fixed flex items-start lg:items-center bg-white py-4 shadow-md"
         style={{
           zIndex: 20,
         }}
       >
-        <div className="ml-6 w-[10%] mr-[10%]">
+        <div className="ml-6  w-[10%] mr-[10%]">
           <img
             src="/assets/icons/logo.svg"
             alt="capival-logo"

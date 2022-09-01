@@ -82,12 +82,63 @@ export const validateAccountAsync = createAsyncThunk(
   }
 );
 
+export const validateInterAccountAsync = createAsyncThunk(
+  "transactionHistory/validateInterAccount",
+  async (values, { rejectWithValue }) => {
+    try {
+      const response = await TransactionHistoryService.validateInterAccount(
+        values
+      );
+      return response;
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 export const getdatedTransactionHistoryAsync = createAsyncThunk(
   "transactionHistory/getdatedTransactionHistory",
   async (values, { rejectWithValue }) => {
     try {
       const response =
         await TransactionHistoryService.getDatedTransactionHistory(values);
+      return response;
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const getInternalBeneficiariesAsync = createAsyncThunk(
+  "transactionHistory/getInternalBeneficiaries",
+  async (values, { rejectWithValue }) => {
+    try {
+      const response = await TransactionHistoryService.getInternalBeneficiaries(
+        values
+      );
+      return response;
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const getExternalBeneficiariesAsync = createAsyncThunk(
+  "transactionHistory/getExternalBeneficiaries",
+  async (values, { rejectWithValue }) => {
+    try {
+      const response = await TransactionHistoryService.getExternalBeneficiaries(
+        values
+      );
       return response;
     } catch (error) {
       if (!error.response) {
@@ -120,12 +171,18 @@ const initialState = {
   getTransactionHistoryLoading: false,
   getDatedTransactionHistoryLoading: false,
   validateAccountLoading: false,
+  validateInterAccountLoading: false,
   generateStatementLoading: false,
   transactionHistory: "",
   isAccountValidated: "",
+  isInterAccountValidated: "",
   datedTransactionHistory: "",
+  getInternalBeneficiaries: "",
+  getExternalBeneficiaries: "",
   capivalTransferLoading: false,
   otherBankTransferLoading: false,
+  getInternalBeneficiariesLoading: false,
+  getExternalBeneficiariesLoading: false,
 };
 
 export const transactionHistorySlice = createSlice({
@@ -172,13 +229,27 @@ export const transactionHistorySlice = createSlice({
     },
     [validateAccountAsync.pending]: (state) => {
       state.validateAccountLoading = true;
+      state.isAccountValidated = "";
     },
     [validateAccountAsync.fulfilled]: (state, action) => {
       state.validateAccountLoading = false;
       state.isAccountValidated = action.payload.data;
     },
-    [validateAccountAsync.rejected]: (state) => {
+    [validateAccountAsync.rejected]: (state, action) => {
       state.validateAccountLoading = false;
+      state.isAccountValidated = "";
+    },
+    [validateInterAccountAsync.pending]: (state) => {
+      state.validateInterAccountLoading = true;
+      state.isInterAccountValidated = "";
+    },
+    [validateInterAccountAsync.fulfilled]: (state, action) => {
+      state.validateInterAccountLoading = false;
+      state.isInterAccountValidated = action.payload.data;
+    },
+    [validateInterAccountAsync.rejected]: (state, action) => {
+      state.validateInterAccountLoading = false;
+      state.isInterAccountValidated = "";
     },
     [generateAccountStatementAsync.pending]: (state) => {
       state.generateStatementLoading = true;
@@ -198,6 +269,26 @@ export const transactionHistorySlice = createSlice({
     },
     [getdatedTransactionHistoryAsync.rejected]: (state) => {
       state.getDatedTransactionHistoryLoading = false;
+    },
+    [getInternalBeneficiariesAsync.pending]: (state) => {
+      state.getInternalBeneficiariesLoading = true;
+    },
+    [getInternalBeneficiariesAsync.fulfilled]: (state, action) => {
+      state.getInternalBeneficiariesLoading = false;
+      state.getInternalBeneficiaries = action.payload.data;
+    },
+    [getInternalBeneficiariesAsync.rejected]: (state) => {
+      state.getInternalBeneficiariesLoading = false;
+    },
+    [getExternalBeneficiariesAsync.pending]: (state) => {
+      state.getExternalBeneficiariesLoading = true;
+    },
+    [getExternalBeneficiariesAsync.fulfilled]: (state, action) => {
+      state.getExternalBeneficiariesLoading = false;
+      state.getExternalBeneficiaries = action.payload.data;
+    },
+    [getExternalBeneficiariesAsync.rejected]: (state) => {
+      state.getExternalBeneficiariesLoading = false;
     },
   },
 });

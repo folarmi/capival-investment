@@ -1,10 +1,12 @@
 import React from "react";
+import CurrencyFormat from "react-currency-format";
 
 const SavingsInput = ({
   placeholder,
   icon,
   label,
   id,
+  ifAmount,
   name,
   ifIcon = false,
   type,
@@ -13,6 +15,7 @@ const SavingsInput = ({
   register,
   className,
   onChange,
+  value,
   ...inputProps
 }) => {
   return (
@@ -32,6 +35,7 @@ const SavingsInput = ({
             loading="lazy"
           />
         )}
+
         <input
           type={type}
           name={name}
@@ -49,9 +53,7 @@ const SavingsInput = ({
         />
       </label>
 
-      <span>
-        <p className="text-red-500 text-xs"> {error}</p>
-      </span>
+      <span className="text-red-500 text-xs">{error}</span>
     </div>
   );
 };

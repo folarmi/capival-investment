@@ -79,3 +79,9 @@ tr:last-child td:last-child {
   border: none;
   cursor: pointer;
 }
+
+input {
+  background: transparent;
+  outline: none;
+  border: none;
+}

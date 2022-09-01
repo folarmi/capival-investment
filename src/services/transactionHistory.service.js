@@ -31,8 +31,23 @@ const validateAccount = async (acctNo) => {
   return response.data;
 };
 
+const validateInterAccount = async (values) => {
+  const response = await api.post(UrlRoute.validateInterAccount, values);
+  return response.data;
+};
+
 const generateAccountStatement = async () => {
   const response = await api.post(`${UrlRoute.generateAccountStatement}`);
+  return response.data;
+};
+
+const getInternalBeneficiaries = async () => {
+  const response = await api.get(`${UrlRoute.getInternalBeneficiaries}`);
+  return response.data;
+};
+
+const getExternalBeneficiaries = async () => {
+  const response = await api.get(`${UrlRoute.getExternalBeneficiaries}`);
   return response.data;
 };
 
@@ -44,6 +59,9 @@ const transactionHistoryService = {
   validateAccount,
   generateAccountStatement,
   getDatedTransactionHistory,
+  getInternalBeneficiaries,
+  validateInterAccount,
+  getExternalBeneficiaries,
 };
 
 export default transactionHistoryService;

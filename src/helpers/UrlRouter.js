@@ -26,11 +26,16 @@ const changePassword = "accounts/change-password";
 const getBillPaymentCategories = "bills-payment/get-categories";
 const getTransactionHistory = "transactions/recent-transactions";
 const datedTransactionHistory = "transactions/transaction-history";
+const getInternalBeneficiaries =
+  "transactions/intra/transfer-fund/fetch-beneficiary";
+const getExternalBeneficiaries =
+  "transactions/inter/transfer-fund/fetch-beneficiary";
 const getDebitCards = "payments/get_cards";
 const getAirtimeBillers = "bills-payment/get-airtime-billers";
 const capivalTransfer = "transactions/intra/transfer-fund";
 const otherBanksTransfer = "transactions/inter/transfer-fund";
 const validateAccount = "transactions/intra/validate-account";
+const validateInterAccount = "utils/validate-bank-account";
 const activeLoans = "loans/active-loans";
 const getPendingLoans = "loans/pending-loans";
 const getLoanDetails = "loans/loan-details";
@@ -80,6 +85,9 @@ const UrlRoute = {
   employerInfo,
   uploadKYCDocuments,
   reportIssue,
+  getInternalBeneficiaries,
+  getExternalBeneficiaries,
+  validateInterAccount,
 };
 
 export default UrlRoute;
