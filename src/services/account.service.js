@@ -16,6 +16,11 @@ const uploadKYCDocuments = async (values) => {
   return response.data;
 };
 
+const addBankAccount = async (values) => {
+  const response = await api.post(UrlRoute.addBankAccounts, values);
+  return response.data;
+};
+
 const reportIssue = async (values) => {
   const response = await api.post(UrlRoute.reportIssue, values);
   return response.data;
@@ -26,6 +31,7 @@ const accountsService = {
   employerInfo,
   uploadKYCDocuments,
   reportIssue,
+  addBankAccount,
 };
 
 export default accountsService;

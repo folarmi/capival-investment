@@ -14,8 +14,6 @@ const Loans = () => {
     (state) => state.auth?.login?.user?.authorisation
   );
 
-  console.log(kycStatus);
-
   const kycObject = {
     bank_account: kycStatus?.bank_account,
     employer_details: kycStatus?.employer_details,
@@ -28,8 +26,6 @@ const Loans = () => {
     kycStatus?.employer_details &&
     kycStatus?.next_of_kin &&
     kycStatus?.kyc_document;
-
-  console.log(kycObject);
 
   const activeLoanHeader = [
     { id: "1", name: "Outstanding" },

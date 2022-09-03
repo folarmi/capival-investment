@@ -41,6 +41,16 @@ const generateAccountStatement = async () => {
   return response.data;
 };
 
+const saveInternalBeneficiary = async (values) => {
+  const response = await api.post(UrlRoute.saveInternalBeneficiary, values);
+  return response.data;
+};
+
+const saveExternalBeneficiary = async (values) => {
+  const response = await api.post(UrlRoute.saveExternalBeneficiary, values);
+  return response.data;
+};
+
 const getInternalBeneficiaries = async () => {
   const response = await api.get(`${UrlRoute.getInternalBeneficiaries}`);
   return response.data;
@@ -62,6 +72,8 @@ const transactionHistoryService = {
   getInternalBeneficiaries,
   validateInterAccount,
   getExternalBeneficiaries,
+  saveInternalBeneficiary,
+  saveExternalBeneficiary,
 };
 
 export default transactionHistoryService;

@@ -42,7 +42,12 @@ const getLoanDetails = "loans/loan-details";
 const createLoan = "loans/create";
 const helpTopics = "support/help-topics";
 const createNextOfKin = "accounts/next-of-kin";
+const addBankAccounts = "accounts/add-bank-account";
 const reportIssue = "support/report-issue";
+const saveInternalBeneficiary =
+  "transactions/intra/transfer-fund/store-beneficiary";
+const saveExternalBeneficiary =
+  "transactions/inter/transfer-fund/store-beneficiary";
 
 const UrlRoute = {
   verifyBVN,
@@ -88,6 +93,9 @@ const UrlRoute = {
   getInternalBeneficiaries,
   getExternalBeneficiaries,
   validateInterAccount,
+  saveInternalBeneficiary,
+  saveExternalBeneficiary,
+  addBankAccounts,
 };
 
 export default UrlRoute;

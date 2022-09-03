@@ -4,16 +4,16 @@ import { toast } from "react-toastify";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import { capivalTransferAsync } from "../../slices/transactionHistory";
+import { otherBankTransferAsync } from "../../slices/transactionHistory";
 
 import { Button } from "../../atoms";
 import { OTPInput } from "../../components/OTPInput";
+import { saveExternalBeneficiaryAsync } from "../../slices/transactions";
 
-const PinModal = ({ toggleTransactionPinModal, formValues }) => {
+const PinModal = ({ formValues, toggleTransactionPinModal }) => {
   const dispatch = useDispatch();
   const nagivate = useNavigate();
-  const { capivalTransferLoading } = useSelector(
+  const { otherBankTransferLoading } = useSelector(
     (state) => state.transactionHistory
   );
 
@@ -26,10 +26,30 @@ const PinModal = ({ toggleTransactionPinModal, formValues }) => {
     }
 
     formValues.pin = otpValues;
-    dispatch(capivalTransferAsync(formValues))
+    dispatch(otherBankTransferAsync(formValues))
       .unwrap()
       .then((res) => {
         if (res?.status === true) {
+          console.log(formValues?.saveBeneficiary);
+          if (formValues?.saveBeneficiary === true) {
+            dispatch(
+              saveExternalBeneficiaryAsync({
+                beneficiary_account: formValues?.destination_account_no,
+                account_name: formValues?.destination_account_name,
+                bank_name: formValues?.destination_bank,
+                bank_code: formValues?.destination_bank,
+              })
+            )
+              .unwrap()
+              .then((res) => {
+                if (res?.status === true) {
+                  toast("Beneficiary Saved Succesfully");
+                }
+              })
+              .catch((err) => {
+                toast.error(err?.message);
+              });
+          }
           toast(res.message);
           nagivate("/dashboard/capival-transfers/receipt", {
             state: {
@@ -69,7 +89,7 @@ const PinModal = ({ toggleTransactionPinModal, formValues }) => {
         buttonText="Continue"
         className="rounded-lg mt-3"
         size="lg"
-        isLoading={capivalTransferLoading}
+        isLoading={otherBankTransferLoading}
         onClick={submitForm}
       />
     </form>

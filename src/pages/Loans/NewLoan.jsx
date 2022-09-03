@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
+import CurrencyFormat from "react-currency-format";
+
 // import * as Yup from "yup";
 import Select from "react-select";
 // import { yupResolver } from "@hookform/resolvers/yup";
@@ -16,6 +18,7 @@ import {
 import { createLoanAsync } from "../../slices/loan";
 import { toast } from "react-toastify";
 import { colourStyles } from "../../utils/HelperFunctions";
+import { validateInterAccountAsync } from "../../slices/transactionHistory";
 
 const NewLoan = () => {
   const dispatch = useDispatch();
@@ -25,57 +28,61 @@ const NewLoan = () => {
     repaymentChannels,
     bankStatementType,
     allBanks,
+    getLoanTypesLoading,
   } = useSelector((state) => state?.utils);
-
   const { createLoanIsLoading } = useSelector((state) => state?.loans);
+  const { isInterAccountValidated, validateInterAccountLoading } = useSelector(
+    (state) => state?.transactionHistory
+  );
 
-  const [selectedLoanType, setSelectedLoanType] = useState("");
-  const [tenure, setTenure] = useState("");
-  const [selectedRepayMethod, setSelectedRepayMethod] = useState("");
-  const [selectedStatementType, setSelectedStatementType] = useState("");
-  const [selectedBank, setSelectedBank] = useState("");
+  const [showDisbursement, setShowDisbursement] = useState(false);
+  const [showMbs, setShowMbs] = useState(false);
 
   // const validationSchema = Yup.object().shape({
   //   loan_type_id: Yup.string().required("Loan enter a password"),
   // });
 
-  const { register, handleSubmit, formState, reset, control } = useForm({
-    // resolver: yupResolver(validationSchema),
-  });
+  const { register, handleSubmit, formState, reset, control, getValues } =
+    useForm({
+      defaultValues: {
+        disbursement_account_name: isInterAccountValidated?.AccountName,
+      },
+      // resolver: yupResolver(validationSchema),
+    });
   const { errors } = formState;
 
   const submitForm = (values) => {
+    let formattedAmount = values?.amount.slice(1);
     const variables = {
-      loan_type_id: selectedLoanType.toString(),
-      loan_amount: values?.loan_amount,
-      tenor: tenure,
-      repayment_channel: selectedRepayMethod,
-      statement_type: selectedStatementType,
+      loan_type_id: values.loan_type_id,
+      loan_amount: formattedAmount,
+      tenor: values?.tenor,
+      repayment_channel: values?.repayment_channel,
+      statement_type: values?.statement_type,
       mbs_ticket_no: values?.mbs_ticket_no,
       mbs_ticket_password: values?.mbs_ticket_password,
       disbursement_account_no: values?.disbursement_account_no || "",
       disbursement_account_name: values?.disbursement_account_name || "",
-      disbursement_bank_code: selectedBank,
+      disbursement_bank_code: values?.disbursement_bank_code || "",
     };
 
-    dispatch(createLoanAsync(variables))
-      .unwrap()
-      .then((res) => {
-        if (res?.status === true) {
-          console.log(res?.status);
-          toast(res?.message);
-          reset();
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        toast.error(err?.message);
-        reset();
-      });
-  };
+    console.log(values);
 
-  const [showDisbursement, setShowDisbursement] = useState(false);
-  const [showMbs, setShowMbs] = useState(false);
+    // dispatch(createLoanAsync(variables))
+    //   .unwrap()
+    //   .then((res) => {
+    //     if (res?.status === true) {
+    //       console.log(res?.status);
+    //       toast(res?.message);
+    //       reset();
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //     toast.error(err?.message);
+    //     reset();
+    //   });
+  };
 
   useEffect(() => {
     dispatch(getLoanTypesAsync());
@@ -131,35 +138,33 @@ const NewLoan = () => {
       };
     });
 
-  const getLoanType = (item) => {
-    setSelectedLoanType(item?.value);
-    if (item.disburse === 0) {
-      setShowDisbursement(true);
-    } else {
-      setShowDisbursement(false);
+  const handleValidateAccount = async (e) => {
+    if (e.target.value.length === 10) {
+      const variables = {
+        account_no: e.target.value,
+        bank_code: getValues("disbursement_bank_code"),
+      };
+      await dispatch(validateInterAccountAsync(variables))
+        .unwrap()
+        .then((res) => {
+          if (res?.status) {
+            toast(res?.message);
+            // reset();
+          }
+        })
+        .catch((err) => {
+          toast.error(err?.message);
+          reset();
+        });
     }
   };
 
-  const geSelectedLoanTenure = (value) => {
-    setTenure(value?.value);
-  };
-
-  const geSelectedRepayMethod = (value) => {
-    setSelectedRepayMethod(value?.value);
-  };
-
-  const geSelectedBank = (value) => {
-    setSelectedBank(value?.value);
-  };
-
-  const getStatementType = (item) => {
-    setSelectedStatementType(item?.value);
-    if (item.value === "mbs") {
-      setShowMbs(true);
-    } else {
-      setShowMbs(false);
-    }
-  };
+  useEffect(() => {
+    const defaultValues = {
+      disbursement_account_name: isInterAccountValidated?.AccountName,
+    };
+    reset(defaultValues);
+  }, [isInterAccountValidated, reset]);
 
   return (
     <div className="mt-4 lg:mt-8">
@@ -174,7 +179,8 @@ const NewLoan = () => {
         <div>
           <Controller
             control={control}
-            name="loan"
+            name="loan_type_id"
+            defaultValue=""
             render={({ field: { onChange, onBlur, value, ref } }) => (
               <div>
                 <label className="text-sm font-normal text-blueTwo">
@@ -182,11 +188,19 @@ const NewLoan = () => {
                 </label>
                 <Select
                   onBlur={onBlur}
-                  onChange={getLoanType}
                   checked={value}
                   inputRef={ref}
                   options={loanTypesData}
-                  // isLoading={getStateLGALoading}
+                  value={loanTypesData.find((c) => c.value === value)}
+                  onChange={(val) => {
+                    onChange(val.value);
+                    if (val.disburse === 0) {
+                      setShowDisbursement(true);
+                    } else {
+                      setShowDisbursement(false);
+                    }
+                  }}
+                  isLoading={getLoanTypesLoading}
                   placeholder="Select Loan Type"
                   styles={colourStyles}
                 />
@@ -196,12 +210,43 @@ const NewLoan = () => {
         </div>
 
         <div className="mt-4">
-          <SavingsInput
-            placeholder="N0.0"
-            label="Loan Amount"
-            register={register("loan_amount")}
-            error={errors?.loan_amount?.message}
-          />
+          <>
+            <label
+              htmlFor="amount"
+              className={`text-sm font-normal text-blueTwo`}
+            >
+              Amount
+            </label>
+            <div className="border border-blueTwo/50 rounded-[20px] w-full py-3.5 placeholder-blueThree text-sm pl-[10px] text-blueTwo bg-blueTwo/20">
+              <Controller
+                control={control}
+                name="amount"
+                defaultValue=""
+                placeholder="Amount"
+                render={({ field: { onChange, ref, name, value } }) => (
+                  <div className="placeholder:text-blueTwo">
+                    <CurrencyFormat
+                      style={{
+                        backgroundColor: "3B58A8",
+                      }}
+                      displayType={"input"}
+                      thousandSeparator={true}
+                      placeholder="₦0.0"
+                      name={name}
+                      value={value}
+                      prefix={"₦"}
+                      onChange={onChange}
+                    />
+                  </div>
+                )}
+              />
+            </div>
+          </>
+          {errors.amount && (
+            <span className="text-red-500 text-xs">
+              {errors?.amount?.message}
+            </span>
+          )}
         </div>
 
         <div className="mt-4">
@@ -215,7 +260,8 @@ const NewLoan = () => {
                 </label>
                 <Select
                   onBlur={onBlur}
-                  onChange={geSelectedLoanTenure}
+                  onChange={(val) => onChange(val.value)}
+                  value={loanTenureData.find((c) => c.value === value)}
                   checked={value}
                   inputRef={ref}
                   options={loanTenureData}
@@ -238,7 +284,8 @@ const NewLoan = () => {
                 </label>
                 <Select
                   onBlur={onBlur}
-                  onChange={geSelectedRepayMethod}
+                  onChange={(val) => onChange(val.value)}
+                  value={repaymentChannelData.find((c) => c.value === value)}
                   checked={value}
                   inputRef={ref}
                   options={repaymentChannelData}
@@ -261,7 +308,15 @@ const NewLoan = () => {
                 </label>
                 <Select
                   onBlur={onBlur}
-                  onChange={getStatementType}
+                  onChange={(val) => {
+                    onChange(val.value);
+                    if (val.value === "mbs") {
+                      setShowMbs(true);
+                    } else {
+                      setShowMbs(false);
+                    }
+                  }}
+                  value={bankStatementData.find((c) => c.value === value)}
                   checked={value}
                   inputRef={ref}
                   options={bankStatementData}
@@ -312,7 +367,8 @@ const NewLoan = () => {
                     </label>
                     <Select
                       onBlur={onBlur}
-                      onChange={geSelectedBank}
+                      onChange={(val) => onChange(val.value)}
+                      value={allBanksData.find((c) => c.value === value)}
                       checked={value}
                       inputRef={ref}
                       options={allBanksData}
@@ -328,7 +384,9 @@ const NewLoan = () => {
               <SavingsInput
                 placeholder="0123456789"
                 label="Account Number"
-                register={register("disbursement_account_no")}
+                register={register("disbursement_account_no", {
+                  onChange: (e) => handleValidateAccount(e),
+                })}
                 error={errors?.disbursement_account_no?.message}
               />
             </div>
@@ -337,9 +395,15 @@ const NewLoan = () => {
               <SavingsInput
                 placeholder="Ayobami olagoke"
                 label="Account Name"
+                readOnly
                 register={register("disbursement_account_name")}
                 error={errors?.disbursement_account_name?.message}
               />
+              {validateInterAccountLoading && (
+                <span className="text-sm text-red-500 font-medium">
+                  Validating...
+                </span>
+              )}
             </div>
           </div>
         )}

@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Select from "react-select";
+import CurrencyFormat from "react-currency-format";
 
 import { Button, SavingsInput, UserAvatar } from "../../atoms";
 import WalletDetailsHeader from "../Wallet/WalletDetailsHeader";
@@ -21,9 +22,9 @@ import { PinModal } from "./PinModal";
 
 const OtherBanksTransfer = () => {
   const dispatch = useDispatch();
-  const nagivate = useNavigate();
 
-  const [selectedBank, setSelectedBank] = useState();
+  const [formValues, setFormValues] = useState("");
+  const [saveAsBeneficiary, setSaveAsBeneficiary] = useState(false);
   const [selectedBeneficiary, setSelectedBeneficiary] = useState();
   const [showTransactionPinModal, setShowTransactionPinModal] = useState(false);
 
@@ -31,38 +32,41 @@ const OtherBanksTransfer = () => {
     setShowTransactionPinModal(!showTransactionPinModal);
   };
 
+  const toggleSwitch = () => {
+    setSaveAsBeneficiary(() => !saveAsBeneficiary);
+  };
+
   const { allBanks } = useSelector((state) => state?.utils);
   const {
-    otherBankTransferLoading,
     validateInterAccountLoading,
     isInterAccountValidated,
-    // getExternalBeneficiaries,
+    getExternalBeneficiaries,
   } = useSelector((state) => state?.transactionHistory);
 
-  const getExternalBeneficiaries = [
-    {
-      id: 1,
-      user_id: 2,
-      beneficiary_account: "1234567890",
-      account_name: "Ajani Chukwudi Musa",
-      bank_name: "GT Bank",
-      bank_code: "000013",
-      deleted_at: null,
-      created_at: "2022-08-26T14:58:58.000000Z",
-      updated_at: "2022-08-26T14:58:58.000000Z",
-    },
-    {
-      id: 1,
-      user_id: 2,
-      beneficiary_account: "1234567890",
-      account_name: "Ajani Chukwudi",
-      bank_name: "GT Bank",
-      bank_code: "000013",
-      deleted_at: null,
-      created_at: "2022-08-26T14:58:58.000000Z",
-      updated_at: "2022-08-26T14:58:58.000000Z",
-    },
-  ];
+  // const getExternalBeneficiaries = [
+  //   {
+  //     id: 1,
+  //     user_id: 2,
+  //     beneficiary_account: "0136201464",
+  //     account_name: "AKINYOSOYE FOLASAYO OLUWASEYI",
+  //     bank_name: "GT Bank",
+  //     bank_code: "000013",
+  //     deleted_at: null,
+  //     created_at: "2022-08-26T14:58:58.000000Z",
+  //     updated_at: "2022-08-26T14:58:58.000000Z",
+  //   },
+  //   {
+  //     id: 1,
+  //     user_id: 2,
+  //     beneficiary_account: "2403056558",
+  //     account_name: "FOLASAYO OLUWASEYI AKINYOSOYE",
+  //     bank_name: "Zenith Bank",
+  //     bank_code: "000015",
+  //     deleted_at: null,
+  //     created_at: "2022-08-26T14:58:58.000000Z",
+  //     updated_at: "2022-08-26T14:58:58.000000Z",
+  //   },
+  // ];
 
   const validationSchema = Yup.object().shape({
     destination_account_no: Yup.string()
@@ -70,9 +74,8 @@ const OtherBanksTransfer = () => {
       .matches(/^[0-9]+$/, "Must be only digits")
       .min(10, "Must be exactly 10 digits")
       .max(10, "Must be exactly 10 digits"),
-    amount: Yup.string()
-      .required()
-      .matches(/^[0-9]+$/, "Must be only digits"),
+    amount: Yup.string().required(),
+    // .matches(/^[0-9]+$/, "Must be only digits"),
     // pin: Yup.string()
     //   .required("Transaction Pin is required")
     //   .matches(/^[0-9]+$/, "Must be only digits")
@@ -80,7 +83,15 @@ const OtherBanksTransfer = () => {
     //   .max(4, "Must be exactly 4 digits"),
   });
 
-  const { register, handleSubmit, formState, reset, control } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState,
+    reset,
+    control,
+    setValue,
+    getValues,
+  } = useForm({
     resolver: yupResolver(validationSchema),
     defaultValues: {
       destination_account_name:
@@ -93,6 +104,7 @@ const OtherBanksTransfer = () => {
   const { errors } = formState;
 
   const getSelectedBeneficiary = (item) => {
+    setValue("destination_bank", item?.bank_code);
     setSelectedBeneficiary(item);
   };
 
@@ -105,10 +117,6 @@ const OtherBanksTransfer = () => {
       };
     });
 
-  const geSelectedBank = (value) => {
-    setSelectedBank(value);
-  };
-
   useEffect(() => {
     dispatch(getAllBanksAsync());
   }, []);
@@ -117,10 +125,8 @@ const OtherBanksTransfer = () => {
     if (e.target.value.length === 10) {
       const variables = {
         account_no: e.target.value,
-        bank_code: selectedBank?.value,
+        bank_code: getValues("destination_bank"),
       };
-
-      console.log("e reach 10", variables);
       await dispatch(validateInterAccountAsync(variables))
         .unwrap()
         .then((res) => {
@@ -131,42 +137,25 @@ const OtherBanksTransfer = () => {
         })
         .catch((err) => {
           toast.error(err?.message);
-          // reset();
+          reset();
         });
     }
   };
 
   const submitForm = (values) => {
+    let formattedAmount = values?.amount.slice(1);
+
     const variables = {
-      destination_bank: selectedBank,
+      destination_bank: values?.destination_bank,
       destination_account_no: values?.destination_account_no,
       destination_account_name: values?.destination_account_name,
-      amount: values?.amount,
+      amount: formattedAmount,
       narration: values?.narration,
+      saveBeneficiary: saveAsBeneficiary,
     };
 
-    console.log(values);
+    setFormValues(variables);
     setShowTransactionPinModal(true);
-
-    // dispatch(otherBankTransferAsync(variables))
-    //   .unwrap()
-    //   .then((res) => {
-    //     if (res?.status === true) {
-    //       console.log(res);
-    //       toast(res.message);
-    //       reset();
-    //       nagivate("/dashboard/capival-transfers/receipt", {
-    //         state: {
-    //           transferDetails: res?.data,
-    //         },
-    //       });
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //     // reset();
-    //     toast.error(err?.message);
-    //   });
   };
 
   useEffect(() => {
@@ -223,7 +212,7 @@ const OtherBanksTransfer = () => {
         <p className="font-medium text-blueTwo text-base uppercase py-5">
           Other Bank Transfer
         </p>
-
+        {/* disbursement_bank_code */}
         <form
           onSubmit={handleSubmit(submitForm)}
           className="grid grid-cols-2 gap-10 px-20"
@@ -232,7 +221,7 @@ const OtherBanksTransfer = () => {
             <Controller
               control={control}
               name="destination_bank"
-              defaultValue=""
+              // defaultValue=""
               render={({ field: { onChange, onBlur, value, ref } }) => (
                 <div>
                   <label className="text-sm font-normal text-blueTwo">
@@ -240,7 +229,8 @@ const OtherBanksTransfer = () => {
                   </label>
                   <Select
                     onBlur={onBlur}
-                    onChange={geSelectedBank}
+                    value={allBanksData.find((c) => c.value === value)}
+                    onChange={(val) => onChange(val.value)}
                     checked={value}
                     inputRef={ref}
                     options={allBanksData}
@@ -279,14 +269,47 @@ const OtherBanksTransfer = () => {
             )}
           </div>
 
-          <div>
-            <SavingsInput
-              placeholder="Amount"
-              register={register("amount")}
-              error={errors?.amount?.message}
-              label="Amount"
-            />
+          <div className="mb-8 md:mb-0">
+            <>
+              {" "}
+              <label
+                htmlFor="amount"
+                className={`text-sm font-normal text-blueTwo`}
+              >
+                Amount
+              </label>
+              <div className="border border-blueTwo/50 rounded-[20px] w-full py-3.5 placeholder-blueThree text-sm pl-[10px] text-blueTwo bg-blueTwo/20">
+                <Controller
+                  control={control}
+                  name="amount"
+                  defaultValue=""
+                  placeholder="Amount"
+                  render={({ field: { onChange, ref, name, value } }) => (
+                    <div className="placeholder:text-blueTwo">
+                      <CurrencyFormat
+                        style={{
+                          backgroundColor: "3B58A8",
+                        }}
+                        displayType={"input"}
+                        thousandSeparator={true}
+                        placeholder="₦0.0"
+                        name={name}
+                        value={value}
+                        prefix={"₦"}
+                        onChange={onChange}
+                      />
+                    </div>
+                  )}
+                />
+              </div>
+            </>
+            {errors.amount && (
+              <span className="text-red-500 text-xs">
+                {errors?.amount?.message}
+              </span>
+            )}
           </div>
+
           <div>
             <SavingsInput
               placeholder="Narration"
@@ -296,12 +319,30 @@ const OtherBanksTransfer = () => {
             />
           </div>
 
+          <div className="flex items-center justify-center col-span-2">
+            <label
+              for="default-toggle"
+              className="inline-flex relative items-center cursor-pointer"
+            >
+              <input
+                type="checkbox"
+                value={saveAsBeneficiary}
+                id="default-toggle"
+                className="sr-only peer"
+                onChange={toggleSwitch}
+              />
+              <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+              <span className="ml-3 text-sm font-medium text-black/60 dark:text-gray-300">
+                Save as beneficiary
+              </span>
+            </label>
+          </div>
+
           <div className="w-[30%] mt-6 justify-self-center col-span-2">
             <Button
               buttonText="Continue"
-              className="rounded-xl"
+              className="rounded-xl mb-8"
               size="lg"
-              isLoading={otherBankTransferLoading}
             />
           </div>
         </form>
@@ -312,7 +353,7 @@ const OtherBanksTransfer = () => {
           children={
             <PinModal
               toggleTransactionPinModal={toggleTransactionPinModal}
-              // formValues={formValues}
+              formValues={formValues}
             />
           }
           isOpen={showTransactionPinModal}

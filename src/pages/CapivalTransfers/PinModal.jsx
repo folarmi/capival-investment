@@ -4,13 +4,13 @@ import { toast } from "react-toastify";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
 import { capivalTransferAsync } from "../../slices/transactionHistory";
 
 import { Button } from "../../atoms";
 import { OTPInput } from "../../components/OTPInput";
+import { saveInternalBeneficiaryAsync } from "../../slices/transactions";
 
-const PinModal = ({ toggleTransactionPinModal, formValues }) => {
+const PinModal = ({ formValues }) => {
   const dispatch = useDispatch();
   const nagivate = useNavigate();
   const { capivalTransferLoading } = useSelector(
@@ -30,6 +30,24 @@ const PinModal = ({ toggleTransactionPinModal, formValues }) => {
       .unwrap()
       .then((res) => {
         if (res?.status === true) {
+          console.log(formValues?.saveBeneficiary);
+          if (formValues?.saveBeneficiary === true) {
+            dispatch(
+              saveInternalBeneficiaryAsync({
+                beneficiary_account: formValues?.destination_account,
+                account_name: formValues?.account_name,
+              })
+            )
+              .unwrap()
+              .then((res) => {
+                if (res?.status === true) {
+                  toast("Beneficiary Saved Succesfully");
+                }
+              })
+              .catch((err) => {
+                toast.error(err?.message);
+              });
+          }
           toast(res.message);
           nagivate("/dashboard/capival-transfers/receipt", {
             state: {

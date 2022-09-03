@@ -6,83 +6,58 @@ import Select from "react-select";
 
 import { Button, SavingsInput } from "../../atoms";
 import { useDispatch, useSelector } from "react-redux";
-import { createNextofKinAsync } from "../../slices/accounts";
+import {
+  addBankAccountAsync,
+  createNextofKinAsync,
+} from "../../slices/accounts";
 import { toast } from "react-toastify";
 import { getAllBanksAsync } from "../../slices/utils";
 import { colourStyles } from "../../utils/HelperFunctions";
-import { validateAccountAsync } from "../../slices/transactionHistory";
+import {
+  validateAccountAsync,
+  validateInterAccountAsync,
+} from "../../slices/transactionHistory";
 
 const BankDetails = ({ setActiveTab }) => {
   const dispatch = useDispatch();
-  const { createNextofKinLoading } = useSelector((state) => state?.accounts);
-  const { validateAccountLoading } = useSelector(
+  const { validateInterAccountLoading, isInterAccountValidated } = useSelector(
     (state) => state.transactionHistory
   );
-  const { allBanks, getAllBanksLoading } = useSelector((state) => state?.utils);
-
-  const [error, setError] = useState("");
-  const [validatedAccountDetails, setValidatedAccountDetails] = useState("");
+  const { allBanks } = useSelector((state) => state?.utils);
+  const { addBankAccountLoading } = useSelector((state) => state?.accounts);
 
   const validationSchema = Yup.object().shape({
-    email: Yup.string()
-      .email("Must be a valid email")
-      .max(255)
-      .required("Email is required"),
-    relationship: Yup.string().required("Relationship is Required"),
-    name: Yup.string().required("Name is Required"),
-    address: Yup.string().required("Address is Required"),
-    phone: Yup.string()
-      .required("Phone Number is Required")
-      .matches(
-        /^(\+{0,})(\d{0,})([(]{1}\d{1,3}[)]{0,}){0,}(\s?\d+|\+\d{2,3}\s{1}\d+|\d+){1}[\s|-]?\d+([\s|-]?\d+){1,2}(\s){0,}$/gm,
-        "Phone number is not valid"
-      ),
+    account_no: Yup.string().required("Account Number is Required"),
+    bank_account_type: Yup.string().required("Account Type is Required"),
+    bank_code: Yup.string().required("You must select a bank"),
   });
 
-  const { register, handleSubmit, formState, reset, control, watch } = useForm({
-    resolver: yupResolver(validationSchema),
-  });
+  const { register, handleSubmit, formState, reset, control, getValues } =
+    useForm({
+      // resolver: yupResolver(validationSchema),
+      defaultValues: {
+        account_name: isInterAccountValidated?.AccountName,
+      },
+    });
 
   const { errors } = formState;
 
-  const watchFields = watch(["account_no"]);
-
-  //   console.log(validatedAccountDetails);
-
-  useEffect(() => {
-    let mounted = false;
-    (async () => {
-      mounted = true;
-      if (mounted && watchFields[0]?.length === 10) {
-        // Run Function
-        dispatch(validateAccountAsync(watchFields[0]))
-          .unwrap()
-          .then((res) => {
-            if (res?.status === true) {
-              console.log(res);
-              setValidatedAccountDetails(res?.data);
-              setValidatedAccountDetails("");
-            }
-          })
-          .catch((err) => {
-            console.log(err?.message);
-            setError(err?.message);
-          });
-      }
-    })();
-    return () => {
-      mounted = false;
-    };
-  }, [watchFields[0]]);
-
   const submitForm = (values) => {
-    // dispatch(createNextofKinAsync(values))
+    const variables = {
+      bank_code: getValues("bank_code")?.value,
+      bank_account_type: values?.bank_account_type,
+      account_name: values?.account_name,
+      account_no: values?.account_no,
+    };
+    console.log(variables);
+
+    // dispatch(addBankAccountAsync(values))
     //   .unwrap()
     //   .then((res) => {
     //     if (res?.status === true) {
     //       // console.log(res?.status);
     //       toast(res?.message);
-    //       setActiveTab("Employer");
+    //       setActiveTab("Documents");
     //       reset();
     //     }
     //   })
@@ -92,16 +67,40 @@ const BankDetails = ({ setActiveTab }) => {
     //   });
   };
 
+  const handleValidateAccount = async (e) => {
+    if (e.target.value.length === 10) {
+      const variables = {
+        account_no: e.target.value,
+        bank_code: getValues("bank_code").value,
+      };
+
+      console.log(getValues("bank_code")?.value);
+
+      await dispatch(validateInterAccountAsync(variables))
+        .unwrap()
+        .then((res) => {
+          if (res?.status) {
+            toast(res?.message);
+            // reset();
+          }
+        })
+        .catch((err) => {
+          toast.error(err?.message);
+          reset();
+        });
+    }
+  };
+
   useEffect(() => {
     dispatch(getAllBanksAsync());
   }, []);
 
   useEffect(() => {
     const defaultValues = {
-      account_name: validatedAccountDetails?.account_name,
+      account_name: isInterAccountValidated?.AccountName,
     };
     reset(defaultValues);
-  }, [validatedAccountDetails, reset]);
+  }, [isInterAccountValidated, reset]);
 
   const allBanksData =
     allBanks &&
@@ -122,34 +121,52 @@ const BankDetails = ({ setActiveTab }) => {
       </p>
 
       <div className="">
-        <Controller
+        {/* <Controller
           control={control}
-          name="disbursement_bank_code"
-          render={({ field: { onChange, onBlur, value, ref } }) => (
+          name="bank_code"
+          // defaultValue=""
+          render={({ field: { onChange, value } }) => (
             <div>
               <label className="text-sm font-normal text-blueTwo">
-                Bank Name
+                Select Bank
               </label>
               <Select
-                onBlur={onBlur}
-                //   onChange={geSelectedBank}
-                checked={value}
-                inputRef={ref}
+                value={allBanksData.find((c) => c.value === value)}
+                onChange={(val) => onChange(val.value)}
                 options={allBanksData}
                 placeholder="Access Bank"
                 styles={colourStyles}
-                isLoading={getAllBanksLoading}
               />
             </div>
           )}
+        /> */}
+        <Controller
+          name="bank_code"
+          control={control}
+          render={({ field }) => (
+            <Select
+              isClearable
+              placeholder="Access Bank"
+              styles={colourStyles}
+              {...field}
+              options={allBanksData}
+            />
+          )}
         />
+        {errors.amount && (
+          <span className="text-red-500 text-xs">
+            {errors?.bank_code?.message}
+          </span>
+        )}
       </div>
 
       <div className="mt-4">
         <SavingsInput
           placeholder="0009251795"
           label="Account Number"
-          register={register("account_no")}
+          register={register("account_no", {
+            onChange: (e) => handleValidateAccount(e),
+          })}
           error={errors?.account_no?.message}
         />
       </div>
@@ -162,11 +179,10 @@ const BankDetails = ({ setActiveTab }) => {
           register={register("account_name")}
           error={errors?.account_name?.message}
         />
-        {validateAccountLoading && (
-          <div>
-            <p className="text-sm text-red-200 font-medium">Validating...</p>
-            <p className="text-sm text-red-200 font-medium">{error}</p>
-          </div>
+        {validateInterAccountLoading && (
+          <span className="text-sm text-red-500 font-medium">
+            Validating...
+          </span>
         )}
       </div>
 
@@ -184,7 +200,7 @@ const BankDetails = ({ setActiveTab }) => {
           buttonText="Next"
           className="rounded-xl mb-10"
           size="lg"
-          isLoading={createNextofKinLoading}
+          isLoading={addBankAccountLoading}
         />
       </div>
     </form>

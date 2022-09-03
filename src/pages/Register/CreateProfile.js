@@ -36,7 +36,8 @@ const CreateProfile = () => {
         }
       })
       .catch((err) => {
-        toast.error(err[0].message);
+        console.log(err);
+        toast.error(err);
         reset();
       });
   };
