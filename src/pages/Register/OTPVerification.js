@@ -9,11 +9,14 @@ import { RegisterInput } from "../../atoms/RegisterInput";
 import { handleNextButton } from "../../slices/multistep";
 import { toast } from "react-toastify";
 import { bvnOtpVerificationAsync } from "../../slices/auth";
+import masked from "../../utils/HelperFunctions";
 
 const OTPVerification = () => {
   const dispatch = useDispatch();
 
   const { bvn } = useSelector((state) => state.multiStep.userInfo);
+  const { phoneNumber } = useSelector((state) => state.multiStep);
+
   const isBvnOtpLoading = useSelector((state) => state.auth.isBvnOtpLoading);
 
   const { value } = useSelector((state) => state.multiStep);
@@ -69,8 +72,8 @@ const OTPVerification = () => {
             OTP Verification
           </p>
           <p className="text-blueTwo font-normal text-sm pb-6">
-            Please enter the 6-digit OTP we sent to your BVN linked phone number
-            090******13
+            Please enter the 6-digit OTP we sent to your BVN linked phone number{" "}
+            {masked(phoneNumber, 5)}
           </p>
         </div>
       </section>

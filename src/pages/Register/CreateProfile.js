@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 
 import { Button } from "../../atoms/Button";
 import { RegisterInput } from "../../atoms/RegisterInput";
-import { handleNextButton } from "../../slices/multistep";
+import { handleNextButton, handlePhoneNumber } from "../../slices/multistep";
 import { verifyBVNAsync } from "../../slices/auth";
 
 const CreateProfile = () => {
@@ -30,13 +30,14 @@ const CreateProfile = () => {
     dispatch(verifyBVNAsync(values?.bvn))
       .unwrap()
       .then((res) => {
-        if (res?.status === true) {
-          toast(res?.message);
-          dispatch(handleNextButton(values?.bvn));
-        }
+        // if (res?.status === true) {
+        toast("BVN Validated");
+        console.log("response here", res);
+        dispatch(handlePhoneNumber(res.phone));
+        dispatch(handleNextButton(values?.bvn));
+        // }
       })
       .catch((err) => {
-        console.log(err);
         toast.error(err);
         reset();
       });

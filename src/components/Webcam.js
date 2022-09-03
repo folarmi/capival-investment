@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
 import Webcam from "react-webcam";
-import { handlePassport } from "../slices/multistep";
+import { Button } from "../atoms";
+import { handleNextButton, handlePassport } from "../slices/multistep";
+import { SimpleDropZone } from "./SimpleDropZoneUploader";
 
 const videoConstraints = {
   width: 250,
@@ -13,28 +15,49 @@ const videoConstraints = {
 export const WebcamCapture = () => {
   const dispatch = useDispatch();
 
-  const [image, setImage] = useState("");
-  const webcamRef = React.useRef(null);
+  const [statusUpload, setStatusUpload] = useState(null);
+  const [passport, setPassport] = useState();
 
-  const capture = React.useCallback(() => {
-    const imageSrc = webcamRef.current.getScreenshot();
-    setImage(imageSrc);
+  const handleChangeStatus = (meta, status) => {
+    setPassport(meta?.file);
+    setStatusUpload(status);
+  };
 
-    fetch(imageSrc)
-      .then((res) => res.blob())
-      .then((blob) => {
-        const file = new File([blob], "passport.jpeg");
-        dispatch(handlePassport(file));
+  const goToNext = () => {
+    dispatch(handlePassport(passport));
+    dispatch(handleNextButton());
+  };
 
-        // for (var value of fd.values()) {
-        //   console.log("multipart value", value);
-        // }
-      });
-  });
+  // const [image, setImage] = useState("");
+  // const webcamRef = React.useRef(null);
+
+  // const capture = React.useCallback(() => {
+  //   const imageSrc = webcamRef.current.getScreenshot();
+  //   setImage(imageSrc);
+
+  //   fetch(imageSrc)
+  //     .then((res) => res.blob())
+  //     .then((blob) => {
+  //       const file = new File([blob], "passport.jpeg");
+  //       dispatch(handlePassport(file));
+
+  //       // for (var value of fd.values()) {
+  //       //   console.log("multipart value", value);
+  //       // }
+  //     });
+  // });
 
   return (
-    <div className="bg-blueThree rounded-[30px] w-1/2">
-      <div className="px-6 pt-6 flex justify-center">
+    <>
+      <div className="bg-blueThree rounded-[30px] w-1/2">
+        <SimpleDropZone
+          handleChangeStatus={handleChangeStatus}
+          statusUpload={statusUpload}
+          imgAvatar="/assets/icons/frontView.svg"
+          viewType="*Front Page"
+        />
+
+        {/* <div className="px-6 pt-6 flex justify-center">
         {image === "" ? (
           <Webcam
             audio={false}
@@ -75,7 +98,15 @@ export const WebcamCapture = () => {
             </button>
           </div>
         )}
+      </div> */}
       </div>
-    </div>
+      <div className="mt-8 w-1/2">
+        <Button
+          buttonText="Continue"
+          className="rounded-2xl"
+          onClick={goToNext}
+        />
+      </div>
+    </>
   );
 };

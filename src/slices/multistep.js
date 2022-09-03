@@ -10,6 +10,7 @@ const initialState = {
     passport: "",
     signature: "",
   },
+  phoneNumber: "",
 };
 
 export const multiStepSlice = createSlice({
@@ -32,6 +33,9 @@ export const multiStepSlice = createSlice({
     // },
     handleNextByCount: (state, action) => {
       state.value += action.payload;
+    },
+    handlePhoneNumber: (state, action) => {
+      state.phoneNumber += action.payload;
     },
     handleGender: (state, action) => {
       state.userInfo.gender = action.payload;
@@ -63,5 +67,6 @@ export const {
   handleEmailAndPassword,
   handlePassport,
   handleSignature,
+  handlePhoneNumber,
 } = actions;
 export default reducer;

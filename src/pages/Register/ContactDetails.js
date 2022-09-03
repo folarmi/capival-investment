@@ -159,7 +159,7 @@ const ContactDetails = () => {
             />
           </div> */}
 
-          <div className="w-1/2">
+          <div className="w-3/4">
             <Button
               size="md"
               buttonText="Continue"

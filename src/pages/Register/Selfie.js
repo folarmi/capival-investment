@@ -8,10 +8,6 @@ import { handleNextButton } from "../../slices/multistep";
 const Selfie = () => {
   const dispatch = useDispatch();
 
-  const goToNext = () => {
-    dispatch(handleNextButton());
-  };
-
   return (
     <div className="w-full h-screen register-bg">
       <div className="m-auto md:w-[80%] lg:w-[70%] xl:w-[54%] mt-16">
@@ -32,13 +28,13 @@ const Selfie = () => {
       <div className="m-auto mt-9 md:w-[80%] lg:w-[70%] xl:w-[54%]">
         <WebcamCapture />
 
-        <div className="mt-8 w-1/2">
+        {/* <div className="mt-8 w-1/2">
           <Button
             buttonText="Continue"
             className="rounded-2xl"
             onClick={goToNext}
           />
-        </div>
+        </div> */}
       </div>
     </div>
   );

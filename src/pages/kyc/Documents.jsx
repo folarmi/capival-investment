@@ -23,7 +23,6 @@ const Documents = () => {
   const [selectedIdType, setSelectedIdType] = useState("");
 
   const handleChangeStatus = (meta, status) => {
-    console.log("file", meta.file);
     setDriverFront(meta?.file);
     setStatusUpload(status);
   };

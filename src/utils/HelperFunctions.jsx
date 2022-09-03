@@ -14,3 +14,25 @@ export const colourStyles = {
     fontSize: "14px",
   }),
 };
+
+export default function masked(str, n) {
+  var maskingSymbol = "*"; // could make this a parameter
+
+  // n might be longer than string
+  var lengthToMask = Math.min(str.length, n);
+  var lengthToShow = Math.max(0, str.length - n);
+
+  // build parts
+  var maskedPart = "";
+  if (lengthToMask > 0) {
+    // repeat count must be positive
+    maskedPart = maskingSymbol.repeat(lengthToMask);
+  }
+  var shownPart = "";
+  if (lengthToShow > 0) {
+    // slice count must be non zero
+    shownPart = str.slice(-lengthToShow);
+  }
+
+  return maskedPart + shownPart;
+}
