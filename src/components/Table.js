@@ -76,44 +76,46 @@ const Table = ({
             // <div className="flex justify-center items-center">
             <Loader />
           ) : (
-            <table
-              {...getTableProps()}
-              className="w-full overflow-scroll bg-white border-collapse rounded-2xl"
-            >
-              <thead className="rounded-2xl">
-                {headerGroups.map((headerGroup) => (
-                  <tr {...headerGroup.getHeaderGroupProps()}>
-                    {headerGroup.headers.map((column) => (
-                      <th
-                        {...column.getHeaderProps()}
-                        className="font-medium text-sm whitespace-nowrap text-blueTwo py-4 text-left pl-4 bg-blueTwo/20"
-                      >
-                        {column.render("Header")}
-                      </th>
-                    ))}
-                  </tr>
-                ))}
-              </thead>
-              <tbody {...getTableBodyProps()} className="bg-blueTwo/5 ">
-                {rows.map((row) => {
-                  prepareRow(row);
-                  return (
-                    <tr {...row.getRowProps()} className="">
-                      {row.cells.map((cell) => {
-                        return (
-                          <td
-                            {...cell.getCellProps()}
-                            className="font-normal py-2 xl:text-lg px-3"
-                          >
-                            {cell.render("Cell")}
-                          </td>
-                        );
-                      })}
+            <div className="overflow-auto">
+              <table
+                {...getTableProps()}
+                className="w-full overflow-scroll bg-white border-collapse rounded-2xl"
+              >
+                <thead className="rounded-2xl">
+                  {headerGroups.map((headerGroup) => (
+                    <tr {...headerGroup.getHeaderGroupProps()}>
+                      {headerGroup.headers.map((column) => (
+                        <th
+                          {...column.getHeaderProps()}
+                          className="font-medium text-sm whitespace-nowrap text-blueTwo py-4 text-left pl-4 bg-blueTwo/20"
+                        >
+                          {column.render("Header")}
+                        </th>
+                      ))}
                     </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+                  ))}
+                </thead>
+                <tbody {...getTableBodyProps()} className="bg-blueTwo/5 ">
+                  {rows.map((row) => {
+                    prepareRow(row);
+                    return (
+                      <tr {...row.getRowProps()} className="">
+                        {row.cells.map((cell) => {
+                          return (
+                            <td
+                              {...cell.getCellProps()}
+                              className="font-normal py-2 xl:text-lg px-3"
+                            >
+                              {cell.render("Cell")}
+                            </td>
+                          );
+                        })}
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
           )}
 
           {ifPagination && <PaginatedItems itemsPerPage={4} />}

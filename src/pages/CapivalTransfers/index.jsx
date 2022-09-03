@@ -248,7 +248,7 @@ const CapivalTransfer = () => {
             />
           </div>
 
-          <div className="flex items-center justify-center col-span-2">
+          <div className="mt-4 lg:mt-0 flex items-center justify-center col-span-2">
             <label
               for="default-toggle"
               className="inline-flex relative items-center cursor-pointer"

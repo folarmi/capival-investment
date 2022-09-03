@@ -122,7 +122,7 @@ const TransactionHistory = () => {
       {getTransactionHistoryLoading ? (
         <Loader />
       ) : (
-        <section className="mt-8 mx-4 md:mx-7">
+        <section className="mt-8 mx-2 md:mx-7">
           <TableHeader
             header="Recent Transactions"
             pageNumber={`Showing 1-${transactionHistory.length} of ${transactionHistory.length} transactions`}

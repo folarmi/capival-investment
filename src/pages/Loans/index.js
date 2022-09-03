@@ -138,7 +138,7 @@ const Loans = () => {
                 {" "}
                 {activeLoans?.map((item) => {
                   return (
-                    <div className="mt-4 mb-4 whitespace-nowrap grid grid-cols-5  bg-blueTwo/5 py-3">
+                    <div className="hidden mt-4 mb-4 whitespace-nowrap lg:grid grid-cols-5  bg-blueTwo/5 py-3">
                       <p className="text-base text-[#AE1F24] font-medium pl-6 col-span-1">
                         <CurrencyFormat
                           value={item?.AmountLeft}

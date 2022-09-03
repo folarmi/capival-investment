@@ -32,7 +32,7 @@ const DashboardHeader = ({ setSidebar, sidebar }) => {
           <img
             src="/assets/icons/harmburger.svg"
             alt="harmburger"
-            className="md:hidden cursor-pointer"
+            className="ml-3 md:hidden cursor-pointer"
             onClick={toggleSidebar}
           />
           <div className="lg:ml-6 w-[30%] lg:mr-[10%]">
