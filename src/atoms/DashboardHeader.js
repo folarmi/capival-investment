@@ -3,9 +3,7 @@ import { useSelector } from "react-redux";
 import ModalPopup from "../components/ModalPopup";
 import { BvnModal } from "./BvnModal";
 
-import { SearchBar } from "./SearchBar";
-
-const DashboardHeader = () => {
+const DashboardHeader = ({ setSidebar, sidebar }) => {
   const userObject = useSelector((state) => state.auth.login?.user?.user);
   const userAvatar = useSelector(
     (state) => state.auth?.login?.user?.authorisation?.user_data?.passport
@@ -15,6 +13,10 @@ const DashboardHeader = () => {
 
   const toggleBVNModal = () => {
     setShowBVN(!showBVN);
+  };
+
+  const toggleSidebar = () => {
+    setSidebar(!sidebar);
   };
   // console.log(userAvatar);
 
@@ -26,49 +28,61 @@ const DashboardHeader = () => {
           zIndex: 20,
         }}
       >
-        <section className="flex flex-row-reverse md:flex-row items-center">
-          <div className="lg:ml-6 w-[10%] lg:mr-[10%]">
+        <div className="w-full flex items-center justify-between lg:w-[25%] mx-4 md:mx-0">
+          <img
+            src="/assets/icons/harmburger.svg"
+            alt="harmburger"
+            className="md:hidden cursor-pointer"
+            onClick={toggleSidebar}
+          />
+          <div className="lg:ml-6 w-[30%] lg:mr-[10%]">
             <img
               src="/assets/icons/logo.svg"
               alt="capival-logo"
-              // className="block"
+              className="lg:w-full"
               loading="lazy"
             />
           </div>
+        </div>
 
-          <div className="flex whitespace-nowrap items-center mr-[3%]">
-            {userAvatar ? (
-              <img
-                src={userAvatar}
-                alt="avatar"
-                className="w-12 md:h-12 rounded-full"
-                loading="lazy"
-              />
-            ) : (
-              <div class="inline-flex overflow-hidden relative justify-center items-center w-12 h-12 bg-gray-100 rounded-full dark:bg-gray-600">
-                <span class="font-medium text-gray-600 dark:text-gray-300">
-                  {userObject?.customer_data?.Firstname.charAt(0)}
-                </span>
-              </div>
-            )}
-            <p className="text-base text-blueTwo font-normal pl-4">
-              Hi,{" "}
-              <span className="font-semibold">
-                {userObject?.customer_data?.Firstname}
-              </span>{" "}
-            </p>
-          </div>
-        </section>
+        <div className="hidden md:flex whitespace-nowrap items-center mr-[3%]">
+          {userAvatar ? (
+            <img
+              src={userAvatar}
+              alt="avatar"
+              className="w-12 md:h-12 rounded-full"
+              loading="lazy"
+            />
+          ) : (
+            // <div class="inline-flex overflow-hidden relative justify-center items-center w-12 h-12 bg-gray-100 rounded-full dark:bg-gray-600">
+            //   <span class="font-medium text-gray-600 dark:text-gray-300">
+            //     {userObject?.customer_data?.Firstname.charAt(0)}
+            //   </span>
+            // </div>
+            <img
+              src="/assets/icons/defaultAvatar.svg"
+              alt="avatar"
+              className="w-12 md:h-12 rounded-full"
+              loading="lazy"
+            />
+          )}
+          <p className="text-base text-blueTwo font-normal pl-4">
+            Hi,{" "}
+            <span className="font-semibold">
+              {userObject?.customer_data?.Firstname}
+            </span>{" "}
+          </p>
+        </div>
 
         <div
-          className="hidden md:flex items-center lg:mr-[42%] cursor-pointer"
+          className="hidden md:flex items-center whitespace-nowrap lg:mr-[42%] cursor-pointer"
           onClick={toggleBVNModal}
         >
           <p className="text-[15px] text-blueTwo font-normal w-fit">Show BVN</p>
           <img src="/assets/icons/rightArrow.svg" alt="avatar" loading="lazy" />
         </div>
 
-        <div className="hidden md:flex items-center  justify-self-end">
+        <div className="hidden md:flex items-center justify-self-end">
           {/* <SearchBar /> */}
 
           <div className="flex items-center ml-[5%] cursor-pointer">
