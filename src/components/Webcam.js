@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
-import Webcam from "react-webcam";
+// import Webcam from "react-webcam";
 import { Button } from "../atoms";
 import { handleNextButton, handlePassport } from "../slices/multistep";
 import { SimpleDropZone } from "./SimpleDropZoneUploader";
 
-const videoConstraints = {
-  width: 250,
-  height: 250,
-  facingMode: "user",
-};
+// const videoConstraints = {
+//   width: 250,
+//   height: 250,
+//   facingMode: "user",
+// };
 
 export const WebcamCapture = () => {
   const dispatch = useDispatch();
@@ -24,6 +25,9 @@ export const WebcamCapture = () => {
   };
 
   const goToNext = () => {
+    if (passport === undefined) {
+      toast.error("You must upload a passport");
+    }
     dispatch(handlePassport(passport));
     dispatch(handleNextButton());
   };
@@ -49,12 +53,12 @@ export const WebcamCapture = () => {
 
   return (
     <>
-      <div className="bg-blueThree rounded-[30px] w-1/2">
+      <div className="mt-9 md:w-[80%] lg:w-[70%]">
         <SimpleDropZone
           handleChangeStatus={handleChangeStatus}
           statusUpload={statusUpload}
           imgAvatar="/assets/icons/frontView.svg"
-          viewType="*Front Page"
+          viewType="Passport"
         />
 
         {/* <div className="px-6 pt-6 flex justify-center">

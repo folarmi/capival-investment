@@ -3,17 +3,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import Webcam from "react-webcam";
+// import Webcam from "react-webcam";
 import { Button } from "../atoms";
-import { handleSignature } from "../slices/multistep";
+// import { handleSignature } from "../slices/multistep";
 import { registerUserAsync } from "../slices/auth";
 import { SimpleDropZone } from "./SimpleDropZoneUploader";
 
-const videoConstraints = {
-  width: 250,
-  height: 250,
-  facingMode: "user",
-};
+// const videoConstraints = {
+//   width: 250,
+//   height: 250,
+//   facingMode: "user",
+// };
 
 export const WebcamSignature = () => {
   let imageSrc;
@@ -25,7 +25,6 @@ export const WebcamSignature = () => {
 
   // console.log("userIfo:", userInfo, "bvn", bvnData);
 
-  const [ifUpload, setIfUpload] = useState(false);
   const [statusUpload, setStatusUpload] = useState(null);
   const [signature, setSignature] = useState();
 
@@ -55,35 +54,36 @@ export const WebcamSignature = () => {
     formData.append("email", userInfo?.email);
     formData.append("password", userInfo?.password);
     formData.append("passport", userInfo?.passport);
-    formData.append("signature", signature);
+    formData.append("signature", signature || " ");
 
     // fetch(imageSrc)
     //   .then((res) => res.blob())
     //   .then((blob) => {
     //     const file = new File([blob], "signature.jpeg");
 
-    if (ifUpload === true) {
-      // dispatch(handleSignature(file));
-      dispatch(registerUserAsync(formData))
-        .unwrap()
-        .then((res) => {
-          if (res?.status === true) {
-            toast(res?.message);
-            navigate("/");
-          }
-        })
-        .catch((err) => {
-          toast.error(err?.message);
-        });
+    // if (ifUpload === true) {
+    // dispatch(handleSignature(file));
+    dispatch(registerUserAsync(formData))
+      .unwrap()
+      .then((res) => {
+        if (res?.status === true) {
+          toast(res?.message);
+          navigate("/");
+        }
+      })
+      .catch((err) => {
+        toast.error(err?.message);
+      });
 
-      for (var value of formData.values()) {
-        console.log("", value);
-      }
+    for (var value of formData.values()) {
+      console.log("", value);
+      // }
       // for (var value of variables?.signature?.values()) {
       //   console.log("signature", value);
       // }
-    } else {
-      console.log("didn't choose");
+      // } else {
+      //   console.log("didn't choose");
+      // }
     }
   };
 
@@ -93,7 +93,7 @@ export const WebcamSignature = () => {
         handleChangeStatus={handleChangeStatus}
         statusUpload={statusUpload}
         imgAvatar="/assets/icons/frontView.svg"
-        viewType="*Front Page"
+        viewType="Signature"
       />
 
       {/* <div className="bg-blueThree rounded-[30px] w-1/2">
@@ -145,21 +145,20 @@ export const WebcamSignature = () => {
         <Button
           buttonText="Upload Now"
           className="rounded-2xl"
-          isLoading={registerUserIsLoading}
-          onClick={() => {
-            setIfUpload(true);
-            registerWithSignature();
-          }}
+          // isLoading={registerUserIsLoading}
+          isLoading={signature ? registerUserIsLoading : false}
+          // onClick={() => {
+          //   setIfUpload(true);
+          //   registerWithSignature();
+          // }}
+          onClick={registerWithSignature}
         />
 
         <Button
           buttonText="Upload Later"
           className="rounded-2xl mt-6"
-          isLoading={registerUserIsLoading}
-          onClick={() => {
-            setIfUpload(false);
-            registerWithSignature();
-          }}
+          isLoading={signature ? false : registerUserIsLoading}
+          onClick={registerWithSignature}
         />
       </div>
     </div>
