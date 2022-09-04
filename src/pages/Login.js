@@ -78,6 +78,7 @@ const Login = () => {
             icon="/assets/icons/lock.svg"
             register={register("password")}
             error={errors?.password?.message}
+            type="password"
           />
           <Button
             buttonText="Login"
