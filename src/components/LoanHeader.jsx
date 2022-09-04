@@ -1,9 +1,9 @@
 import CurrencyFormat from "react-currency-format";
 
-const LoanHeader = ({ title, amount }) => {
+const LoanHeader = ({ title, amount, className }) => {
   return (
     <div
-      className="flex flex-col items-center justify-center bg-center bg-no-repeat py-2 rounded-xl mx-[25%]"
+      className={`flex flex-col items-center justify-center bg-center bg-no-repeat py-2 rounded-xl mx-[25%] ${className}`}
       style={{
         backgroundImage: `url(${"/assets/images/repaymentBg.svg"})`,
       }}

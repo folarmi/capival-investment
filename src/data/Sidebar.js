@@ -51,12 +51,12 @@ export const SidebarMenuItems = [
       //   path: "/customers/oystr-smart-costumers",
       //   icon: feedback,
       // },
-      {
-        id: "4",
-        item: "FAQ",
-        path: "dashboard/update-kyc",
-        icon: faq,
-      },
+      // {
+      //   id: "4",
+      //   item: "FAQ",
+      //   path: "dashboard/update-kyc",
+      //   icon: faq,
+      // },
     ],
   },
   {

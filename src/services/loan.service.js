@@ -16,6 +16,16 @@ const getLoanDetails = async (loanId) => {
   return response.data;
 };
 
+const getLoanSchedule = async (loanId) => {
+  const response = await api.get(`${UrlRoute.getLoanSchedule}/${loanId}`);
+  return response.data;
+};
+
+const liquidateLoan = async (loanId) => {
+  const response = await api.get(`${UrlRoute.liquidateLoan}/${loanId}`);
+  return response.data;
+};
+
 const createLoan = async (values) => {
   const response = await api.post(UrlRoute.createLoan, values);
   return response.data;
@@ -26,6 +36,8 @@ const loanService = {
   getPendingLoans,
   getLoanDetails,
   createLoan,
+  getLoanSchedule,
+  liquidateLoan,
 };
 
 export default loanService;

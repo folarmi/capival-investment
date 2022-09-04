@@ -86,7 +86,7 @@ const SubMenu = ({ item }) => {
         </NavLink>
       )}
 
-      <div className="mt-3">
+      <div className="mt-3 ml-4">
         {dropDown &&
           item?.subMenu.map((item) => {
             return (

@@ -61,14 +61,48 @@ export const createLoanAsync = createAsyncThunk(
   }
 );
 
+export const getLoanScheduleAsync = createAsyncThunk(
+  "loan/loanSchedule",
+  async (values, { rejectWithValue }) => {
+    try {
+      const response = await LoanService.getLoanSchedule(values);
+      return response;
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const liquidateLoanAsync = createAsyncThunk(
+  "loan/liquidateLoan",
+  async (values, { rejectWithValue }) => {
+    try {
+      const response = await LoanService.liquidateLoan(values);
+      return response;
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 const initialState = {
   getActiveLoanLoading: false,
   getPendingLoanLoading: false,
   getLoanDetailsLoading: false,
   createLoanIsLoading: false,
+  getLoanScheduleIsLoading: false,
+  liquidateLoanIsLoading: false,
   activeLoans: "",
   pendingLoans: "",
   loanDetails: "",
+  loanSchedule: "",
+  liquidateLoan: "",
 };
 
 const loanSlice = createSlice({
@@ -115,6 +149,26 @@ const loanSlice = createSlice({
     },
     [createLoanAsync.rejected]: (state) => {
       state.createLoanIsLoading = false;
+    },
+    [getLoanScheduleAsync.pending]: (state) => {
+      state.getLoanScheduleIsLoading = true;
+    },
+    [getLoanScheduleAsync.fulfilled]: (state, action) => {
+      state.loanSchedule = action.payload.data;
+      state.getLoanScheduleIsLoading = false;
+    },
+    [getLoanScheduleAsync.rejected]: (state) => {
+      state.getLoanScheduleIsLoading = false;
+    },
+    [liquidateLoanAsync.pending]: (state) => {
+      state.liquidateLoanIsLoading = true;
+    },
+    [liquidateLoanAsync.fulfilled]: (state, action) => {
+      state.liquidateLoan = action.payload.data;
+      state.liquidateLoanIsLoading = false;
+    },
+    [liquidateLoanAsync.rejected]: (state) => {
+      state.liquidateLoanIsLoading = false;
     },
   },
 });

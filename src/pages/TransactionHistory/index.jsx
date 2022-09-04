@@ -125,7 +125,7 @@ const TransactionHistory = () => {
         <section className="mt-8 mx-2 md:mx-7">
           <TableHeader
             header="Recent Transactions"
-            pageNumber={`Showing 1-${transactionHistory.length} of ${transactionHistory.length} transactions`}
+            pageNumber={`Showing 1-${transactionHistory?.length} of ${transactionHistory?.length} transactions`}
           />
 
           <div className="mt-2">

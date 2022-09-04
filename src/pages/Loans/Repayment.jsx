@@ -2,51 +2,39 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { LoanHeader, TableHeader } from "../../components";
-import { getLoanDetailsAsync } from "../../slices/loan";
+import { getLoanDetailsAsync, getLoanScheduleAsync } from "../../slices/loan";
 import { RepaymentCard } from "./RepaymentCard";
+import CurrencyFormat from "react-currency-format";
 
 const Repayment = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
-  const { loanDetails } = useSelector((state) => state.loans);
+  const { loanSchedule } = useSelector((state) => state.loans);
   const singleLoanDetails = location?.state.loan;
 
-  const gotToLoanDetailsPage = (item) => {
-    navigate("/dashboard/loans/details", {
-      state: {
-        loan: item,
-      },
-    });
-  };
-
-  const gotToSettleLoanPage = () => {
-    navigate("/dashboard/loans/settle-loan");
-  };
-
-  const data = [
-    {
-      id: "1",
-      amountPaid: "N 600,000",
-      date: "21st March 2022",
-      narration: "CAPIVAL-WEB-LOANRE-90920280",
-    },
-    {
-      id: "2",
-      amountPaid: "N 600,000",
-      date: "21st March 2022",
-      narration: "CAPIVAL-WEB-LOANRE-90920280",
-    },
-    {
-      id: "3",
-      amountPaid: "N 600,000",
-      date: "21st March 2022",
-      narration: "CAPIVAL-WEB-LOANRE-90920280",
-    },
+  const repaymentLoanHeader = [
+    { id: "1", name: "Due Date" },
+    { id: "2", name: "Amount Paid" },
+    { id: "3", name: "Status" },
+    { id: "4", name: "Closing Balance" },
   ];
+
+  // const gotToLoanDetailsPage = (item) => {
+  //   navigate("/dashboard/loans/details", {
+  //     state: {
+  //       loan: item,
+  //     },
+  //   });
+  // };
+
+  // const gotToSettleLoanPage = () => {
+  //   navigate("/dashboard/loans/settle-loan");
+  // }
 
   useEffect(() => {
     dispatch(getLoanDetailsAsync(singleLoanDetails?.LoanID));
+    dispatch(getLoanScheduleAsync(singleLoanDetails?.LoanID));
   }, []);
 
   return (
@@ -56,6 +44,7 @@ const Repayment = () => {
         <LoanHeader
           amount={singleLoanDetails?.AmountLeft}
           title="Outstanding"
+          className="mb-4"
         />
         {/* </div> */}
 
@@ -83,7 +72,7 @@ const Repayment = () => {
               onClick={gotToNextRepaymentPage}
             />
           </div> */}
-          <div
+          {/* <div
             className="cursor-pointer mr-6"
             onClick={() => gotToLoanDetailsPage(singleLoanDetails)}
           >
@@ -93,55 +82,81 @@ const Repayment = () => {
               className="w-40 h-40"
               loading="lazy"
             />
-          </div>
-          <div className="cursor-pointer" onClick={gotToSettleLoanPage}>
+          </div> */}
+          {/* <div className="cursor-pointer" onClick={gotToSettleLoanPage}>
             <img
               src="/assets/images/settleLoan.svg"
               alt="settle loan"
               className="w-40 h-40"
               loading="lazy"
             />
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="mt-8 mx-4 md:mx-7">
         <TableHeader
           header="Repayment History"
-          pageNumber="Showing 1-3 of 3 transactions"
+          pageNumber={`Showing 1-${loanSchedule?.length} of ${loanSchedule?.length} transactions`}
         />
-
         <main className="mt-4 md:mt-0 bg-blueTwo/10 rounded-xl overflow-scroll">
-          <section className="bg-blueTwo/20 rounded-xl py-4 md:pr-[40%] grid grid-cols-3 gap-32 md:gap-4">
-            <p className="font-medium whitespace-nowrap text-base text-blueTwo pl-6">
-              Amount Paid
-            </p>
-            <p className="font-medium whitespace-nowrap text-base text-blueTwo">
-              Paid on (Date)
-            </p>
-            <p className="font-medium whitespace-nowrap text-base text-blueTwo">
-              Narration
-            </p>
+          <section className="bg-blueTwo/20 rounded-xl py-4 overflow-scroll">
+            <div className="grid grid-cols-4 items-center pl-6">
+              {repaymentLoanHeader.map((header) => {
+                return (
+                  <div>
+                    <p className="font-medium whitespace-nowrap text-base text-blueTwo">
+                      {header?.name}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
           </section>
 
           <div className="bg-blueTwo/10 overflow-scroll">
-            {data.map((item) => {
-              return (
-                <div
-                  className="w-full grid grid-cols-3 gap-32 md:gap-4 mt-4 mb-4 bg-blueTwo/5 py-3 md:pr-[40%]"
-                  key={item?.id}
-                >
-                  <p className="whitespace-nowrap text-base text-blueTwo pl-6 font-normal ">
-                    {item?.amountPaid}
-                  </p>
-                  <p className="text-base whitespace-nowrap text-blueTwo font-normal ">
-                    {item?.date}
-                  </p>
-                  <p className="text-base whitespace-nowrap text-blueTwo font-normal ">
-                    {item?.narration}
-                  </p>{" "}
-                </div>
-              );
-            })}
+            {loanSchedule &&
+              loanSchedule?.map((item) => {
+                return (
+                  <div className="hidden mt-4 mb-4 whitespace-nowrap lg:grid grid-cols-4 bg-blueTwo/5 py-3 pl-6">
+                    <p className="whitespace-nowrap text-base text-blueTwo font-normal ">
+                      {item?.DueDate}
+                    </p>
+                    <p className="text-base whitespace-nowrap text-blueTwo font-normal col-span-1">
+                      {/* <CurrencyFormat
+                        value={Math.round(
+                          item?.Principal.toString() +
+                            item?.InterestAmount.toString()
+                        )}
+                        displayType={"number"}
+                        thousandSeparator={true}
+                        prefix={"₦"}
+                      /> */}
+                      {/* {Math.round(item?.Principal + item?.InterestAmount)} */}
+                      {item?.Principal + item?.InterestAmount}
+                      {/* {Math.round(item?.Principal + item?.InterestAmount)} */}
+                    </p>
+                    <p
+                      className="whitespace-nowrap text-base font-medium"
+                      style={{
+                        color:
+                          item?.PaymentStatus === "Paid"
+                            ? "#3B58A8"
+                            : "rgb(220 38 38)",
+                      }}
+                    >
+                      {item?.PaymentStatus === "Paid" ? "Paid" : "Unpaid"}
+                    </p>
+                    <p className="text-base whitespace-nowrap text-blueTwo font-normal col-span-1">
+                      <CurrencyFormat
+                        value={item?.ClosingBalance}
+                        displayType={"text"}
+                        thousandSeparator={true}
+                        prefix={"₦"}
+                      />
+                    </p>
+                  </div>
+                );
+              })}
           </div>
         </main>
 
