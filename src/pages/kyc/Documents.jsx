@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
@@ -20,7 +20,7 @@ const Documents = () => {
   const [driverBack, setDriverBack] = useState();
   const [govtIdFront, setGovtIdFront] = useState();
   const [govtIDBack, setGovtIDBack] = useState();
-  const [selectedIdType, setSelectedIdType] = useState("");
+  const [selectedIdType, setSelectedIdType] = useState("Driver's License");
 
   const handleChangeStatus = (meta, status) => {
     setDriverFront(meta?.file);
@@ -43,11 +43,6 @@ const Documents = () => {
   };
 
   const { control } = useForm({});
-
-  const geSelectedIDType = (item) => {
-    console.log(item);
-    setSelectedIdType(item?.label);
-  };
 
   const submitForm = () => {
     if (driverFront === undefined) {
@@ -95,6 +90,14 @@ const Documents = () => {
     },
   ];
 
+  const getSelectedIDType = (item) => {
+    setSelectedIdType(item?.label);
+  };
+
+  // useEffect(() => {
+  //   getSelectedIDType();
+  // }, [selectedIdType]);
+
   return (
     <div>
       <p className="text-blueTwo uppercase font-medium text-2xl text-center">
@@ -108,14 +111,14 @@ const Documents = () => {
         <Controller
           control={control}
           name=""
-          render={({ field: { onChange, onBlur, value, ref } }) => (
+          render={({ field: { onBlur, value, ref } }) => (
             <div>
               <label className="text-sm font-normal text-blueTwo">
                 ID Type
               </label>
               <Select
                 onBlur={onBlur}
-                onChange={geSelectedIDType}
+                onChange={getSelectedIDType}
                 checked={value}
                 inputRef={ref}
                 options={idOptions}
@@ -128,7 +131,7 @@ const Documents = () => {
       </div>
 
       <p className="text-sm text-blueTwo pb-4 text-center">
-        Upload Front & Back Snapshot of {selectedIdType?.value}
+        Upload Front & Back Snapshot of {selectedIdType}
       </p>
 
       <div className="flex items-center justify-between">

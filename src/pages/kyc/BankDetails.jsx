@@ -26,10 +26,17 @@ const BankDetails = ({ setActiveTab }) => {
   const { allBanks } = useSelector((state) => state?.utils);
   const { addBankAccountLoading } = useSelector((state) => state?.accounts);
 
+  const [selectedbank, setSelectedbank] = useState("");
+  const [error, setError] = useState("");
+
+  const getSelectedBank = (item) => {
+    setSelectedbank(item?.value);
+  };
+
   const validationSchema = Yup.object().shape({
     account_no: Yup.string().required("Account Number is Required"),
     bank_account_type: Yup.string().required("Account Type is Required"),
-    bank_code: Yup.string().required("You must select a bank"),
+    // bank_code: Yup.string().required("You must select a bank"),
   });
 
   const { register, handleSubmit, formState, reset, control, getValues } =
@@ -43,15 +50,20 @@ const BankDetails = ({ setActiveTab }) => {
   const { errors } = formState;
 
   const submitForm = (values) => {
+    console.log(values);
+    if (selectedbank === undefined) {
+      setError("Bank Name is Required");
+    } else {
+      setError("");
+    }
+
     const variables = {
-      bank_code: getValues("bank_code")?.value,
+      bank_code: selectedbank,
       bank_account_type: values?.bank_account_type,
       account_name: values?.account_name,
       account_no: values?.account_no,
     };
-    console.log(variables);
-
-    // dispatch(addBankAccountAsync(values))
+    // dispatch(addBankAccountAsync(variables))
     //   .unwrap()
     //   .then((res) => {
     //     if (res?.status === true) {
@@ -71,7 +83,7 @@ const BankDetails = ({ setActiveTab }) => {
     if (e.target.value.length === 10) {
       const variables = {
         account_no: e.target.value,
-        bank_code: getValues("bank_code").value,
+        bank_code: selectedbank,
       };
 
       console.log(getValues("bank_code")?.value);
@@ -148,16 +160,14 @@ const BankDetails = ({ setActiveTab }) => {
               isClearable
               placeholder="Access Bank"
               styles={colourStyles}
+              value={selectedbank}
               {...field}
               options={allBanksData}
+              onChange={getSelectedBank}
             />
           )}
         />
-        {errors.amount && (
-          <span className="text-red-500 text-xs">
-            {errors?.bank_code?.message}
-          </span>
-        )}
+        {error && <span className="text-red-500 text-xs">{error}</span>}
       </div>
 
       <div className="mt-4">
