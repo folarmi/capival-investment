@@ -3,10 +3,16 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { BillCard } from "../../components";
 import WalletDetailsHeader from "../Wallet/WalletDetailsHeader";
-import { getBillPaymentCategories } from "../../slices/billPayment";
+import {
+  getBillPaymentCategories,
+  singleBillPaymentCategoryAsync,
+} from "../../slices/billPayment";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const BillPayment = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { billPaymentCategories } = useSelector((state) => state.billPayment);
 
@@ -16,8 +22,24 @@ const BillPayment = () => {
       return {
         value: item?.categoryName?.replace(/ /g, "_").replace(/&/g, ""),
         label: item?.categoryName,
+        id: item?.categoryId,
       };
     });
+
+  const goToSingleCategoryPage = (item) => {
+    dispatch(singleBillPaymentCategoryAsync(item?.id))
+      .unwrap()
+      .then((res) => {
+        if (res?.status === true) {
+          navigate("/dashboard/bill-payment/category", {
+            state: res?.data,
+          });
+        }
+      })
+      .catch((err) => {
+        toast.error(err?.message);
+      });
+  };
 
   useEffect(() => {
     dispatch(getBillPaymentCategories());
@@ -34,8 +56,9 @@ const BillPayment = () => {
               return (
                 <BillCard
                   cardName={item?.label}
-                  path={item?.value}
+                  // path={item?.value}
                   id={item?.categoryId}
+                  onClick={() => goToSingleCategoryPage(item)}
                 />
               );
             })}

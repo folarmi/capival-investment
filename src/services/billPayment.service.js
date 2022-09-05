@@ -6,13 +6,20 @@ const billPaymentCategories = async () => {
   return response.data;
 };
 
-// const deleteCustomer = async (values) => {
-//   const response = await api.delete(`${UrlRoute.getSingleCustomer}/${values}`);
-//   return response.data;
-// };
+const billPaymentCategory = async (id) => {
+  const response = await api.get(`${UrlRoute.billPaymentCategory}/${id}`);
+  return response.data;
+};
+
+const getBillerProducts = async (id) => {
+  const response = await api.get(`${UrlRoute.getBillerProducts}/${id}`);
+  return response.data;
+};
 
 const billPaymentService = {
   billPaymentCategories,
+  billPaymentCategory,
+  getBillerProducts,
 };
 
 export default billPaymentService;

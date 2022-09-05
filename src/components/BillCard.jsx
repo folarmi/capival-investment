@@ -1,9 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 const BillCard = ({ cardName, onClick, path, id }) => {
   return (
-    <Link
+    <div
       to={path}
       className="py-4 max-w-[192px] bg-[#CBE1FD]/50 rounded-2xl h-[70px]"
       onClick={onClick}
@@ -16,7 +16,7 @@ const BillCard = ({ cardName, onClick, path, id }) => {
       <p className="text-center font-normal text-sm text-blueTwo flex justify-center items-center px-4 max-w-xl">
         {cardName}
       </p>
-    </Link>
+    </div>
   );
 };
 

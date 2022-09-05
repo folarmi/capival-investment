@@ -24,6 +24,8 @@ const forgotPassword = "auth/forgot-password";
 const forgotPasswordOTP = "auth/forgot-password/validate-otp";
 const changePassword = "accounts/change-password";
 const getBillPaymentCategories = "bills-payment/get-categories";
+const billPaymentCategory = "bills-payment/get-billers/category";
+const getBillerProducts = "bills-payment/biller/get-products";
 const getTransactionHistory = "transactions/recent-transactions";
 const datedTransactionHistory = "transactions/transaction-history";
 const getInternalBeneficiaries =
@@ -100,6 +102,8 @@ const UrlRoute = {
   addBankAccounts,
   getLoanSchedule,
   liquidateLoan,
+  billPaymentCategory,
+  getBillerProducts,
 };
 
 export default UrlRoute;

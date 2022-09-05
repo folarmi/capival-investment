@@ -19,7 +19,6 @@ export * from "./Loans/NextRepayment";
 export * from "./Loans/LoanDetails";
 export * from "./Loans/SettleLoan";
 export * from "./BillPayment/index";
-export * from "./BillPayment/CableTV";
 export * from "./MobileTopUp/index";
 export * from "./MobileTopUp/ConfirmationPage";
 export * from "./Rewards/index";

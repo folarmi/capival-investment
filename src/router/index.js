@@ -15,7 +15,6 @@ import {
   LoanDetails,
   SettleLoan,
   BillPayment,
-  CableTV,
   MobileTopUp,
   ConfirmationPage,
   Rewards,
@@ -34,6 +33,7 @@ import {
   UpdateKYC,
 } from "../pages";
 import { BetTransactionDetail } from "../pages/BetsAndLorries/BetTransactionDetail";
+import { SingleCategory } from "../pages/BillPayment/SingleCategory";
 import CapivalTransfer from "../pages/CapivalTransfers";
 import { SelectedTransactionHistory } from "../pages/TransactionHistory/SelectedTransactionHistory";
 import { FixedDeposits } from "../pages/Wallet/investments/fixedDeposit";
@@ -88,10 +88,10 @@ const Index = () => {
         <Route path="dashboard/loans/details" element={<LoanDetails />} />
         <Route path="dashboard/loans/settle-loan" element={<SettleLoan />} />
         <Route path="dashboard/bill-payment" element={<BillPayment />} />
-        {/* <Route
-          path="dashboard/bill-payment/Airtime__Data"
-          element={<CableTV />}
-        /> */}
+        <Route
+          path="dashboard/bill-payment/category"
+          element={<SingleCategory />}
+        />
         <Route path="dashboard/Airtime__Data" element={<MobileTopUp />} />
         <Route
           path="dashboard/bill-payment/Airtime__Data"
