@@ -135,7 +135,7 @@ const Loans = () => {
           pageNumber="Showing 1-3 of 3 transactions"
         /> */}
 
-        <main className="mt-4 bg-blueTwo/10 rounded-xl">
+        <main className="hidden md:block  mt-4 bg-blueTwo/10 rounded-xl">
           <section className="bg-blueTwo/20 rounded-xl py-4 overflow-scroll">
             <div className="grid grid-cols-5 gap-5 items-center">
               {activeLoanHeader.map((header) => {
@@ -160,7 +160,7 @@ const Loans = () => {
                 {" "}
                 {activeLoans?.map((item) => {
                   return (
-                    <div className="hidden mt-4 mb-4 whitespace-nowrap lg:grid grid-cols-5  bg-blueTwo/5 py-3">
+                    <div className="mt-4 mb-4 whitespace-nowrap lg:grid grid-cols-5  bg-blueTwo/5 py-3">
                       <p className="text-base text-[#AE1F24] font-medium pl-6 col-span-1">
                         <CurrencyFormat
                           value={item?.AmountLeft}
@@ -234,6 +234,67 @@ const Loans = () => {
             )}
           </div>
         </main>
+
+        {/* Mobile View */}
+
+        <section
+          className="lg:hidden rounded-xl p-4 flex items-center justify-between"
+          style={{
+            backgroundColor: "#3B58A8",
+            boxShadow: "0px 1px 2px 0px #02733626",
+          }}
+        >
+          {activeLoans?.length === 0 ? (
+            <p className="w-full flex items-center justify-center my-10 text-white text-xl">
+              No Active Loan
+            </p>
+          ) : (
+            <>
+              {" "}
+              {activeLoans?.map((item) => {
+                return (
+                  <div className="">
+                    <div>
+                      <p className="pb-2 text-[#C06B29]">Outstanding</p>
+                      <p className="text-xl text-[#C06B29] font-medium">
+                        <CurrencyFormat
+                          value={item?.AmountLeft}
+                          displayType={"text"}
+                          thousandSeparator={true}
+                          prefix={"₦"}
+                        />
+                      </p>
+                      <p
+                        onClick={() => gotToRepaymentPage(item)}
+                        className="py-2 font-medium text-sm cursor-pointer text-[#699DEE]"
+                      >
+                        See More
+                      </p>
+                    </div>
+
+                    <div>
+                      <p className="pb-2 text-white">Amount Paid</p>
+                      <p className="text-xl text-white font-medium">
+                        <CurrencyFormat
+                          value={item?.AmountPaid}
+                          displayType={"text"}
+                          thousandSeparator={true}
+                          prefix={"₦"}
+                        />
+                      </p>
+                      <p
+                        onClick={() => liquidateLoanFnc(item)}
+                        className="py-2 font-medium text-sm cursor-pointer text-red-500"
+                      >
+                        Liquidate Loan
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </>
+          )}
+        </section>
 
         <div className="my-10">
           {/* <TableHeader
