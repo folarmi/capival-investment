@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
@@ -14,6 +14,13 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isLoading } = useSelector((state) => state?.auth?.login);
+
+  const [passwordShown, setPasswordShown] = useState(false);
+
+  const togglePasswordShown = () => {
+    console.log("clicked");
+    setPasswordShown(!passwordShown);
+  };
 
   const validationSchema = Yup.object().shape({
     email: Yup.string()
@@ -73,13 +80,29 @@ const Login = () => {
             register={register("email")}
             error={errors?.email?.message}
           />
-          <Input
-            placeholder="Password"
-            icon="/assets/icons/lock.svg"
-            register={register("password")}
-            error={errors?.password?.message}
-            type="password"
-          />
+
+          <div className="w-full relative">
+            <i onClick={togglePasswordShown} className="">
+              <img
+                src={
+                  passwordShown
+                    ? "/assets/icons/hide.svg"
+                    : "/assets/icons/hide.svg"
+                }
+                onClick={togglePasswordShown}
+                alt="visible"
+                className="w-5 absolute md:mt-[5%] ml-[89%]"
+              />
+            </i>
+            <Input
+              placeholder="Password"
+              icon="/assets/icons/lock.svg"
+              register={register("password")}
+              error={errors?.password?.message}
+              type={passwordShown ? "text" : "password"}
+              ifIcon
+            />
+          </div>
           <Button
             buttonText="Login"
             className="mt-6 rounded-[30px]"

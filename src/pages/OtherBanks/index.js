@@ -75,12 +75,10 @@ const OtherBanksTransfer = () => {
       .min(10, "Must be exactly 10 digits")
       .max(10, "Must be exactly 10 digits"),
     amount: Yup.string().required(),
-    // .matches(/^[0-9]+$/, "Must be only digits"),
-    // pin: Yup.string()
-    //   .required("Transaction Pin is required")
-    //   .matches(/^[0-9]+$/, "Must be only digits")
-    //   .min(4, "Must be exactly 4 digits")
-    //   .max(4, "Must be exactly 4 digits"),
+    narration: Yup.string().matches(
+      /^[aA-zZ\s]+$/,
+      "Only alphabets are allowed for this field "
+    ),
   });
 
   const {
