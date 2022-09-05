@@ -423,13 +423,23 @@
 
 // export { NewLoan };
 
+// showEmail: yup.boolean(),
+//     email: yup
+//       .string()
+//       .email()
+//       .when("showEmail", {
+//         is: true,
+//         then: yup.string().required("Must enter email address")
+//       })
+//   })
+
 import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import CurrencyFormat from "react-currency-format";
-// import * as Yup from "yup";
+import * as Yup from "yup";
 import Select from "react-select";
-// import { yupResolver } from "@hookform/resolvers/yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 import { Button, SavingsInput } from "../../atoms";
 import {
@@ -470,9 +480,15 @@ const NewLoan = () => {
   const [selectedStatementType, setSelectedStatementType] = useState("");
   const [selectedBank, setSelectedBank] = useState("");
 
-  // const validationSchema = Yup.object().shape({
-  //   loan_type_id: Yup.string().required("Loan enter a password"),
-  // });
+  const validationSchema = Yup.object().shape({
+    // showEmail: Yup.boolean(),
+    // mbs_ticket_no: Yup.string().when(selectedStatementType, {
+    //   is: "mbs",
+    //   then: Yup.string().required("Must enter email address"),
+    // }),
+  });
+  // mbs_ticket_no: Yup.string().required("Loan enter a password"),
+  // mbs_ticket_password: Yup.string().required("Loan enter a password"),
 
   const { register, handleSubmit, formState, reset, control } = useForm({
     defaultValues: {

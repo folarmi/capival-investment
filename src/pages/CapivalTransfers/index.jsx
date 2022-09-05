@@ -43,9 +43,10 @@ const CapivalTransfer = () => {
       .min(10, "Must be exactly 10 digits")
       .max(10, "Must be exactly 10 digits"),
     amount: Yup.string().required("Amount is required"),
-    narration: Yup.string()
-      // .required("Please enter the required field")
-      .matches(/^[aA-zZ\s]+$/, "Only alphabets are allowed for this field "),
+    narration: Yup.string().matches(
+      /^[aA-zZ\s]+$/,
+      "Only alphabets are allowed for this field "
+    ),
   });
 
   const { register, handleSubmit, formState, reset, control } = useForm({
