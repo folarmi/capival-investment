@@ -17,7 +17,7 @@ const FluentSelect = ({
   const { field } = useController({ name, control, rules });
 
   return (
-    <div>
+    <div className="mt-4">
       <label className="text-sm font-normal text-blueTwo">{label}</label>
       <Select
         options={options}
