@@ -13,6 +13,7 @@ module.exports = {
         primary: "#33458D",
         secondary: "#C6211B",
         blueOne: "#A4B5E233",
+        greenOne: "#236362",
         blueTwo: "#3B58A8",
         blueThree: "#8EA8DD",
         blueFour: "#CBE1FD",
