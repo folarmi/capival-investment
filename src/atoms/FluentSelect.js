@@ -1,45 +1,39 @@
+import React from "react";
+import Select from "react-select";
+import { colourStyles } from "../utils/HelperFunctions";
+import { useController, useForm } from "react-hook-form";
+
 const FluentSelect = ({
   options,
-  onValueChange,
-  selectedValue,
-  className,
-  labelName,
-  label,
-  register,
+  isLoading,
   placeholder,
+  name,
+  control,
   error,
-  ...rest
+  label,
+  customOnChange,
+  rules,
 }) => {
+  const { field } = useController({ name, control, rules });
+
   return (
-    <div className="mb-6 otherSelect">
-      <label className="text-xs md:text-base font-normal uppercase mb-3">
-        {label}
-      </label>
-
-      <select
-        {...register}
-        className={`w-3/4 rounded-2xl border border-blueTwo/50 py-3.5 placeholder-blueThree text-sm pl-12 ${className}`}
-        {...rest}
+    <div className="mt-4">
+      <label className="text-sm font-normal text-blueTwo">{label}</label>
+      <Select
+        options={options}
+        onChange={(val) => {
+          customOnChange && customOnChange(val);
+          field.onChange(val.value);
+        }}
+        isLoading={isLoading}
         placeholder={placeholder}
-      >
-        <option value="" selected disabled>
-          {labelName}
-        </option>
-        {options?.map(({ value, label }) => (
-          <option
-            key={value}
-            value={value}
-            className="pb-2"
-            // style={{ backgroundColor: "#EEF5FF" }}
-          >
-            {label}
-          </option>
-        ))}
-      </select>
-
-      <span>
-        <p className="text-red-500 text-sm">{error}</p>
-      </span>
+        styles={colourStyles}
+      />
+      {error && (
+        <span>
+          <p className="text-red-500 text-sm">{error}</p>
+        </span>
+      )}
     </div>
   );
 };
