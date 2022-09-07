@@ -16,10 +16,16 @@ const getBillerProducts = async (id) => {
   return response.data;
 };
 
+const validateBillerProduct = async (values) => {
+  const response = await api.post(UrlRoute.validateBillerProduct, values);
+  return response.data;
+};
+
 const billPaymentService = {
   billPaymentCategories,
   billPaymentCategory,
   getBillerProducts,
+  validateBillerProduct,
 };
 
 export default billPaymentService;

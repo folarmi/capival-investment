@@ -33,6 +33,7 @@ import {
   UpdateKYC,
 } from "../pages";
 import { BetTransactionDetail } from "../pages/BetsAndLorries/BetTransactionDetail";
+import { BillPaymentForm } from "../pages/BillPayment/BillPaymentForm";
 import { SingleCategory } from "../pages/BillPayment/SingleCategory";
 import CapivalTransfer from "../pages/CapivalTransfers";
 import { SelectedTransactionHistory } from "../pages/TransactionHistory/SelectedTransactionHistory";
@@ -91,6 +92,10 @@ const Index = () => {
         <Route
           path="dashboard/bill-payment/category"
           element={<SingleCategory />}
+        />
+        <Route
+          path="dashboard/bill-payment/category/form"
+          element={<BillPaymentForm />}
         />
         <Route path="dashboard/Airtime__Data" element={<MobileTopUp />} />
         <Route

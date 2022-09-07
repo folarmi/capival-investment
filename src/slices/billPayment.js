@@ -47,13 +47,30 @@ export const getBillerProductsAsync = createAsyncThunk(
   }
 );
 
+export const validateBillerProductAsync = createAsyncThunk(
+  "billPayment/validateBillerProduct",
+  async (values, { rejectWithValue }) => {
+    try {
+      const response = await BillPaymentService.validateBillerProduct(values);
+      return response;
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 const initialState = {
   billPaymentCategoriesLoading: false,
   singleBillPaymentCategoryLoading: false,
   getBillerProductsLoading: false,
+  validateBillerProductLoading: false,
   billPaymentCategories: "",
   singleBillPaymentCategory: "",
   billerProducts: "",
+  validateBillerProduct: "",
 };
 
 export const billPaymentSlice = createSlice({
@@ -65,10 +82,10 @@ export const billPaymentSlice = createSlice({
     },
     [getBillPaymentCategories.fulfilled]: (state, action) => {
       state.billPaymentCategories = action.payload.data;
-      state.billPaymentCategoriesLoading = true;
+      state.billPaymentCategoriesLoading = false;
     },
     [getBillPaymentCategories.rejected]: (state) => {
-      state.billPaymentCategoriesLoading = true;
+      state.billPaymentCategoriesLoading = false;
     },
     [singleBillPaymentCategoryAsync.pending]: (state) => {
       state.singleBillPaymentCategoryLoading = true;
@@ -89,6 +106,16 @@ export const billPaymentSlice = createSlice({
     },
     [getBillerProductsAsync.rejected]: (state) => {
       state.getBillerProductsLoading = true;
+    },
+    [validateBillerProductAsync.pending]: (state) => {
+      state.validateBillerProductLoading = true;
+    },
+    [validateBillerProductAsync.fulfilled]: (state, action) => {
+      state.validateBillerProduct = action.payload.data;
+      state.validateBillerProductLoading = false;
+    },
+    [validateBillerProductAsync.rejected]: (state) => {
+      state.validateBillerProductLoading = false;
     },
   },
 });

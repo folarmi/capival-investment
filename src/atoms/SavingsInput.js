@@ -1,5 +1,4 @@
 import React from "react";
-import CurrencyFormat from "react-currency-format";
 
 const SavingsInput = ({
   placeholder,
@@ -40,6 +39,7 @@ const SavingsInput = ({
           type={type}
           name={name}
           id={id}
+          value={value}
           onChange={onChange}
           {...register}
           placeholder={placeholder}

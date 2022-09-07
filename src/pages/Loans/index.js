@@ -236,6 +236,16 @@ const Loans = () => {
         </main>
 
         {/* Mobile View */}
+        {/* {
+                "billPaymentProductName": "CATTLE LICENCE",
+                "billPaymentProductId": "41467803",
+                "isAmountFixed": true,
+                "amount": 15000,
+                "currency": "NGN",
+                "metadata": {
+                    "customFields": []
+                }
+            }, */}
 
         <section
           className="lg:hidden rounded-xl p-4 flex items-center justify-between"

@@ -2,9 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import CurrencyFormat from "react-currency-format";
-import * as Yup from "yup";
-import Select from "react-select";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { FluentSelect } from "../../atoms/FluentSelect";
 
 import { Button, SavingsInput } from "../../atoms";
@@ -17,7 +14,6 @@ import {
 } from "../../slices/utils";
 import { createLoanAsync } from "../../slices/loan";
 import { toast } from "react-toastify";
-import { colourStyles } from "../../utils/HelperFunctions";
 import { validateInterAccountAsync } from "../../slices/transactionHistory";
 
 const NewLoan = () => {
@@ -73,8 +69,6 @@ const NewLoan = () => {
       disbursement_account_name: values?.disbursement_account_name || "",
       disbursement_bank_code: values?.disbursement_bank_code || "",
     };
-
-    console.log(variables);
 
     dispatch(createLoanAsync(variables))
       .unwrap()
@@ -371,3 +365,168 @@ const NewLoan = () => {
 };
 
 export { NewLoan };
+
+{
+  /* <SavingsInput
+placeholder="111111"
+label="Ticket Password"
+register={register("mbs_ticket_password", {
+  required: "Ticket Password is required",
+})}
+error={errors?.mbs_ticket_password?.message} */
+}
+
+// {
+//   "billerId": "C0000164693",
+//   "categoryId": "3",
+//   "products": [
+//       {
+//           "billPaymentProductName": "EEDC (Prepaid)",
+//           "billPaymentProductId": "4111465504",
+//           "isAmountFixed": false,
+//           "amount": 0,
+//           "currency": "NGN",
+//           "metadata": {
+//               "customFields": [
+//                   {
+//                       "display_name": "Meter Number",
+//                       "variable_name": "meter_number",
+//                       "validation": true,
+//                       "type": "text",
+//                       "required": true,
+//                       "sortOrder": "1",
+//                       "selectOptions": []
+//                   },
+//                   {
+//                       "display_name": "Total Due",
+//                       "variable_name": "total_due",
+//                       "validation": false,
+//                       "type": "alphanumeric",
+//                       "required": false,
+//                       "sortOrder": null,
+//                       "selectOptions": []
+//                   },
+//                   {
+//                       "display_name": "Account Number",
+//                       "variable_name": "account_number",
+//                       "validation": false,
+//                       "type": "alphanumeric",
+//                       "required": false,
+//                       "sortOrder": null,
+//                       "selectOptions": []
+//                   },
+//                   {
+//                       "display_name": "Billed Amount",
+//                       "variable_name": "billed_amount",
+//                       "validation": false,
+//                       "type": "alphanumeric",
+//                       "required": false,
+//                       "sortOrder": null,
+//                       "selectOptions": []
+//                   },
+//                   {
+//                       "display_name": "Address",
+//                       "variable_name": "address",
+//                       "validation": false,
+//                       "type": "alphanumeric",
+//                       "required": false,
+//                       "sortOrder": null,
+//                       "selectOptions": []
+//                   },
+//                   {
+//                       "display_name": "Arrears",
+//                       "variable_name": "arrears",
+//                       "validation": false,
+//                       "type": "alphanumeric",
+//                       "required": false,
+//                       "sortOrder": null,
+//                       "selectOptions": []
+//                   },
+//                   {
+//                       "display_name": "VAT",
+//                       "variable_name": "vat",
+//                       "validation": false,
+//                       "type": "alphanumeric",
+//                       "required": false,
+//                       "sortOrder": null,
+//                       "selectOptions": []
+//                   }
+//               ]
+//           }
+//       },
+//       {
+//           "billPaymentProductName": "EEDC (Postpaid)",
+//           "billPaymentProductId": "4111465265",
+//           "isAmountFixed": false,
+//           "amount": 0,
+//           "currency": "NGN",
+//           "metadata": {
+//               "customFields": [
+//                   {
+//                       "display_name": "Meter Number",
+//                       "variable_name": "meter_number",
+//                       "validation": true,
+//                       "type": "text",
+//                       "required": true,
+//                       "sortOrder": "1",
+//                       "selectOptions": []
+//                   },
+//                   {
+//                       "display_name": "Address",
+//                       "variable_name": "address",
+//                       "validation": false,
+//                       "type": "alphanumeric",
+//                       "required": false,
+//                       "sortOrder": null,
+//                       "selectOptions": []
+//                   },
+//                   {
+//                       "display_name": "Total Due",
+//                       "variable_name": "total_due",
+//                       "validation": false,
+//                       "type": "alphanumeric",
+//                       "required": false,
+//                       "sortOrder": null,
+//                       "selectOptions": []
+//                   },
+//                   {
+//                       "display_name": "Arrears",
+//                       "variable_name": "arrears",
+//                       "validation": false,
+//                       "type": "alphanumeric",
+//                       "required": false,
+//                       "sortOrder": null,
+//                       "selectOptions": []
+//                   },
+//                   {
+//                       "display_name": "VAT",
+//                       "variable_name": "vat",
+//                       "validation": false,
+//                       "type": "alphanumeric",
+//                       "required": false,
+//                       "sortOrder": null,
+//                       "selectOptions": []
+//                   },
+//                   {
+//                       "display_name": "Account Number",
+//                       "variable_name": "account_number",
+//                       "validation": false,
+//                       "type": "alphanumeric",
+//                       "required": false,
+//                       "sortOrder": null,
+//                       "selectOptions": []
+//                   },
+//                   {
+//                       "display_name": "Billed Amount",
+//                       "variable_name": "billed_amount",
+//                       "validation": false,
+//                       "type": "alphanumeric",
+//                       "required": false,
+//                       "sortOrder": null,
+//                       "selectOptions": []
+//                   }
+//               ]
+//           }
+//       }
+//   ]
+// }

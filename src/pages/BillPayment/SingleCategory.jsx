@@ -22,9 +22,9 @@ const SingleCategory = () => {
       .unwrap()
       .then((res) => {
         if (res?.status === true) {
-          // navigate("/dashboard/bill-payment/category", {
-          //   state: res?.data,
-          // });
+          navigate("/dashboard/bill-payment/category/form", {
+            state: res?.data,
+          });
         }
       })
       .catch((err) => {
@@ -43,18 +43,23 @@ const SingleCategory = () => {
         {singleBillPaymentCategoryLoading ? (
           <Loader />
         ) : (
-          <div className="px-4 md:px-10 lg:px-20 w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-16">
+          <div className="px-4 md:px-10 lg:px-20 flex flex-wrap my-16">
             {state &&
               state?.map((item) => {
                 return (
-                  <img
-                    // src={item?.billerLogoUrl}
-                    src="/assets/images/gotv.svg"
-                    alt="loan detail"
-                    className="w-[120px] mt-6"
-                    loading="lazy"
-                    onClick={() => getBillerProducts(item)}
-                  />
+                  <div className="cursor-pointer flex-[20%]">
+                    <img
+                      // src={item?.billerLogoUrl}
+                      src="/assets/images/gotv.svg"
+                      alt="loan detail"
+                      className="w-full max-w-[210px] px-6 my-4"
+                      loading="lazy"
+                      onClick={() => getBillerProducts(item)}
+                    />
+                    <p className="text-sm font-medium text-center">
+                      {item?.billerName}
+                    </p>
+                  </div>
                 );
               })}
           </div>
