@@ -21,11 +21,17 @@ const validateBillerProduct = async (values) => {
   return response.data;
 };
 
+const initiateTransaction = async (values) => {
+  const response = await api.post(UrlRoute.initiateTransaction, values);
+  return response.data;
+};
+
 const billPaymentService = {
   billPaymentCategories,
   billPaymentCategory,
   getBillerProducts,
   validateBillerProduct,
+  initiateTransaction,
 };
 
 export default billPaymentService;

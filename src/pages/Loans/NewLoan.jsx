@@ -53,7 +53,7 @@ const NewLoan = () => {
   });
   const { errors } = formState;
 
-  console.log("errors", errors);
+  // console.log("errors", errors);
 
   const submitForm = (values) => {
     let formattedAmount = values?.amount.slice(1);

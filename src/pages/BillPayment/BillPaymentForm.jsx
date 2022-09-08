@@ -3,6 +3,9 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
+import { ErrorMessage } from "@hookform/error-message";
+import { v4 as uuidv4 } from "uuid";
+
 import { Button, FluentSelect, SavingsInput } from "../../atoms";
 import { validateBillerProductAsync } from "../../slices/billPayment";
 
@@ -11,13 +14,18 @@ const BillPaymentForm = () => {
   const dispatch = useDispatch();
   const { validateBillerProductLoading, getBillerProductsLoading } =
     useSelector((state) => state?.billPayment);
+  const userObject = useSelector(
+    (state) => state.auth.login?.user?.user?.customer_data
+  );
+
+  //   console.log(userObject);
 
   const [selectedBillerProduct, setSelectedBillerProduct] = useState();
 
   const { control, handleSubmit, register, formState, getValues, setValue } =
     useForm({});
   const { errors } = formState;
-  //   console.log("the errors", errors?.policy_number?.message);
+  console.log("the errors", errors);
 
   const productsData =
     state?.products &&
@@ -60,7 +68,26 @@ const BillPaymentForm = () => {
   };
 
   const submitForm = (values) => {
-    console.log(values);
+    console.log("form values", values);
+    const variables = {
+      billPaymentProductId: values?.billPaymentProductId,
+      amount: 2000.0,
+      transactionRef: uuidv4(),
+      name: userObject?.Firstname + " " + userObject?.Surname,
+      email: userObject?.Email,
+      phoneNumber: userObject?.Mobile,
+      customerId: userObject?.CustomerID,
+      metadata: {
+        customFields: [
+          {
+            variable_name: "size",
+            value: "40abc",
+          },
+        ],
+      },
+    };
+
+    // console.log(variables);
   };
 
   return (
@@ -93,32 +120,37 @@ const BillPaymentForm = () => {
           <>
             {selectedBillerProduct?.customFields &&
               selectedBillerProduct?.customFields.map((product) => {
-                const variableName = product?.variable_name;
+                // const variableName = product?.variable_name;
+                console.log("logging", selectedBillerProduct?.isAmountFixed);
                 return (
                   <div className="mt-4" key={product?.variable_name}>
-                    {console.log("the product", typeof product?.sortOrder)}
-                    {product?.selectOptions.length === 0 ? (
+                    {product?.selectOptions?.length === 0 ? (
                       <div>
                         <SavingsInput
                           label={product?.display_name}
                           placeholder={product?.display_name}
-                          readOnly={
-                            selectedBillerProduct?.isAmountFixed === true
-                              ? true
-                              : false
-                          }
+                          readOnly={selectedBillerProduct?.isAmountFixed}
                           value={
-                            selectedBillerProduct?.isAmountFixed === true &&
-                            selectedBillerProduct?.amount
+                            selectedBillerProduct?.isAmountFixed === true
+                              ? selectedBillerProduct?.amount
+                              : ""
                           }
                           register={register(product?.variable_name, {
                             onBlur: (e) => handleValidation(e, product),
-                            onChange: (e) => setValue(e.target.value),
+                            // onChange: (e) => setValue(e.target.value),
                             required: product?.required
                               ? "This field is required"
                               : false,
                           })}
-                          error={errors?.variableName?.message}
+                          error={errors?.[product?.variable_name]?.message}
+                          //   error={
+                          //     errors && (
+                          //       <ErrorMessage
+                          //         errors={errors}
+                          //         name={product?.variable_name}
+                          //       />
+                          //     )
+                          //   }
                         />
                         {product?.validation &&
                           validateBillerProductLoading && (
@@ -146,7 +178,12 @@ const BillPaymentForm = () => {
                             ? "This field is required"
                             : false,
                         }}
-                        // error={variable_name}
+                        error={
+                          <ErrorMessage
+                            errors={errors}
+                            name={product?.variable_name}
+                          />
+                        }
                       />
                     )}
                   </div>

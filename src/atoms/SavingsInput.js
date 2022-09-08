@@ -17,6 +17,9 @@ const SavingsInput = ({
   value,
   ...inputProps
 }) => {
+  {
+    console.log("error from input", error);
+  }
   return (
     <div className={`${className}`}>
       <label htmlFor={name} className={`text-sm font-normal text-blueTwo`}>
@@ -39,14 +42,14 @@ const SavingsInput = ({
           type={type}
           name={name}
           id={id}
-          value={value}
+          defaultValue={value}
           onChange={onChange}
           {...register}
           placeholder={placeholder}
           {...inputProps}
           className={`border border-blueTwo/50 rounded-[20px] w-full py-3.5 placeholder-blueThree text-sm pl-[10px] text-blueTwo bg-blueTwo/20`}
           style={{
-            border: error ? "1px solid red" : "",
+            border: error && "1px solid red",
             backgroundColor: readOnly ? "#DCDCDC" : "",
           }}
           readOnly={readOnly}
