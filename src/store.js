@@ -21,6 +21,7 @@ import mobileTopUpReducer from "./slices/mobileTopup";
 import loanReducer from "./slices/loan";
 import accountReducer from "./slices/accounts";
 import transactionsReducer from "./slices/transactions";
+import dropDownReducer from "./slices/dropdown";
 
 const persistConfig = {
   key: "root",
@@ -39,7 +40,8 @@ const reducers = combineReducers({
   mobileTopUp: mobileTopUpReducer,
   loans: loanReducer,
   accounts: accountReducer,
-  transactions: accountReducer,
+  transactions: transactionsReducer,
+  dropdown: dropDownReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);

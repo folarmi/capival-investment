@@ -150,27 +150,8 @@ const SelectedTransactionHistory = () => {
 
   return (
     <>
-      {showTable ? (
-        <div>
-          {getDatedTransactionHistoryLoading ? (
-            <Loader />
-          ) : (
-            <section className="mt-8 mx-4 md:mx-7">
-              <TableHeader
-                header="Transactions History"
-                pageNumber={`Showing 1-${datedTransactionHistory.length} of ${datedTransactionHistory.length} transactions`}
-              />
-
-              <div className="mt-2">
-                <Table data={data} columns={columns} />
-              </div>
-            </section>
-          )}
-        </div>
-      ) : (
+      <div>
         <div className="m-auto w-[60%] mt-8 ">
-          <WalletDetailsHeader ifTransaction={false} />
-
           <form className="mt-8 grid grid-cols-2">
             <div>
               <label
@@ -214,7 +195,25 @@ const SelectedTransactionHistory = () => {
             </div>
           </form>
         </div>
-      )}
+        {showTable && (
+          <>
+            {getDatedTransactionHistoryLoading ? (
+              <Loader />
+            ) : (
+              <section className="mt-8 mx-4 md:mx-7">
+                <TableHeader
+                  header="Transactions History"
+                  pageNumber={`Showing 1-${datedTransactionHistory.length} of ${datedTransactionHistory.length} transactions`}
+                />
+
+                <div className="mt-2">
+                  <Table data={data} columns={columns} />
+                </div>
+              </section>
+            )}
+          </>
+        )}
+      </div>
     </>
   );
 };

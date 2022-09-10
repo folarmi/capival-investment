@@ -18,7 +18,6 @@ const Login = () => {
   const [passwordShown, setPasswordShown] = useState(false);
 
   const togglePasswordShown = () => {
-    console.log("clicked");
     setPasswordShown(!passwordShown);
   };
 
