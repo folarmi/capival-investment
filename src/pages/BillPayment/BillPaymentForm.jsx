@@ -7,13 +7,19 @@ import { ErrorMessage } from "@hookform/error-message";
 import { v4 as uuidv4 } from "uuid";
 
 import { Button, FluentSelect, SavingsInput } from "../../atoms";
-import { validateBillerProductAsync } from "../../slices/billPayment";
+import {
+  initiateTransactionAsync,
+  validateBillerProductAsync,
+} from "../../slices/billPayment";
 
 const BillPaymentForm = () => {
   const { state } = useLocation();
   const dispatch = useDispatch();
-  const { validateBillerProductLoading, getBillerProductsLoading } =
-    useSelector((state) => state?.billPayment);
+  const {
+    validateBillerProductLoading,
+    getBillerProductsLoading,
+    initiateTransactionLoading,
+  } = useSelector((state) => state?.billPayment);
   const userObject = useSelector(
     (state) => state.auth.login?.user?.user?.customer_data
   );
@@ -21,8 +27,9 @@ const BillPaymentForm = () => {
   //   console.log(userObject);
 
   const [selectedBillerProduct, setSelectedBillerProduct] = useState();
+  const [billPaymentProductId, setBillPaymentProductId] = useState("");
 
-  const { control, handleSubmit, register, formState, getValues, setValue } =
+  const { control, handleSubmit, register, reset, formState, getValues } =
     useForm({});
   const { errors } = formState;
   console.log("the errors", errors);
@@ -41,8 +48,9 @@ const BillPaymentForm = () => {
     });
 
   const getSelectedBillerProduct = (item) => {
-    // console.log(item);
+    setBillPaymentProductId(item?.value);
     setSelectedBillerProduct(item);
+    reset();
   };
 
   const handleValidation = (e, product) => {
@@ -68,26 +76,41 @@ const BillPaymentForm = () => {
   };
 
   const submitForm = (values) => {
-    console.log("form values", values);
+    if (selectedBillerProduct?.isAmountFixed) {
+      values.amount = selectedBillerProduct?.amount;
+    }
+    if (values?.amount === undefined) {
+      toast.error("Amount not specified");
+      return;
+    }
+
+    // deep copy the values object
+    let copiedValues = JSON.parse(JSON.stringify(values));
+    delete copiedValues.billPaymentProductId;
+    // parseInt(copiedValues?.amount);
+    Number(copiedValues.amount);
+
     const variables = {
-      billPaymentProductId: values?.billPaymentProductId,
-      amount: 2000.0,
+      billPaymentProductId: billPaymentProductId,
+      amount: parseInt(values?.amount),
       transactionRef: uuidv4(),
       name: userObject?.Firstname + " " + userObject?.Surname,
       email: userObject?.Email,
       phoneNumber: userObject?.Mobile,
       customerId: userObject?.CustomerID,
       metadata: {
-        customFields: [
-          {
-            variable_name: "size",
-            value: "40abc",
-          },
-        ],
+        customFields: [copiedValues],
       },
     };
 
-    // console.log(variables);
+    dispatch(initiateTransactionAsync(variables))
+      .unwrap()
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -110,18 +133,20 @@ const BillPaymentForm = () => {
             <SavingsInput
               label="Amount"
               placeholder="Amount"
-              readOnly={
-                selectedBillerProduct?.isAmountFixed === true ? true : false
-              }
+              readOnly={selectedBillerProduct?.isAmountFixed}
               value={selectedBillerProduct?.amount}
+              register={register("amount", {
+                required: "THis Field is required",
+              })}
             />
           </div>
         ) : (
           <>
             {selectedBillerProduct?.customFields &&
               selectedBillerProduct?.customFields.map((product) => {
-                // const variableName = product?.variable_name;
-                console.log("logging", selectedBillerProduct?.isAmountFixed);
+                // {
+                //   console.log(product.type);
+                // }
                 return (
                   <div className="mt-4" key={product?.variable_name}>
                     {product?.selectOptions?.length === 0 ? (
@@ -141,16 +166,14 @@ const BillPaymentForm = () => {
                             required: product?.required
                               ? "This field is required"
                               : false,
+
+                            // pattern:
+                            //   product?.type === "alphanumeric"
+                            //     ? /^[0-9]+$/
+                            //     : /[^A-Za-z0-9]+/,
+                            min: 3,
                           })}
                           error={errors?.[product?.variable_name]?.message}
-                          //   error={
-                          //     errors && (
-                          //       <ErrorMessage
-                          //         errors={errors}
-                          //         name={product?.variable_name}
-                          //       />
-                          //     )
-                          //   }
                         />
                         {product?.validation &&
                           validateBillerProductLoading && (
@@ -178,12 +201,7 @@ const BillPaymentForm = () => {
                             ? "This field is required"
                             : false,
                         }}
-                        error={
-                          <ErrorMessage
-                            errors={errors}
-                            name={product?.variable_name}
-                          />
-                        }
+                        error={errors?.[product?.variable_name]?.message}
                       />
                     )}
                   </div>
@@ -197,7 +215,7 @@ const BillPaymentForm = () => {
             buttonText="Submit"
             className="rounded-xl mb-10"
             size="lg"
-            // isLoading={createLoanIsLoading}
+            isLoading={initiateTransactionLoading}
           />
         </div>
       </form>

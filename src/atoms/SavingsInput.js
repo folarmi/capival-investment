@@ -17,9 +17,6 @@ const SavingsInput = ({
   value,
   ...inputProps
 }) => {
-  {
-    console.log("error from input", error);
-  }
   return (
     <div className={`${className}`}>
       <label htmlFor={name} className={`text-sm font-normal text-blueTwo`}>
