@@ -3,6 +3,8 @@ import { Controller, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import Select from "react-select";
 import { toast } from "react-toastify";
+import DatePicker from "react-datepicker";
+
 import { Button, SavingsInput } from "../../atoms";
 import { TextArea } from "../../atoms/TextArea";
 import { reportIssueAsync } from "../../slices/accounts";
@@ -17,9 +19,9 @@ const Issue = () => {
   const { reportIssueLoading } = useSelector((state) => state.accounts);
 
   const [selectedTopic, setSelectedTopic] = useState();
+  const [startDate, setStartDate] = useState(new Date());
 
   const getSelectedTopic = (item) => {
-    console.log(item);
     setSelectedTopic(item);
   };
 
@@ -43,11 +45,21 @@ const Issue = () => {
   }, []);
 
   const submitForm = (values) => {
+    var newDateOptions = {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    };
+
+    const dateVariables = {
+      start_date: startDate.toLocaleString("en-US", newDateOptions),
+    };
+
     const variables = {
       topicId: selectedTopic?.value,
       topicName: selectedTopic?.label,
       amount: values?.amount,
-      date: values?.date,
+      date: dateVariables?.start_date,
       refNo: values?.refNo,
       message: values?.message,
     };
@@ -64,7 +76,7 @@ const Issue = () => {
       .catch((err) => {
         toast.error(err?.message);
       });
-    console.log(values);
+    console.log(dateVariables?.start_date);
   };
 
   return (
@@ -127,13 +139,29 @@ const Issue = () => {
           />
         </div>
 
-        <div className="mt-4">
+        {/* <div >
           <SavingsInput
             placeholder="Transaction Date"
             label="Transaction Date"
             register={register("date")}
             error={errors?.date?.message}
           />
+        </div> */}
+
+        <div className="mt-4">
+          <label
+            htmlFor="start Date"
+            className={`text-sm font-normal text-blueTwo`}
+          >
+            Transaction Date
+          </label>
+          <div className="cursor-pointer px-4 mr-4 border border-blueTwo/50 py-4 rounded-[20px] flex items-center text-blueTwo bg-blueTwo/20">
+            <DatePicker
+              selected={startDate}
+              onChange={(date) => setStartDate(date)}
+            />
+            <img src="/assets/icons/calendar.svg" alt="" />
+          </div>
         </div>
 
         <div className="w-full mt-10 md:w-[70%] m-auto">
