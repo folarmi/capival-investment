@@ -21,6 +21,21 @@ const Loans = () => {
     (state) => state.auth?.login?.user?.authorisation
   );
 
+  const sampleActiveLoans = [
+    {
+      id: "1",
+      AmountLeft: "50000",
+      AmountPaid: "50000",
+      Loan_Amount: "100000",
+    },
+    {
+      id: "2",
+      AmountLeft: "50000",
+      AmountPaid: "5000",
+      Loan_Amount: "100000",
+    },
+  ];
+
   const kycObject = {
     bank_account: kycStatus?.bank_account,
     employer_details: kycStatus?.employer_details,
@@ -101,32 +116,6 @@ const Loans = () => {
             Apply Now
           </p>
         </div>
-
-        {/* <div className="flex mt-10 mb-8 justify-center">
-          <div className="cursor-pointer">
-            <img
-              src="/assets/images/repayment.svg"
-              alt="repayment icon"
-              onClick={gotToRepaymentPage}
-            />
-          </div>
-
-          <div className="cursor-pointer">
-            <img
-              src="/assets/images/loanDetails.svg"
-              alt="loan detail"
-              onClick={gotToLoanDetailsPage}
-            />
-          </div>
-
-          <div className="">
-            <img
-              src="/assets/images/settleLoan.svg"
-              alt="settle loan"
-              onClick={gotToSettleLoanPage}
-            />
-          </div>
-        </div> */}
       </div>
 
       <div className="mt-8 mx-4 md:mx-7">
@@ -236,37 +225,27 @@ const Loans = () => {
         </main>
 
         {/* Mobile View */}
-        {/* {
-                "billPaymentProductName": "CATTLE LICENCE",
-                "billPaymentProductId": "41467803",
-                "isAmountFixed": true,
-                "amount": 15000,
-                "currency": "NGN",
-                "metadata": {
-                    "customFields": []
-                }
-            }, */}
-
-        <section
-          className="lg:hidden rounded-xl p-4 flex items-center justify-between"
-          style={{
-            backgroundColor: "#3B58A8",
-            boxShadow: "0px 1px 2px 0px #02733626",
-          }}
-        >
-          {activeLoans?.length === 0 ? (
+        <p className="text-xl font-medium pb-4">Active Loans</p>
+        <section className="lg:hidden">
+          {sampleActiveLoans?.length === 0 ? (
             <p className="w-full flex items-center justify-center my-10 text-white text-xl">
               No Active Loan
             </p>
           ) : (
             <>
               {" "}
-              {activeLoans?.map((item) => {
+              {sampleActiveLoans?.map((item) => {
                 return (
-                  <div className="">
-                    <div>
-                      <p className="pb-2 text-[#C06B29]">Outstanding</p>
-                      <p className="text-xl text-[#C06B29] font-medium">
+                  <div
+                    className="flex flex-col items-center justify-between mb-4 rounded-xl p-4"
+                    style={{
+                      backgroundColor: "#3B58A8",
+                      boxShadow: "0px 1px 2px 0px #02733626",
+                    }}
+                  >
+                    <div className="w-full pb-4 mb-3 flex items-center justify-between border-b border-[#6A77AC]">
+                      <p className="text-white">Outstanding</p>
+                      <p className="text-xl text-red-500 font-medium">
                         <CurrencyFormat
                           value={item?.AmountLeft}
                           displayType={"text"}
@@ -274,16 +253,10 @@ const Loans = () => {
                           prefix={"₦"}
                         />
                       </p>
-                      <p
-                        onClick={() => gotToRepaymentPage(item)}
-                        className="py-2 font-medium text-sm cursor-pointer text-[#699DEE]"
-                      >
-                        See More
-                      </p>
                     </div>
 
-                    <div>
-                      <p className="pb-2 text-white">Amount Paid</p>
+                    <div className="w-full pb-4 flex items-center justify-between">
+                      <p className=" text-white">Amount Paid</p>
                       <p className="text-xl text-white font-medium">
                         <CurrencyFormat
                           value={item?.AmountPaid}
@@ -292,13 +265,31 @@ const Loans = () => {
                           prefix={"₦"}
                         />
                       </p>
-                      <p
+                    </div>
+
+                    <div className="w-full mb-5 bg-white py-2 px-3 rounded-md">
+                      <ProgressBar
+                        width={`${Math.round(
+                          (item?.AmountPaid / item?.Loan_Amount) * 100
+                        )}%`}
+                      />
+                    </div>
+
+                    <section className="w-full flex justify-between">
+                      <button
+                        className="py-4 font-medium text-sm bg-white rounded-lg px-6 text-[#33458D]"
+                        onClick={() => gotToRepaymentPage(item)}
+                      >
+                        See More
+                      </button>
+
+                      <button
+                        className="py-4 font-medium text-sm border border-white rounded-lg px-6 text-white"
                         onClick={() => liquidateLoanFnc(item)}
-                        className="py-2 font-medium text-sm cursor-pointer text-red-500"
                       >
                         Liquidate Loan
-                      </p>
-                    </div>
+                      </button>
+                    </section>
                   </div>
                 );
               })}
@@ -307,12 +298,7 @@ const Loans = () => {
         </section>
 
         <div className="my-10">
-          {/* <TableHeader
-            header="Pending Loans"
-            pageNumber="Showing 1-3 of 3 transactions"
-          /> */}
-
-          <main className="mt-4 bg-blueTwo/10 rounded-xl">
+          <main className="hidden md:block mt-4 bg-blueTwo/10 rounded-xl">
             <section className="bg-blueTwo/20 rounded-xl py-4 overflow-scroll">
               <div className="grid grid-cols-5 gap-5 items-center pl-6">
                 {pendingLoanHeader.map((header) => {
@@ -384,6 +370,71 @@ const Loans = () => {
               )}
             </div>
           </main>
+
+          {/* Mobile View */}
+          <p className="text-xl font-medium pb-4">Pending Loans</p>
+          <section className="lg:hidden">
+            {pendingLoans?.length === 0 ? (
+              <p className="w-full flex items-center justify-center my-10 text-white text-xl">
+                No Pending Loan
+              </p>
+            ) : (
+              <>
+                {" "}
+                {pendingLoans?.map((item) => {
+                  return (
+                    <div
+                      className="flex flex-col items-center justify-between mb-4 rounded-xl p-4"
+                      style={{
+                        backgroundColor: "#3B58A8",
+                        boxShadow: "0px 1px 2px 0px #02733626",
+                      }}
+                    >
+                      <div className="w-full pb-4 mb-3 flex items-center justify-between border-b border-[#6A77AC]">
+                        <p className="text-white">Amount Applied</p>
+                        <p className="text-xl text-red-500 font-medium">
+                          <CurrencyFormat
+                            value={item?.loan_amount}
+                            displayType={"text"}
+                            thousandSeparator={true}
+                            prefix={"₦"}
+                          />
+                        </p>
+                      </div>
+
+                      <div className="w-full pb-4 flex items-center justify-between">
+                        <p className=" text-white">Tenure</p>
+                        <p className="text-xl text-white font-medium">
+                          {`${item?.tenor} months`}
+                        </p>
+                      </div>
+
+                      <div className="w-full pb-4 flex items-center justify-between">
+                        <p className=" text-white">Loan Details</p>
+                        <p className="text-xl text-white font-medium">
+                          {item?.repayment_channel}
+                        </p>
+                      </div>
+
+                      <div className="w-full pb-4 flex items-center justify-between">
+                        <p className=" text-white">Mode</p>
+                        <p className="text-xl text-white font-medium">
+                          {item?.mode}
+                        </p>
+                      </div>
+
+                      <div className="w-full pb-4 flex items-center justify-between">
+                        <p className=" text-white">Mode</p>
+                        <p className="text-xl text-white font-medium">
+                          {item?.status === 0 ? "Inactive" : "Active"}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </>
+            )}
+          </section>
         </div>
       </div>
     </>

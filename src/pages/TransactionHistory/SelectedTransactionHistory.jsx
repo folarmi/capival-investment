@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button, Loader } from "../../atoms";
 import { Table, TableHeader } from "../../components";
 import { getdatedTransactionHistoryAsync } from "../../slices/transactionHistory";
-import WalletDetailsHeader from "../Wallet/WalletDetailsHeader";
 import { FormattedCurrency } from "../../atoms/FormattedCurrency";
 import { toast } from "react-toastify";
 

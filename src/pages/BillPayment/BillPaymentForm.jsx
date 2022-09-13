@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
-import { ErrorMessage } from "@hookform/error-message";
 import { v4 as uuidv4 } from "uuid";
 
 import { Button, FluentSelect, SavingsInput } from "../../atoms";
@@ -32,7 +31,7 @@ const BillPaymentForm = () => {
   const { control, handleSubmit, register, reset, formState, getValues } =
     useForm({});
   const { errors } = formState;
-  console.log("the errors", errors);
+  // console.log("the errors", errors);
 
   const productsData =
     state?.products &&
@@ -161,17 +160,47 @@ const BillPaymentForm = () => {
                               : ""
                           }
                           register={register(product?.variable_name, {
-                            onBlur: (e) => handleValidation(e, product),
-                            // onChange: (e) => setValue(e.target.value),
+                            // onBlur: (e) => handleValidation(e, product),
                             required: product?.required
                               ? "This field is required"
                               : false,
-
-                            // pattern:
-                            //   product?.type === "alphanumeric"
-                            //     ? /^[0-9]+$/
-                            //     : /[^A-Za-z0-9]+/,
-                            min: 3,
+                            validate: (value) => {
+                              let errorMessage;
+                              if (
+                                product.type === "text" ||
+                                product.type === "alphabetic"
+                              ) {
+                                return /^[a-zA-Z]+$/g.test(value)
+                                  ? ""
+                                  : (errorMessage =
+                                      "This field accepts text only");
+                              } else if (product.type === "numeric") {
+                                return /^[0-9]+$/.test(value)
+                                  ? ""
+                                  : (errorMessage =
+                                      "This field accepts number only");
+                              } else if (product.type === "alphanumeric") {
+                                return /^[a-z0-9]+$/i.test(value)
+                                  ? ""
+                                  : (errorMessage =
+                                      "This field accepts alphanumeric values only");
+                              } else if (product.type === "date") {
+                                {
+                                  console.log(
+                                    /^[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{4}$/.test(
+                                      value
+                                    )
+                                  );
+                                }
+                                return /^[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{4}$/.test(
+                                  value
+                                )
+                                  ? ""
+                                  : (errorMessage =
+                                      "Date should be in the DD/MM/YYYY Format");
+                              }
+                              return errorMessage;
+                            },
                           })}
                           error={errors?.[product?.variable_name]?.message}
                         />

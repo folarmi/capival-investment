@@ -16,11 +16,10 @@ const OTPVerification = () => {
 
   const { bvn } = useSelector((state) => state.multiStep.userInfo);
   const { phoneNumber } = useSelector((state) => state.multiStep);
-
   const isBvnOtpLoading = useSelector((state) => state.auth.isBvnOtpLoading);
 
+  console.log(bvn, phoneNumber);
   const { value } = useSelector((state) => state.multiStep);
-  console.log(isBvnOtpLoading, value);
 
   const validationSchema = Yup.object().shape({
     otp: Yup.string()

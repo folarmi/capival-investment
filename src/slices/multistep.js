@@ -9,6 +9,7 @@ const initialState = {
     password: "",
     passport: "",
     signature: "",
+    otpEmail: "",
   },
   phoneNumber: "",
 };
@@ -17,10 +18,6 @@ export const multiStepSlice = createSlice({
   name: "multistep",
   initialState,
   reducers: {
-    // handleNextButton: (state, action) => {
-    //   state.value < 7 ? (state.value += 1) : (window.location = "/dashboard");
-    //   state.userInfo.bvn = action.payload;
-    // },
     handleNextButton: (state, action) => {
       state.value < 7 ? (state.value += 1) : (window.location = "/dashboard");
       state.userInfo.bvn = action.payload;
@@ -28,9 +25,6 @@ export const multiStepSlice = createSlice({
     handleBackButton: (state) => {
       state.value === 1 ? (state.value = 1) : (state.value -= 1);
     },
-    // handleBackButton: (state) => {
-    //   state.value -= 1;
-    // },
     handleNextByCount: (state, action) => {
       state.value += action.payload;
     },
@@ -39,6 +33,9 @@ export const multiStepSlice = createSlice({
     },
     handleGender: (state, action) => {
       state.userInfo.gender = action.payload;
+    },
+    handleOTPEmail: (state, action) => {
+      state.userInfo.otpEmail = action.payload;
     },
     handleAddress: (state, action) => {
       state.userInfo.address = action.payload;
@@ -68,5 +65,6 @@ export const {
   handlePassport,
   handleSignature,
   handlePhoneNumber,
+  handleOTPEmail,
 } = actions;
 export default reducer;
