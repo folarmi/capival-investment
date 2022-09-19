@@ -26,12 +26,18 @@ const initiateTransaction = async (values) => {
   return response.data;
 };
 
+const processPayment = async (values) => {
+  const response = await api.post(UrlRoute.processPayment, values);
+  return response.data;
+};
+
 const billPaymentService = {
   billPaymentCategories,
   billPaymentCategory,
   getBillerProducts,
   validateBillerProduct,
   initiateTransaction,
+  processPayment,
 };
 
 export default billPaymentService;

@@ -10,6 +10,7 @@ const SetTransactionPin = ({ toggleTransactionPinModal }) => {
   const { isTransactionPinLoading } = useSelector((state) => state?.auth);
 
   const [otpValues, setOtpValues] = useState("");
+
   const submitForm = (e) => {
     e.preventDefault();
     // setOtpValues('')

@@ -62,6 +62,21 @@ export const validateBillerProductAsync = createAsyncThunk(
   }
 );
 
+export const processPaymentAsync = createAsyncThunk(
+  "billPayment/processPayment",
+  async (values, { rejectWithValue }) => {
+    try {
+      const response = await BillPaymentService.processPayment(values);
+      return response;
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 export const initiateTransactionAsync = createAsyncThunk(
   "billPayment/initiateTransaction",
   async (values, { rejectWithValue }) => {
@@ -83,11 +98,13 @@ const initialState = {
   getBillerProductsLoading: false,
   validateBillerProductLoading: false,
   initiateTransactionLoading: false,
+  processPaymentLoading: false,
   billPaymentCategories: "",
   singleBillPaymentCategory: "",
   billerProducts: "",
   validateBillerProduct: "",
   initiateTransaction: "",
+  processPayment: "",
 };
 
 export const billPaymentSlice = createSlice({
@@ -143,6 +160,16 @@ export const billPaymentSlice = createSlice({
     },
     [initiateTransactionAsync.rejected]: (state) => {
       state.initiateTransactionLoading = false;
+    },
+    [processPaymentAsync.pending]: (state) => {
+      state.processPaymentLoading = true;
+    },
+    [processPaymentAsync.fulfilled]: (state, action) => {
+      state.processPaymentLoading = action.payload.data;
+      state.processPayment = false;
+    },
+    [processPaymentAsync.rejected]: (state) => {
+      state.processPaymentLoading = false;
     },
   },
 });

@@ -54,6 +54,7 @@ const saveExternalBeneficiary =
 const liquidateLoan = "loans/liquidate";
 const validateBillerProduct = "bills-payment/biller/validate-customer";
 const initiateTransaction = "bills-payment/biller/initiate-transaction";
+const processPayment = "bills-payment/biller/process-payment";
 
 const UrlRoute = {
   verifyBVN,
@@ -108,6 +109,7 @@ const UrlRoute = {
   getBillerProducts,
   validateBillerProduct,
   initiateTransaction,
+  processPayment,
 };
 
 export default UrlRoute;
