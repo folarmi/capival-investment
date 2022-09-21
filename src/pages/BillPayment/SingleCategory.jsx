@@ -56,7 +56,12 @@ const SingleCategory = () => {
                       loading="lazy"
                       onClick={() => getBillerProducts(item)}
                     />
-                    <p className="text-sm font-medium text-center">
+                    <p
+                      className="text-sm w-[90%]  font-medium text-center"
+                      // style={{
+                      //   flexGrow: "1",
+                      // }}
+                    >
                       {item?.billerName}
                     </p>
                   </div>

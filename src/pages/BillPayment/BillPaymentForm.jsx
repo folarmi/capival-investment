@@ -31,7 +31,6 @@ const BillPaymentForm = () => {
   const [billPaymentProductId, setBillPaymentProductId] = useState("");
   const [paymentModal, setPaymentModal] = useState(false);
   const [response, setResponse] = useState();
-  const [startDate, setStartDate] = useState(new Date());
 
   const { control, handleSubmit, register, reset, formState, getValues } =
     useForm({});
@@ -99,7 +98,7 @@ const BillPaymentForm = () => {
   const submitForm = (values) => {
     // deep copy the values object
     let copiedValues = JSON.parse(JSON.stringify(values));
-    delete copiedValues.amount;
+    // delete copiedValues.amount;
     delete copiedValues.billPaymentProductId;
 
     const valuesObject = () => {
@@ -130,19 +129,19 @@ const BillPaymentForm = () => {
       },
     };
 
-    console.log(variables);
+    // console.log(variables);
 
-    // dispatch(initiateTransactionAsync(variables))
-    //   .unwrap()
-    //   .then((res) => {
-    //     if (res?.status) {
-    //       toggleBillModal();
-    //       setResponse(res?.data);
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    dispatch(initiateTransactionAsync(variables))
+      .unwrap()
+      .then((res) => {
+        if (res?.status) {
+          toggleBillModal();
+          setResponse(res?.data);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   return (
     <div className="m-auto w-[92%] md:w-[50%] lg:w-[40%] xl:w-[34%] mt-16">
@@ -181,15 +180,28 @@ const BillPaymentForm = () => {
                       <div>
                         {product?.type !== "date" ? (
                           <>
+                            {selectedBillerProduct?.isAmountFixed && (
+                              <SavingsInput
+                                label="Amount"
+                                className="mb-4"
+                                placeholder="Amount"
+                                readOnly={true}
+                                value={selectedBillerProduct?.amount}
+                                register={register("amount", {
+                                  required: "THis Field is required",
+                                })}
+                              />
+                            )}
+
                             <SavingsInput
                               label={product?.display_name}
                               placeholder={product?.display_name}
-                              readOnly={selectedBillerProduct?.isAmountFixed}
-                              value={
-                                selectedBillerProduct?.isAmountFixed === true
-                                  ? selectedBillerProduct?.amount
-                                  : ""
-                              }
+                              // readOnly={selectedBillerProduct?.isAmountFixed}
+                              // value={
+                              //   selectedBillerProduct?.isAmountFixed === true
+                              //     ? selectedBillerProduct?.amount
+                              //     : ""
+                              // }
                               register={register(product?.variable_name, {
                                 onBlur: (e) => handleValidation(e, product),
                                 required: product?.required
@@ -215,13 +227,11 @@ const BillPaymentForm = () => {
                                         /^[a-z0-9]+$/i.test(value)) ||
                                       "This field accepts alphanumeric values only"
                                     );
-                                  } else if (product?.type === "date") {
+                                  } else if (product?.type === "alphabetic") {
                                     return (
-                                      (product?.type === "date" &&
-                                        /^[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{4}$/.test(
-                                          value
-                                        )) ||
-                                      "Date should be in the DD/MM/YYYY Format"
+                                      (product?.type === "alphabetic" &&
+                                        /^[a-zA-Z]+$/g.test(value)) ||
+                                      "This field accepts text only"
                                     );
                                   }
                                 },
@@ -247,21 +257,6 @@ const BillPaymentForm = () => {
                                 : false,
                             }}
                           />
-                          // <div className="mt-4">
-                          //   <label
-                          //     htmlFor="start Date"
-                          //     className={`text-sm font-normal text-blueTwo`}
-                          //   >
-                          //     {product?.display_name}
-                          //   </label>
-                          //   <div className="cursor-pointer px-4 border border-blueTwo/50 py-3 rounded-[20px] flex items-center text-blueTwo bg-blueTwo/20">
-                          //     <ReactDatePicker
-                          //       selected={startDate}
-                          //       onChange={(date) => setStartDate(date)}
-                          //     />
-                          //     <img src="/assets/icons/calendar.svg" alt="" />
-                          //   </div>
-                          // </div>
                         )}
                       </div>
                     ) : (
