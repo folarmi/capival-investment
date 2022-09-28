@@ -66,6 +66,11 @@ const getAllCompanies = async () => {
   return response.data;
 };
 
+const getDashboardFeatures = async () => {
+  const response = await api.get(`${UrlRoute.getDashboardFeatures}`);
+  return response.data;
+};
+
 const utilsService = {
   getGender,
   getMaritalStatus,
@@ -80,6 +85,7 @@ const utilsService = {
   getRelationshipOfficer,
   getHelpTopics,
   getAllCompanies,
+  getDashboardFeatures,
 };
 
 export default utilsService;

@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+
 import { CircularIcon } from "../../atoms";
 import ModalPopup from "../../components/ModalPopup";
 import { checkTransactionPinStatusAsync } from "../../slices/transactionHistory";
+import { getDashboardFeaturesAsync } from "../../slices/utils";
 import { SetTransactionPin } from "./SetTransactionPin";
+import { responsive } from "../../utils/data";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
-  // const test = useSelector((state) => state.auth.login?.user?.authorisation);
+  const { dashboardFeatures } = useSelector((state) => state.utils);
 
   const [showTransactionPinModal, setShowTransactionPinModal] = useState(false);
   const [transactionPinStatus, setTransactionPinStatus] = useState("");
@@ -23,6 +28,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     getTransactionPinStatus();
+    dispatch(getDashboardFeaturesAsync());
   }, []);
 
   useEffect(() => {
@@ -76,6 +82,82 @@ const Dashboard = () => {
       </section>
 
       <img src="/assets/icons/loanThree.svg" alt="" loading="lazy" />
+
+      {/* Carousel begins */}
+      <div
+        style={{
+          backgroundColor: "#e5f0f8",
+        }}
+      >
+        <section className="mx-12 my-10">
+          <p className="text-xl text-blueTwo leading-7 font-medium py-6">
+            Features
+          </p>
+          <Carousel
+            containerClass="w-full"
+            responsive={responsive}
+            showDots={true}
+            autoPlay
+          >
+            {dashboardFeatures !== "" &&
+              Array.isArray(dashboardFeatures) &&
+              dashboardFeatures?.map((flier) => {
+                return (
+                  <div className="w-full pb-10">
+                    <img
+                      src={flier.image}
+                      className="w-[446px] h-[217px] object-cover rounded-xl"
+                    />
+                  </div>
+                );
+              })}
+          </Carousel>
+        </section>
+      </div>
+
+      <div
+        style={{
+          backgroundColor: "#e5f0f8",
+        }}
+      >
+        <section className="mx-12 my-10">
+          <p className="text-xl text-blueTwo leading-7 font-medium py-6">
+            Movies Showing now
+          </p>
+          <Carousel
+            containerClass="w-full"
+            responsive={responsive}
+            showDots={true}
+            autoPlay
+          >
+            <div>
+              <img
+                src="/assets/images/pitch.jpeg"
+                className="w-[446px] h-[217px] object-cover rounded-xl"
+              />
+            </div>
+            <div>
+              <img
+                src="/assets/images/vivo.jpeg"
+                className="w-[446px] h-[217px] object-cover rounded-xl"
+              />
+            </div>
+            <div>
+              <img
+                src="/assets/images/pitch.jpeg"
+                className="w-[446px] h-[217px] object-cover rounded-xl"
+              />
+            </div>
+            <div>
+              <img
+                src="/assets/images/vivo.jpeg"
+                className="w-[446px] h-[217px] object-cover rounded-xl"
+              />
+            </div>
+          </Carousel>
+        </section>
+      </div>
+
       <ModalPopup
         modalHeight="300px"
         modalWidth="400px"

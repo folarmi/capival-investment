@@ -200,6 +200,21 @@ export const getAllEmployers = createAsyncThunk(
   }
 );
 
+export const getDashboardFeaturesAsync = createAsyncThunk(
+  "utils/getDashboardFeatures",
+  async (values, { rejectWithValue }) => {
+    try {
+      const response = await utilsService.getDashboardFeatures(values);
+      return response;
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 const initialState = {
   getGenderLoading: false,
   getLoanTypesLoading: false,
@@ -214,6 +229,7 @@ const initialState = {
   getRelationShipOfficerLoading: false,
   gethelpTopicsLoading: false,
   getAllEmployersLoading: false,
+  getDashboardFeaturesLoading: false,
   gender: [],
   maritalStatus: [],
   states: [],
@@ -226,6 +242,7 @@ const initialState = {
   helpTopics: [],
   employers: [],
   officerDetails: "",
+  dashboardFeatures: "",
 };
 
 const utilsSlice = createSlice({
@@ -372,6 +389,17 @@ const utilsSlice = createSlice({
     },
     [getAllEmployers.rejected]: (state, action) => {
       state.getAllEmployersLoading = false;
+      state.error = action.payload;
+    },
+    [getDashboardFeaturesAsync.pending]: (state) => {
+      state.getDashboardFeaturesLoading = true;
+    },
+    [getDashboardFeaturesAsync.fulfilled]: (state, action) => {
+      state.getDashboardFeaturesLoading = false;
+      state.dashboardFeatures = action.payload.data;
+    },
+    [getDashboardFeaturesAsync.rejected]: (state, action) => {
+      state.getDashboardFeaturesLoading = false;
       state.error = action.payload;
     },
   },

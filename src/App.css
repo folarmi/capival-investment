@@ -85,3 +85,13 @@ input {
   outline: none;
   /* border: none; */
 }
+
+.slider-wrapper {
+  height: 321px;
+}
+
+.carousel .slide img {
+  /* width: 100%; */
+  height: 250px;
+  object-fit: cover;
+}

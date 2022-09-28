@@ -18,6 +18,7 @@ const repaymentChannels = "utils/repayment-channels";
 const bankStatementType = "utils/bank-statement-type";
 const getAllBanks = "utils/bank-lists";
 const getAllEmployers = "utils/all-companies";
+const getDashboardFeatures = "utils/get-dashboard-feature";
 const registerUser = "auth/register";
 const login = "auth/login";
 const forgotPassword = "auth/forgot-password";
@@ -110,6 +111,7 @@ const UrlRoute = {
   validateBillerProduct,
   initiateTransaction,
   processPayment,
+  getDashboardFeatures,
 };
 
 export default UrlRoute;
