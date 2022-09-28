@@ -213,7 +213,7 @@ const OtherBanksTransfer = () => {
         {/* disbursement_bank_code */}
         <form
           onSubmit={handleSubmit(submitForm)}
-          className="grid grid-cols-2 gap-10 px-20"
+          className="md:grid md:grid-cols-2 gap-10 md:px-20"
         >
           <div className="">
             <Controller
@@ -240,7 +240,7 @@ const OtherBanksTransfer = () => {
             />
           </div>
 
-          <div>
+          <div className="mt-5 md:mt-0">
             <SavingsInput
               placeholder="Beneficiary Account Number"
               register={register("destination_account_no", {
@@ -252,7 +252,7 @@ const OtherBanksTransfer = () => {
             />
           </div>
 
-          <div>
+          <div className="mt-5 md:mt-0">
             <SavingsInput
               placeholder="Beneficiary Account Name"
               register={register("destination_account_name")}
@@ -267,7 +267,7 @@ const OtherBanksTransfer = () => {
             )}
           </div>
 
-          <div className="mb-8 md:mb-0">
+          <div className="mt-5 md:mt-0 mb-8 md:mb-0">
             <>
               {" "}
               <label
@@ -317,7 +317,7 @@ const OtherBanksTransfer = () => {
             />
           </div>
 
-          <div className="flex items-center justify-center col-span-2">
+          <div className="mt-4 md:mt-0 flex items-center justify-center col-span-2">
             <label
               for="default-toggle"
               className="inline-flex relative items-center cursor-pointer"
@@ -336,7 +336,7 @@ const OtherBanksTransfer = () => {
             </label>
           </div>
 
-          <div className="w-[30%] mt-6 justify-self-center col-span-2">
+          <div className="lg:w-[30%] mt-6 justify-self-center col-span-2">
             <Button
               buttonText="Continue"
               className="rounded-xl mb-8"
