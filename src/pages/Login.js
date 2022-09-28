@@ -13,7 +13,10 @@ import tokenService from "../services/token.service";
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  // const { isLoading } = useSelector((state) => state?.auth?.login);
   const { isLoading } = useSelector((state) => state?.auth?.login);
+
+  console.log(isLoading);
 
   const [passwordShown, setPasswordShown] = useState(false);
 
@@ -106,7 +109,7 @@ const Login = () => {
           <Button
             buttonText="Login"
             className="mt-6 rounded-[30px]"
-            isLoading={isLoading}
+            // isLoading={isLoading}
           />
           <p
             onClick={gotToForgotPasswordPage}
