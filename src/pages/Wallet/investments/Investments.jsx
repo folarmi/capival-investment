@@ -46,7 +46,7 @@ const Investments = () => {
           title="Investments"
           ifAccountName
           cardName="Account Name"
-          amount="50,000.25"
+          amount="50,677885"
           bgImage={investmentBg}
         />
       </section>
