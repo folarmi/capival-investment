@@ -5,7 +5,6 @@ import { useLocation } from "react-router-dom";
 const TransferReceipt = () => {
   const location = useLocation();
   const transferDetails = location.state?.transferDetails;
-  console.log(location.state?.transferDetails);
   return (
     <div className="mt-4 md:mt-8">
       <p className="font-normal text-xl text-blueTwo pb-4 md:pb-8 pl-6 md:pl-12">

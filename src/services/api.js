@@ -30,7 +30,7 @@ const apiResource = () => {
   api.interceptors.response.use(
     (response) =>
       new Promise((resolve, reject) => {
-        console.log(response);
+        // console.log(response);
         resolve(response);
       }),
     async (error) => {

@@ -8,7 +8,13 @@ import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 import CurrencyFormat from "react-currency-format";
 
-import { Button, SavingsInput, UserAvatar } from "../../atoms";
+import {
+  Button,
+  CustomSelect,
+  FluentSelect,
+  SavingsInput,
+  UserAvatar,
+} from "../../atoms";
 import WalletDetailsHeader from "../Wallet/WalletDetailsHeader";
 import { getAllBanksAsync } from "../../slices/utils";
 import {
@@ -43,31 +49,6 @@ const OtherBanksTransfer = () => {
     getExternalBeneficiaries,
   } = useSelector((state) => state?.transactionHistory);
 
-  // const getExternalBeneficiaries = [
-  //   {
-  //     id: 1,
-  //     user_id: 2,
-  //     beneficiary_account: "0136201464",
-  //     account_name: "AKINYOSOYE FOLASAYO OLUWASEYI",
-  //     bank_name: "GT Bank",
-  //     bank_code: "000013",
-  //     deleted_at: null,
-  //     created_at: "2022-08-26T14:58:58.000000Z",
-  //     updated_at: "2022-08-26T14:58:58.000000Z",
-  //   },
-  //   {
-  //     id: 1,
-  //     user_id: 2,
-  //     beneficiary_account: "2403056558",
-  //     account_name: "FOLASAYO OLUWASEYI AKINYOSOYE",
-  //     bank_name: "Zenith Bank",
-  //     bank_code: "000015",
-  //     deleted_at: null,
-  //     created_at: "2022-08-26T14:58:58.000000Z",
-  //     updated_at: "2022-08-26T14:58:58.000000Z",
-  //   },
-  // ];
-
   const validationSchema = Yup.object().shape({
     destination_account_no: Yup.string()
       .required("Destination Account is required")
@@ -95,8 +76,8 @@ const OtherBanksTransfer = () => {
       destination_account_name:
         isInterAccountValidated?.AccountName ??
         selectedBeneficiary?.account_name,
-      destination_account_no: selectedBeneficiary?.beneficiary_account,
-      destination_bank: selectedBeneficiary?.bank_code,
+      // destination_account_no: selectedBeneficiary?.beneficiary_account,
+      // destination_bank: selectedBeneficiary?.bank_code,
     },
   });
   const { errors } = formState;
@@ -161,11 +142,12 @@ const OtherBanksTransfer = () => {
       destination_account_name:
         isInterAccountValidated?.AccountName ??
         selectedBeneficiary?.account_name,
-      destination_account_no: selectedBeneficiary?.beneficiary_account,
-      destination_bank: selectedBeneficiary?.bank_code,
+      // destination_account_no: selectedBeneficiary?.beneficiary_account,
+      // destination_bank: selectedBeneficiary?.bank_code,
     };
-    reset(defaultValues);
-  }, [isInterAccountValidated, selectedBeneficiary, reset]);
+    // reset(defaultValues);
+    setValue("destination_account_name", isInterAccountValidated?.AccountName);
+  }, [isInterAccountValidated, selectedBeneficiary]);
 
   useEffect(() => {
     dispatch(getExternalBeneficiariesAsync());
@@ -210,7 +192,6 @@ const OtherBanksTransfer = () => {
         <p className="font-medium text-blueTwo text-base uppercase py-5">
           Other Bank Transfer
         </p>
-        {/* disbursement_bank_code */}
         <form
           onSubmit={handleSubmit(submitForm)}
           className="md:grid md:grid-cols-2 gap-10 md:px-20"
@@ -228,7 +209,10 @@ const OtherBanksTransfer = () => {
                   <Select
                     onBlur={onBlur}
                     value={allBanksData.find((c) => c.value === value)}
-                    onChange={(val) => onChange(val.value)}
+                    onChange={(val) => {
+                      onChange(val.value);
+                      console.log(val);
+                    }}
                     checked={value}
                     inputRef={ref}
                     options={allBanksData}
@@ -239,6 +223,25 @@ const OtherBanksTransfer = () => {
               )}
             />
           </div>
+          {/* <FluentSelect
+            name="destination_bank"
+            control={control}
+            label="Select Bank"
+            options={allBanksData}
+            // rules={{
+            //   required: product?.required ? "This field is required" : false,
+            // }}
+            error={errors?.destination_bank?.message}
+          /> */}
+          {/* <FluentSelect
+            control={control}
+            name="destination_bank"
+            options={allBanksData}
+            label="Bank Statement type"
+            placeholder="My bank statement"
+            error={errors?.destination_bank?.message}
+            rules={{ required: "Destination Bank is required" }}
+          /> */}
 
           <div className="mt-5 md:mt-0">
             <SavingsInput
