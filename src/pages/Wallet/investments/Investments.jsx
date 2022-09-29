@@ -90,17 +90,17 @@ const Investments = () => {
           >
             Savings
           </p>
-          <p
+          {/* <p
             className="font-medium text-xl text-blueTwo rounded-2xl bg-white/70 flex items-center justify-center py-2 px-8 my-4 cursor-pointer"
             onClick={goToFixedDepositsPage}
           >
             Fixed Deposits
-          </p>
+          </p> */}
         </div>
       </div>
 
       <div className="my-8 mx-7">
-        <TableHeader header="Active Assets" pageNumber="See all" />
+        {/* <TableHeader header="Active Assets" pageNumber="See all" /> */}
 
         <main className="bg-blueTwo/10 rounded-xl">
           {/* <section className="bg-blueTwo/20 rounded-xl py-4 pr-[40%] grid grid-cols-4 gap-4">
