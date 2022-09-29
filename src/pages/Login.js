@@ -109,7 +109,7 @@ const Login = () => {
           <Button
             buttonText="Login"
             className="mt-6 rounded-[30px]"
-            // isLoading={isLoading}
+            isLoading={isLoading}
           />
           <p
             onClick={gotToForgotPasswordPage}

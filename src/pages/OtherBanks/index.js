@@ -8,13 +8,7 @@ import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 import CurrencyFormat from "react-currency-format";
 
-import {
-  Button,
-  CustomSelect,
-  FluentSelect,
-  SavingsInput,
-  UserAvatar,
-} from "../../atoms";
+import { Button, SavingsInput, UserAvatar } from "../../atoms";
 import WalletDetailsHeader from "../Wallet/WalletDetailsHeader";
 import { getAllBanksAsync } from "../../slices/utils";
 import {
@@ -42,7 +36,7 @@ const OtherBanksTransfer = () => {
     setSaveAsBeneficiary(() => !saveAsBeneficiary);
   };
 
-  const { allBanks } = useSelector((state) => state?.utils);
+  const { allBanks, getAllBanksLoading } = useSelector((state) => state?.utils);
   const {
     validateInterAccountLoading,
     isInterAccountValidated,
@@ -76,15 +70,17 @@ const OtherBanksTransfer = () => {
       destination_account_name:
         isInterAccountValidated?.AccountName ??
         selectedBeneficiary?.account_name,
-      // destination_account_no: selectedBeneficiary?.beneficiary_account,
-      // destination_bank: selectedBeneficiary?.bank_code,
+      destination_account_no: selectedBeneficiary?.beneficiary_account,
+      destination_bank: selectedBeneficiary?.bank_code,
     },
   });
   const { errors } = formState;
 
   const getSelectedBeneficiary = (item) => {
     setValue("destination_bank", item?.bank_code);
+    // setValue("destination_account_no", item?.beneficiary_account);
     setSelectedBeneficiary(item);
+    console.log(item);
   };
 
   const allBanksData =
@@ -138,15 +134,16 @@ const OtherBanksTransfer = () => {
   };
 
   useEffect(() => {
-    const defaultValues = {
-      destination_account_name:
-        isInterAccountValidated?.AccountName ??
-        selectedBeneficiary?.account_name,
-      // destination_account_no: selectedBeneficiary?.beneficiary_account,
-      // destination_bank: selectedBeneficiary?.bank_code,
-    };
-    // reset(defaultValues);
-    setValue("destination_account_name", isInterAccountValidated?.AccountName);
+    setValue(
+      "destination_account_name",
+      isInterAccountValidated?.AccountName ?? selectedBeneficiary?.account_name
+    );
+    // beneficiary_account
+    setValue(
+      "destination_account_no",
+      isInterAccountValidated?.AccountNo ??
+        selectedBeneficiary?.beneficiary_account
+    );
   }, [isInterAccountValidated, selectedBeneficiary]);
 
   useEffect(() => {
@@ -211,9 +208,9 @@ const OtherBanksTransfer = () => {
                     value={allBanksData.find((c) => c.value === value)}
                     onChange={(val) => {
                       onChange(val.value);
-                      console.log(val);
                     }}
                     checked={value}
+                    isLoading={getAllBanksLoading}
                     inputRef={ref}
                     options={allBanksData}
                     placeholder="Access Bank"
@@ -223,25 +220,6 @@ const OtherBanksTransfer = () => {
               )}
             />
           </div>
-          {/* <FluentSelect
-            name="destination_bank"
-            control={control}
-            label="Select Bank"
-            options={allBanksData}
-            // rules={{
-            //   required: product?.required ? "This field is required" : false,
-            // }}
-            error={errors?.destination_bank?.message}
-          /> */}
-          {/* <FluentSelect
-            control={control}
-            name="destination_bank"
-            options={allBanksData}
-            label="Bank Statement type"
-            placeholder="My bank statement"
-            error={errors?.destination_bank?.message}
-            rules={{ required: "Destination Bank is required" }}
-          /> */}
 
           <div className="mt-5 md:mt-0">
             <SavingsInput
