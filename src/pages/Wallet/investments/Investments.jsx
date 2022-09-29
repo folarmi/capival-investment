@@ -103,7 +103,7 @@ const Investments = () => {
         <TableHeader header="Active Assets" pageNumber="See all" />
 
         <main className="bg-blueTwo/10 rounded-xl">
-          <section className="bg-blueTwo/20 rounded-xl py-4 pr-[40%] grid grid-cols-4 gap-4">
+          {/* <section className="bg-blueTwo/20 rounded-xl py-4 pr-[40%] grid grid-cols-4 gap-4">
             <p className="font-medium whitespace-nowrap text-base text-blueTwo pl-6">
               Target
             </p>
@@ -116,7 +116,7 @@ const Investments = () => {
             <p className="font-medium whitespace-nowrap text-base text-blueTwo">
               Asset Type
             </p>
-          </section>
+          </section> */}
 
           {data.map((item) => {
             return (
