@@ -11,6 +11,7 @@ const Table = ({
   pageCount,
   handlePageClick,
   ifPagination,
+  onClick,
 }) => {
   // const paginationStyle = {
   //   backgroundColor: "red",
@@ -99,7 +100,10 @@ const Table = ({
                   {rows.map((row) => {
                     prepareRow(row);
                     return (
-                      <tr {...row.getRowProps()} className="">
+                      <tr
+                        {...row.getRowProps()}
+                        onClick={() => onClick(row.original)}
+                      >
                         {row.cells.map((cell) => {
                           return (
                             <td

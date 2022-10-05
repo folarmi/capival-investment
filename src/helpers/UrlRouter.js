@@ -6,6 +6,7 @@ const getWalletBalance = "accounts/wallet-balance";
 const checkTransactionPinStatus = "accounts/check-pin-status";
 const getRelationshipOfficer = "accounts/relationship-officer";
 const generateAccountStatement = "accounts/generate-statement";
+const addDebitCard = "accounts/add-debit-card";
 const uploadKYCDocuments = "accounts/kyc_documents";
 const employerInfo = "accounts/employer-details";
 const getGender = "utils/gender";
@@ -56,6 +57,10 @@ const liquidateLoan = "loans/liquidate";
 const validateBillerProduct = "bills-payment/biller/validate-customer";
 const initiateTransaction = "bills-payment/biller/initiate-transaction";
 const processPayment = "bills-payment/biller/process-payment";
+const targetCategories = "utils/target-savings/categories";
+const savingsFrequency = "utils/target-savings/frequency";
+const sourceOfFunding = "utils/target-savings/source";
+const preferredTime = "utils/target-savings/timing";
 
 const UrlRoute = {
   verifyBVN,
@@ -112,6 +117,11 @@ const UrlRoute = {
   initiateTransaction,
   processPayment,
   getDashboardFeatures,
+  addDebitCard,
+  targetCategories,
+  savingsFrequency,
+  sourceOfFunding,
+  preferredTime,
 };
 
 export default UrlRoute;

@@ -77,12 +77,28 @@ export const addBankAccountAsync = createAsyncThunk(
   }
 );
 
+export const addDebitCardAsync = createAsyncThunk(
+  "accounts/addDebitCard",
+  async (values, { rejectWithValue }) => {
+    try {
+      const response = await AccountService.addDebitCard(values);
+      return response;
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 const initialState = {
   createNextofKinLoading: false,
   createEmployerInfoLoading: false,
   uploadKycDocumentsLoading: false,
   addBankAccountLoading: false,
   reportIssueLoading: false,
+  addDebitCardLoading: false,
 };
 
 export const accountsSlice = createSlice({
@@ -133,6 +149,15 @@ export const accountsSlice = createSlice({
     },
     [addBankAccountAsync.rejected]: (state) => {
       state.addBankAccountLoading = false;
+    },
+    [addDebitCardAsync.pending]: (state) => {
+      state.addDebitCardLoading = true;
+    },
+    [addDebitCardAsync.fulfilled]: (state) => {
+      state.addDebitCardLoading = false;
+    },
+    [addDebitCardAsync.rejected]: (state) => {
+      state.addDebitCardLoading = false;
     },
   },
 });

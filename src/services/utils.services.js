@@ -71,6 +71,26 @@ const getDashboardFeatures = async () => {
   return response.data;
 };
 
+const getTargetCategories = async () => {
+  const response = await api.get(`${UrlRoute.targetCategories}`);
+  return response.data;
+};
+
+const getSavingsFrequency = async () => {
+  const response = await api.get(`${UrlRoute.savingsFrequency}`);
+  return response.data;
+};
+
+const getFundingSource = async () => {
+  const response = await api.get(`${UrlRoute.sourceOfFunding}`);
+  return response.data;
+};
+
+const preferredTime = async () => {
+  const response = await api.get(`${UrlRoute.preferredTime}`);
+  return response.data;
+};
+
 const utilsService = {
   getGender,
   getMaritalStatus,
@@ -86,6 +106,10 @@ const utilsService = {
   getHelpTopics,
   getAllCompanies,
   getDashboardFeatures,
+  getTargetCategories,
+  getSavingsFrequency,
+  getFundingSource,
+  preferredTime,
 };
 
 export default utilsService;

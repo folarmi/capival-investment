@@ -16,8 +16,6 @@ const Login = () => {
   // const { isLoading } = useSelector((state) => state?.auth?.login);
   const { isLoading } = useSelector((state) => state?.auth?.login);
 
-  console.log(isLoading);
-
   const [passwordShown, setPasswordShown] = useState(false);
 
   const togglePasswordShown = () => {
@@ -56,7 +54,6 @@ const Login = () => {
         }
       })
       .catch((err) => {
-        console.log(err);
         toast.error(err?.message);
       });
   };

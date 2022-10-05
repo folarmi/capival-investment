@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getDebitCardsAsync } from "../../slices/debitCard";
 
 import { DebitButton } from "./DebitButton";
+import { PaystackHook } from "./PayStackHook";
 
 const DebitCard = () => {
   const dispatch = useDispatch();
@@ -32,11 +33,7 @@ const DebitCard = () => {
 
       <div className="grid grid-cols-2 lg:grid-cols-3 place-content-center items-center mx-2 lg:mx-10  w-full">
         <DebitButton text="Update Card Limit" icon="/assets/icons/star.svg" />
-        <DebitButton
-          text="Add New Card"
-          icon="/assets/icons/plus.svg"
-          ifPrimary={false}
-        />
+        <PaystackHook />
         <DebitButton text="Block Card" icon="/assets/icons/block.svg" />
       </div>
 

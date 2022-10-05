@@ -46,6 +46,24 @@
   background-size: cover;
 }
 
+.investment-bg {
+  background-image: url("./icons/investmentHeader.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 250px;
+  width: 415px;
+}
+
+.target-bg {
+  background-image: url("./icons/targetBg.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* height: 90px;
+  width: 100px; */
+}
+
 table {
   border-collapse: separate;
 }

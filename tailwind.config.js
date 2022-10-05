@@ -20,6 +20,7 @@ module.exports = {
         blueFive: "#699DEE",
         blueSix: "#E8ECF5",
         blueSeven: "#DEE3F0",
+        blueEight: "#d8deed",
         redOne: "#C6211B",
         redTwo: "#AE1F24",
         orange: "#C06B29",

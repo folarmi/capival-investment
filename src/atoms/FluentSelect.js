@@ -14,11 +14,12 @@ const FluentSelect = ({
   customOnChange,
   rules,
   isMulti,
+  className,
 }) => {
   const { field } = useController({ name, control, rules });
 
   return (
-    <div className="mt-4">
+    <div className={`mt-4 ${className}`}>
       <label className="text-sm font-normal text-blueTwo">{label}</label>
       <Select
         options={options}

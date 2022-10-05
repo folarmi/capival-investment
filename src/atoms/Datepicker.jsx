@@ -12,7 +12,7 @@ const DatePicker = ({ name, className, label, rules, control, error }) => {
   };
 
   return (
-    <>
+    <div className={`${className}`}>
       <label
         htmlFor="start Date"
         className={`text-sm font-normal text-blueTwo`}
@@ -20,7 +20,9 @@ const DatePicker = ({ name, className, label, rules, control, error }) => {
         {label}
       </label>
 
-      <div className="cursor-pointer px-4 border border-blueTwo/50 py-3 rounded-[20px] flex items-center text-blueTwo bg-blueTwo/20">
+      <div
+        className={`cursor-pointer px-4 border border-blueTwo/50 py-3 rounded-[20px] flex items-center text-blueTwo bg-blueTwo/20`}
+      >
         <ReactDatePicker
           name={name}
           onChange={(date) => field.onChange(date)}
@@ -40,7 +42,7 @@ const DatePicker = ({ name, className, label, rules, control, error }) => {
           <p className="text-red-500 text-sm">{error}</p>
         </span>
       )}
-    </>
+    </div>
   );
 };
 

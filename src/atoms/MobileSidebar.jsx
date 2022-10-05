@@ -22,7 +22,7 @@ const MobileSidebar = ({ setSidebar, sidebar }) => {
   };
 
   return (
-    <div className="fixed z-40 sidebar-bg w-[60%] min-h-screen">
+    <div className="fixed z-40 sidebar-bg w-[60%] h-full min-h-screen">
       <div
         className="flex justify-end cursor-pointer mr-4 mt-2"
         onClick={toggleSidebar}

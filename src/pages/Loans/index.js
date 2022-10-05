@@ -119,11 +119,6 @@ const Loans = () => {
       </div>
 
       <div className="mt-8 mx-4 md:mx-7">
-        {/* <TableHeader
-          header="Active Loans"
-          pageNumber="Showing 1-3 of 3 transactions"
-        /> */}
-
         <main className="hidden md:block  mt-4 bg-blueTwo/10 rounded-xl">
           <section className="bg-blueTwo/20 rounded-xl py-4 overflow-scroll">
             <div className="grid grid-cols-5 gap-5 items-center">

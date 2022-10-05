@@ -26,12 +26,18 @@ const reportIssue = async (values) => {
   return response.data;
 };
 
+const addDebitCard = async (values) => {
+  const response = await api.post(UrlRoute.addDebitCard, values);
+  return response.data;
+};
+
 const accountsService = {
   createNextOfKin,
   employerInfo,
   uploadKYCDocuments,
   reportIssue,
   addBankAccount,
+  addDebitCard,
 };
 
 export default accountsService;

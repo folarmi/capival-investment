@@ -40,8 +40,15 @@ import { SelectedTransactionHistory } from "../pages/TransactionHistory/Selected
 import { FixedDeposits } from "../pages/Wallet/investments/fixedDeposit";
 import { Confirmation } from "../pages/Wallet/investments/fixedDeposit/Confirmation";
 import { Investments } from "../pages/Wallet/investments/Investments";
+import { LockedSavings } from "../pages/Wallet/investments/lockedSavings";
+import { LockedSavingsForm } from "../pages/Wallet/investments/lockedSavings/LockedSavingsForm";
 import { Savings } from "../pages/Wallet/investments/savings";
 import { SavingsConfirmation } from "../pages/Wallet/investments/savings/SavingsConfirmation";
+import SavingsType from "../pages/Wallet/investments/SavingsType";
+import { TargetSavings } from "../pages/Wallet/investments/targetSavings";
+import { TargetSavingsDetails } from "../pages/Wallet/investments/targetSavings/TargetSavingsDetails";
+import { TermDeposit } from "../pages/Wallet/investments/termDeposit";
+import { TermDepositDetail } from "../pages/Wallet/investments/termDeposit/TermDepositDetail";
 import { WalletDetails } from "../pages/Wallet/WalletDetails";
 import { WalletTransactionDetails } from "../pages/Wallet/WalletTransactionDetails";
 import { RequiredAuthDashboard } from "./RequiredAuth";
@@ -62,6 +69,34 @@ const Index = () => {
         <Route
           path="dashboard/wallet/investments/new-saving"
           element={<Savings />}
+        />
+        <Route
+          path="dashboard/wallet/investments/saving-type"
+          element={<SavingsType />}
+        />
+        <Route
+          path="dashboard/wallet/investments/saving-type/term-deposit"
+          element={<TermDeposit />}
+        />
+        <Route
+          path="dashboard/wallet/investments/saving-type/term-deposit/2"
+          element={<TermDepositDetail />}
+        />
+        <Route
+          path="dashboard/wallet/investments/saving-type/target-savings"
+          element={<TargetSavings />}
+        />
+        <Route
+          path="dashboard/wallet/investments/saving-type/target-savings/2"
+          element={<TargetSavingsDetails />}
+        />
+        <Route
+          path="dashboard/wallet/investments/saving-type/locked-savings"
+          element={<LockedSavings />}
+        />
+        <Route
+          path="dashboard/wallet/investments/saving-type/locked-savings/form"
+          element={<LockedSavingsForm />}
         />
         <Route
           path="dashboard/wallet/investments/new-saving/confirm"

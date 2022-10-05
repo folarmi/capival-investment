@@ -215,6 +215,66 @@ export const getDashboardFeaturesAsync = createAsyncThunk(
   }
 );
 
+export const getTargetCategoriesAsync = createAsyncThunk(
+  "utils/getTargetCategories",
+  async (values, { rejectWithValue }) => {
+    try {
+      const response = await utilsService.getTargetCategories(values);
+      return response;
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const getSavingsFrequencyAsync = createAsyncThunk(
+  "utils/getSavingsFrequency",
+  async (values, { rejectWithValue }) => {
+    try {
+      const response = await utilsService.getSavingsFrequency(values);
+      return response;
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const getFundingSourceAsync = createAsyncThunk(
+  "utils/getFundingSource",
+  async (values, { rejectWithValue }) => {
+    try {
+      const response = await utilsService.getFundingSource(values);
+      return response;
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const preferredTimeAsync = createAsyncThunk(
+  "utils/preferredTime",
+  async (values, { rejectWithValue }) => {
+    try {
+      const response = await utilsService.preferredTime(values);
+      return response;
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 const initialState = {
   getGenderLoading: false,
   getLoanTypesLoading: false,
@@ -230,6 +290,10 @@ const initialState = {
   gethelpTopicsLoading: false,
   getAllEmployersLoading: false,
   getDashboardFeaturesLoading: false,
+  getTargetCategoriesLoading: false,
+  getSavingsFrequencyLoading: false,
+  getFundingSourceLoading: false,
+  preferredTimeLoading: false,
   gender: [],
   maritalStatus: [],
   states: [],
@@ -243,6 +307,10 @@ const initialState = {
   employers: [],
   officerDetails: "",
   dashboardFeatures: "",
+  targetCategories: "",
+  savingsFrequencyData: "",
+  fundingSource: "",
+  preferredTime: "",
 };
 
 const utilsSlice = createSlice({
@@ -400,6 +468,61 @@ const utilsSlice = createSlice({
     },
     [getDashboardFeaturesAsync.rejected]: (state, action) => {
       state.getDashboardFeaturesLoading = false;
+      state.error = action.payload;
+    },
+    [getTargetCategoriesAsync.pending]: (state) => {
+      state.getTargetCategoriesLoading = true;
+    },
+    [getTargetCategoriesAsync.fulfilled]: (state, action) => {
+      state.getTargetCategoriesLoading = false;
+      state.targetCategories = action.payload.data;
+    },
+    [getTargetCategoriesAsync.rejected]: (state, action) => {
+      state.getTargetCategoriesLoading = false;
+      state.error = action.payload;
+    },
+    [getSavingsFrequencyAsync.pending]: (state) => {
+      state.getSavingsFrequencyLoading = true;
+    },
+    [getSavingsFrequencyAsync.fulfilled]: (state, action) => {
+      state.getSavingsFrequencyLoading = false;
+      state.savingsFrequencyData = action.payload.data;
+    },
+    [getSavingsFrequencyAsync.rejected]: (state, action) => {
+      state.getSavingsFrequencyLoading = false;
+      state.error = action.payload;
+    },
+    [getFundingSourceAsync.pending]: (state) => {
+      state.getFundingSourceLoading = true;
+    },
+    [getFundingSourceAsync.fulfilled]: (state, action) => {
+      state.getFundingSourceLoading = false;
+      state.fundingSource = action.payload.data;
+    },
+    [getFundingSourceAsync.rejected]: (state, action) => {
+      state.getFundingSourceLoading = false;
+      state.error = action.payload;
+    },
+    [getFundingSourceAsync.pending]: (state) => {
+      state.getFundingSourceLoading = true;
+    },
+    [getFundingSourceAsync.fulfilled]: (state, action) => {
+      state.getFundingSourceLoading = false;
+      state.fundingSource = action.payload.data;
+    },
+    [getFundingSourceAsync.rejected]: (state, action) => {
+      state.getFundingSourceLoading = false;
+      state.error = action.payload;
+    },
+    [preferredTimeAsync.pending]: (state) => {
+      state.preferredTimeLoading = true;
+    },
+    [preferredTimeAsync.fulfilled]: (state, action) => {
+      state.preferredTimeLoading = false;
+      state.preferredTime = action.payload.data;
+    },
+    [preferredTimeAsync.rejected]: (state, action) => {
+      state.preferredTimeLoading = false;
       state.error = action.payload;
     },
   },
