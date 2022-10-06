@@ -46,6 +46,11 @@ const changePassword = async (values) => {
   return response.data;
 };
 
+const changePasswordWithToken = async (values) => {
+  const response = await api.post(UrlRoute.changePassword, values);
+  return response.data;
+};
+
 const logout = () => {
   sessionStorage.clear();
 };
@@ -76,6 +81,7 @@ const authService = {
   logout,
   setTransactionPin,
   resetTransactionPin,
+  changePasswordWithToken,
 };
 
 export default authService;

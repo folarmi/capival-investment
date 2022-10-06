@@ -114,7 +114,7 @@ export const changePasswordAsync = createAsyncThunk(
   "auth/changePassword",
   async (values, { rejectWithValue }) => {
     try {
-      const response = await AuthService.changePassword(values);
+      const response = await AuthService.changePasswordWithToken(values);
       return response;
     } catch (error) {
       if (!error.response) {
