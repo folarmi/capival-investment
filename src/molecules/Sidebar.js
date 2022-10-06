@@ -43,7 +43,7 @@ const Sidebar = (props) => {
       <div className="mb-8 pb-12">
         {SidebarMenuItems.map((item, index) => {
           return (
-            <div>
+            <div key={index}>
               {item?.subMenu ? (
                 <>
                   {item?.subMenu ? (

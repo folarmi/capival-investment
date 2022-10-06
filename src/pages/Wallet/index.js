@@ -36,14 +36,14 @@ const Wallet = () => {
   return (
     <>
       <div className="flex justify-center items-center mt-12 mx-4">
-        <WalletCard
+        {/* <WalletCard
           title="Wallet"
           ifAccountName
           cardName="Account Name"
           amount="50,000.25"
           onClick={goToInvestments}
           bgImage={investmentBg}
-        />
+        /> */}
 
         <div>
           <WalletCard

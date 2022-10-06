@@ -42,7 +42,7 @@ const forgotPasswordOTP = async (values) => {
 };
 
 const changePassword = async (values) => {
-  const response = await api.post(UrlRoute.changePassword, values);
+  const response = await api.post(UrlRoute.noAuthChangePassword, values);
   return response.data;
 };
 

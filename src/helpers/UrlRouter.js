@@ -25,6 +25,7 @@ const login = "auth/login";
 const forgotPassword = "auth/forgot-password";
 const forgotPasswordOTP = "auth/forgot-password/validate-otp";
 const changePassword = "accounts/change-password";
+const noAuthChangePassword = "auth/change-password";
 const getBillPaymentCategories = "bills-payment/get-categories";
 const billPaymentCategory = "bills-payment/get-billers/category";
 const getBillerProducts = "bills-payment/biller/get-products";
@@ -61,6 +62,7 @@ const targetCategories = "utils/target-savings/categories";
 const savingsFrequency = "utils/target-savings/frequency";
 const sourceOfFunding = "utils/target-savings/source";
 const preferredTime = "utils/target-savings/timing";
+const createTargetSavings = "investments/target-savings/create";
 
 const UrlRoute = {
   verifyBVN,
@@ -122,6 +124,8 @@ const UrlRoute = {
   savingsFrequency,
   sourceOfFunding,
   preferredTime,
+  createTargetSavings,
+  noAuthChangePassword,
 };
 
 export default UrlRoute;

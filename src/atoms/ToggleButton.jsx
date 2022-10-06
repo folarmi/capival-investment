@@ -4,7 +4,7 @@ const ToggleButton = ({ onChange, toggleText, value }) => {
   return (
     <div className="my-4 flex items-center justify-center col-span-2">
       <label
-        for="default-toggle"
+        htmlFor="default-toggle"
         className="inline-flex relative items-center cursor-pointer"
       >
         <input

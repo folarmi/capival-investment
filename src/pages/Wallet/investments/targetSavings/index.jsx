@@ -12,6 +12,8 @@ import {
   getTargetCategoriesAsync,
   preferredTimeAsync,
 } from "../../../../slices/utils";
+import { toast } from "react-toastify";
+import { createTargetSavingsAsync } from "../../../../slices/investments";
 
 const TargetSavings = () => {
   const dispatch = useDispatch();
@@ -25,6 +27,9 @@ const TargetSavings = () => {
     preferredTimeLoading,
     preferredTime,
   } = useSelector((state) => state.utils);
+  const { createTargetSavingsLoading } = useSelector(
+    (state) => state.investments
+  );
 
   const [selectedSavingsFrequency, setSelectedSavingsFrequency] =
     useState("Daily");
@@ -72,11 +77,50 @@ const TargetSavings = () => {
       };
     });
 
-  const submitForm = (values) => {
-    console.log(values);
+  const newDateOptions = {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
   };
 
-  // console.log(preferredTime);
+  const submitForm = (values) => {
+    let formattedTargetAmount = values?.target_amount.slice(1);
+    let formattedFrequencyAmount = values?.frequency_amount.slice(1);
+
+    const dateVariables = {
+      start_date: values?.start_date.toLocaleString("en-US", newDateOptions),
+      withdrawal_date: values?.withdrawal_date.toLocaleString(
+        "en-US",
+        newDateOptions
+      ),
+    };
+
+    const variables = {
+      title: values?.title,
+      category: values?.category,
+      target_amount: formattedTargetAmount,
+      savings_frequency: values?.savings_frequency,
+      frequency_amount: formattedFrequencyAmount,
+      day_of_the_week: values?.day_of_the_week || "",
+      day_of_the_month: values?.day_of_the_month || "",
+      preferred_time: values?.preferred_time,
+      start_date: dateVariables?.start_date,
+      withdrawal_date: dateVariables?.withdrawal_date,
+      primary_source: values?.primary_source,
+    };
+
+    dispatch(createTargetSavingsAsync(variables))
+      .unwrap()
+      .then((res) => {
+        if (res?.status === true) {
+          console.log(res);
+          toast("Login successful");
+        }
+      })
+      .catch((err) => {
+        toast.error(err?.message);
+      });
+  };
 
   useEffect(() => {
     dispatch(getTargetCategoriesAsync());
@@ -203,6 +247,7 @@ const TargetSavings = () => {
           name="start_date"
           control={control}
           className="mt-4"
+          minDate={new Date()}
           error={errors?.start_date?.message}
           rules={{ required: "Start Date  is required" }}
         />
@@ -211,6 +256,7 @@ const TargetSavings = () => {
           label="Withdrawal Date"
           name="withdrawal_date"
           control={control}
+          minDate={new Date()}
           className="mt-4"
           error={errors?.withdrawal_date?.message}
           rules={{ required: "Withdrawal Date  is required" }}
@@ -247,7 +293,7 @@ by the set withdrawal data"
             buttonText="Create Target"
             className="rounded-xl mb-10"
             size="lg"
-            // isLoading={createLoanIsLoading}
+            isLoading={createTargetSavingsLoading}
           />
         </div>
       </form>

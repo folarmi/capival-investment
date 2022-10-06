@@ -37,29 +37,22 @@ const PaystackHook = () => {
     console.log(reference);
     // Implementation for whatever you want to do with reference and after success call.
     const variables = {
-      authorization_code: "AUTH_555hjdh7",
-      bin: "519999",
-      last4: "8900",
-      exp_month: "08",
-      exp_year: "2022",
-      card_type: "Visa debit",
-      brand: "Visa",
-      bank: "UBA",
+      reference_no: reference?.reference,
     };
 
-    // dispatch(addDebitCardAsync(variables))
-    //   .unwrap()
-    //   .then((res) => {
-    //     if (res?.status === true) {
-    //       console.log(res);
-    //       // console.log(res?.status);
-    //       // toast("Login successful");
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //     toast.error(err?.message);
-    //   });
+    dispatch(addDebitCardAsync(variables))
+      .unwrap()
+      .then((res) => {
+        if (res?.status === true) {
+          console.log(res);
+          // console.log(res?.status);
+          // toast("Login successful");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error(err?.message);
+      });
   };
 
   // you can call this function anything

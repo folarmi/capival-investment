@@ -51,8 +51,7 @@ const CreateNewPassword = () => {
         }
       })
       .catch((err) => {
-        console.log(err);
-        toast.error(err?.message);
+        toast.error(err?.error);
       });
   };
 
@@ -61,7 +60,7 @@ const CreateNewPassword = () => {
       <Header />
       <div className="bg-blueOne m-auto md:w-[50%] lg:w-[40%] xl:w-[34%] mt-16 rounded-3xl">
         <p className="text-2xl text-redOne py-4 text-center">
-          Create new password
+          Create new passwordss
         </p>
         <p className="text-sm text-blueTwo text-center pb-4">
           Password should contain: An uppercase (A) A lowercase (a) Special

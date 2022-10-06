@@ -22,6 +22,7 @@ import loanReducer from "./slices/loan";
 import accountReducer from "./slices/accounts";
 import transactionsReducer from "./slices/transactions";
 import dropDownReducer from "./slices/dropdown";
+import investmentsReducer from "./slices/investments";
 
 const persistConfig = {
   key: "root",
@@ -42,6 +43,7 @@ const reducers = combineReducers({
   accounts: accountReducer,
   transactions: transactionsReducer,
   dropdown: dropDownReducer,
+  investments: investmentsReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);

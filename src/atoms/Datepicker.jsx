@@ -2,7 +2,15 @@ import React from "react";
 import ReactDatePicker from "react-datepicker";
 import { useController } from "react-hook-form";
 
-const DatePicker = ({ name, className, label, rules, control, error }) => {
+const DatePicker = ({
+  name,
+  className,
+  label,
+  rules,
+  control,
+  error,
+  minDate,
+}) => {
   const { field } = useController({ name, control, rules });
 
   const newDateOptions = {
@@ -29,10 +37,16 @@ const DatePicker = ({ name, className, label, rules, control, error }) => {
           // onChange={field.onChange((date) =>
           //   date?.toLocaleString("en-US", newDateOptions)
           // )}
+          // onChange={(date) =>
+          //   field.onChange(
+          //     date && date?.toLocaleString("en-US", newDateOptions)
+          //   )
+          // }
           selected={field.value || new Date()}
           inputProps={{
             placeholder: "MM-DD-YYYY HH:mm",
           }}
+          minDate={minDate}
           // viewMode="time"
         />
         <img src="/assets/icons/calendar.svg" alt="" />
