@@ -1,44 +1,67 @@
-import React from "react";
+import React, { useCallback, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { Loader } from "../../../../atoms";
+import { FormattedCurrency } from "../../../../atoms/FormattedCurrency";
 import { Table, TableHeader } from "../../../../components";
+import { getAllTermDepositTenureAsync } from "../../../../slices/investments";
 
 const TermDepositAll = () => {
-  // const data = [
-  //   amount_saved: <p>test</p>
-  // ]
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const data = React.useMemo(
-    () => [
-      {
-        amount_saved: (
-          <p className="font-normal text-lg text-orange">N 60,000</p>
-        ),
-        interest_rate: (
-          <p className="font-normal text-lg text-blueTwo">N 60,000</p>
-        ),
-        maturity_date: (
-          <p className="font-normal text-lg text-blueTwo">31-Dec-2022</p>
-        ),
-      },
-      {
-        amount_saved: (
-          <p className="font-normal text-lg text-orange">N 60,000</p>
-        ),
-        interest_rate: (
-          <p className="font-normal text-lg text-blueTwo">N 60,000</p>
-        ),
-        maturity_date: (
-          <p className="font-normal text-lg text-blueTwo">31-Dec-2022</p>
-        ),
-      },
-    ],
-    []
+  const { allTermDepositTenure, getAllTermDepositTenureLoading } = useSelector(
+    (state) => state.investments
   );
+
+  const goToSinglePage = (item) => {
+    navigate(
+      `/dashboard/wallet/investments/saving-type/term-deposit/${item?.id}`,
+      {
+        state: item,
+      }
+    );
+  };
+
+  const getData = useCallback(() => {
+    const result =
+      allTermDepositTenure &&
+      allTermDepositTenure?.map((item, i) => {
+        return {
+          amount: (
+            <p className="text-sm text-blueTwo font-normal">
+              {" "}
+              <FormattedCurrency value={item?.amount} />
+            </p>
+          ),
+          interest_rate: (
+            <p className="text-sm text-orange font-medium">{`${item?.rate}% per annum`}</p>
+          ),
+          maturity_date: (
+            <p className="text-sm text-blueTwo font-medium">
+              {item?.maturity_date}
+            </p>
+          ),
+          view: (
+            <p
+              onClick={() => goToSinglePage(item)}
+              className="text-sm text-blueTwo font-medium cursor-pointer"
+            >
+              View Details
+            </p>
+          ),
+        };
+      });
+    return [...(result || [])];
+  }, [allTermDepositTenure]);
+
+  const data = React.useMemo(() => getData(), [getData]);
 
   const columns = React.useMemo(
     () => [
       {
         Header: "Amount Saved",
-        accessor: "amount_saved",
+        accessor: "amount",
       },
       {
         Header: "Interest Rate",
@@ -48,19 +71,31 @@ const TermDepositAll = () => {
         Header: "Maturity Date",
         accessor: "maturity_date",
       },
+      {
+        Header: "",
+        accessor: "view",
+      },
     ],
     []
   );
 
+  useEffect(() => {
+    dispatch(getAllTermDepositTenureAsync());
+  }, []);
+
   return (
     <div>
-      <section className="mt-8 mx-4 md:mx-7">
-        <TableHeader header="Term Deposit" />
+      {getAllTermDepositTenureLoading ? (
+        <Loader />
+      ) : (
+        <section className="mt-8 mx-4 md:mx-7">
+          <TableHeader header="Term Deposit" />
 
-        <div className="mt-2">
-          <Table data={data} columns={columns} />
-        </div>
-      </section>
+          <div className="mt-2">
+            <Table data={data} columns={columns} />
+          </div>
+        </section>
+      )}
     </div>
   );
 };

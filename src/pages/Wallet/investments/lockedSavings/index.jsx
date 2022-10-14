@@ -1,36 +1,37 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { Loader } from "../../../../atoms";
+import { tenureAndRateAsync } from "../../../../slices/utils";
 
 const LockedSavings = () => {
   const navigate = useNavigate();
-  const interestType = [
-    {
-      id: "1",
-      noOfDays: "10 - 30 days",
-      interest: "5% Per annum",
-    },
-    {
-      id: "2",
-      noOfDays: "40 - 50 days",
-      interest: "10% Per annum",
-    },
-    {
-      id: "3",
-      noOfDays: "60 - 80 days",
-      interest: "15% Per annum",
-    },
-    {
-      id: "4",
-      noOfDays: "90 - 120 days",
-      interest: "5% Per annum",
-    },
-  ];
+  const dispatch = useDispatch();
+
+  const { tenureAndRateLoading, tenureAndRate } = useSelector(
+    (state) => state.utils
+  );
+
+  const tenureAndRateData =
+    tenureAndRate &&
+    tenureAndRate?.map((item) => {
+      return {
+        id: item?.id,
+        min_day: item?.min_day,
+        max_day: item?.max_day,
+        rate: item?.rate,
+      };
+    });
 
   const goToForm = (item) => {
     navigate("/dashboard/wallet/investments/saving-type/locked-savings/form", {
       state: item,
     });
   };
+
+  useEffect(() => {
+    dispatch(tenureAndRateAsync());
+  }, []);
 
   return (
     <div className="mt-4 lg:mt-10 m-auto w-[90%] md:w-[80%] lg:w-[70%]">
@@ -47,20 +48,29 @@ const LockedSavings = () => {
           How Long do will you like to lock your savings.
         </p>
 
-        <section className="flex flex-wrap gap-[2rem] rounded-xl items-center justify-around py-10 bg-[#eaeef6]">
-          {interestType?.map((type) => {
-            return (
-              <div
-                className="hover:bg-blueTwo cursor-pointer bg-blueFour hover:text-white text-blueTwo flex flex-col items-center justify-center w-[270px] h-[270px] rounded-2xl"
-                key={type?.id}
-                onClick={() => goToForm(type)}
-              >
-                <p className="font-medium text-lg pb-2 ">{type?.noOfDays}</p>
-                <p className="font-semibold text-lg italic">{type?.interest}</p>
-              </div>
-            );
-          })}
-        </section>
+        {tenureAndRateLoading ? (
+          <Loader />
+        ) : (
+          <section className="flex flex-wrap gap-[2rem] rounded-xl items-center justify-around py-10 bg-[#eaeef6]">
+            {tenureAndRateData &&
+              tenureAndRateData?.map((type) => {
+                return (
+                  <div
+                    className="hover:bg-blueTwo cursor-pointer bg-blueFour hover:text-white text-blueTwo flex flex-col items-center justify-center w-[270px] h-[270px] rounded-2xl"
+                    key={type?.id}
+                    onClick={() => goToForm(type)}
+                  >
+                    <p className="font-medium text-lg pb-2 ">
+                      {type?.min_day} - {type?.max_day} days
+                    </p>
+                    <p className="font-semibold text-lg italic">
+                      {type?.rate}%
+                    </p>
+                  </div>
+                );
+              })}
+          </section>
+        )}
       </main>
     </div>
   );

@@ -1,82 +1,117 @@
-import React from "react";
-import { Table, TableHeader } from "../../../../components";
+import React, { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { Button, FluentSelect, SavingsInput } from "../../../../atoms";
+import { AmountInput } from "../../../../atoms/AmountInput";
+import {
+  getInterestRateAsync,
+  getTermDepositTenureAsync,
+} from "../../../../slices/investments";
 
 const TermDeposit = () => {
-  // const data = [
-  //   amount_saved: <p>test</p>
-  // ]
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const data = React.useMemo(
-    () => [
-      {
-        amount_saved: <p>test</p>,
+  const {
+    getInterestRateLoading,
+    interestRates,
+    termDepositTenure,
+    getTermDepositTenureLoading,
+  } = useSelector((state) => state.investments);
+  const { register, handleSubmit, formState, control, getValues, setValue } =
+    useForm({
+      defaultValues: {
+        rate: interestRates && `${interestRates?.rate}% per annum`,
       },
-    ],
-    []
-  );
+    });
+  const { errors } = formState;
 
-  const columns = React.useMemo(
-    () => [
-      {
-        Header: "Amount Saved",
-        accessor: "amount_saved",
-      },
-      {
-        Header: "Interest Rate",
-        accessor: "interest_rate",
-      },
-      {
-        Header: "Maturity Date",
-        accessor: "maturity_date",
-      },
-    ],
-    []
-  );
+  const termDepositTenureData =
+    Array.isArray(termDepositTenure) &&
+    termDepositTenure &&
+    termDepositTenure?.map((day) => {
+      return {
+        value: day?.display_value,
+        label: day?.display_name,
+      };
+    });
 
-  const goToDetailPage = (item) => {
-    console.log(item);
+  const getInterestRateData = () => {
+    let formattedAmount = getValues("amount").slice(1);
+
+    const variables = {
+      amount: formattedAmount,
+      tenor: getValues("tenor"),
+    };
+
+    // console.log(variables);
+    dispatch(getInterestRateAsync(variables));
   };
 
-  return (
-    <div>
-      <section className="mt-8 mx-4 md:mx-7">
-        <TableHeader header="Transactions History" />
+  const submitForm = (values) => {
+    navigate("/dashboard/wallet/investments/saving-type/term-deposit/preview", {
+      state: values,
+    });
+  };
 
-        <div className="mt-2">
-          <Table
-            data={data}
-            columns={columns}
-            onClick={(item) => goToDetailPage(item)}
-            // onClick={(item) => goToSinglePage(item?.id?.props?.children)}
+  useEffect(() => {
+    setValue("rate", interestRates && `${interestRates?.rate}% per annum`);
+  }, [interestRates]);
+
+  useEffect(() => {
+    dispatch(getTermDepositTenureAsync());
+  }, []);
+
+  return (
+    <div className="mt-4 lg:mt-10 m-auto w-[90%] md:w-[80%] lg:w-[60%]">
+      <form onSubmit={handleSubmit(submitForm)}>
+        <AmountInput
+          control={control}
+          name="amount"
+          label="How much would you like to save?"
+          placeholder="N 10,000.00"
+          min={"100,000"}
+          error={errors?.amount?.message}
+          rules={{ required: "Amount is required" }}
+        />
+
+        <FluentSelect
+          control={control}
+          name="tenor"
+          options={termDepositTenureData}
+          label="For how long?"
+          isLoading={getTermDepositTenureLoading}
+          placeholder="Tenure"
+          error={errors?.tenor?.message}
+          rules={{ required: "Tenure is required" }}
+          onBlur={getInterestRateData}
+        />
+
+        <SavingsInput
+          readOnly
+          placeholder=""
+          className="mt-4"
+          label="Interest Rate"
+          register={register("rate", {
+            required: "Interest Rate is required",
+          })}
+          error={errors?.rate?.message}
+        />
+        <span className="text-xs text-red-400">
+          {getInterestRateLoading ? "Calculating Rate" : ""}
+        </span>
+
+        <div className="w-full mt-14 md:w-[40%] m-auto">
+          <Button
+            buttonText="Continue"
+            className="rounded-xl mb-10"
+            size="lg"
           />
         </div>
-      </section>
+      </form>
     </div>
   );
 };
 
 export { TermDeposit };
-
-// <tbody {...getTableBodyProps()}>
-// {rows.map((row) => {
-//   prepareRow(row);
-//   return (
-//     <tr
-//       {...row.getRowProps()}
-//       className="text-left"
-//       // onClick={() => onClick(row.original)}
-//     >
-//       {row.cells.map((cell) => {
-//         return (
-//           <td
-//             {...cell.getCellProps()}
-//             className="whitespace-nowrap font-normal py-3 text-base"
-//           >
-//             {cell.render("Cell")}
-//           </td>
-//         );
-//       })}
-//     </tr>
-//   );
-// })}
-// </tbody>

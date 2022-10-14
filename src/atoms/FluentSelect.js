@@ -15,6 +15,7 @@ const FluentSelect = ({
   rules,
   isMulti,
   className,
+  onBlur,
 }) => {
   const { field } = useController({ name, control, rules });
 
@@ -34,6 +35,7 @@ const FluentSelect = ({
         placeholder={placeholder}
         isMulti={isMulti}
         styles={colourStyles}
+        onBlur={onBlur}
       />
       {error && (
         <span>

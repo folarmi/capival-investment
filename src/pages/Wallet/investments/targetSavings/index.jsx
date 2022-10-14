@@ -3,7 +3,6 @@ import { Button, FluentSelect, SavingsInput } from "../../../../atoms";
 import { useForm } from "react-hook-form";
 import { AmountInput } from "../../../../atoms/AmountInput";
 import { DatePicker } from "../../../../atoms/Datepicker";
-import { ToggleButton } from "../../../../atoms/ToggleButton";
 import { daysOfTheMonth, daysOfTheWeek } from "../../../../utils/data";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -12,11 +11,12 @@ import {
   getTargetCategoriesAsync,
   preferredTimeAsync,
 } from "../../../../slices/utils";
-import { toast } from "react-toastify";
-import { createTargetSavingsAsync } from "../../../../slices/investments";
+import { useNavigate } from "react-router-dom";
 
 const TargetSavings = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const {
     getTargetCategoriesLoading,
     targetCategories,
@@ -27,14 +27,10 @@ const TargetSavings = () => {
     preferredTimeLoading,
     preferredTime,
   } = useSelector((state) => state.utils);
-  const { createTargetSavingsLoading } = useSelector(
-    (state) => state.investments
-  );
 
   const [selectedSavingsFrequency, setSelectedSavingsFrequency] =
     useState("Daily");
   const { register, handleSubmit, formState, control } = useForm();
-
   const { errors } = formState;
 
   const getSelectedFrequency = (item) => {
@@ -77,49 +73,13 @@ const TargetSavings = () => {
       };
     });
 
-  const newDateOptions = {
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-  };
-
   const submitForm = (values) => {
-    let formattedTargetAmount = values?.target_amount.slice(1);
-    let formattedFrequencyAmount = values?.frequency_amount.slice(1);
-
-    const dateVariables = {
-      start_date: values?.start_date.toLocaleString("en-US", newDateOptions),
-      withdrawal_date: values?.withdrawal_date.toLocaleString(
-        "en-US",
-        newDateOptions
-      ),
-    };
-
-    const variables = {
-      title: values?.title,
-      category: values?.category,
-      target_amount: formattedTargetAmount,
-      savings_frequency: values?.savings_frequency,
-      frequency_amount: formattedFrequencyAmount,
-      day_of_the_week: values?.day_of_the_week || "",
-      day_of_the_month: values?.day_of_the_month || "",
-      preferred_time: values?.preferred_time,
-      start_date: dateVariables?.start_date,
-      withdrawal_date: dateVariables?.withdrawal_date,
-      primary_source: values?.primary_source,
-    };
-
-    dispatch(createTargetSavingsAsync(variables))
-      .unwrap()
-      .then((res) => {
-        if (res?.status === true) {
-          console.log(res);
-          toast("Login successful");
-        }
-      })
-      .catch((err) => {
-        toast.error(err?.message);
-      });
+    navigate(
+      "/dashboard/wallet/investments/saving-type/target-savings-preview",
+      {
+        state: values,
+      }
+    );
   };
 
   useEffect(() => {
@@ -235,7 +195,7 @@ const TargetSavings = () => {
           options={preferredTimeData}
           label="Preferred Time"
           isLoading={preferredTimeLoading}
-          placeholder="Monday"
+          placeholder="9.00am"
           error={errors?.preferred_time?.message}
           rules={{
             required: "Preferred Time is required",
@@ -276,24 +236,11 @@ const TargetSavings = () => {
           }}
         />
 
-        <ToggleButton
-          toggleText="I hereby agree that if i will forfeit the interest accrued to
-this savings if I fail to meet this target Amount (N 1000,000.00) 
-by the set withdrawal data"
-        />
-
-        <ToggleButton
-          toggleText="I hereby agree that if i will forfeit the interest accrued to
-this savings if I fail to meet this target Amount (N 1000,000.00) 
-by the set withdrawal data"
-        />
-
         <div className="w-full mt-14 md:w-[40%] m-auto">
           <Button
-            buttonText="Create Target"
+            buttonText="Continue"
             className="rounded-xl mb-10"
             size="lg"
-            isLoading={createTargetSavingsLoading}
           />
         </div>
       </form>

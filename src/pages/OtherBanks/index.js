@@ -12,7 +12,6 @@ import { Button, SavingsInput, UserAvatar } from "../../atoms";
 import WalletDetailsHeader from "../Wallet/WalletDetailsHeader";
 import { getAllBanksAsync } from "../../slices/utils";
 import {
-  otherBankTransferAsync,
   getExternalBeneficiariesAsync,
   validateInterAccountAsync,
 } from "../../slices/transactionHistory";

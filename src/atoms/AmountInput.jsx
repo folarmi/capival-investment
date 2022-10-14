@@ -2,7 +2,15 @@ import React from "react";
 import { useController } from "react-hook-form";
 import CurrencyFormat from "react-currency-format";
 
-const AmountInput = ({ label, name, control, placeholder, error, rules }) => {
+const AmountInput = ({
+  label,
+  name,
+  control,
+  placeholder,
+  error,
+  rules,
+  min,
+}) => {
   const { field } = useController({ name, control, rules });
 
   return (
@@ -19,6 +27,7 @@ const AmountInput = ({ label, name, control, placeholder, error, rules }) => {
           thousandSeparator={true}
           placeholder={placeholder}
           name={name}
+          min={min}
           //   value={value}
           prefix={"₦"}
           onChange={field.onChange}

@@ -102,7 +102,7 @@ const Table = ({
                     return (
                       <tr
                         {...row.getRowProps()}
-                        onClick={() => onClick(row.original)}
+                        // onClick={() => onClick(row.original)}
                       >
                         {row.cells.map((cell) => {
                           return (

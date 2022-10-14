@@ -7,11 +7,12 @@ const ModalPopup = ({
   isOpen,
   modalWidth = "500px",
   modalHeight = "500px",
+  className,
 }) => {
   if (!isOpen) return null;
   return ReactDOM.createPortal(
     <div
-      className="fixed w-full h-full z-40 top-0 left-0 flex justify-center items-center"
+      className={`fixed w-full h-full z-40 top-0 left-0 flex justify-center items-center ${className}`}
       style={{
         backgroundColor: "rgba(0, 0, 0, 0.7)",
       }}

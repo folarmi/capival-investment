@@ -91,6 +91,21 @@ const preferredTime = async () => {
   return response.data;
 };
 
+const reasonForBreaking = async () => {
+  const response = await api.get(`${UrlRoute.reasonForBreaking}`);
+  return response.data;
+};
+
+const tenureAndRate = async () => {
+  const response = await api.get(`${UrlRoute.tenureAndRate}`);
+  return response.data;
+};
+
+const payBackDate = async (id) => {
+  const response = await api.get(`${UrlRoute.payBackDate}/${id}`);
+  return response.data;
+};
+
 const utilsService = {
   getGender,
   getMaritalStatus,
@@ -110,6 +125,9 @@ const utilsService = {
   getSavingsFrequency,
   getFundingSource,
   preferredTime,
+  reasonForBreaking,
+  tenureAndRate,
+  payBackDate,
 };
 
 export default utilsService;

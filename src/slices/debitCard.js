@@ -19,6 +19,7 @@ export const getDebitCardsAsync = createAsyncThunk(
 
 const initialState = {
   getDebitCardsLoading: false,
+  allDebitCards: "",
 };
 
 export const debitCardSlice = createSlice({
@@ -29,7 +30,7 @@ export const debitCardSlice = createSlice({
       state.getDebitCardsLoading = true;
     },
     [getDebitCardsAsync.fulfilled]: (state, action) => {
-      state.billPaymentCategories = action.payload.data;
+      state.allDebitCards = action.payload.data;
       state.getDebitCardsLoading = true;
     },
     [getDebitCardsAsync.rejected]: (state) => {

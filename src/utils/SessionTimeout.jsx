@@ -34,17 +34,20 @@ const SessionTimeout = () => {
       console.error(err);
     }
   };
-  const handleContinue = () => {
-    setTimeoutModalOpen(false);
-    clearSessionInterval();
-    clearSessionTimeout();
-  };
+
+  // const handleContinue = () => {
+  //   setTimeoutModalOpen(false);
+  //   clearSessionInterval();
+  //   clearSessionTimeout();
+  // };
+
   const onActive = () => {
     if (!timeoutModalOpen) {
       clearSessionInterval();
       clearSessionTimeout();
     }
   };
+
   const onIdle = () => {
     const delay = 1000 * 1;
     if (window.sessionStorage.getItem("accessToken")) {
@@ -62,6 +65,7 @@ const SessionTimeout = () => {
       }, delay);
     }
   };
+
   return (
     <>
       <IdleTimer

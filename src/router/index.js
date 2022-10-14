@@ -42,13 +42,16 @@ import { Confirmation } from "../pages/Wallet/investments/fixedDeposit/Confirmat
 import { Investments } from "../pages/Wallet/investments/Investments";
 import { LockedSavings } from "../pages/Wallet/investments/lockedSavings";
 import { LockedSavingsForm } from "../pages/Wallet/investments/lockedSavings/LockedSavingsForm";
+import { LockedSavingsPreview } from "../pages/Wallet/investments/lockedSavings/LockedSavingsPreview";
 import { Savings } from "../pages/Wallet/investments/savings";
 import { SavingsConfirmation } from "../pages/Wallet/investments/savings/SavingsConfirmation";
 import SavingsType from "../pages/Wallet/investments/SavingsType";
 import { TargetSavings } from "../pages/Wallet/investments/targetSavings";
 import { TargetSavingsDetails } from "../pages/Wallet/investments/targetSavings/TargetSavingsDetails";
+import { TargetSavingsPreview } from "../pages/Wallet/investments/targetSavings/TargetSavingsPreview";
 import { TermDeposit } from "../pages/Wallet/investments/termDeposit";
 import { TermDepositDetail } from "../pages/Wallet/investments/termDeposit/TermDepositDetail";
+import { TermDepositPreview } from "../pages/Wallet/investments/termDeposit/TermDepositPreview";
 import { WalletDetails } from "../pages/Wallet/WalletDetails";
 import { WalletTransactionDetails } from "../pages/Wallet/WalletTransactionDetails";
 import { RequiredAuthDashboard } from "./RequiredAuth";
@@ -79,7 +82,11 @@ const Index = () => {
           element={<TermDeposit />}
         />
         <Route
-          path="dashboard/wallet/investments/saving-type/term-deposit/2"
+          path="dashboard/wallet/investments/saving-type/term-deposit/preview"
+          element={<TermDepositPreview />}
+        />
+        <Route
+          path="dashboard/wallet/investments/saving-type/term-deposit/:id"
           element={<TermDepositDetail />}
         />
         <Route
@@ -87,7 +94,11 @@ const Index = () => {
           element={<TargetSavings />}
         />
         <Route
-          path="dashboard/wallet/investments/saving-type/target-savings/2"
+          path="dashboard/wallet/investments/saving-type/target-savings-preview"
+          element={<TargetSavingsPreview />}
+        />
+        <Route
+          path="dashboard/wallet/investments/saving-type/target-savings/:id"
           element={<TargetSavingsDetails />}
         />
         <Route
@@ -97,6 +108,10 @@ const Index = () => {
         <Route
           path="dashboard/wallet/investments/saving-type/locked-savings/form"
           element={<LockedSavingsForm />}
+        />
+        <Route
+          path="dashboard/wallet/investments/saving-type/locked-savings/form/preview"
+          element={<LockedSavingsPreview />}
         />
         <Route
           path="dashboard/wallet/investments/new-saving/confirm"

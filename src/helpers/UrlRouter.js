@@ -35,7 +35,7 @@ const getInternalBeneficiaries =
   "transactions/intra/transfer-fund/fetch-beneficiary";
 const getExternalBeneficiaries =
   "transactions/inter/transfer-fund/fetch-beneficiary";
-const getDebitCards = "payments/get_cards";
+const getDebitCards = "accounts/get-debit-card";
 const getAirtimeBillers = "bills-payment/get-airtime-billers";
 const capivalTransfer = "transactions/intra/transfer-fund";
 const otherBanksTransfer = "transactions/inter/transfer-fund";
@@ -63,6 +63,23 @@ const savingsFrequency = "utils/target-savings/frequency";
 const sourceOfFunding = "utils/target-savings/source";
 const preferredTime = "utils/target-savings/timing";
 const createTargetSavings = "investments/target-savings/create";
+const getAllTargetSavings = "investments/target-savings";
+const getSingleTargetSaving = "investments/target-savings/get-savings-details";
+const quickTopUp = "investments/target-savings/quick-topup";
+const extendTargetSavings = "investments/target-savings/increase-amount";
+const changeFundingSource = "investments/target-savings/change-source";
+const reasonForBreaking = "utils/target-savings/reason-for-breaking";
+const breakTargetSavings = "investments/target-savings/break";
+const tenureAndRate = "utils/safe-lock/rate-guide";
+const payBackDate = "utils/safe-lock/payback-date";
+const createSafeLock = "investments/safe-lock/create";
+const getAllSafeLock = "investments/safe-lock";
+const getInterestRate = "investments/term-deposit/get-interset-rate";
+const createTermDeposit = "investments/term-deposit/create";
+const getTermDepositTenure = "utils/term-deposit/tenor";
+const getAllTermDepositTenure = "investments/term-deposit";
+const requestInvestmentLetter = "investments/term-deposit/investment-letter";
+const liquidateInvestment = "investments/term-deposit/liquidate-deposit";
 
 const UrlRoute = {
   verifyBVN,
@@ -126,6 +143,23 @@ const UrlRoute = {
   preferredTime,
   createTargetSavings,
   noAuthChangePassword,
+  getSingleTargetSaving,
+  quickTopUp,
+  getAllTargetSavings,
+  extendTargetSavings,
+  changeFundingSource,
+  reasonForBreaking,
+  breakTargetSavings,
+  tenureAndRate,
+  payBackDate,
+  createSafeLock,
+  getAllSafeLock,
+  getInterestRate,
+  createTermDeposit,
+  getTermDepositTenure,
+  getAllTermDepositTenure,
+  requestInvestmentLetter,
+  liquidateInvestment,
 };
 
 export default UrlRoute;

@@ -275,6 +275,51 @@ export const preferredTimeAsync = createAsyncThunk(
   }
 );
 
+export const tenureAndRateAsync = createAsyncThunk(
+  "utils/tenureAndRate",
+  async (values, { rejectWithValue }) => {
+    try {
+      const response = await utilsService.tenureAndRate(values);
+      return response;
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const reasonForBreakingAsync = createAsyncThunk(
+  "utils/reasonForBreaking",
+  async (values, { rejectWithValue }) => {
+    try {
+      const response = await utilsService.reasonForBreaking(values);
+      return response;
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const payBackDateAsync = createAsyncThunk(
+  "utils/payBackDate",
+  async (values, { rejectWithValue }) => {
+    try {
+      const response = await utilsService.payBackDate(values);
+      return response;
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 const initialState = {
   getGenderLoading: false,
   getLoanTypesLoading: false,
@@ -294,6 +339,9 @@ const initialState = {
   getSavingsFrequencyLoading: false,
   getFundingSourceLoading: false,
   preferredTimeLoading: false,
+  reasonForBreakingLoading: false,
+  tenureAndRateLoading: false,
+  payBackDateLoading: false,
   gender: [],
   maritalStatus: [],
   states: [],
@@ -311,6 +359,9 @@ const initialState = {
   savingsFrequencyData: "",
   fundingSource: "",
   preferredTime: "",
+  reasonsForBreaking: "",
+  tenureAndRate: "",
+  payBackDate: "",
 };
 
 const utilsSlice = createSlice({
@@ -523,6 +574,39 @@ const utilsSlice = createSlice({
     },
     [preferredTimeAsync.rejected]: (state, action) => {
       state.preferredTimeLoading = false;
+      state.error = action.payload;
+    },
+    [reasonForBreakingAsync.pending]: (state) => {
+      state.reasonForBreakingLoading = true;
+    },
+    [reasonForBreakingAsync.fulfilled]: (state, action) => {
+      state.reasonForBreakingLoading = false;
+      state.reasonsForBreaking = action.payload.data;
+    },
+    [reasonForBreakingAsync.rejected]: (state, action) => {
+      state.reasonForBreakingLoading = false;
+      state.error = action.payload;
+    },
+    [tenureAndRateAsync.pending]: (state) => {
+      state.tenureAndRateLoading = true;
+    },
+    [tenureAndRateAsync.fulfilled]: (state, action) => {
+      state.tenureAndRateLoading = false;
+      state.tenureAndRate = action.payload.data;
+    },
+    [tenureAndRateAsync.rejected]: (state, action) => {
+      state.tenureAndRateLoading = false;
+      state.error = action.payload;
+    },
+    [payBackDateAsync.pending]: (state) => {
+      state.payBackDateLoading = true;
+    },
+    [payBackDateAsync.fulfilled]: (state, action) => {
+      state.payBackDateLoading = false;
+      state.payBackDate = action.payload;
+    },
+    [payBackDateAsync.rejected]: (state, action) => {
+      state.payBackDateLoading = false;
       state.error = action.payload;
     },
   },

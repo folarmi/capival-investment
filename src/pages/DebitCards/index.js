@@ -7,11 +7,7 @@ import { PaystackHook } from "./PayStackHook";
 
 const DebitCard = () => {
   const dispatch = useDispatch();
-  const customerId = useSelector(
-    (state) => state?.auth?.login?.user?.user?.customer_data?.CustomerID
-  );
-
-  // console.log(isLoading);
+  const { allDebitCards } = useSelector((state) => state?.debitCard);
 
   useEffect(() => {
     dispatch(getDebitCardsAsync());
@@ -37,25 +33,15 @@ const DebitCard = () => {
         <DebitButton text="Block Card" icon="/assets/icons/block.svg" />
       </div>
 
-      <div className="flex items-center justify-between bg-[#c2cce4] mt-8 py-10 px-20">
-        <img
-          src="/assets/icons/realAtmCard.svg"
-          alt="realAtmCard"
-          className="w-1/4"
-          loading="lazy"
-        />
-        <img
-          src="/assets/icons/realAtmCard.svg"
-          alt="realAtmCard"
-          className="w-1/4"
-          loading="lazy"
-        />
-        <img
-          src="/assets/icons/realAtmCard.svg"
-          alt="realAtmCard"
-          className="w-1/4"
-          loading="lazy"
-        />
+      <div className="flex flex-wrap items-center justify-between bg-[#c2cce4] mt-8 py-10 px-20">
+        {allDebitCards &&
+          allDebitCards?.map((card) => {
+            return (
+              <div className="atm-bg relative mb-5">
+                <p className="absolute top-[37%] left-[50%]">{card?.last4}</p>
+              </div>
+            );
+          })}
       </div>
     </>
   );
