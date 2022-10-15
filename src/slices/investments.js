@@ -140,9 +140,11 @@ export const getSingleTargetSavingAsync = createAsyncThunk(
 export const quickTopUpAsync = createAsyncThunk(
   "transactions/quickTopUp",
   async (values, { rejectWithValue }) => {
-    const [id, formValues] = values;
     try {
-      const response = await InvestmentsService.quickTopUp(id, formValues);
+      const response = await InvestmentsService.quickTopUp(
+        values?.savingsId,
+        values?.values
+      );
       return response;
     } catch (error) {
       if (!error.response) {
@@ -156,12 +158,10 @@ export const quickTopUpAsync = createAsyncThunk(
 export const extendTargetSavingsAsync = createAsyncThunk(
   "transactions/extendTargetSavings",
   async (values, { rejectWithValue }) => {
-    const [id, formValues] = values;
-    console.log(values);
     try {
       const response = await InvestmentsService.extendTargetSavings(
-        id,
-        formValues
+        values?.savingsId,
+        values?.values
       );
       return response;
     } catch (error) {
@@ -191,12 +191,10 @@ export const getAllTargetSavingsAsync = createAsyncThunk(
 export const changeFundingSourceAsync = createAsyncThunk(
   "transactions/changeFundingSource",
   async (values, { rejectWithValue }) => {
-    const [id, formValues] = values;
-    console.log(id, formValues);
     try {
       const response = await InvestmentsService.changeFundingSource(
-        id,
-        formValues
+        values?.savingsId,
+        values?.values
       );
       return response;
     } catch (error) {
@@ -211,11 +209,10 @@ export const changeFundingSourceAsync = createAsyncThunk(
 export const breakTargetSavingsAsync = createAsyncThunk(
   "transactions/breakTargetSavings",
   async (values, { rejectWithValue }) => {
-    const [id, formValues] = values;
     try {
       const response = await InvestmentsService.breakTargetSavings(
-        id,
-        formValues
+        values?.savingsId,
+        values?.values
       );
       return response;
     } catch (error) {

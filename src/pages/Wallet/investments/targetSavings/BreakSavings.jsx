@@ -13,6 +13,8 @@ const BreakSavings = ({
   savingsId,
 }) => {
   const dispatch = useDispatch();
+  const navigate = useDispatch();
+
   const { reasonsForBreaking, reasonForBreakingLoading } = useSelector(
     (state) => state.utils
   );
@@ -37,13 +39,18 @@ const BreakSavings = ({
   }, []);
 
   const submitForm = (values) => {
-    dispatch(breakTargetSavingsAsync(savingsId, values))
+    const variables = {
+      savingsId,
+      values,
+    };
+
+    dispatch(breakTargetSavingsAsync(variables))
       .unwrap()
       .then((res) => {
         if (res?.status) {
           toast(res?.message);
-          // toggleQuickTopUpModal();
-          // window.location.reload();
+          toggleBreakSavingsModal();
+          navigate("dashboard/wallet/investments");
         }
       })
       .catch((err) => {
@@ -84,10 +91,10 @@ const BreakSavings = ({
           label="Tell us why you are breaking."
           placeholder="I am no longer interested"
           className="mt-4"
-          register={register("message", {
+          register={register("reason_details", {
             required: "Reason for breaking is required",
           })}
-          error={errors?.message?.message}
+          error={errors?.reason_details?.message}
         />
 
         <SavingsInput

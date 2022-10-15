@@ -51,37 +51,39 @@ const TargetSavingsAll = () => {
               ) : (
                 <>
                   {" "}
-                  {allTargetSavings?.map((item) => {
-                    return (
-                      <div
-                        key={item?.id}
-                        className="cursor-pointer mt-4 mb-4 whitespace-nowrap lg:grid grid-cols-5 bg-blueTwo/5 py-3"
-                        onClick={() => goToSingleTargetSavings(item?.id)}
-                      >
-                        <p className="text-base text-blueTwo font-medium pl-6 col-span-1">
-                          {item?.title}
-                        </p>
-                        <p className="text-base text-orange font-medium pl-6 col-span-1">
-                          <CurrencyFormat
-                            value={Number(item?.target_amount)}
-                            displayType={"text"}
-                            thousandSeparator={true}
-                            prefix={"₦"}
-                          />
-                        </p>
+                  {Array.isArray(allTargetSavings) &&
+                    allTargetSavings &&
+                    allTargetSavings?.map((item) => {
+                      return (
+                        <div
+                          key={item?.id}
+                          className="cursor-pointer mt-4 mb-4 whitespace-nowrap lg:grid grid-cols-5 bg-blueTwo/5 py-3"
+                          onClick={() => goToSingleTargetSavings(item?.id)}
+                        >
+                          <p className="text-base text-blueTwo font-medium pl-6 col-span-1">
+                            {item?.title}
+                          </p>
+                          <p className="text-base text-orange font-medium pl-6 col-span-1">
+                            <CurrencyFormat
+                              value={Number(item?.target_amount)}
+                              displayType={"text"}
+                              thousandSeparator={true}
+                              prefix={"₦"}
+                            />
+                          </p>
 
-                        <p className="text-base text-blueTwo font-medium pl-6 col-span-1">
-                          {item?.savings_frequency}
-                        </p>
-                        <p className="text-base text-blueTwo font-medium pl-6 col-span-1">
-                          {item?.category}
-                        </p>
-                        <p className="text-base text-orange font-medium pl-6 col-span-1">
-                          {item?.withdrawal_date}
-                        </p>
-                      </div>
-                    );
-                  })}
+                          <p className="text-base text-blueTwo font-medium pl-6 col-span-1">
+                            {item?.savings_frequency}
+                          </p>
+                          <p className="text-base text-blueTwo font-medium pl-6 col-span-1">
+                            {item?.category}
+                          </p>
+                          <p className="text-base text-orange font-medium pl-6 col-span-1">
+                            {item?.withdrawal_date}
+                          </p>
+                        </div>
+                      );
+                    })}
                 </>
               )}
             </div>

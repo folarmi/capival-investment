@@ -158,8 +158,8 @@ const BillPaymentForm = () => {
       />
 
       <form onSubmit={handleSubmit(submitForm)}>
-        {selectedBillerProduct?.customFields.length === 0 ? (
-          <div className="mt-4">
+        {/* {selectedBillerProduct?.customFields.length === 0 ? ( */}
+        {/* <div className="mt-4">
             <SavingsInput
               label="Amount"
               placeholder="Amount"
@@ -169,124 +169,124 @@ const BillPaymentForm = () => {
                 required: "THis Field is required",
               })}
             />
-          </div>
-        ) : (
-          <>
-            {selectedBillerProduct?.customFields &&
-              selectedBillerProduct?.customFields.map((product) => {
-                return (
-                  <div className="mt-4" key={product?.variable_name}>
-                    {product?.selectOptions?.length === 0 ? (
-                      <div>
-                        {product?.type !== "date" ? (
-                          <>
-                            {selectedBillerProduct?.isAmountFixed && (
-                              <SavingsInput
-                                label="Amount"
-                                className="mb-4"
-                                placeholder="Amount"
-                                readOnly={true}
-                                value={selectedBillerProduct?.amount}
-                                register={register("amount", {
-                                  required: "THis Field is required",
-                                })}
-                              />
-                            )}
-
+          </div> */}
+        {/* // ) : ( */}
+        <>
+          {selectedBillerProduct?.customFields &&
+            selectedBillerProduct?.customFields.map((product) => {
+              return (
+                <div className="mt-4" key={product?.variable_name}>
+                  {product?.selectOptions?.length === 0 ? (
+                    <div>
+                      {product?.type !== "date" ? (
+                        <>
+                          {selectedBillerProduct?.isAmountFixed && (
                             <SavingsInput
-                              label={product?.display_name}
-                              placeholder={product?.display_name}
-                              // readOnly={selectedBillerProduct?.isAmountFixed}
-                              // value={
-                              //   selectedBillerProduct?.isAmountFixed === true
-                              //     ? selectedBillerProduct?.amount
-                              //     : ""
-                              // }
-                              register={register(product?.variable_name, {
-                                onBlur: (e) => handleValidation(e, product),
-                                required: product?.required
-                                  ? "This field is required"
-                                  : false,
-
-                                validate: (value) => {
-                                  if (product?.type === "text") {
-                                    return (
-                                      (product?.type === "text" &&
-                                        /^[a-zA-Z]+$/g.test(value)) ||
-                                      "This field accepts text only"
-                                    );
-                                  } else if (product?.type === "numeric") {
-                                    return (
-                                      (product?.type === "numeric" &&
-                                        /^[0-9]+$/.test(value)) ||
-                                      "This field accepts number only"
-                                    );
-                                  } else if (product?.type === "alphanumeric") {
-                                    return (
-                                      (product?.type === "alphanumeric" &&
-                                        /^[a-z0-9]+$/i.test(value)) ||
-                                      "This field accepts alphanumeric values only"
-                                    );
-                                  } else if (product?.type === "alphabetic") {
-                                    return (
-                                      (product?.type === "alphabetic" &&
-                                        /^[a-zA-Z]+$/g.test(value)) ||
-                                      "This field accepts text only"
-                                    );
-                                  }
-                                },
+                              label="Amount"
+                              className="mb-4"
+                              placeholder="Amount"
+                              readOnly={true}
+                              value={selectedBillerProduct?.amount}
+                              register={register("amount", {
+                                required: "THis Field is required",
                               })}
-                              error={errors?.[product?.variable_name]?.message}
                             />
-                            {product?.validation &&
-                              validateBillerProductLoading && (
-                                <span className="text-sm text-red-500 font-medium">
-                                  Validating...
-                                </span>
-                              )}
-                          </>
-                        ) : (
-                          <DatePicker
+                          )}
+
+                          <SavingsInput
                             label={product?.display_name}
-                            name={product?.variable_name}
-                            control={control}
-                            error={errors?.[product?.variable_name]?.message}
-                            rules={{
+                            placeholder={product?.display_name}
+                            // readOnly={selectedBillerProduct?.isAmountFixed}
+                            // value={
+                            //   selectedBillerProduct?.isAmountFixed === true
+                            //     ? selectedBillerProduct?.amount
+                            //     : ""
+                            // }
+                            register={register(product?.variable_name, {
+                              onBlur: (e) => handleValidation(e, product),
                               required: product?.required
                                 ? "This field is required"
                                 : false,
-                            }}
+
+                              validate: (value) => {
+                                if (product?.type === "text") {
+                                  return (
+                                    (product?.type === "text" &&
+                                      /^[a-zA-Z]+$/g.test(value)) ||
+                                    "This field accepts text only"
+                                  );
+                                } else if (product?.type === "numeric") {
+                                  return (
+                                    (product?.type === "numeric" &&
+                                      /^[0-9]+$/.test(value)) ||
+                                    "This field accepts number only"
+                                  );
+                                } else if (product?.type === "alphanumeric") {
+                                  return (
+                                    (product?.type === "alphanumeric" &&
+                                      /^[a-z0-9]+$/i.test(value)) ||
+                                    "This field accepts alphanumeric values only"
+                                  );
+                                } else if (product?.type === "alphabetic") {
+                                  return (
+                                    (product?.type === "alphabetic" &&
+                                      /^[a-zA-Z]+$/g.test(value)) ||
+                                    "This field accepts text only"
+                                  );
+                                }
+                              },
+                            })}
+                            error={errors?.[product?.variable_name]?.message}
                           />
-                        )}
-                      </div>
-                    ) : (
-                      <FluentSelect
-                        name={product?.variable_name}
-                        control={control}
-                        label={product?.display_name}
-                        isMulti={product?.type === "multiselect"}
-                        options={
-                          product?.selectOptions &&
-                          product?.selectOptions?.map((item) => {
-                            return {
-                              value: item?.VALUE,
-                              label: item?.DISPLAY_NAME,
-                            };
-                          })
-                        }
-                        rules={{
-                          required: product?.required
-                            ? "This field is required"
-                            : false,
-                        }}
-                        error={errors?.[product?.variable_name]?.message}
-                      />
-                    )}
-                  </div>
-                );
-              })}
-          </>
-        )}
+                          {product?.validation &&
+                            validateBillerProductLoading && (
+                              <span className="text-sm text-red-500 font-medium">
+                                Validating...
+                              </span>
+                            )}
+                        </>
+                      ) : (
+                        <DatePicker
+                          label={product?.display_name}
+                          name={product?.variable_name}
+                          control={control}
+                          error={errors?.[product?.variable_name]?.message}
+                          rules={{
+                            required: product?.required
+                              ? "This field is required"
+                              : false,
+                          }}
+                        />
+                      )}
+                    </div>
+                  ) : (
+                    <FluentSelect
+                      name={product?.variable_name}
+                      control={control}
+                      label={product?.display_name}
+                      isMulti={product?.type === "multiselect"}
+                      options={
+                        product?.selectOptions &&
+                        product?.selectOptions?.map((item) => {
+                          return {
+                            value: item?.VALUE,
+                            label: item?.DISPLAY_NAME,
+                          };
+                        })
+                      }
+                      rules={{
+                        required: product?.required
+                          ? "This field is required"
+                          : false,
+                      }}
+                      error={errors?.[product?.variable_name]?.message}
+                    />
+                  )}
+                </div>
+              );
+            })}
+        </>
+        {/* // )} */}
 
         {selectedBillerProduct?.customFields &&
         selectedBillerProduct?.customFields

@@ -31,7 +31,19 @@ const QuickTopUp = ({ toggleQuickTopUpModal, savingsId }) => {
   }, []);
 
   const submitForm = (values) => {
-    dispatch(quickTopUpAsync(savingsId, values))
+    let formattedAmount = values?.amount.slice(1);
+
+    const formVariables = {
+      amount: formattedAmount,
+      source: values?.source,
+    };
+
+    const variables = {
+      savingsId,
+      values: formVariables,
+    };
+
+    dispatch(quickTopUpAsync(variables))
       .unwrap()
       .then((res) => {
         if (res?.status) {

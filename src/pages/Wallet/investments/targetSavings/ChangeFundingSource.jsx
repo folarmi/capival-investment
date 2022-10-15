@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Button, FluentSelect } from "../../../../atoms";
 import { changeFundingSourceAsync } from "../../../../slices/investments";
@@ -8,6 +9,8 @@ import { getFundingSourceAsync } from "../../../../slices/utils";
 
 const ChangeFundingSource = ({ toggleChangeSourceModal, savingsId }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const { getFundingSourceLoading, fundingSource } = useSelector(
     (state) => state.utils
   );
@@ -33,17 +36,23 @@ const ChangeFundingSource = ({ toggleChangeSourceModal, savingsId }) => {
     });
 
   const submitForm = (values) => {
-    dispatch(changeFundingSourceAsync(savingsId, values))
+    const variables = {
+      savingsId,
+      values,
+    };
+
+    dispatch(changeFundingSourceAsync(variables))
       .unwrap()
       .then((res) => {
         if (res?.status) {
           toast(res?.message);
           toggleChangeSourceModal();
-          // window.location.reload();
+          navigate("/dashboard/wallet/investments");
         }
       })
       .catch((err) => {
         toast.error(err?.message);
+        toggleChangeSourceModal();
       });
   };
   return (

@@ -7,9 +7,12 @@ import { daysOfTheMonth, daysOfTheWeek } from "../../../../utils/data";
 import { getSavingsFrequencyAsync } from "../../../../slices/utils";
 import { toast } from "react-toastify";
 import { extendTargetSavingsAsync } from "../../../../slices/investments";
+import { useNavigate } from "react-router-dom";
 
 const ExtendSavings = ({ toggleExtendModal, savingsId }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const { getSavingsFrequencyLoading, savingsFrequencyData } = useSelector(
     (state) => state.utils
   );
@@ -51,12 +54,19 @@ const ExtendSavings = ({ toggleExtendModal, savingsId }) => {
       frequency_amount: formattedFrequencyAmount,
       password: values?.password,
     };
-    // console.log(variables);
-    dispatch(extendTargetSavingsAsync(savingsId, variables))
+
+    const formVariables = {
+      savingsId,
+      values: variables,
+    };
+
+    dispatch(extendTargetSavingsAsync(formVariables))
       .unwrap()
       .then((res) => {
         if (res?.status) {
           toast(res?.message);
+          toggleExtendModal();
+          navigate("/dashboard/wallet/investments");
         }
       })
       .catch((err) => {
