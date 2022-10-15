@@ -39,9 +39,9 @@ const LockedSavingsForm = () => {
   };
 
   const paybackDateData =
-    Array.isArray(payBackDate) &&
-    payBackDate &&
-    payBackDate?.map((date) => {
+    Array.isArray(payBackDate?.data) &&
+    payBackDate?.data &&
+    payBackDate?.data?.map((date) => {
       return {
         value: date?.maturity_date,
         interest: date?.interest,
@@ -50,6 +50,7 @@ const LockedSavingsForm = () => {
       };
     });
 
+  console.log(payBackDate);
   const sourceOfFundData =
     Array.isArray(fundingSource) &&
     fundingSource &&
