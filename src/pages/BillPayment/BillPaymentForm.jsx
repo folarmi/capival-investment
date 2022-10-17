@@ -133,17 +133,17 @@ const BillPaymentForm = () => {
 
     console.log(variables);
 
-    dispatch(initiateTransactionAsync(variables))
-      .unwrap()
-      .then((res) => {
-        if (res?.status) {
-          toggleBillModal();
-          setResponse(res?.data);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    // dispatch(initiateTransactionAsync(variables))
+    //   .unwrap()
+    //   .then((res) => {
+    //     if (res?.status) {
+    //       toggleBillModal();
+    //       setResponse(res?.data);
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   };
   return (
     <div className="m-auto w-[92%] md:w-[50%] lg:w-[40%] xl:w-[34%] mt-16">
@@ -214,7 +214,7 @@ const BillPaymentForm = () => {
                                 if (product?.type === "text") {
                                   return (
                                     (product?.type === "text" &&
-                                      /^[a-zA-Z]+$/g.test(value)) ||
+                                      /^[a-zA-Z\s]*$/.test(value)) ||
                                     "This field accepts text only"
                                   );
                                 } else if (product?.type === "numeric") {
