@@ -22,14 +22,17 @@ const BreakSavings = ({
     (state) => state.investments
   );
 
-  const reasonsForBreakingData =
-    reasonsForBreaking &&
-    reasonsForBreaking?.map((reason) => {
-      return {
-        value: reason,
-        label: reason,
-      };
-    });
+  // console.log(reasonsForBreaking);
+
+  // const reasonsForBreakingData =
+  //   Array.isArray(reasonsForBreaking) &&
+  //   reasonsForBreaking &&
+  //   reasonsForBreaking?.map((reason) => {
+  //     return {
+  //       value: reason,
+  //       label: reason,
+  //     };
+  //   });
 
   const { handleSubmit, formState, control, register } = useForm();
   const { errors } = formState;
@@ -76,8 +79,17 @@ const BreakSavings = ({
         <FluentSelect
           control={control}
           name="reason"
-          options={reasonsForBreakingData}
-          label="Select Primary Source"
+          options={
+            Array.isArray(reasonsForBreaking) &&
+            reasonsForBreaking &&
+            reasonsForBreaking?.map((reason) => {
+              return {
+                value: reason,
+                label: reason,
+              };
+            })
+          }
+          label="Select Reason for breaking"
           isLoading={reasonForBreakingLoading}
           placeholder="I can not continue"
           className="mb-6"
@@ -103,7 +115,7 @@ const BreakSavings = ({
             required: "Password is required",
           })}
           className="mt-4"
-          //   type="password"
+          type="password"
           error={errors?.password?.message}
         />
 

@@ -49,8 +49,8 @@ const SingleCategory = () => {
                 return (
                   <div className="cursor-pointer flex-[20%]">
                     <img
-                      // src={item?.billerLogoUrl}
-                      src="/assets/images/gotv.svg"
+                      src={item?.billerLogoUrl}
+                      // src="/assets/images/gotv.svg"
                       alt="loan detail"
                       className="w-full max-w-[210px] px-6 my-4"
                       loading="lazy"

@@ -49,6 +49,7 @@ const TargetSavingsDetails = () => {
   const getData = useCallback(() => {
     const result =
       singleTargetDetails?.transactions &&
+      Array.isArray(singleTargetDetails?.transactions) &&
       singleTargetDetails?.transactions?.map((item, i) => {
         return {
           transType: (

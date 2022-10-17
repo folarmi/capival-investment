@@ -47,11 +47,11 @@ const ExtendSavings = ({ toggleExtendModal, savingsId }) => {
     let formattedFrequencyAmount = values?.frequency_amount.slice(1);
 
     const variables = {
-      target_amount: formattedTargetAmount,
-      savings_frequency: values?.savings_frequency,
-      day_of_the_month: values?.day_of_the_month || "",
-      day_of_the_week: values?.day_of_the_week || "",
-      frequency_amount: formattedFrequencyAmount,
+      target_amount: parseInt(formattedTargetAmount),
+      savings_frequency: values?.savings_frequency.toString(),
+      // day_of_the_month: values?.day_of_the_month || "",
+      // day_of_the_week: values?.day_of_the_week || "",
+      frequency_amount: Number(formattedFrequencyAmount),
       password: values?.password,
     };
 
@@ -59,7 +59,7 @@ const ExtendSavings = ({ toggleExtendModal, savingsId }) => {
       savingsId,
       values: variables,
     };
-
+    console.log(+formattedTargetAmount);
     dispatch(extendTargetSavingsAsync(formVariables))
       .unwrap()
       .then((res) => {
@@ -157,7 +157,7 @@ const ExtendSavings = ({ toggleExtendModal, savingsId }) => {
             required: "Password is required",
           })}
           className="mt-4"
-          //   type="password"
+          type="password"
           error={errors?.password?.message}
         />
 

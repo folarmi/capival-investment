@@ -50,7 +50,6 @@ const LockedSavingsForm = () => {
       };
     });
 
-  console.log(payBackDate);
   const sourceOfFundData =
     Array.isArray(fundingSource) &&
     fundingSource &&

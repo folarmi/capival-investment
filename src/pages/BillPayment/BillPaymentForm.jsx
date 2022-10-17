@@ -98,12 +98,14 @@ const BillPaymentForm = () => {
   const submitForm = (values) => {
     // deep copy the values object
     let copiedValues = JSON.parse(JSON.stringify(values));
-    // delete copiedValues.amount;
-    delete copiedValues.billPaymentProductId;
+
+    delete copiedValues.amount;
+    // delete copiedValues.billPaymentProductId;
 
     const valuesObject = () => {
       let valuesArray = [];
       let customValues;
+
       Object.keys(copiedValues).forEach(function (key) {
         customValues = {
           variable_name: key,
@@ -129,7 +131,7 @@ const BillPaymentForm = () => {
       },
     };
 
-    // console.log(variables);
+    console.log(variables);
 
     dispatch(initiateTransactionAsync(variables))
       .unwrap()

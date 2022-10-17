@@ -62,7 +62,6 @@ const quickTopUp = async (id, values) => {
 };
 
 const extendTargetSavings = async (id, values) => {
-  console.log(id, values);
   const response = await api.post(
     `${UrlRoute.extendTargetSavings}/${id}`,
     values

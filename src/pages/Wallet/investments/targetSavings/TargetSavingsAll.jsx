@@ -65,7 +65,7 @@ const TargetSavingsAll = () => {
                           </p>
                           <p className="text-base text-orange font-medium pl-6 col-span-1">
                             <CurrencyFormat
-                              value={Number(item?.target_amount)}
+                              value={item?.target_amount}
                               displayType={"text"}
                               thousandSeparator={true}
                               prefix={"₦"}
