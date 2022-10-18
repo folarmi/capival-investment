@@ -8,12 +8,6 @@ const apiResource = () => {
 
   const api = axios.create({
     baseURL,
-    headers: {
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Methods": "*",
-      "Access-Control-Allow-Origin": URL,
-      "Access-Control-Allow-Credentials": true,
-    },
   });
 
   api.interceptors.request.use(
@@ -21,11 +15,27 @@ const apiResource = () => {
       const token = window.sessionStorage.getItem("accessToken");
 
       if (!token) return config;
+
       config.headers["Authorization"] = `Bearer ${token}`;
+      config.headers["Access-Control-Allow-Origin"] = `*`;
+      config.headers["Access-Control-Allow-Methods"] =
+        "GET, POST, PATCH, PUT, DELETE, OPTIONS";
+      config.headers["Access-Control-Allow-Headers"] =
+        "Content-Type, Accept, Authorization, X-Requested-With, X-Auth-Token, Origin, Application";
       return config;
     },
     (error) => Promise.reject(error)
   );
+
+  // axios.interceptors.request.use(
+  //   config => {
+  //     config.headers['Authorization'] = `Bearer ${localStorage.getItem('access_token')}`;
+  //         return config;
+  //     },
+  //     error => {
+  //         return Promise.reject(error);
+  //     }
+  // );
 
   api.interceptors.response.use(
     (response) =>
