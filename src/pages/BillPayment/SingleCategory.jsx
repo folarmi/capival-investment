@@ -47,15 +47,17 @@ const SingleCategory = () => {
             {state &&
               state?.map((item) => {
                 return (
-                  <div className="cursor-pointer flex-[20%]">
-                    <img
-                      src={item?.billerLogoUrl}
-                      // src="/assets/images/gotv.svg"
-                      alt="loan detail"
-                      className="w-full max-w-[210px] px-6 my-4"
-                      loading="lazy"
-                      onClick={() => getBillerProducts(item)}
-                    />
+                  <div className="cursor-pointer  flex-[20%]">
+                    <div className="w-full flex justify-center">
+                      <img
+                        // src={item?.billerLogoUrl}
+                        src="/assets/icons/logoOnly.svg"
+                        alt="loan detail"
+                        className="w-1/2 max-w-[210px] px-6 my-4"
+                        loading="lazy"
+                        onClick={() => getBillerProducts(item)}
+                      />
+                    </div>
                     <p
                       className="text-sm w-[90%]  font-medium text-center"
                       // style={{
