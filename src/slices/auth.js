@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import AuthService from "../services/auth.service.js";
+import AccountService from "../services/account.service";
 
 export const verifyBVNAsync = createAsyncThunk(
   "auth/verifyBVN",
@@ -46,24 +47,6 @@ export const registerUserAsync = createAsyncThunk(
     }
   }
 );
-
-// export const loginUserAsync = createAsyncThunk(
-//   "auth/login",
-//   async (values, { rejectWithValue }) => {
-//     console.log("reach here", values);
-//     try {
-//       const response = await AuthService.loginUser(values);
-//       console.log("reach here");
-
-//       return response;
-//     } catch (error) {
-//       if (!error.response) {
-//         throw error;
-//       }
-//       return rejectWithValue(error.response.data);
-//     }
-//   }
-// );
 
 export const loginUserAsync = createAsyncThunk(
   "auth/loginUser",
@@ -159,6 +142,66 @@ export const logoutAsync = createAsyncThunk("auth/logout", async () => {
   AuthService.logout();
 });
 
+export const createNextofKinAsync = createAsyncThunk(
+  "accounts/createNextOfKin",
+  async (values, { rejectWithValue }) => {
+    try {
+      const response = await AccountService.createNextOfKin(values);
+      return response;
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const employerInfoAsync = createAsyncThunk(
+  "accounts/employerInfo",
+  async (values, { rejectWithValue }) => {
+    try {
+      const response = await AccountService.employerInfo(values);
+      return response;
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const addBankAccountAsync = createAsyncThunk(
+  "accounts/addBankAccount",
+  async (values, { rejectWithValue }) => {
+    try {
+      const response = await AccountService.addBankAccount(values);
+      return response;
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const uploadKYCDocumentsAsync = createAsyncThunk(
+  "accounts/uploadKYCDocuments",
+  async (values, { rejectWithValue }) => {
+    try {
+      const response = await AccountService.uploadKYCDocuments(values);
+      return response;
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 const initialState = {
   isVerifyBvnLoading: false,
   isBvnOtpLoading: false,
@@ -168,6 +211,10 @@ const initialState = {
   changePasswordLoading: false,
   isTransactionPinLoading: false,
   isresetTransactionPinLoading: false,
+  createNextofKinLoading: false,
+  createEmployerInfoLoading: false,
+  addBankAccountLoading: false,
+  uploadKycDocumentsLoading: false,
   forgotPasswordEmail: "",
   bvnData: [],
   login: {
@@ -292,6 +339,46 @@ const registerSlice = createSlice({
       state.login.isLoggedIn = false;
       state.login.isLoading = false;
       state.login.user = null;
+    },
+    [createNextofKinAsync.pending]: (state) => {
+      state.createNextofKinLoading = true;
+    },
+    [createNextofKinAsync.fulfilled]: (state, action) => {
+      state.createNextofKinLoading = false;
+      state.login.user = action.payload;
+    },
+    [createNextofKinAsync.rejected]: (state) => {
+      state.createNextofKinLoading = false;
+    },
+    [employerInfoAsync.pending]: (state) => {
+      state.createEmployerInfoLoading = true;
+    },
+    [employerInfoAsync.fulfilled]: (state, action) => {
+      state.createEmployerInfoLoading = false;
+      state.login.user = action.payload;
+    },
+    [employerInfoAsync.rejected]: (state) => {
+      state.createEmployerInfoLoading = false;
+    },
+    [addBankAccountAsync.pending]: (state) => {
+      state.addBankAccountLoading = true;
+    },
+    [addBankAccountAsync.fulfilled]: (state, action) => {
+      state.addBankAccountLoading = false;
+      state.login.user = action.payload;
+    },
+    [addBankAccountAsync.rejected]: (state) => {
+      state.addBankAccountLoading = false;
+    },
+    [uploadKYCDocumentsAsync.pending]: (state) => {
+      state.uploadKycDocumentsLoading = true;
+    },
+    [uploadKYCDocumentsAsync.fulfilled]: (state, action) => {
+      state.uploadKycDocumentsLoading = false;
+      state.login.user = action.payload;
+    },
+    [uploadKYCDocumentsAsync.rejected]: (state) => {
+      state.uploadKycDocumentsLoading = false;
     },
   },
 });

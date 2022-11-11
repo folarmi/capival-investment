@@ -1,22 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import Select from "react-select";
 
 import { Button, SavingsInput } from "../../atoms";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addBankAccountAsync,
-  createNextofKinAsync,
-} from "../../slices/accounts";
+import { addBankAccountAsync } from "../../slices/auth";
 import { toast } from "react-toastify";
 import { getAllBanksAsync } from "../../slices/utils";
 import { colourStyles } from "../../utils/HelperFunctions";
-import {
-  validateAccountAsync,
-  validateInterAccountAsync,
-} from "../../slices/transactionHistory";
+import { validateInterAccountAsync } from "../../slices/transactionHistory";
 
 const BankDetails = ({ setActiveTab }) => {
   const dispatch = useDispatch();
@@ -24,7 +17,7 @@ const BankDetails = ({ setActiveTab }) => {
     (state) => state.transactionHistory
   );
   const { allBanks } = useSelector((state) => state?.utils);
-  const { addBankAccountLoading } = useSelector((state) => state?.accounts);
+  const { addBankAccountLoading } = useSelector((state) => state?.auth?.login);
 
   const [selectedbank, setSelectedbank] = useState("");
   const [error, setError] = useState("");
@@ -63,20 +56,20 @@ const BankDetails = ({ setActiveTab }) => {
       account_name: values?.account_name,
       account_no: values?.account_no,
     };
-    // dispatch(addBankAccountAsync(variables))
-    //   .unwrap()
-    //   .then((res) => {
-    //     if (res?.status === true) {
-    //       // console.log(res?.status);
-    //       toast(res?.message);
-    //       setActiveTab("Documents");
-    //       reset();
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //     toast.error(err?.message);
-    //   });
+    dispatch(addBankAccountAsync(variables))
+      .unwrap()
+      .then((res) => {
+        if (res?.status === true) {
+          // console.log(res?.status);
+          toast(res?.message);
+          setActiveTab("Documents");
+          reset();
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error(err?.message);
+      });
   };
 
   const handleValidateAccount = async (e) => {

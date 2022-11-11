@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 // import sideArrowUp from "../assets/icons/sideArrowUp.svg";
 // import sideArrowDown from "../assets/icons/sideArrowDown.svg";
 
-const SubMenu = ({ item }) => {
+const SubMenu = ({ item, toggleSidebar }) => {
   const navigate = useNavigate();
 
   const [dropDown, setDropDown] = useState(null);
@@ -18,6 +18,7 @@ const SubMenu = ({ item }) => {
 
   const goToPath = (item) => {
     navigate(item?.path, { replace: true });
+    toggleSidebar();
   };
 
   const changeActive = (item) => {
@@ -69,6 +70,7 @@ const SubMenu = ({ item }) => {
       ) : (
         <NavLink
           end
+          onClick={toggleSidebar}
           to={item?.path}
           className={({ isActive }) =>
             isActive

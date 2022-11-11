@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
@@ -11,6 +11,22 @@ import { changePasswordAsync } from "../../slices/auth";
 const ChangePassword = () => {
   const dispatch = useDispatch();
   const { changePasswordLoading } = useSelector((state) => state.auth);
+
+  const [passwordShown, setPasswordShown] = useState(false);
+  const [newPasswordShown, setNewPasswordShown] = useState(false);
+  const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
+
+  const togglePasswordShown = () => {
+    setPasswordShown(!passwordShown);
+  };
+
+  const toggleNewPasswordShown = () => {
+    setNewPasswordShown(!newPasswordShown);
+  };
+
+  const toggleConfirmPasswordShown = () => {
+    setConfirmPasswordShown(!confirmPasswordShown);
+  };
 
   const validationSchema = Yup.object().shape({
     old_password: Yup.string()
@@ -69,37 +85,76 @@ const ChangePassword = () => {
         className="m-auto w-[90%] md:w-[80%] lg:w-[40%]"
         onSubmit={handleSubmit(submitForm)}
       >
-        <SavingsInput
-          placeholder="Enter Current Password"
-          label="Enter Current Password"
-          // ifIcon
-          // icon="/assets/icons/hide.svg"
-          type="password"
-          register={register("old_password")}
-          error={errors?.old_password?.message}
-        />
+        <div className="w-full relative">
+          <i onClick={togglePasswordShown} className="">
+            <img
+              src={
+                passwordShown
+                  ? "/assets/icons/hide.svg"
+                  : "/assets/icons/hide.svg"
+              }
+              onClick={togglePasswordShown}
+              alt="visible"
+              className="w-5 absolute z-30 cursor-pointer mt-[12%] md:mt-[8%] ml-[89%]"
+            />
+          </i>
+          <SavingsInput
+            placeholder="Enter Current Password"
+            label="Enter Current Password"
+            type={passwordShown ? "text" : "password"}
+            register={register("old_password")}
+            error={errors?.old_password?.message}
+          />
+        </div>
 
-        <SavingsInput
-          placeholder="Enter New Password"
-          label="Enter New Password"
-          className="mt-6"
-          // ifIcon
-          icon="/assets/icons/hide.svg"
-          type="password"
-          register={register("new_password")}
-          error={errors?.new_password?.message}
-        />
+        <div className="w-full relative">
+          <i onClick={toggleNewPasswordShown} className="">
+            <img
+              src={
+                newPasswordShown
+                  ? "/assets/icons/hide.svg"
+                  : "/assets/icons/hide.svg"
+              }
+              onClick={toggleNewPasswordShown}
+              alt="visible"
+              className="w-5 absolute z-30 cursor-pointer mt-[12%] md:mt-[8%] ml-[89%]"
+            />
+          </i>
+          <SavingsInput
+            placeholder="Enter New Password"
+            label="Enter New Password"
+            className="mt-6"
+            // ifIcon
+            icon="/assets/icons/hide.svg"
+            type={newPasswordShown ? "text" : "password"}
+            register={register("new_password")}
+            error={errors?.new_password?.message}
+          />
+        </div>
 
-        <SavingsInput
-          placeholder="Confirm New Password"
-          label="Confirm New Password"
-          className="mt-6"
-          // ifIcon
-          icon="/assets/icons/hide.svg"
-          register={register("confirm_new_password")}
-          type="password"
-          error={errors?.confirm_new_password?.message}
-        />
+        <div className="w-full relative">
+          <i onClick={toggleConfirmPasswordShown} className="">
+            <img
+              src={
+                confirmPasswordShown
+                  ? "/assets/icons/hide.svg"
+                  : "/assets/icons/hide.svg"
+              }
+              onClick={toggleConfirmPasswordShown}
+              alt="visible"
+              className="w-5 absolute z-30 cursor-pointer mt-[12%] md:mt-[8%] ml-[89%]"
+            />
+          </i>
+          <SavingsInput
+            placeholder="Confirm New Password"
+            label="Confirm New Password"
+            className="mt-6"
+            icon="/assets/icons/hide.svg"
+            register={register("confirm_new_password")}
+            type={confirmPasswordShown ? "text" : "password"}
+            error={errors?.confirm_new_password?.message}
+          />
+        </div>
 
         <Button
           buttonText="Confirm"

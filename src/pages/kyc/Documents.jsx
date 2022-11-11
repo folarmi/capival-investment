@@ -4,13 +4,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { Button } from "../../atoms";
 import { SimpleDropZone } from "../../components/SimpleDropZoneUploader";
-import { uploadKYCDocumentsAsync } from "../../slices/accounts";
+import { uploadKYCDocumentsAsync } from "../../slices/auth";
 import Select from "react-select";
 import { colourStyles } from "../../utils/HelperFunctions";
 
 const Documents = () => {
   const dispatch = useDispatch();
-  const { uploadKycDocumentsLoading } = useSelector((state) => state?.accounts);
+  const { uploadKycDocumentsLoading } = useSelector(
+    (state) => state?.auth?.login
+  );
 
   const [statusUpload, setStatusUpload] = useState(null);
   const [driverBackStatusUpload, setDriverBackStatusUpload] = useState(null);

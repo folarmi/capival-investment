@@ -8,13 +8,15 @@ import { toast } from "react-toastify";
 
 import { Button, SavingsInput } from "../../atoms";
 import { useDispatch, useSelector } from "react-redux";
-import { employerInfoAsync } from "../../slices/accounts";
+import { employerInfoAsync } from "../../slices/auth";
 import { colourStyles } from "../../utils/HelperFunctions";
 import { getAllEmployers } from "../../slices/utils";
 
 const Employer = ({ setActiveTab }) => {
   const dispatch = useDispatch();
-  const { createEmployerInfoLoading } = useSelector((state) => state?.accounts);
+  const { createEmployerInfoLoading } = useSelector(
+    (state) => state?.auth?.login
+  );
   const { employers, getAllEmployersLoading } = useSelector(
     (state) => state?.utils
   );

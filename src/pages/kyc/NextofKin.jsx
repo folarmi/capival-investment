@@ -5,12 +5,12 @@ import * as Yup from "yup";
 
 import { Button, SavingsInput } from "../../atoms";
 import { useDispatch, useSelector } from "react-redux";
-import { createNextofKinAsync } from "../../slices/accounts";
+import { createNextofKinAsync } from "../../slices/auth";
 import { toast } from "react-toastify";
 
 const NextofKin = ({ setActiveTab }) => {
   const dispatch = useDispatch();
-  const { createNextofKinLoading } = useSelector((state) => state?.accounts);
+  const { createNextofKinLoading } = useSelector((state) => state?.auth?.login);
 
   const validationSchema = Yup.object().shape({
     email: Yup.string()
@@ -39,9 +39,8 @@ const NextofKin = ({ setActiveTab }) => {
       .unwrap()
       .then((res) => {
         if (res?.status === true) {
-          // console.log(res?.status);
           toast(res?.message);
-          setActiveTab("Employer");
+          // setActiveTab("Employer");
           reset();
         }
       })
