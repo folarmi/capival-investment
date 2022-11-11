@@ -6,8 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 // import { NavLink } from "react-router-dom";
 
 import { SidebarMenuItems } from "../data/Sidebar";
-// import { Text } from "../components";
-import { SubMenu } from "./SubMenu";
 import { logoutAsync } from "../slices/auth";
 import { NavLink, useNavigate } from "react-router-dom";
 import { toggleDropDownState } from "../slices/dropdown";
@@ -24,7 +22,6 @@ const Sidebar = (props) => {
   const [activeTab, setActiveTab] = useState("Data Consumers");
 
   const toggleDropDown = (item) => {
-    // setDropDown(!dropDown);
     dispatch(toggleDropDownState(item?.id));
   };
 

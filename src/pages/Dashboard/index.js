@@ -173,3 +173,9 @@ const Dashboard = () => {
 };
 
 export { Dashboard };
+
+// {
+//   "account_number": "34382",
+//   "account_name": "test account",
+//   "amount": "300"
+// }

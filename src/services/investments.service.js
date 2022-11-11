@@ -85,6 +85,24 @@ const breakTargetSavings = async (id, values) => {
   return response.data;
 };
 
+const checkLoanEligibility = async (id) => {
+  const response = await api.get(`${UrlRoute.checkLoanEligibility}/${id}`);
+  return response.data;
+};
+
+const getLoanOffer = async (id, values) => {
+  const response = await api.post(`${UrlRoute.getLoanOffer}/${id}`, values);
+  return response.data;
+};
+
+const applyForCashBackLoan = async (id, values) => {
+  const response = await api.post(
+    `${UrlRoute.applyForCashBackLoan}/${id}`,
+    values
+  );
+  return response.data;
+};
+
 const investmentService = {
   createTargetSavings,
   getSingleTargetSaving,
@@ -101,6 +119,9 @@ const investmentService = {
   getAllTermDepositTenure,
   requestInvestmentLetter,
   liquidateInvestment,
+  checkLoanEligibility,
+  applyForCashBackLoan,
+  getLoanOffer,
 };
 
 export default investmentService;

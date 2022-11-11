@@ -10,7 +10,7 @@ const BillCard = ({ cardName, onClick, path, id, isLoading }) => {
       ) : ( */}
       <div
         to={path}
-        className="cursor-pointer py-4 max-w-[192px] bg-[#CBE1FD]/50 rounded-2xl h-[70px]"
+        className="cursor-pointer py-4  bg-[#CBE1FD]/50 rounded-2xl gallery__img"
         onClick={onClick}
         id={id}
         style={{

@@ -44,10 +44,10 @@ const GenerateStatement = () => {
   };
 
   return (
-    <div className="m-auto w-[60%] mt-8 ">
+    <div className="m-auto w-full md:w-[60%] mt-8">
       <WalletDetailsHeader ifTransaction={false} />
 
-      <form className="mt-8 grid grid-cols-2">
+      <form className="px-6 lg:px-0 mt-8 grid grid-cols-1 md:grid-cols-2">
         <div>
           <label
             htmlFor="start Date"
@@ -64,7 +64,7 @@ const GenerateStatement = () => {
           </div>
         </div>
 
-        <div>
+        <div className="mt-6 lg:mt-0">
           <label
             htmlFor="start Date"
             className={`text-sm font-normal text-blueTwo`}
@@ -79,7 +79,7 @@ const GenerateStatement = () => {
           </div>
         </div>
 
-        <div className="w-full mt-10 md:w-[80%] m-auto ml-[60%]">
+        <div className="w-full mt-10 md:w-[80%] m-auto lg:ml-[60%]">
           <Button
             buttonText="Generate Statement"
             className="rounded-xl mb-10"

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
@@ -22,17 +22,10 @@ const BreakSavings = ({
     (state) => state.investments
   );
 
-  // console.log(reasonsForBreaking);
-
-  // const reasonsForBreakingData =
-  //   Array.isArray(reasonsForBreaking) &&
-  //   reasonsForBreaking &&
-  //   reasonsForBreaking?.map((reason) => {
-  //     return {
-  //       value: reason,
-  //       label: reason,
-  //     };
-  //   });
+  const [passwordShown, setPasswordShown] = useState(false);
+  const togglePasswordShown = () => {
+    setPasswordShown(!passwordShown);
+  };
 
   const { handleSubmit, formState, control, register } = useForm();
   const { errors } = formState;
@@ -109,15 +102,29 @@ const BreakSavings = ({
           error={errors?.reason_details?.message}
         />
 
-        <SavingsInput
-          label="For Security Reasons, Please Enter Your Password"
-          register={register("password", {
-            required: "Password is required",
-          })}
-          className="mt-4"
-          type="password"
-          error={errors?.password?.message}
-        />
+        <div className="w-full relative">
+          <i onClick={togglePasswordShown} className="">
+            <img
+              src={
+                passwordShown
+                  ? "/assets/icons/hide.svg"
+                  : "/assets/icons/hide.svg"
+              }
+              onClick={togglePasswordShown}
+              alt="visible"
+              className="w-5 absolute z-30 cursor-pointer md:mt-[10%] ml-[89%]"
+            />
+          </i>
+          <SavingsInput
+            label="For Security Reasons, Please Enter Your Password"
+            register={register("password", {
+              required: "Password is required",
+            })}
+            className="mt-4"
+            type={passwordShown ? "text" : "password"}
+            error={errors?.password?.message}
+          />
+        </div>
 
         <div className="w-full md:w-[100%] mt-6 m-auto">
           <Button

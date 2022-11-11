@@ -93,7 +93,6 @@ const Employer = ({ setActiveTab }) => {
   }, []);
 
   const getSelectedCompany = (item) => {
-    console.log(item);
     setSelectedCompany(item);
   };
 

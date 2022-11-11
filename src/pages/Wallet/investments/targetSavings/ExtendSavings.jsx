@@ -24,6 +24,11 @@ const ExtendSavings = ({ toggleExtendModal, savingsId }) => {
 
   const [selectedSavingsFrequency, setSelectedSavingsFrequency] =
     useState("Daily");
+  const [passwordShown, setPasswordShown] = useState(false);
+
+  const togglePasswordShown = () => {
+    setPasswordShown(!passwordShown);
+  };
 
   const savingsFrequency =
     savingsFrequencyData &&
@@ -47,10 +52,12 @@ const ExtendSavings = ({ toggleExtendModal, savingsId }) => {
     let formattedFrequencyAmount = values?.frequency_amount.slice(1);
 
     const variables = {
-      target_amount: parseInt(formattedTargetAmount),
+      target_amount: parseInt(
+        values?.target_amount.slice(1).split(",").join("")
+      ),
       savings_frequency: values?.savings_frequency.toString(),
-      // day_of_the_month: values?.day_of_the_month || "",
-      // day_of_the_week: values?.day_of_the_week || "",
+      day_of_the_month: values?.day_of_the_month || "",
+      day_of_the_week: values?.day_of_the_week || "",
       frequency_amount: Number(formattedFrequencyAmount),
       password: values?.password,
     };
@@ -59,7 +66,7 @@ const ExtendSavings = ({ toggleExtendModal, savingsId }) => {
       savingsId,
       values: variables,
     };
-    console.log(+formattedTargetAmount);
+
     dispatch(extendTargetSavingsAsync(formVariables))
       .unwrap()
       .then((res) => {
@@ -151,15 +158,29 @@ const ExtendSavings = ({ toggleExtendModal, savingsId }) => {
           />
         )}
 
-        <SavingsInput
-          label="For Security Reasons, Please Enter Your Password"
-          register={register("password", {
-            required: "Password is required",
-          })}
-          className="mt-4"
-          type="password"
-          error={errors?.password?.message}
-        />
+        <div className="w-full relative">
+          <i onClick={togglePasswordShown} className="">
+            <img
+              src={
+                passwordShown
+                  ? "/assets/icons/hide.svg"
+                  : "/assets/icons/hide.svg"
+              }
+              onClick={togglePasswordShown}
+              alt="visible"
+              className="w-5 absolute z-30 cursor-pointer md:mt-[10%] ml-[89%]"
+            />
+          </i>
+          <SavingsInput
+            label="For Security Reasons, Please Enter Your Password"
+            register={register("password", {
+              required: "Password is required",
+            })}
+            className="mt-4"
+            type={passwordShown ? "text" : "password"}
+            error={errors?.password?.message}
+          />
+        </div>
 
         <div className="w-full md:w-[100%] mt-6 m-auto">
           <Button

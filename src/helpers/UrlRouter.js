@@ -80,6 +80,16 @@ const getTermDepositTenure = "utils/term-deposit/tenor";
 const getAllTermDepositTenure = "investments/term-deposit";
 const requestInvestmentLetter = "investments/term-deposit/investment-letter";
 const liquidateInvestment = "investments/term-deposit/liquidate-deposit";
+const checkLoanEligibility = "/loans/cash-back/eligibility";
+const applyForCashBackLoan = "loans/cash-back/apply";
+const getLoanOffer = "loans/cash-back/loan-offer";
+const getDataProducts = "bills-payment/get-airtime-billers-products/?billerId=";
+const purchaseAirtime = "bills-payment/purchase-airtime";
+const getAllBettingBillers = "bills-payment/get-betting-billers";
+const purchaseData = "bills-payment/purchase-data-bundle";
+const validateBettingAccount = "bills-payment/validate-betting-customer";
+const fundBettingWallet = "bills-payment/fund-betting-wallet";
+const getAllDataBillers = "bills-payment/get-data-billers";
 
 const UrlRoute = {
   verifyBVN,
@@ -160,6 +170,16 @@ const UrlRoute = {
   getAllTermDepositTenure,
   requestInvestmentLetter,
   liquidateInvestment,
+  checkLoanEligibility,
+  applyForCashBackLoan,
+  getLoanOffer,
+  getDataProducts,
+  purchaseAirtime,
+  getAllBettingBillers,
+  purchaseData,
+  validateBettingAccount,
+  fundBettingWallet,
+  getAllDataBillers,
 };
 
 export default UrlRoute;

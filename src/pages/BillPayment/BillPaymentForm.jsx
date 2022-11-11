@@ -80,13 +80,16 @@ const BillPaymentForm = () => {
       const variables = {
         billPaymentProductId: selectedBillerProduct?.value,
         customerId: getValues(product?.variable_name),
+        billerId: state?.billerId,
+        categoryId: state?.categoryId,
       };
 
+      //
       dispatch(validateBillerProductAsync(variables))
         .unwrap()
         .then((res) => {
           if (res?.status === true) {
-            toast.error(res?.message);
+            toast(res?.message);
           }
         })
         .catch((err) => {
@@ -126,12 +129,12 @@ const BillPaymentForm = () => {
       email: userObject?.Email,
       phoneNumber: userObject?.Mobile,
       customerId: userObject?.Email,
+      billerId: state?.billerId,
+      categoryId: state?.categoryId,
       metadata: {
         customFields: valuesObject(),
       },
     };
-
-    console.log(variables);
 
     dispatch(initiateTransactionAsync(variables))
       .unwrap()
@@ -178,7 +181,8 @@ const BillPaymentForm = () => {
             selectedBillerProduct?.customFields.map((product) => {
               return (
                 <div className="mt-4" key={product?.variable_name}>
-                  {product?.selectOptions?.length === 0 ? (
+                  {product?.selectOptions?.length === 0 ||
+                  product?.type === "numeric" ? (
                     <div>
                       {product?.type !== "date" ? (
                         <>
@@ -190,7 +194,7 @@ const BillPaymentForm = () => {
                               readOnly={true}
                               value={selectedBillerProduct?.amount}
                               register={register("amount", {
-                                required: "THis Field is required",
+                                required: "This Field is required",
                               })}
                             />
                           )}
@@ -345,6 +349,7 @@ const BillPaymentForm = () => {
             buttonText="Submit"
             className="rounded-xl mb-10"
             size="lg"
+            disabled={validateBillerProductLoading}
             isLoading={initiateTransactionLoading}
           />
         </div>

@@ -4,14 +4,10 @@ import { useSelector } from "react-redux";
 
 import { WalletCard } from "../../components/WalletCard";
 import walletBg from "../../icons/walletBg.svg";
-import investmentBg from "../../icons/investmentBg.svg";
 import { TransactionHistory } from "../TransactionHistory";
 
 const Wallet = () => {
   const navigate = useNavigate();
-  // const virtualAccount = useSelector(
-  //   (state) => state.auth?.login?.user?.user?.virtual_account
-  // );
 
   const accountNumber = useSelector(
     (state) => state.auth.login?.user?.user?.accounts?.AccountNo

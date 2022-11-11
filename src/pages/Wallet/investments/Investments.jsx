@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { LockedSavingsAll } from "./lockedSavings/LockedSavingsAll";
 import { TargetSavingsAll } from "./targetSavings/TargetSavingsAll";
@@ -6,32 +7,17 @@ import { TermDepositAll } from "./termDeposit/TermDepositAll";
 
 const Investments = () => {
   const navigate = useNavigate();
+  const kycStatus = useSelector(
+    (state) => state.auth?.login?.user?.authorisation
+  );
+
+  const ifEligibleForLoan =
+    kycStatus?.bank_account &&
+    kycStatus?.employer_details &&
+    kycStatus?.next_of_kin &&
+    kycStatus?.kyc_document;
 
   const [activeTab, setActiveTab] = useState("Term Deposit");
-
-  const data = [
-    {
-      id: "1",
-      target: "N 600,000",
-      amountSaved: "N60,000",
-      timeLeft: "6 Months",
-      assetType: "Fixed Deposit",
-    },
-    {
-      id: "2",
-      target: "N 600,000",
-      amountSaved: "N60,000",
-      timeLeft: "6 Months",
-      assetType: "Fixed Deposit",
-    },
-    {
-      id: "3",
-      target: "N 600,000",
-      amountSaved: "N60,000",
-      timeLeft: "6 Months",
-      assetType: "Fixed Deposit",
-    },
-  ];
 
   const tabs = [
     {
@@ -49,7 +35,12 @@ const Investments = () => {
   ];
 
   const goToSavingsTypePage = () => {
-    navigate("/dashboard/wallet/investments/saving-type");
+    console.log(ifEligibleForLoan);
+    if (ifEligibleForLoan) {
+      navigate("/dashboard/wallet/investments/saving-type");
+    } else {
+      navigate("/dashboard/update-kyc");
+    }
   };
 
   const changeActiveItem = (item) => {

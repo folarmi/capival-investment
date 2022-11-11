@@ -136,10 +136,10 @@ export const billPaymentSlice = createSlice({
     },
     [getBillerProductsAsync.fulfilled]: (state, action) => {
       state.billerProducts = action.payload.data;
-      state.getBillerProductsLoading = true;
+      state.getBillerProductsLoading = false;
     },
     [getBillerProductsAsync.rejected]: (state) => {
-      state.getBillerProductsLoading = true;
+      state.getBillerProductsLoading = false;
     },
     [validateBillerProductAsync.pending]: (state) => {
       state.validateBillerProductLoading = true;

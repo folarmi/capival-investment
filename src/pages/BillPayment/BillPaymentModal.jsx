@@ -44,9 +44,9 @@ const BillPaymentModal = ({ response, toggleBillModal }) => {
 
       <form className="flex flex-col gap-6 px-6">
         <p>Transaction Amount: ₦{response?.rrrAmount}</p>
-        <p>Remita Fee: ₦{response?.fee}</p>
-        <p>Total: ₦{response?.amount}</p>
-        <p>Transaction Pin:</p>
+        <p>Remita Fee: ₦{response?.fee || 0}</p>
+        <p>Total: ₦{response?.amount || 0}</p>
+        <p>Transaction Pin</p>
         <OTPInput otpValues={otpValues} setOtpValues={setOtpValues} />
         <Button
           isLoading={processPaymentLoading}

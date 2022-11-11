@@ -239,6 +239,59 @@ export const createSafeLockAsync = createAsyncThunk(
   }
 );
 
+export const checkLoanEligibilityAsync = createAsyncThunk(
+  "transactions/checkLoanEligibility",
+  async (values, { rejectWithValue }) => {
+    try {
+      const response = await InvestmentsService.checkLoanEligibility(values);
+      return response;
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const getLoanOfferAsync = createAsyncThunk(
+  "transactions/getLoanOffer",
+  async (values, { rejectWithValue }) => {
+    console.log(values);
+    try {
+      const response = await InvestmentsService.getLoanOffer(
+        values?.id,
+        values?.variables
+      );
+      return response;
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const applyForCashBackLoanAsync = createAsyncThunk(
+  "transactions/applyForCashBack",
+  async (values, { rejectWithValue }) => {
+    console.log(values);
+    try {
+      const response = await InvestmentsService.applyForCashBackLoan(
+        values?.id,
+        values?.variables
+      );
+      return response;
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 const initialState = {
   createTargetSavingsLoading: false,
   getSingleTargetSavingLoading: false,
@@ -255,6 +308,9 @@ const initialState = {
   getAllTermDepositTenureLoading: false,
   requestInvestmentLetterLoading: false,
   liquidateInvestmentLoading: false,
+  checkLoanEligibilityLoading: false,
+  getLoanOfferLoading: false,
+  applyForCashBackLoanLoading: false,
   singleTargetDetails: "",
   allTargetSavings: "",
   getAllSafeLock: "",
@@ -262,6 +318,7 @@ const initialState = {
   termDeposit: "",
   termDepositTenure: "",
   allTermDepositTenure: "",
+  checkLoanEligibility: "",
 };
 
 export const investmentsSlice = createSlice({
@@ -426,6 +483,37 @@ export const investmentsSlice = createSlice({
     },
     [liquidateInvestmentAsync.rejected]: (state, action) => {
       state.liquidateInvestmentLoading = false;
+      state.error = action.payload;
+    },
+    [checkLoanEligibilityAsync.pending]: (state) => {
+      state.checkLoanEligibilityLoading = true;
+    },
+    [checkLoanEligibilityAsync.fulfilled]: (state, action) => {
+      state.checkLoanEligibilityLoading = false;
+      state.checkLoanEligibility = action.payload.data;
+    },
+    [checkLoanEligibilityAsync.rejected]: (state, action) => {
+      state.checkLoanEligibilityLoading = false;
+      state.error = action.payload;
+    },
+    [getLoanOfferAsync.pending]: (state) => {
+      state.getLoanOfferLoading = true;
+    },
+    [getLoanOfferAsync.fulfilled]: (state) => {
+      state.getLoanOfferLoading = false;
+    },
+    [getLoanOfferAsync.rejected]: (state, action) => {
+      state.getLoanOfferLoading = false;
+      state.error = action.payload;
+    },
+    [applyForCashBackLoanAsync.pending]: (state) => {
+      state.applyForCashBackLoanLoading = true;
+    },
+    [applyForCashBackLoanAsync.fulfilled]: (state) => {
+      state.applyForCashBackLoanLoading = false;
+    },
+    [applyForCashBackLoanAsync.rejected]: (state, action) => {
+      state.applyForCashBackLoanLoading = false;
       state.error = action.payload;
     },
   },

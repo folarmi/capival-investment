@@ -71,7 +71,7 @@ const UpdateKYC = () => {
         Update kyc
       </p>
 
-      <div className="flex items-center justify-center mt-10">
+      <div className="overflow-auto flex whitespace-nowrap items-center justify-center mt-10">
         {kycOptions?.map((item) => {
           return (
             <div
@@ -84,7 +84,7 @@ const UpdateKYC = () => {
               onClick={() => changeActive(item)}
             >
               <p
-                className={`pb-4 `}
+                className={`pb-4 text-sm md:text-xl`}
                 style={{
                   color: activeTab === item?.title ? "#8EA8DD" : "#3B58A8",
                 }}

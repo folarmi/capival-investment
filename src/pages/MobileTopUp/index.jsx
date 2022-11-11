@@ -1,113 +1,168 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { Button, SavingsInput } from "../../atoms";
+import { Button, FluentSelect, SavingsInput } from "../../atoms";
 import WalletDetailsHeader from "../Wallet/WalletDetailsHeader";
-import { getAirtimeBillersAsync } from "../../slices/mobileTopup";
+import {
+  getAirtimeBillersAsync,
+  getAllDataBillersAsync,
+  getDataProductsAsync,
+} from "../../slices/mobileTopup";
+import { useForm } from "react-hook-form";
 
 const MobileTopUp = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const goToConfirmationPage = () => {
-    navigate("/dashboard/mobile-top-up/confirm");
-  };
-
-  //   {
-  //     "billerId": "C0000264104",
-  //     "billerName": "9-Mobile",
-  //     "billerShortName": "9-Mobile",
-  //     "billerLogoUrl": "http://cdn.remita.net/biller/images/logo/c0000264104.png",
-  //     "categoryId": "1",
-  //     "categoryName": "Airtime & Data",
-  //     "categoryDescription": "Airtime & Data"
-  // }
-
-  const { airtimeBillers } = useSelector((state) => state.mobileTopUp);
-  const selectedAmount = [
-    {
-      id: "1",
-      amount: "N 100.00",
-    },
-    {
-      id: "2",
-      amount: "N 200.00",
-    },
-    {
-      id: "3",
-      amount: "N 500.00",
-    },
-    {
-      id: "3",
-      amount: "N 1000.00",
-    },
+  const mobileMoneyType = [
+    { label: "Airtime", value: "Airtime" },
+    { label: "Data", value: "Data" },
   ];
 
-  const formattedValues =
+  const [airtimeOrData, setAirtimeOrData] = useState("");
+  const [selectedDataType, setSelectedDataType] = useState();
+
+  const getSelectedMobileMoney = (item) => {
+    setAirtimeOrData(item?.value);
+  };
+
+  const getDataProductsIfData = (item) => {
+    const variables = {
+      billerId: item?.value,
+    };
+    dispatch(getDataProductsAsync(variables));
+  };
+
+  const { airtimeBillers, dataProducts, getDataProductsLoading, dataBillers } =
+    useSelector((state) => state.mobileTopUp);
+
+  const { control, handleSubmit, register, formState, setValue, clearErrors } =
+    useForm({});
+
+  const { errors } = formState;
+
+  const airtimeBillersData =
     airtimeBillers &&
     airtimeBillers?.map((item) => {
       return {
-        imgUrl: item?.billerLogoUrl,
         label: item?.billerName,
-        id: item?.billerId,
+        value: item?.billerId,
       };
     });
 
+  const dataBillersData =
+    airtimeBillers &&
+    airtimeBillers?.map((item) => {
+      return {
+        label: item?.billerName,
+        value: item?.billerId,
+      };
+    });
+
+  const dataProductsData =
+    Array.isArray(dataProducts) &&
+    dataProducts &&
+    dataProducts?.map((item) => {
+      return {
+        label: item?.display_name,
+        value: item?.variable_name,
+        amount: item?.amount,
+      };
+    });
+
+  const getSelectedDataType = (item) => {
+    setSelectedDataType(item);
+
+    if (item) clearErrors("bundle");
+    // setValue("bundle", item.value);
+    setValue("amount", item?.amount);
+    return item;
+  };
+
   useEffect(() => {
     dispatch(getAirtimeBillersAsync());
+    dispatch(getAllDataBillersAsync());
   }, []);
+
+  const submitForm = (values) => {
+    navigate("/dashboard/Airtime__Data/preview", {
+      state: values,
+    });
+  };
 
   return (
     <div className="mt-8">
       <WalletDetailsHeader ifTransaction={false} />
 
-      <div className="grid grid-cols-4 m-auto w-[90%] md:w-[50%] -gap-10 mt-8">
-        {airtimeBillers &&
-          formattedValues?.map((item) => {
-            return (
-              <div key={item?.id}>
-                <img
-                  // src={item?.imgUrl}
-                  src="/assets/images/airtel.svg"
-                  alt={item?.label}
-                  className="w-20"
-                  loading="lazy"
-                />
-                <p className="text-sm pl-4 text-primary">{item?.label}</p>
-              </div>
-            );
-          })}
-      </div>
-
-      <form className="grid rid-cols-1g md:grid-cols-2 gap-2 md:gap-10 mt-12 m-auto w-[90%] md:w-[70%]">
-        <div>
-          <SavingsInput placeholder="Mobile Number" />
-        </div>
-        <div className="mt-8 md:mt-0">
-          <SavingsInput placeholder="Amount" />
-        </div>
-      </form>
-
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12 m-auto w-[90%] md:w-[70%]">
-        {selectedAmount.map((item) => {
-          return (
-            <div className="rounded-lg p-4 bg-[#afbbdb]" key={item?.id}>
-              <p className="font-semibold text-base text-blueTwo flex items-center justify-center">
-                {item?.amount}
-              </p>
-            </div>
-          );
-        })}
-      </div>
-
-      <div className="w-[80%] md:w-[30%] m-auto justify-self-center mt-12">
-        <Button
-          buttonText="Continue"
-          className="rounded-xl"
-          size="lg"
-          onClick={goToConfirmationPage}
+      <div className="m-auto w-[92%] md:w-[50%] lg:w-[40%] xl:w-[34%] mt-16">
+        <FluentSelect
+          control={control}
+          name="topup"
+          options={mobileMoneyType}
+          customOnChange={getSelectedMobileMoney}
+          label="Select Category"
+          placeholder="Airtime"
         />
+
+        <form onSubmit={handleSubmit(submitForm)}>
+          <FluentSelect
+            control={control}
+            name="billerId"
+            options={
+              airtimeOrData === "Airtime" ? airtimeBillersData : dataBillersData
+            }
+            customOnChange={getDataProductsIfData}
+            label="Select Category"
+            placeholder="Airtel"
+            error={errors?.billerId?.message}
+            rules={{ required: "Network is required" }}
+          />
+
+          {airtimeOrData === "Data" && (
+            <FluentSelect
+              control={control}
+              name="bundle"
+              options={dataProductsData}
+              label="Select a bundle"
+              placeholder="100MB Daily"
+              error={errors?.bundle?.message}
+              customOnChange={getSelectedDataType}
+              isLoading={getDataProductsLoading}
+              rules={{ required: "Bundle Type is required" }}
+            />
+          )}
+
+          <SavingsInput
+            placeholder="N 10,000.00"
+            label="Amount"
+            register={register("amount", {
+              required: "Amount is required",
+            })}
+            className="mt-4"
+            error={errors?.amount?.message}
+            readOnly={airtimeOrData === "Data" ? true : false}
+          />
+
+          <SavingsInput
+            placeholder="08132455678"
+            label="Mobile Number"
+            error={errors?.phone?.message}
+            register={register("phone", {
+              required: "Phone Number is required",
+            })}
+            className="mt-4"
+          />
+
+          <div className="w-full mt-10 md:w-[70%] m-auto">
+            <Button
+              buttonText="Continue"
+              className="rounded-xl mb-10"
+              size="lg"
+              // isLoading={createEmployerInfoLoading}
+            />
+          </div>
+        </form>
       </div>
     </div>
   );

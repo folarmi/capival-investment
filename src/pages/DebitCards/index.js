@@ -27,13 +27,16 @@ const DebitCard = () => {
         </p>
       </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-3 place-content-center items-center mx-2 lg:mx-10  w-full">
-        <DebitButton text="Update Card Limit" icon="/assets/icons/star.svg" />
+      <div className="grid grid-cols-2 lg:grid-cols-3 place-content-center items-center mx-2 lg:mx-20 w-full">
+        <DebitButton text="View Debit Card" icon="/assets/icons/star.svg" />
+        <DebitButton
+          text="Request Capival Card"
+          icon="/assets/icons/block.svg"
+        />
         <PaystackHook />
-        <DebitButton text="Block Card" icon="/assets/icons/block.svg" />
       </div>
 
-      <div className="flex flex-wrap items-center justify-between bg-[#c2cce4] mt-8 py-10 px-20">
+      <div className="flex flex-wrap items-center justify-between bg-[#c2cce4] mt-8 py-10 px-4 lg:px-20">
         {allDebitCards &&
           allDebitCards?.map((card) => {
             return (

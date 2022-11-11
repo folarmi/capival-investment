@@ -13,7 +13,6 @@ import tokenService from "../services/token.service";
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const { isLoading } = useSelector((state) => state?.auth?.login);
   const { isLoading } = useSelector((state) => state?.auth?.login);
 
   const [passwordShown, setPasswordShown] = useState(false);
@@ -32,7 +31,6 @@ const Login = () => {
       .min(8, "Password too short")
       .matches(
         /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/,
-
         "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
       ),
   });
@@ -92,7 +90,7 @@ const Login = () => {
                 }
                 onClick={togglePasswordShown}
                 alt="visible"
-                className="w-5 absolute md:mt-[5%] ml-[89%]"
+                className="w-5 absolute z-30 cursor-pointer md:mt-[5%] ml-[89%]"
               />
             </i>
             <Input

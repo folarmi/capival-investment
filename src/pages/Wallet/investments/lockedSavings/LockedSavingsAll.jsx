@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import CurrencyFormat from "react-currency-format";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { Loader } from "../../../../atoms";
 import { getAllSafeLockAsync } from "../../../../slices/investments";
 import { lockedSavingsHeader } from "../../../../utils/data";
@@ -9,6 +10,7 @@ import { lockedSavingsHeader } from "../../../../utils/data";
 
 const LockedSavingsAll = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { getAllSafeLock, getAllSafeLockLoading } = useSelector(
     (state) => state.investments
   );
@@ -25,6 +27,15 @@ const LockedSavingsAll = () => {
         status: item?.status,
       };
     });
+
+  const goToDetailsPage = (item) => {
+    navigate(
+      `/dashboard/wallet/investments/saving-type/locked-savings/${item.id}`,
+      {
+        state: item,
+      }
+    );
+  };
 
   useEffect(() => {
     dispatch(getAllSafeLockAsync());
@@ -63,7 +74,8 @@ const LockedSavingsAll = () => {
                     return (
                       <div
                         key={item?.id}
-                        className="mt-4 mb-4 whitespace-nowrap lg:grid grid-cols-4 bg-blueTwo/5 py-3"
+                        className="mt-4 mb-4 whitespace-nowrap lg:grid grid-cols-4 bg-blueTwo/5 py-3 cursor-pointer"
+                        onClick={() => goToDetailsPage(item)}
                       >
                         <p className="text-base text-orange font-medium pl-6">
                           <CurrencyFormat

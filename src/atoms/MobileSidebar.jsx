@@ -1,17 +1,26 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+
 import ModalPopup from "../components/ModalPopup";
+import logout from "../icons/logout.svg";
 import { SidebarMenuItems } from "../data/Sidebar";
 import { SubMenu } from "../molecules";
+import { logoutAsync } from "../slices/auth";
 import { BvnModal } from "./BvnModal";
+import { useDispatch } from "react-redux";
 
 const MobileSidebar = ({ setSidebar, sidebar }) => {
+  const dispatch = useDispatch();
   const [showBVN, setShowBVN] = useState(false);
 
   const userObject = useSelector((state) => state.auth.login?.user?.user);
   const userAvatar = useSelector(
     (state) => state.auth?.login?.user?.authorisation?.user_data?.passport
   );
+
+  const logoutUser = () => {
+    dispatch(logoutAsync());
+  };
 
   const toggleSidebar = () => {
     setSidebar(!sidebar);
@@ -50,8 +59,20 @@ const MobileSidebar = ({ setSidebar, sidebar }) => {
         </div>
       </div>
       {SidebarMenuItems.map((item, index) => {
-        return <SubMenu item={item} key={index} />;
+        return (
+          <SubMenu item={item} key={index} toggleSidebar={toggleSidebar} />
+        );
       })}
+
+      <div
+        to="/"
+        className="flex items-center mt-6 cursor-pointer 2xl:text-lg xl:text-sm px-8 lg:px-4 xl:px-6 2xl:px-12"
+        key="logout"
+        onClick={logoutUser}
+      >
+        <img src={logout} alt="logout" className="mr-4" loading="lazy" />
+        <p className="font-normal text-sm text-white">Logout</p>
+      </div>
 
       <ModalPopup
         modalHeight="150px"

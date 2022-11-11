@@ -53,12 +53,17 @@ const BillPayment = () => {
   return (
     <>
       <div className="mt-8">
-        <WalletDetailsHeader ifTransaction={false} />
+        <div className="flex items-center justify-center">
+          <WalletDetailsHeader ifTransaction={false} />
+          {singleBillPaymentCategoryLoading && (
+            <img className="h-6 w-6" src="/assets/icons/loading.svg" />
+          )}
+        </div>
 
         {billPaymentCategoriesLoading ? (
           <Loader />
         ) : (
-          <main className="px-4 md:px-10 lg:px-20 w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-16">
+          <main className="px-4 md:px-10 lg:px-20 w-full gallery  mt-16">
             {billPaymentCategories &&
               formattedValues?.map((item) => {
                 return (

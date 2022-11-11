@@ -1,77 +1,75 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Button, SavingsInput } from "../../atoms";
+import { Button, Loader, SavingsInput } from "../../atoms";
+import { getAllBettingBillersAsync } from "../../slices/mobileTopup";
 import WalletDetailsHeader from "../Wallet/WalletDetailsHeader";
 
 const BetsAndLotteries = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const goToConfirmationPage = () => {
-    navigate("/dashboard/bets-and-lotteries/confirm");
+  const { bettingBillersLoading, bettingBillers } = useSelector(
+    (state) => state.mobileTopUp
+  );
+
+  const goToConfirmationPage = (item) => {
+    navigate("/dashboard/bets-and-lotteries/form", {
+      state: item,
+    });
   };
 
+  useEffect(() => {
+    dispatch(getAllBettingBillersAsync());
+  }, []);
+
   return (
-    <div className="mt-8">
-      <WalletDetailsHeader ifTransaction={false} />
+    <>
+      {bettingBillersLoading ? (
+        <Loader />
+      ) : (
+        <div className="mt-8">
+          <WalletDetailsHeader ifTransaction={false} />
 
-      <div className="grid grid-cols-5 m-auto w-[50%] -gap-10 mt-8">
-        <img
-          src="/assets/icons/sporty.svg"
-          alt="sporty"
-          className="w-20"
-          loading="lazy"
-        />
-        <img
-          src="/assets/icons/bet.svg"
-          alt="bet"
-          className="w-20"
-          loading="lazy"
-        />
-        <img
-          src="/assets/icons/babaIjebu.svg"
-          alt="babaIjebu"
-          className="w-20"
-          loading="lazy"
-        />
-        <img
-          src="/assets/icons/nairabet.svg"
-          alt="nairabet"
-          className="w-20"
-          loading="lazy"
-        />
-        <img
-          src="/assets/icons/lotto.svg"
-          alt="lotto"
-          className="w-20"
-          loading="lazy"
-        />
-      </div>
-
-      <form className="grid grid-cols-2 gap-10 mt-12 m-auto w-[70%]">
-        <div>
-          <SavingsInput placeholder="Mobile Number" />
+          <div className="gallery m-auto w-[70%] -gap-10 mt-8">
+            {bettingBillers &&
+              Array.isArray(bettingBillers) &&
+              bettingBillers?.map((biller) => {
+                return (
+                  <div
+                    onClick={() => goToConfirmationPage(biller)}
+                    key={biller?.billerId}
+                    className="cursor-pointer"
+                  >
+                    <img
+                      src={biller?.billerLogoUrl}
+                      alt="bet"
+                      // className="w-20"
+                      // className="w-full max-w-[100px] lg:max-w-[210px] px-6 my-4"
+                      className="gallery__img my-4"
+                      loading="lazy"
+                    />
+                    <p className="text-sm w-[90%] font-medium text-center">
+                      {biller?.billerName}
+                    </p>
+                  </div>
+                );
+              })}
+          </div>
         </div>
-        <div>
-          <SavingsInput placeholder="Refrence Number" />
-        </div>
-        <div>
-          <SavingsInput placeholder="Amount" />
-        </div>
-        <div>
-          <SavingsInput placeholder="Narration" />
-        </div>
-      </form>
-
-      <div className="w-[30%] m-auto justify-self-center mt-12">
-        <Button
-          buttonText="Continue"
-          className="rounded-xl"
-          size="lg"
-          onClick={goToConfirmationPage}
-        />
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 
 export { BetsAndLotteries };
+
+// {
+//   "billerId": "supabet",
+//   "billerName": "SupaBet",
+//   "billerShortName": "SupaBet",
+//   "billerLogoUrl": "https://baxi-biller-pod-images.s3.eu-west-1.amazonaws.com/images/supabet.jpeg",
+//   "categoryId": "betting",
+//   "categoryName": "Betting",
+//   "categoryDescription": "Betting"
+// }

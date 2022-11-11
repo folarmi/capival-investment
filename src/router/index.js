@@ -32,15 +32,20 @@ import {
   GenerateStatement,
   UpdateKYC,
 } from "../pages";
+import BettingForm from "../pages/BetsAndLorries/BettingForm";
 import { BetTransactionDetail } from "../pages/BetsAndLorries/BetTransactionDetail";
 import { BillPaymentForm } from "../pages/BillPayment/BillPaymentForm";
 import { SingleCategory } from "../pages/BillPayment/SingleCategory";
 import CapivalTransfer from "../pages/CapivalTransfers";
+import { MobileTopupPreview } from "../pages/MobileTopUp/MobileTopupPreview";
 import { SelectedTransactionHistory } from "../pages/TransactionHistory/SelectedTransactionHistory";
 import { FixedDeposits } from "../pages/Wallet/investments/fixedDeposit";
 import { Confirmation } from "../pages/Wallet/investments/fixedDeposit/Confirmation";
 import { Investments } from "../pages/Wallet/investments/Investments";
 import { LockedSavings } from "../pages/Wallet/investments/lockedSavings";
+import { CashBackOfferPage } from "../pages/Wallet/investments/lockedSavings/CashBackOfferPage";
+import { CashBackPage } from "../pages/Wallet/investments/lockedSavings/CashBackPage";
+import { LockedSavingsDetails } from "../pages/Wallet/investments/lockedSavings/LockedSavingsDetails";
 import { LockedSavingsForm } from "../pages/Wallet/investments/lockedSavings/LockedSavingsForm";
 import { LockedSavingsPreview } from "../pages/Wallet/investments/lockedSavings/LockedSavingsPreview";
 import { Savings } from "../pages/Wallet/investments/savings";
@@ -114,6 +119,18 @@ const Index = () => {
           element={<LockedSavingsPreview />}
         />
         <Route
+          path="dashboard/wallet/investments/saving-type/locked-savings/:id"
+          element={<LockedSavingsDetails />}
+        />
+        <Route
+          path="dashboard/wallet/investments/saving-type/locked-savings/:id/cashback_loan"
+          element={<CashBackPage />}
+        />
+        <Route
+          path="dashboard/wallet/investments/saving-type/locked-savings/:id/cashback_loan/offer"
+          element={<CashBackOfferPage />}
+        />
+        <Route
           path="dashboard/wallet/investments/new-saving/confirm"
           element={<SavingsConfirmation />}
         />
@@ -149,6 +166,10 @@ const Index = () => {
         />
         <Route path="dashboard/Airtime__Data" element={<MobileTopUp />} />
         <Route
+          path="dashboard/Airtime__Data/preview"
+          element={<MobileTopupPreview />}
+        />
+        <Route
           path="dashboard/bill-payment/Airtime__Data"
           element={<MobileTopUp />}
         />
@@ -174,6 +195,10 @@ const Index = () => {
         <Route
           path="dashboard/bets-and-lotteries"
           element={<BetsAndLotteries />}
+        />
+        <Route
+          path="dashboard/bets-and-lotteries/form"
+          element={<BettingForm />}
         />
         <Route
           path="dashboard/bets-and-lotteries/confirm"

@@ -24,7 +24,6 @@ const SetTransactionPin = ({ toggleTransactionPinModal }) => {
       .then((res) => {
         setOtpValues("");
         if (res?.status === true) {
-          console.log(res);
           toast("Transaction Pin sucessfully set");
           toggleTransactionPinModal();
           window.location.reload();

@@ -10,11 +10,13 @@ const AmountInput = ({
   error,
   rules,
   min,
+  readOnly,
+  className,
 }) => {
   const { field } = useController({ name, control, rules });
 
   return (
-    <div className="mt-4">
+    <div className={`mt-4 ${className}`}>
       <label htmlFor="amount" className={`text-sm font-normal text-blueTwo`}>
         {label}
       </label>
@@ -28,6 +30,7 @@ const AmountInput = ({
           placeholder={placeholder}
           name={name}
           min={min}
+          readOnly={readOnly}
           //   value={value}
           prefix={"₦"}
           onChange={field.onChange}

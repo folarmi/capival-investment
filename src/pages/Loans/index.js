@@ -80,7 +80,6 @@ const Loans = () => {
   };
 
   const liquidateLoanFnc = (item) => {
-    console.log(item);
     dispatch(liquidateLoanAsync(item?.LoanID))
       .unwrap()
       .then((res) => {
