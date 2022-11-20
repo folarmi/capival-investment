@@ -193,9 +193,10 @@ const primarySource = [
 export const targetSavingsHeader = [
   { id: "1", name: "Title" },
   { id: "2", name: "Target" },
-  { id: "3", name: "Frequency" },
-  { id: "4", name: "Category" },
-  { id: "5", name: "Withdrawal Date" },
+  { id: "3", name: "Status" },
+  { id: "4", name: "Frequency" },
+  { id: "5", name: "Category" },
+  { id: "6", name: "Withdrawal Date" },
 ];
 
 export const lockedSavingsHeader = [
@@ -203,6 +204,7 @@ export const lockedSavingsHeader = [
   { id: "2", name: "Interest Earned" },
   { id: "3", name: "Interest Rate" },
   { id: "4", name: "Payback Date" },
+  { id: "5", name: "Status" },
 ];
 
 export const termDepositTenure = [

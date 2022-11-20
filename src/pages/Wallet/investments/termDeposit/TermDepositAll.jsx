@@ -29,23 +29,23 @@ const TermDepositAll = () => {
       allTermDepositTenure?.map((item, i) => {
         return {
           amount: (
-            <p className="text-sm text-blueTwo font-normal">
+            <p className="text-sm whitespace-nowrap text-blueTwo font-normal">
               {" "}
               <FormattedCurrency value={item?.amount} />
             </p>
           ),
           interest_rate: (
-            <p className="text-sm text-orange font-medium">{`${item?.rate}% per annum`}</p>
+            <p className="text-sm whitespace-nowrap text-orange font-medium">{`${item?.rate}% per annum`}</p>
           ),
           maturity_date: (
-            <p className="text-sm text-blueTwo font-medium">
+            <p className="text-sm whitespace-nowrap text-blueTwo font-medium">
               {item?.maturity_date}
             </p>
           ),
           view: (
             <p
               onClick={() => goToSinglePage(item)}
-              className="text-sm text-blueTwo font-medium cursor-pointer"
+              className="text-sm whitespace-nowrap text-blueTwo font-medium cursor-pointer"
             >
               View Details
             </p>

@@ -129,6 +129,18 @@ const TargetSavingsDetails = () => {
 
   const data = React.useMemo(() => getData(), [getData]);
 
+  const backgroundColorType = (status) => {
+    let bgColor;
+    if (status === "Ongoing") {
+      bgColor = "#00FF00";
+    } else if (status === "Closed") {
+      bgColor = "rgb(249 115 22)";
+    } else if (status === "Terminated") {
+      bgColor = "rgb(127 29 29)";
+    }
+    return bgColor;
+  };
+
   return (
     <>
       {getSingleTargetSavingLoading ? (
@@ -142,7 +154,14 @@ const TargetSavingsDetails = () => {
                   {singleTargetDetails?.title}
                 </p>
                 <div className="flex items-center ml-4">
-                  <div className="bg-[#00FF00] w-[10px] h-[10px] rounded-full"></div>
+                  <div
+                    className="bg-[#00FF00] w-[10px] h-[10px] rounded-full"
+                    style={{
+                      backgroundColor: backgroundColorType(
+                        singleTargetDetails?.status
+                      ),
+                    }}
+                  ></div>
                   <p className="font-medium text-lg pl-2">
                     {singleTargetDetails?.status}
                   </p>
@@ -161,68 +180,87 @@ const TargetSavingsDetails = () => {
 
               <div class="flex w-full my-2 justify-end">
                 <span class="text-xs font-normal pr-4">
-                  {singleTargetDetails?.progress}% complete
+                  {singleTargetDetails?.progress > 100
+                    ? "100"
+                    : singleTargetDetails?.progress}
+                  % complete
                 </span>
               </div>
+
               <div class="w-[80%] mx-10 bg-white rounded-full h-1.5 mb-2">
                 <div
                   class="bg-[#111127] h-1.5 rounded-full"
-                  style={{ width: singleTargetDetails?.progress }}
+                  style={{
+                    width:
+                      singleTargetDetails?.progress > 100
+                        ? 100
+                        : singleTargetDetails?.progress,
+                  }}
                 ></div>
               </div>
 
-              <p
-                onClick={toggleQuickTopUpModal}
-                className="uppercase bg-[#644031] rounded-3xl text-xs px-5 py-1.5"
-              >
-                Quick Top up
-              </p>
+              {singleTargetDetails?.status === "Ongoing" && (
+                <p
+                  onClick={toggleQuickTopUpModal}
+                  className="uppercase bg-[#644031] rounded-3xl text-xs px-5 py-1.5"
+                >
+                  Quick Top up
+                </p>
+              )}
 
               <section className="flex items-center justify-around mt-2 cursor-pointer">
-                <div
-                  className="flex items-center bg-[#43272c] px-3 py-1 mr-3"
-                  onClick={toggleExtendModal}
-                >
-                  <img src="/assets/icons/extend.svg" alt="" />
-                  <p className="text-xs uppercase pl-2">Extend</p>
-                </div>
+                {singleTargetDetails?.status === "Ongoing" && (
+                  <div
+                    className="flex items-center bg-[#43272c] px-3 py-1 mr-3"
+                    onClick={toggleExtendModal}
+                  >
+                    <img src="/assets/icons/extend.svg" alt="" />
+                    <p className="text-xs uppercase pl-2">Extend</p>
+                  </div>
+                )}
 
-                <div
-                  onClick={toggleBreakSavingsModal}
-                  className="flex items-center bg-[#43272c] px-3 py-1 mr-3"
-                >
-                  <img src="/assets/icons/break.svg" alt="" />
-                  <p className="text-xs uppercase pl-2">Break</p>
-                </div>
+                {singleTargetDetails?.totalPayment !== 0 &&
+                  singleTargetDetails?.status === "Ongoing" && (
+                    <div
+                      onClick={toggleBreakSavingsModal}
+                      className="flex items-center bg-[#43272c] px-3 py-1 mr-3"
+                    >
+                      <img src="/assets/icons/break.svg" alt="" />
+                      <p className="text-xs uppercase pl-2">Break</p>
+                    </div>
+                  )}
 
-                <div
-                  onClick={toggleChangeSourceModal}
-                  className="flex items-center bg-[#43272c] px-3 py-1"
-                >
-                  <img src="/assets/icons/changeTarget.svg" alt="" />
-                  <p className="text-xs uppercase pl-2">Change Source</p>
-                </div>
+                {singleTargetDetails?.status === "Ongoing" && (
+                  <div
+                    onClick={toggleChangeSourceModal}
+                    className="flex items-center bg-[#43272c] px-3 py-1"
+                  >
+                    <img src="/assets/icons/changeTarget.svg" alt="" />
+                    <p className="text-xs uppercase pl-2">Change Source</p>
+                  </div>
+                )}
               </section>
             </div>
 
-            <section className="flex items-center gap-6 justify-around mt-6">
+            <section className="flex flex-wrap items-center gap-6 justify-around mt-6">
               <TargetCard
                 title="My Target"
                 value={` ₦${singleTargetDetails?.target_amount}`}
               />
               <TargetCard
                 title="Frequency"
-                value={singleTargetDetails?.frequency_amount}
+                value={`₦${singleTargetDetails?.frequency_amount} `}
                 ifSecondValue
                 secondValue={singleTargetDetails?.savings_frequency}
               />
               <TargetCard
                 title="Interest"
-                value={`${singleTargetDetails?.interestAccrued}% per annum`}
+                value={`₦${singleTargetDetails?.interestAccrued}`}
               />
               <TargetCard
                 title="Withdrawal Date"
                 value={singleTargetDetails?.withdrawal_date}
+                ifAmount={false}
               />
             </section>
 

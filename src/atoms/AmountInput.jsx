@@ -31,7 +31,6 @@ const AmountInput = ({
           name={name}
           min={min}
           readOnly={readOnly}
-          //   value={value}
           prefix={"₦"}
           onChange={field.onChange}
         />

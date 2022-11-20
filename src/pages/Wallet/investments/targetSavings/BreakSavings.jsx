@@ -50,7 +50,8 @@ const BreakSavings = ({
         }
       })
       .catch((err) => {
-        toast.error(err?.message);
+        // toast.error(err?.message);
+        console.log(err?.message);
       });
   };
 

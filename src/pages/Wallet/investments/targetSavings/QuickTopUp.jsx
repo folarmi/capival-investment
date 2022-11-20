@@ -49,7 +49,7 @@ const QuickTopUp = ({ toggleQuickTopUpModal, savingsId }) => {
         if (res?.status) {
           toast(res?.message);
           toggleQuickTopUpModal();
-          // window.location.reload();
+          window.location.reload();
         }
       })
       .catch((err) => {

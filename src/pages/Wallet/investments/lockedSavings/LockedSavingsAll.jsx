@@ -40,7 +40,6 @@ const LockedSavingsAll = () => {
   useEffect(() => {
     dispatch(getAllSafeLockAsync());
   }, []);
-
   return (
     <>
       {getAllSafeLockLoading ? (
@@ -49,7 +48,7 @@ const LockedSavingsAll = () => {
         <div className="w-full ">
           <main className="hidden bg-blueTwo/10 md:block mx-4 md:mx-7 mt-4 rounded-xl">
             <section className="bg-blueTwo/20 rounded-xl py-4 overflow-scroll">
-              <div className="grid grid-cols-4 gap-5 items-center">
+              <div className="grid grid-cols-5 gap-5 items-center">
                 {lockedSavingsHeader.map((header) => {
                   return (
                     <div key={header?.id}>
@@ -74,7 +73,7 @@ const LockedSavingsAll = () => {
                     return (
                       <div
                         key={item?.id}
-                        className="mt-4 mb-4 whitespace-nowrap lg:grid grid-cols-4 bg-blueTwo/5 py-3 cursor-pointer"
+                        className="mt-4 mb-4 whitespace-nowrap lg:grid grid-cols-5 bg-blueTwo/5 py-3 cursor-pointer"
                         onClick={() => goToDetailsPage(item)}
                       >
                         <p className="text-base text-orange font-medium pl-6">
@@ -100,6 +99,9 @@ const LockedSavingsAll = () => {
                         </p>
                         <p className="text-base text-blueTwo font-medium pl-6">
                           {item?.payBackDate}
+                        </p>
+                        <p className="text-base text-blueTwo font-medium pl-6">
+                          {item?.status}
                         </p>
                       </div>
                     );

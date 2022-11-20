@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { Button, FluentSelect, SavingsInput } from "../../../../atoms";
 import { AmountInput } from "../../../../atoms/AmountInput";
 import {
@@ -45,14 +46,24 @@ const TermDeposit = () => {
       tenor: getValues("tenor"),
     };
 
-    // console.log(variables);
-    dispatch(getInterestRateAsync(variables));
+    dispatch(getInterestRateAsync(variables))
+      .unwrap()
+      .then((res) => {
+        if (res?.status) {
+          toast(res?.message);
+        }
+      })
+      .catch((err) => {
+        toast.error(err?.message);
+      });
   };
 
   const submitForm = (values) => {
     navigate("/dashboard/wallet/investments/saving-type/term-deposit/preview", {
       state: values,
     });
+
+    console.log(values);
   };
 
   useEffect(() => {

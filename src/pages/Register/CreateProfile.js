@@ -30,8 +30,7 @@ const CreateProfile = () => {
     dispatch(verifyBVNAsync(values?.bvn))
       .unwrap()
       .then((res) => {
-        if (res?.status === true) {
-          console.log(res);
+        if (res?.status) {
           toast("BVN Validated");
           dispatch(handlePhoneNumber(res.phone));
           dispatch(handleNextButton(values?.bvn));
@@ -47,13 +46,13 @@ const CreateProfile = () => {
 
   return (
     <div className="w-full h-screen register-bg">
-      <div className="m-auto md:w-[80%] lg:w-[70%] xl:w-[54%] mt-16">
+      <div className="pl-4 lg:pl-0 m-auto md:w-[80%] lg:w-[70%] xl:w-[54%] mt-16">
         <p className="text-redOne font-semibold md:text-4xl lg:text-5xl xl:text-[50px] pb-10">
           Create your Profile
         </p>
       </div>
 
-      <section className="bg-blueOne">
+      <section className="px-4 lg:px-0 bg-blueOne">
         <div className="m-auto md:w-[80%] lg:w-[70%] xl:w-[54%]">
           <p className="font-semibold text-lg text-blueTwo py-6">
             Why we need your BVN
@@ -71,7 +70,7 @@ const CreateProfile = () => {
 
       <form
         onSubmit={handleSubmit(submitForm)}
-        className="m-auto mt-8 md:w-[80%] lg:w-[70%] xl:w-[54%]"
+        className="px-4 lg:px-0 m-auto mt-8 md:w-[80%] lg:w-[70%] xl:w-[54%]"
       >
         <RegisterInput
           placeholder="Enter your BVN"

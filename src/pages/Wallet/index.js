@@ -21,10 +21,6 @@ const Wallet = () => {
     navigate("/dashboard/wallet/details");
   };
 
-  const goToInvestments = () => {
-    navigate("/dashboard/wallet/investments");
-  };
-
   // const goToLoansPage = () => {
   //   navigate("/dashboard/loans");
   // };

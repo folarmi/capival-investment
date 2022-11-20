@@ -59,13 +59,13 @@ const OTPVerification = () => {
 
   return (
     <div className="w-full h-screen register-bg">
-      <div className="m-auto md:w-[80%] lg:w-[70%] xl:w-[54%] mt-16">
+      <div className="pl-4 lg:pl-0 m-auto md:w-[80%] lg:w-[70%] xl:w-[54%] mt-16">
         <p className="text-redOne font-semibold md:text-4xl lg:text-5xl xl:text-[50px] pb-10">
           Create your Profile
         </p>
       </div>
 
-      <section className="bg-blueOne">
+      <section className="px-4 lg:px-0 bg-blueOne">
         <div className="m-auto md:w-[80%] lg:w-[70%] xl:w-[54%]">
           <p className="font-semibold text-lg text-blueTwo py-6">
             OTP Verification
@@ -77,7 +77,7 @@ const OTPVerification = () => {
         </div>
       </section>
 
-      <form className="m-auto mt-8 md:w-[80%] lg:w-[70%] xl:w-[54%]">
+      <form className="px-4 lg:px-0 m-auto mt-8 md:w-[80%] lg:w-[70%] xl:w-[54%]">
         <RegisterInput
           placeholder="Enter OTP"
           register={register("otp")}
@@ -99,7 +99,7 @@ const OTPVerification = () => {
             />
           </div> */}
 
-          <div className="w-1/2">
+          <div className="w-full lg:w-1/2">
             <Button
               size="md"
               buttonText="Continue"
