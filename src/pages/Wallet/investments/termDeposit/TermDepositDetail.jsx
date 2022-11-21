@@ -110,20 +110,6 @@ const TermDepositDetail = () => {
           </p>
         </div>
 
-        <div className="w-full md:flex md:items-center border-b border-blueTwo/30 pt-8 pb-4 ">
-          <p className="text-base font-medium text-blueTwo md:w-[40%] pl-[10%]">
-            Maturity Amount:
-          </p>
-          <p className="pl-[10%] md:pl-0 text-base font-normal text-blueTwo md:w-[60%]">
-            <CurrencyFormat
-              value={state?.maturity_amount}
-              displayType={"text"}
-              thousandSeparator={true}
-              prefix={"₦"}
-            />
-          </p>
-        </div>
-
         <div className="w-full md:flex md:items-center  border-b border-blueTwo/30 pt-8 pb-4 ">
           <p className="text-base font-medium text-blueTwo md:w-[40%] pl-[10%]">
             Start Date
@@ -147,14 +133,14 @@ const TermDepositDetail = () => {
         <Button
           onClick={liquidate}
           isLoading={liquidateInvestmentLoading}
-          className="rounded-[50px] mr-10 w-1/2"
+          className="rounded-[50px] mr-10 w-1/2 mb-20"
           buttonText="Liquidate"
         />
 
         <Button
           onClick={getInvestmentLetter}
           isLoading={requestInvestmentLetterLoading}
-          className="rounded-[50px] w-1/2"
+          className="rounded-[50px] w-1/2 mb-20"
           buttonText="Request Investment Letter"
         />
       </div>

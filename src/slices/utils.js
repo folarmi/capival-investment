@@ -356,6 +356,7 @@ const initialState = {
   officerDetails: "",
   dashboardFeatures: "",
   targetCategories: "",
+  walletBalance: "",
   savingsFrequencyData: "",
   fundingSource: "",
   preferredTime: "",
@@ -470,8 +471,10 @@ const utilsSlice = createSlice({
     [getWalletBalanceAsync.pending]: (state) => {
       state.getWalletBalanceLoading = true;
     },
-    [getWalletBalanceAsync.fulfilled]: (state) => {
+    [getWalletBalanceAsync.fulfilled]: (state, action) => {
+      console.log("it ran", action);
       state.getWalletBalanceLoading = false;
+      state.walletBalance = action.payload;
     },
     [getWalletBalanceAsync.rejected]: (state, action) => {
       state.getWalletBalanceLoading = false;

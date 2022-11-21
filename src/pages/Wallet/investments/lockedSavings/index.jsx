@@ -38,7 +38,7 @@ const LockedSavings = () => {
       <p className="font-bold text-lg text-blueTwo text-center pb-2">
         Locked Savings
       </p>
-      <p className="text-lg font-medium text-blueTwo">
+      <p className="text-lg font-medium text-center text-blueTwo">
         Lock away funds safely and earn up to 9%. Locked savings start timing
         from N 5,000.00
       </p>
@@ -64,7 +64,7 @@ const LockedSavings = () => {
                       {type?.min_day} - {type?.max_day} days
                     </p>
                     <p className="font-semibold text-lg italic">
-                      {type?.rate}%
+                      {type?.rate}% per annum
                     </p>
                   </div>
                 );

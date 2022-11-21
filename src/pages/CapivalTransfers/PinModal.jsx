@@ -10,7 +10,7 @@ import { Button } from "../../atoms";
 import { OTPInput } from "../../components/OTPInput";
 import { saveInternalBeneficiaryAsync } from "../../slices/transactions";
 
-const PinModal = ({ formValues }) => {
+const PinModal = ({ formValues, toggleTransactionPinModal }) => {
   const dispatch = useDispatch();
   const nagivate = useNavigate();
   const { capivalTransferLoading } = useSelector(
@@ -64,15 +64,12 @@ const PinModal = ({ formValues }) => {
 
   return (
     <form className="px-6 py-3">
+      <div className="flex justify-end" onClick={toggleTransactionPinModal}>
+        <img src="/assets/icons/closeTwo.svg" alt="closeButton" />
+      </div>
       <p className="text-blueTwo font-medium text-sm pb-6 text-center uppercase">
         Enter your Transaction Pin
       </p>
-      {/* <SavingsInput
-        placeholder="PIN"
-        register={register("pin")}
-        type="password"
-        error={errors?.pin?.message}
-      /> */}
       <OTPInput
         otpValues={otpValues}
         setOtpValues={setOtpValues}
@@ -80,7 +77,6 @@ const PinModal = ({ formValues }) => {
         height="20px"
         width="20px"
         className="mr-4"
-        // hasErrored={otpValues === "" ? true : false}
       />
 
       <Button

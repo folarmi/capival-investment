@@ -105,7 +105,7 @@ const Issue = () => {
                   isLoading={gethelpTopicsLoading}
                   inputRef={ref}
                   options={allTopicData}
-                  placeholder="Select Loan Type"
+                  placeholder="Select Help Topic"
                   styles={colourStyles}
                 />
               </div>

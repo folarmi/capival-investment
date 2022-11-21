@@ -88,7 +88,6 @@ const Loans = () => {
         }
       })
       .catch((err) => {
-        console.log(err);
         toast.error(err?.message);
       });
   };
@@ -118,6 +117,7 @@ const Loans = () => {
       </div>
 
       <div className="mt-8 mx-4 md:mx-7">
+        <p className="hidden md:block text-xl font-medium pb-4">Active Loans</p>
         <main className="hidden md:block  mt-4 bg-blueTwo/10 rounded-xl">
           <section className="bg-blueTwo/20 rounded-xl py-4 overflow-scroll">
             <div className="grid grid-cols-5 gap-5 items-center">
@@ -140,7 +140,6 @@ const Loans = () => {
               </p>
             ) : (
               <>
-                {" "}
                 {activeLoans?.map((item) => {
                   return (
                     <div className="mt-4 mb-4 whitespace-nowrap lg:grid grid-cols-5  bg-blueTwo/5 py-3">
@@ -219,7 +218,7 @@ const Loans = () => {
         </main>
 
         {/* Mobile View */}
-        <p className="text-xl font-medium pb-4">Active Loans</p>
+        <p className="lg:hidden text-xl font-medium pb-4">Active Loans</p>
         <section className="lg:hidden">
           {sampleActiveLoans?.length === 0 ? (
             <p className="w-full flex items-center justify-center my-10 text-white text-xl">
@@ -292,6 +291,9 @@ const Loans = () => {
         </section>
 
         <div className="my-10">
+          <p className="hidden md:block text-xl font-medium pb-4">
+            Pending Loans
+          </p>
           <main className="hidden md:block mt-4 bg-blueTwo/10 rounded-xl">
             <section className="bg-blueTwo/20 rounded-xl py-4 overflow-scroll">
               <div className="grid grid-cols-5 gap-5 items-center pl-6">
@@ -314,7 +316,6 @@ const Loans = () => {
                 </p>
               ) : (
                 <>
-                  {" "}
                   {pendingLoans?.map((item) => {
                     return (
                       <div className="mt-4 mb-4 whitespace-nowrap grid grid-cols-5 gap-5  bg-blueTwo/5 py-3 pl-6">
@@ -366,7 +367,7 @@ const Loans = () => {
           </main>
 
           {/* Mobile View */}
-          <p className="text-xl font-medium pb-4">Pending Loans</p>
+          <p className="lg:hidden text-xl font-medium pb-4">Pending Loans</p>
           <section className="lg:hidden">
             {pendingLoans?.length === 0 ? (
               <p className="w-full flex items-center justify-center my-10 text-white text-xl">
