@@ -5,14 +5,19 @@ import { useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import CurrencyFormat from "react-currency-format";
 
-import { Button, FluentSelect, SavingsInput } from "../../atoms";
+import {
+  Button,
+  FluentSelect,
+  FluentSelectTwo,
+  SavingsInput,
+} from "../../atoms";
 import {
   initiateTransactionAsync,
   validateBillerProductAsync,
 } from "../../slices/billPayment";
 import ModalPopup from "../../components/ModalPopup";
 import { BillPaymentModal } from "./BillPaymentModal";
-import ReactDatePicker from "react-datepicker";
+// import ReactDatePicker from "react-datepicker";
 import { DatePicker } from "../../atoms/Datepicker";
 
 const BillPaymentForm = () => {
@@ -150,7 +155,7 @@ const BillPaymentForm = () => {
   };
   return (
     <div className="m-auto w-[92%] md:w-[50%] lg:w-[40%] xl:w-[34%] mt-16">
-      <FluentSelect
+      <FluentSelectTwo
         control={control}
         name="billPaymentProductId"
         options={productsData}
@@ -158,8 +163,6 @@ const BillPaymentForm = () => {
         label="Biller Products"
         isLoading={getBillerProductsLoading}
         placeholder="Biller Products"
-        // error={errors?.repayment_channel?.message}
-        // rules={{ required: "Repayment Method is required" }}
       />
 
       <form onSubmit={handleSubmit(submitForm)}>

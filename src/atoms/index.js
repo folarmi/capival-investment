@@ -5,6 +5,7 @@ export * from "./Button";
 export * from "./Input";
 export * from "./RegisterInput";
 export * from "./FluentSelect";
+export * from "./FluentSelectTwo";
 export * from "./DashboardHeader";
 export * from "./SearchBar";
 export * from "./CircularIcon";
