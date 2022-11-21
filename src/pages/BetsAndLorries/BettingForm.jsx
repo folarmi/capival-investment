@@ -56,48 +56,47 @@ const BettingForm = () => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(submitForm)}
-      className="grid grid-cols-2 gap-10 mt-12 m-auto w-[70%]"
-    >
-      <div>
-        <SavingsInput
-          placeholder="34382"
-          label="Account Number"
-          register={register("account_number", {
-            onBlur: (e) => handleValidation(),
-            required: "Account Number is required",
-          })}
-          error={errors?.account_number?.message}
-        />
-        {validateBettingAccountLoading && (
-          <span className="text-sm text-red-500 font-medium">
-            Validating...
-          </span>
-        )}
-      </div>
+    <form onSubmit={handleSubmit(submitForm)} className="mt-12 m-auto w-[70%]">
+      <section className="grid grid-cols-2 gap-10">
+        <div>
+          <SavingsInput
+            placeholder="34382"
+            label="Account Number"
+            register={register("account_number", {
+              onBlur: (e) => handleValidation(),
+              required: "Account Number is required",
+            })}
+            error={errors?.account_number?.message}
+          />
+          {validateBettingAccountLoading && (
+            <span className="text-sm text-red-500 font-medium">
+              Validating...
+            </span>
+          )}
+        </div>
 
-      <div>
-        <SavingsInput
-          placeholder="Name"
-          label="Account Name"
-          register={register("account_name", {
-            required: "Account Name is required",
-          })}
-          error={errors?.account_name?.message}
-        />
-      </div>
+        <div>
+          <SavingsInput
+            placeholder="Name"
+            label="Account Name"
+            register={register("account_name", {
+              required: "Account Name is required",
+            })}
+            error={errors?.account_name?.message}
+          />
+        </div>
 
-      <div>
-        <SavingsInput
-          placeholder="Amount"
-          label="Amount"
-          register={register("amount", {
-            required: "Account Name is required",
-          })}
-          error={errors?.amount?.message}
-        />
-      </div>
+        <div>
+          <SavingsInput
+            placeholder="Amount"
+            label="Amount"
+            register={register("amount", {
+              required: "Account Name is required",
+            })}
+            error={errors?.amount?.message}
+          />
+        </div>
+      </section>
 
       <div className="w-[80%] m-auto grid-cols-2 mt-12">
         <Button buttonText="Continue" className="rounded-xl" size="lg" />
