@@ -64,7 +64,7 @@ const Investments = () => {
         {tabs.map((tab) => {
           return (
             <div
-              className="cursor-pointer"
+              className="cursor-pointer mr-[15px]"
               key={tab?.id}
               onClick={() => changeActiveItem(tab)}
             >
