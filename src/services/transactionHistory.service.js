@@ -36,8 +36,8 @@ const validateInterAccount = async (values) => {
   return response.data;
 };
 
-const generateAccountStatement = async () => {
-  const response = await api.post(`${UrlRoute.generateAccountStatement}`);
+const generateAccountStatement = async (values) => {
+  const response = await api.post(UrlRoute.generateAccountStatement, values);
   return response.data;
 };
 

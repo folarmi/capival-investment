@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import CurrencyFormat from "react-currency-format";
 import { FluentSelect } from "../../atoms/FluentSelect";
 
-import { Button, SavingsInput } from "../../atoms";
+import { Button, FluentSelectTwo, SavingsInput } from "../../atoms";
 import {
   getAllBanksAsync,
   getBankStatementAsync,
@@ -190,7 +190,7 @@ const NewLoan = () => {
         onSubmit={handleSubmit(submitForm)}
         className="rounded-xl m-auto w-[90%] md:w-[80%] lg:w-[50%]"
       >
-        <FluentSelect
+        <FluentSelectTwo
           control={control}
           name="loan_type_id"
           options={loanTypesData}
@@ -243,7 +243,7 @@ const NewLoan = () => {
           )}
         </div>
 
-        <FluentSelect
+        <FluentSelectTwo
           control={control}
           name="tenor"
           options={loanTenureData}
@@ -254,7 +254,7 @@ const NewLoan = () => {
           rules={{ required: "Tenure  is required" }}
         />
 
-        <FluentSelect
+        <FluentSelectTwo
           control={control}
           name="repayment_channel"
           options={repaymentChannelData}
@@ -265,7 +265,7 @@ const NewLoan = () => {
           rules={{ required: "Repayment Method is required" }}
         />
 
-        <FluentSelect
+        <FluentSelectTwo
           control={control}
           name="statement_type"
           isLoading={getBankStatementLoading}
@@ -308,7 +308,7 @@ const NewLoan = () => {
             <p className="font-normal text-xl text-blueTwo text-center pb-6 uppercase">
               Disbursement Details
             </p>
-            <FluentSelect
+            <FluentSelectTwo
               control={control}
               name="disbursement_bank_code"
               options={allBanksData}

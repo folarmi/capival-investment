@@ -3,7 +3,7 @@ import React from "react";
 const DebitButton = ({ icon, text, ifPrimary = true, onClick, isLoading }) => {
   return (
     <div
-      className="flex mb-4 max-w-[250px] lg:max-w-[270px]  whitespace-nowrap items-center rounded-lg py-3 px-4 lg:px-10"
+      className="flex mb-4 max-w-[250px] lg:max-w-[270px]  whitespace-nowrap items-center rounded-lg py-3 px-4 lg:px-10 cursor-pointer"
       onClick={onClick}
       style={{
         backgroundColor: ifPrimary ? "#c2cce4" : "#9dacd3",

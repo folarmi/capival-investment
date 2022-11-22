@@ -103,6 +103,7 @@ const TargetSavingsAll = () => {
                   {allTargetSavings?.map((item) => {
                     return (
                       <div
+                        key={item?.id}
                         className="flex flex-col items-center justify-between mb-4 rounded-xl p-4"
                         style={{
                           backgroundColor: "#3B58A8",

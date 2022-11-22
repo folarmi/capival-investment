@@ -2,7 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Button, FluentSelect, SavingsInput } from "../../../../atoms";
+import {
+  Button,
+  FluentSelect,
+  FluentSelectTwo,
+  SavingsInput,
+} from "../../../../atoms";
 import { AmountInput } from "../../../../atoms/AmountInput";
 import {
   getFundingSourceAsync,
@@ -98,7 +103,7 @@ const LockedSavingsForm = () => {
           rules={{ required: "Amount is required" }}
         />
 
-        <FluentSelect
+        <FluentSelectTwo
           control={control}
           name="maturity_date"
           options={paybackDateData}
@@ -112,7 +117,7 @@ const LockedSavingsForm = () => {
           }}
         />
 
-        <FluentSelect
+        <FluentSelectTwo
           control={control}
           name="source"
           options={sourceOfFundData}

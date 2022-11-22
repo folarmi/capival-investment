@@ -6,28 +6,35 @@ import { WalletCard } from "../../components/WalletCard";
 import walletBg from "../../icons/walletBg.svg";
 import { TransactionHistory } from "../TransactionHistory";
 import { getWalletBalanceAsync } from "../../slices/utils";
+import { toast } from "react-toastify";
 
 const Wallet = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const [walletBalance, setWalletBalance] = useState("");
+
   const accountNumber = useSelector(
     (state) => state.auth.login?.user?.user?.accounts?.AccountNo
   );
 
-  const { walletBalance } = useSelector((state) => state.utils);
+  const { getWalletBalanceLoading } = useSelector((state) => state.utils);
 
-  const AccountBalance = useSelector(
-    (state) => state.auth.login?.user?.user?.accounts?.AccountBalance
-  );
-
-  console.log(walletBalance);
   const goToWallet = () => {
     navigate("/dashboard/wallet/details");
   };
 
   const getWalletBalanceFnc = () => {
-    dispatch(getWalletBalanceAsync());
+    dispatch(getWalletBalanceAsync())
+      .unwrap()
+      .then((res) => {
+        if (res?.status === true) {
+          setWalletBalance(res?.balance);
+        }
+      })
+      .catch((err) => {
+        toast.error(err?.message);
+      });
   };
 
   useEffect(() => {
@@ -42,7 +49,7 @@ const Wallet = () => {
             title="Wallet"
             ifAccountName
             cardName="Account Name"
-            amount={AccountBalance}
+            amount={walletBalance}
             onClick={goToWallet}
             bgImage={walletBg}
             ifAccountNumber

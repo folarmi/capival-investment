@@ -26,6 +26,18 @@ const LockedSavingsPreview = () => {
     setAgreeTwo(() => !agreeTwo);
   };
 
+  const formattedSource = (source) => {
+    if (source.includes("card")) {
+      let formatted;
+      let indexOfDash = source.indexOf("-");
+      formatted = source?.slice(0, indexOfDash);
+      let finalValue = formatted.charAt(0).toUpperCase() + formatted.slice(1);
+      return finalValue;
+    } else {
+      return source.charAt(0).toUpperCase() + source.slice(1);
+    }
+  };
+
   const submitForm = () => {
     if (!agreeOne && !agreeTwo) {
       toast.error("You must agree to both terms");
@@ -99,18 +111,18 @@ const LockedSavingsPreview = () => {
           Source
         </p>
         <p className="pl-[10%] md:pl-0 text-base font-normal text-blueTwo md:w-[60%]">
-          {savingsDetails?.source}
+          {formattedSource(savingsDetails?.source)}
         </p>
       </div>
 
       <ToggleButton
         toggleText={`I hereby agree that if i will forfeit the interest accrued to this
         savings if I fail to meet this target Amount 
-        ${state?.amount}  by
+        ${savingsDetails?.amount}  by
         the set withdrawal data`}
         onChange={toggleOne}
       />
-
+      {console.log(savingsDetails)}
       <ToggleButton
         toggleText={`I hereby authorize that this Locked savings cannot be broken once it has being created`}
         onChange={toggleTwo}

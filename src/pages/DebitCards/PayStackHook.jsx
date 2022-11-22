@@ -46,7 +46,8 @@ const PaystackHook = () => {
         if (res?.status === true) {
           console.log(res);
           // console.log(res?.status);
-          // toast("Login successful");
+          toast(res?.message);
+          window.location.reload();
         }
       })
       .catch((err) => {
