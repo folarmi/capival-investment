@@ -36,13 +36,6 @@ const Loans = () => {
     },
   ];
 
-  const kycObject = {
-    bank_account: kycStatus?.bank_account,
-    employer_details: kycStatus?.employer_details,
-    next_of_kin: kycStatus?.next_of_kin,
-    kyc_document: kycStatus?.kyc_document,
-  };
-
   const ifEligibleForLoan =
     kycStatus?.bank_account &&
     kycStatus?.employer_details &&
@@ -318,7 +311,10 @@ const Loans = () => {
                 <>
                   {pendingLoans?.map((item) => {
                     return (
-                      <div className="mt-4 mb-4 whitespace-nowrap grid grid-cols-5 gap-5  bg-blueTwo/5 py-3 pl-6">
+                      <div
+                        className="mt-4 mb-4 whitespace-nowrap grid grid-cols-5 gap-5  bg-blueTwo/5 py-3 pl-6"
+                        onClick={() => gotToRepaymentPage(item)}
+                      >
                         <p className="text-base text-[#AE1F24] font-medium  col-span-1">
                           <CurrencyFormat
                             value={item?.loan_amount}
