@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
@@ -11,12 +11,15 @@ import { TransactionPin } from "./TransactionPin";
 const BettingForm = () => {
   const { state } = useLocation();
   const dispatch = useDispatch();
-  const { validateBettingAccountLoading } = useSelector(
+  const { validateBettingAccountLoading, bettingAccountDetails } = useSelector(
     (state) => state.mobileTopUp
   );
 
-  const { register, handleSubmit, formState, reset, control, getValues } =
-    useForm({});
+  // console.log(bettingAccountDetails);
+
+  const { register, handleSubmit, formState, getValues, setValue } = useForm(
+    {}
+  );
   const { errors } = formState;
 
   const [pinModal, setPinModal] = useState(false);
@@ -55,9 +58,16 @@ const BettingForm = () => {
     togglePinModal();
   };
 
+  useEffect(() => {
+    setValue("account_name", bettingAccountDetails?.name);
+  }, [bettingAccountDetails]);
+
   return (
-    <form onSubmit={handleSubmit(submitForm)} className="mt-12 m-auto w-[70%]">
-      <section className="grid grid-cols-2 gap-10">
+    <form
+      onSubmit={handleSubmit(submitForm)}
+      className="mt-6 lg:mt-12 m-auto w-[90%] lg:w-[70%]"
+    >
+      <section className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-10">
         <div>
           <SavingsInput
             placeholder="34382"

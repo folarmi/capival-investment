@@ -22,6 +22,8 @@ const TransactionPin = ({ formValues, togglePinModal }) => {
       toast.error("Please enter your transaction pin");
       return;
     }
+    formValues.pin = otpValues;
+    // console.log(formValues);
 
     dispatch(fundBettingWalletAsync(formValues))
       .unwrap()
@@ -51,6 +53,7 @@ const TransactionPin = ({ formValues, togglePinModal }) => {
         className="rounded-xl mt-6"
         buttonText="Fund Wallet"
         isLoading={fundBettingWalletLoading}
+        disabled={fundBettingWalletLoading}
       />
     </div>
   );

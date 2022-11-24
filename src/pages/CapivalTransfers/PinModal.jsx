@@ -85,6 +85,7 @@ const PinModal = ({ formValues, toggleTransactionPinModal }) => {
         size="lg"
         isLoading={capivalTransferLoading}
         onClick={submitForm}
+        disabled={capivalTransferLoading}
       />
     </form>
   );

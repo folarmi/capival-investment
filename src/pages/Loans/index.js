@@ -200,7 +200,7 @@ const Loans = () => {
         <p className="lg:hidden text-xl font-medium pb-4">Active Loans</p>
         <section className="lg:hidden">
           {activeLoans?.length === 0 ? (
-            <p className="w-full flex items-center justify-center my-10 text-white text-xl">
+            <p className="w-full flex items-center justify-center my-10 text-blueTwo text-xl">
               No Active Loan
             </p>
           ) : (

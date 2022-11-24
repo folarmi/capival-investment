@@ -84,6 +84,7 @@ const TransactionPin = ({ formValues, togglePinModal }) => {
         className="rounded-xl mt-6"
         buttonText="Top up"
         isLoading={airtimeLoading || buyDataLoading}
+        disabled={airtimeLoading || buyDataLoading}
       />
     </div>
   );

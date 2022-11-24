@@ -2,12 +2,9 @@ import React from "react";
 import { Loader } from "../atoms";
 // import { Link } from "react-router-dom";
 
-const BillCard = ({ cardName, onClick, path, id, isLoading }) => {
+const BillCard = ({ cardName, onClick, path, id }) => {
   return (
     <>
-      {/* {isLoading ? (
-        <Loader />
-      ) : ( */}
       <div
         to={path}
         className="cursor-pointer py-4  bg-[#CBE1FD]/50 rounded-2xl gallery__img"
@@ -22,7 +19,6 @@ const BillCard = ({ cardName, onClick, path, id, isLoading }) => {
           {cardName}
         </p>
       </div>
-      {/* )} */}
     </>
   );
 };

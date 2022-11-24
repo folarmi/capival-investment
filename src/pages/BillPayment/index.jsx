@@ -74,7 +74,6 @@ const BillPayment = () => {
                       id={item?.categoryId}
                       onClick={() => goToSingleCategoryPage(item)}
                     />
-                    {/* )} */}
                   </>
                 );
               })}

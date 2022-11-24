@@ -89,27 +89,10 @@ const PinModal = ({ formValues, toggleTransactionPinModal }) => {
         size="lg"
         isLoading={otherBankTransferLoading}
         onClick={submitForm}
+        disabled={otherBankTransferLoading}
       />
     </form>
   );
 };
 
 export { PinModal };
-
-// {
-//   "destination_account_no" : "1010000265",
-//    "destination_bank" : "000013",
-//    "destination_account_name" : "Osagie Tomori",
-//    "amount":"3000",
-//    "narration": "Api Test Transfer",
-//    "pin": "1234"
-// }
-
-// {
-//   "destination_account_no": "0136201464",
-//   "destination_account_name": "Olaolu Adejide",
-//   "amount": "50",
-//   "narration": "testing",
-//   "saveBeneficiary": false,
-//   "pin": "1234"
-// }

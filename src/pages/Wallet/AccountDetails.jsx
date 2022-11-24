@@ -1,6 +1,12 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { CopyFunction } from "./CopyFunction";
 
 const AccountDetails = ({ toggleDetailsModal }) => {
+  const accountNumber = useSelector(
+    (state) => state.auth?.login?.user?.user?.virtual_account?.VirtualAccount
+  );
+
   return (
     <>
       <div className="flex justify-end mr-4 mt-4" onClick={toggleDetailsModal}>
@@ -11,19 +17,16 @@ const AccountDetails = ({ toggleDetailsModal }) => {
           Fund your wallet
         </p>
         <p className="pt-2 font-thin pb-5 text-[15px]">Bank: Providus Bank</p>
-        <div className="flex items-center justify-center bg-blueTwo py-2 rounded-3xl m-auto w-1/2">
-          <img
-            src="/assets/icons/copyIcon.svg"
-            alt="closeButton"
-            className="mr-3"
-          />
-          <p className="font-medium text-lg text-white">0046378932</p>
-        </div>
+        <CopyFunction
+          accountNumber={accountNumber}
+          valueToCopy={accountNumber}
+        />
 
-        <p className="pt-6 text-center text-sm">
+        <p className="pt-6 text-center text-sm px-5 leading-5">
           This works like a regular bank account number. Transfer from any
-          source to 0046378932. Select Providus bank as the destination bank.
-          Funds will be credited to your Account instantly.
+          source to <span className="font-bold">{accountNumber}</span>. Select
+          Providus bank as the destination bank. Funds will be credited to your
+          Account instantly.
         </p>
       </section>
     </>

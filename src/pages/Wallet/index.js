@@ -80,7 +80,7 @@ const Wallet = () => {
       </section>
 
       <ModalPopup
-        // modalHeight="300px"
+        modalHeight="300px"
         modalWidth="400px"
         children={<AccountDetails toggleDetailsModal={toggleDetailsModal} />}
         isOpen={detailsModal}
