@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import CurrencyFormat from "react-currency-format";
 
-import { ProgressBar, TableHeader } from "../../components";
+import { ProgressBar } from "../../components";
 import {
   getActiveLoans,
   getPendingLoansAsync,
@@ -20,21 +20,6 @@ const Loans = () => {
   const kycStatus = useSelector(
     (state) => state.auth?.login?.user?.authorisation
   );
-
-  const sampleActiveLoans = [
-    {
-      id: "1",
-      AmountLeft: "50000",
-      AmountPaid: "50000",
-      Loan_Amount: "100000",
-    },
-    {
-      id: "2",
-      AmountLeft: "50000",
-      AmountPaid: "5000",
-      Loan_Amount: "100000",
-    },
-  ];
 
   const ifEligibleForLoan =
     kycStatus?.bank_account &&
@@ -73,6 +58,7 @@ const Loans = () => {
   };
 
   const liquidateLoanFnc = (item) => {
+    console.log(item);
     dispatch(liquidateLoanAsync(item?.LoanID))
       .unwrap()
       .then((res) => {
@@ -213,14 +199,14 @@ const Loans = () => {
         {/* Mobile View */}
         <p className="lg:hidden text-xl font-medium pb-4">Active Loans</p>
         <section className="lg:hidden">
-          {sampleActiveLoans?.length === 0 ? (
+          {activeLoans?.length === 0 ? (
             <p className="w-full flex items-center justify-center my-10 text-white text-xl">
               No Active Loan
             </p>
           ) : (
             <>
               {" "}
-              {sampleActiveLoans?.map((item) => {
+              {activeLoans?.map((item) => {
                 return (
                   <div
                     className="flex flex-col items-center justify-between mb-4 rounded-xl p-4"

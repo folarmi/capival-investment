@@ -39,16 +39,14 @@ const Repayment = () => {
 
   return (
     <>
-      <div className="m-auto w-full md:w-[70%] mt-8">
-        {/* <div className="mx-2"> */}
+      <div className="m-auto w-full md:w-[70%] lg:mt-8">
         <LoanHeader
           amount={singleLoanDetails?.AmountLeft}
           title="Outstanding"
           className="mb-4"
         />
-        {/* </div> */}
 
-        <div className="flex items-center justify-between px-4 md:px-10 bg-grayTwo py-3 rounded-bl-xl rounded-br-xl">
+        <div className="flex flex-wrap items-center justify-between px-4 md:px-10 bg-grayTwo py-3 rounded-bl-xl rounded-br-xl">
           <RepaymentCard
             title="Amount Paid"
             amount={singleLoanDetails?.AmountPaid}
@@ -63,35 +61,6 @@ const Repayment = () => {
             amount={`${singleLoanDetails?.Loan_Tenure} months`}
           />
         </div>
-
-        <div className="flex mt-10 mb-8 justify-center">
-          {/* <div className="cursor-pointer">
-            <img
-              src="/assets/images/repayment.svg"
-              alt="repayment icon"
-              onClick={gotToNextRepaymentPage}
-            />
-          </div> */}
-          {/* <div
-            className="cursor-pointer mr-6"
-            onClick={() => gotToLoanDetailsPage(singleLoanDetails)}
-          >
-            <img
-              src="/assets/images/loanDetails.svg"
-              alt="loan detail"
-              className="w-40 h-40"
-              loading="lazy"
-            />
-          </div> */}
-          {/* <div className="cursor-pointer" onClick={gotToSettleLoanPage}>
-            <img
-              src="/assets/images/settleLoan.svg"
-              alt="settle loan"
-              className="w-40 h-40"
-              loading="lazy"
-            />
-          </div> */}
-        </div>
       </div>
       <div className="mt-8 mx-4 md:mx-7">
         <TableHeader
@@ -100,11 +69,11 @@ const Repayment = () => {
         />
         <main className="mt-4 md:mt-0 bg-blueTwo/10 rounded-xl overflow-scroll">
           <section className="bg-blueTwo/20 rounded-xl py-4 overflow-scroll">
-            <div className="grid grid-cols-4 items-center pl-6">
+            <div className="grid grid-cols-4 items-center pl-3 lg:pl-6">
               {repaymentLoanHeader.map((header) => {
                 return (
                   <div>
-                    <p className="font-medium whitespace-nowrap text-base text-blueTwo">
+                    <p className="font-medium whitespace-nowrap text-xs lg:text-base text-blueTwo">
                       {header?.name}
                     </p>
                   </div>
@@ -117,11 +86,11 @@ const Repayment = () => {
             {loanSchedule &&
               loanSchedule?.map((item) => {
                 return (
-                  <div className="hidden mt-4 mb-4 whitespace-nowrap lg:grid grid-cols-4 bg-blueTwo/5 py-3 pl-6">
-                    <p className="whitespace-nowrap text-base text-blueTwo font-normal ">
+                  <div className="mt-4 mb-4 whitespace-nowrap grid grid-cols-4 bg-blueTwo/5 py-3 pl-3 lg:pl-6">
+                    <p className="whitespace-nowrap text-xs lg:text-base text-blueTwo font-normal ">
                       {item?.DueDate}
                     </p>
-                    <p className="text-base whitespace-nowrap text-blueTwo font-normal col-span-1">
+                    <p className="text-xs lg:text-base whitespace-nowrap text-blueTwo font-normal col-span-1">
                       {/* <CurrencyFormat
                         value={Math.round(
                           item?.Principal.toString() +
@@ -136,7 +105,7 @@ const Repayment = () => {
                       {/* {Math.round(item?.Principal + item?.InterestAmount)} */}
                     </p>
                     <p
-                      className="whitespace-nowrap text-base font-medium"
+                      className="whitespace-nowrap text-xs lg:text-base font-medium"
                       style={{
                         color:
                           item?.PaymentStatus === "Paid"
@@ -146,7 +115,7 @@ const Repayment = () => {
                     >
                       {item?.PaymentStatus === "Paid" ? "Paid" : "Unpaid"}
                     </p>
-                    <p className="text-base whitespace-nowrap text-blueTwo font-normal col-span-1">
+                    <p className="text-xs lg:text-base whitespace-nowrap text-blueTwo font-normal col-span-1">
                       <CurrencyFormat
                         value={item?.ClosingBalance}
                         displayType={"text"}

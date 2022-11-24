@@ -3,7 +3,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import MobileTopUpService from "../services/mobileTopUp.service";
 
 export const getAirtimeBillersAsync = createAsyncThunk(
-  "mobiletopUp/get",
+  "mobiletopUp/getAirtimeBillers",
   async (values, { rejectWithValue }) => {
     try {
       const response = await MobileTopUpService.getAirtimeBillers(values);

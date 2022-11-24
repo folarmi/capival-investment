@@ -2,7 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { Button, FluentSelect, SavingsInput } from "../../atoms";
+import {
+  Button,
+  FluentSelect,
+  FluentSelectTwo,
+  SavingsInput,
+} from "../../atoms";
 import WalletDetailsHeader from "../Wallet/WalletDetailsHeader";
 import {
   getAirtimeBillersAsync,
@@ -28,6 +33,7 @@ const MobileTopUp = () => {
   };
 
   const getDataProductsIfData = (item) => {
+    console.log(item);
     const variables = {
       billerId: item?.value,
     };
@@ -52,8 +58,8 @@ const MobileTopUp = () => {
     });
 
   const dataBillersData =
-    airtimeBillers &&
-    airtimeBillers?.map((item) => {
+    dataBillers &&
+    dataBillers?.map((item) => {
       return {
         label: item?.billerName,
         value: item?.billerId,
@@ -96,31 +102,31 @@ const MobileTopUp = () => {
       <WalletDetailsHeader ifTransaction={false} />
 
       <div className="m-auto w-[92%] md:w-[50%] lg:w-[40%] xl:w-[34%] mt-16">
-        <FluentSelect
+        <FluentSelectTwo
           control={control}
           name="topup"
           options={mobileMoneyType}
           customOnChange={getSelectedMobileMoney}
-          label="Select Category"
+          label="Select Type"
           placeholder="Airtime"
         />
 
         <form onSubmit={handleSubmit(submitForm)}>
-          <FluentSelect
+          <FluentSelectTwo
             control={control}
             name="billerId"
             options={
               airtimeOrData === "Airtime" ? airtimeBillersData : dataBillersData
             }
             customOnChange={getDataProductsIfData}
-            label="Select Category"
+            label="Select Network Provider"
             placeholder="Airtel"
             error={errors?.billerId?.message}
             rules={{ required: "Network is required" }}
           />
 
           {airtimeOrData === "Data" && (
-            <FluentSelect
+            <FluentSelectTwo
               control={control}
               name="bundle"
               options={dataProductsData}

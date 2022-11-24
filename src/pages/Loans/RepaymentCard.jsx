@@ -10,7 +10,7 @@ const RepaymentCard = ({
 }) => {
   return (
     <div
-      className="bg-blueTwo w-[30%] whitespace-nowrap rounded-lg py-1 flex items-center justify-center flex-col"
+      className="mb-4 lg:mb-0 bg-blueTwo w-[45%] lg:w-[30%] whitespace-nowrap rounded-lg py-1 flex items-center justify-center flex-col"
       onClick={onClick}
     >
       <p className="px-2 md:px-0 font-normal md:font-semibold text-base md:text-lg text-blackTwo">
