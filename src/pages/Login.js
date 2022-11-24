@@ -90,7 +90,7 @@ const Login = () => {
                 }
                 onClick={togglePasswordShown}
                 alt="visible"
-                className="w-5 absolute z-30 cursor-pointer md:mt-[5%] ml-[89%]"
+                className="w-5 absolute z-30 cursor-pointer mt-5 md:mt-[5%] ml-[89%]"
               />
             </i>
             <Input
