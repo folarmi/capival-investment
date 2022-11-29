@@ -2,12 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import {
-  Button,
-  FluentSelect,
-  FluentSelectTwo,
-  SavingsInput,
-} from "../../atoms";
+import { Button, FluentSelectTwo, SavingsInput } from "../../atoms";
 import WalletDetailsHeader from "../Wallet/WalletDetailsHeader";
 import {
   getAirtimeBillersAsync,
@@ -15,10 +10,12 @@ import {
   getDataProductsAsync,
 } from "../../slices/mobileTopup";
 import { useForm } from "react-hook-form";
+import { useRef } from "react";
 
 const MobileTopUp = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const selectRef = useRef(null);
 
   const mobileMoneyType = [
     { label: "Airtime", value: "Airtime" },
@@ -33,7 +30,6 @@ const MobileTopUp = () => {
   };
 
   const getDataProductsIfData = (item) => {
-    console.log(item);
     const variables = {
       billerId: item?.value,
     };
@@ -118,7 +114,11 @@ const MobileTopUp = () => {
             options={
               airtimeOrData === "Airtime" ? airtimeBillersData : dataBillersData
             }
-            customOnChange={getDataProductsIfData}
+            customOnChange={(item) => {
+              getDataProductsIfData(item);
+              setValue("amount", "");
+              setValue("bundle", null);
+            }}
             label="Select Network Provider"
             placeholder="Airtel"
             error={errors?.billerId?.message}
@@ -129,6 +129,7 @@ const MobileTopUp = () => {
             <FluentSelectTwo
               control={control}
               name="bundle"
+              ref={selectRef}
               options={dataProductsData}
               label="Select a bundle"
               placeholder="100MB Daily"

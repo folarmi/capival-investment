@@ -7,7 +7,7 @@ const BillCard = ({ cardName, onClick, path, id }) => {
     <>
       <div
         to={path}
-        className="cursor-pointer py-4  bg-[#CBE1FD]/50 rounded-2xl gallery__img"
+        className="h-fit cursor-pointer py-4  bg-[#CBE1FD]/50 rounded-2xl"
         onClick={onClick}
         id={id}
         style={{
@@ -15,7 +15,7 @@ const BillCard = ({ cardName, onClick, path, id }) => {
           boxShadow: "0px 4px 4px 0px rgba(59, 88, 168, 1)",
         }}
       >
-        <p className="text-center font-normal text-sm text-blueTwo flex justify-center items-center px-4 max-w-xl">
+        <p className="whitespace-nowrap text-center font-normal text-sm text-blueTwo flex justify-center items-center px-4 max-w-xl">
           {cardName}
         </p>
       </div>

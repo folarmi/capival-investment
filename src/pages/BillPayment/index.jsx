@@ -63,7 +63,7 @@ const BillPayment = () => {
         {billPaymentCategoriesLoading ? (
           <Loader />
         ) : (
-          <main className="px-4 md:px-10 lg:px-20 w-full gallery  mt-16">
+          <main className="px-4 md:px-10 lg:px-20 w-full bill-payment  mt-16">
             {billPaymentCategories &&
               formattedValues?.map((item) => {
                 return (

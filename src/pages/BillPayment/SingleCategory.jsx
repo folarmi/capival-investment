@@ -46,21 +46,21 @@ const SingleCategory = () => {
         {singleBillPaymentCategoryLoading ? (
           <Loader />
         ) : (
-          <div className="px-4 md:px-10 lg:px-20 gallery my-16">
+          <div className="px-4 md:px-10 lg:px-20 row my-16">
             {state &&
               state?.map((item) => {
                 return (
-                  <div className="w-full cursor-pointer">
+                  <div className="w-full cursor-pointer column" key={item?.id}>
                     <img
                       src={item?.billerLogoUrl}
                       // src="/assets/icons/logoOnly.svg"
                       alt="loan detail"
-                      // className="w-1/2 max-w-[100px] lg:max-w-[210px] px-6 my-4"
-                      className="gallery__img  my-4"
+                      className="w-full h-20"
                       loading="lazy"
                       onClick={() => getBillerProducts(item)}
                     />
-                    <p className="text-sm w-[90%] font-medium text-center">
+
+                    <p className="pt-4 text-sm w-[90%] font-medium text-center">
                       {item?.billerName}
                     </p>
                   </div>

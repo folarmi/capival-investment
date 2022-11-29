@@ -45,14 +45,14 @@ const LockedSavingsAll = () => {
       {getAllSafeLockLoading ? (
         <Loader />
       ) : (
-        <div className="w-full ">
+        <div className="w-full">
           <main className="hidden bg-blueTwo/10 md:block mx-4 md:mx-7 mt-4 rounded-xl">
             <section className="bg-blueTwo/20 rounded-xl py-4 overflow-scroll">
               <div className="grid grid-cols-5 gap-5 items-center">
                 {lockedSavingsHeader.map((header) => {
                   return (
                     <div key={header?.id}>
-                      <p className="font-medium whitespace-nowrap text-base text-blueTwo px-6 md:w-[20%]">
+                      <p className="font-medium whitespace-nowrap text-xs lg:text-base text-blueTwo px-6 md:w-[20%]">
                         {header?.name}
                       </p>
                     </div>
@@ -110,6 +110,64 @@ const LockedSavingsAll = () => {
               )}
             </div>
           </main>
+
+          <div className="mt-8">
+            {Array.isArray(allSafeLocks) &&
+              allSafeLocks &&
+              allSafeLocks?.map((item) => {
+                return (
+                  <div
+                    key={item?.id}
+                    className="md:hidden bg-blueTwo rounded-lg py-8 px-6 mb-5 flex items-center mx-3"
+                  >
+                    <div className="w-1/2">
+                      <p className="text-white font-medium text-[10px]">
+                        {item?.status === "Locked" ? "Locked" : "Paid"}
+                      </p>
+                      <p className="text-white font-medium text-2xl">
+                        <CurrencyFormat
+                          value={item?.amountLocked}
+                          displayType={"text"}
+                          thousandSeparator={true}
+                          prefix={"₦"}
+                        />
+                      </p>
+                      <p className="text-orange font-medium text-xs whitespace-nowrap">
+                        Interest Earned:{" "}
+                        <CurrencyFormat
+                          value={item?.interest_earned}
+                          displayType={"text"}
+                          thousandSeparator={true}
+                          prefix={"₦"}
+                        />
+                      </p>
+                    </div>
+
+                    <div className="w-1/2 flex flex-col">
+                      {item?.status === "Locked" ? (
+                        <div className="w-full self-end mb-auto">
+                          <img
+                            src="/assets/images/openLock.svg"
+                            alt="closeButton"
+                          />
+                        </div>
+                      ) : (
+                        <div className="w-full ml-auto">
+                          <img
+                            src="/assets/images/Padlock.svg"
+                            alt="closeButton"
+                          />
+                        </div>
+                      )}
+
+                      <p className="text-orange font-medium text-xs whitespace-nowrap">
+                        Payback Date: {item?.payBackDate}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+          </div>
         </div>
       )}
     </>

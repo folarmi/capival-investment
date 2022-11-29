@@ -75,6 +75,7 @@ const GenerateStatement = () => {
               selected={endDate}
               onChange={(date) => setEndDate(date)}
             />
+            <img src="/assets/icons/calendar.svg" alt="" />
           </div>
         </div>
 

@@ -36,6 +36,7 @@ const BillPaymentForm = () => {
   const [billPaymentProductId, setBillPaymentProductId] = useState("");
   const [paymentModal, setPaymentModal] = useState(false);
   const [response, setResponse] = useState();
+  const [validatedProduct, setValidatedProduct] = useState("");
 
   const { control, handleSubmit, register, reset, formState, getValues } =
     useForm({});
@@ -88,8 +89,8 @@ const BillPaymentForm = () => {
         billerId: state?.billerId,
         categoryId: state?.categoryId,
       };
+      setValidatedProduct(variables?.customerId);
 
-      //
       dispatch(validateBillerProductAsync(variables))
         .unwrap()
         .then((res) => {
@@ -133,7 +134,7 @@ const BillPaymentForm = () => {
       name: userObject?.Firstname + " " + userObject?.Surname,
       email: userObject?.Email,
       phoneNumber: userObject?.Mobile,
-      customerId: userObject?.Email,
+      customerId: validatedProduct ? validatedProduct : userObject?.Email,
       billerId: state?.billerId,
       categoryId: state?.categoryId,
       metadata: {

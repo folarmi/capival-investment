@@ -69,7 +69,7 @@ const Investments = () => {
               onClick={() => changeActiveItem(tab)}
             >
               <p
-                className="justify-self-center py-1 text-center px-3 uppercase text-xs md:text-base font-normal md:font-medium"
+                className="justify-self-center py-1 text-center px-3 uppercase text-[10px] whitespace-nowrap md:text-base font-normal md:font-medium"
                 style={{
                   color: activeTab === tab?.name ? "white" : "#3B58A8",
                   backgroundColor:

@@ -41,3 +41,14 @@ const billPaymentService = {
 };
 
 export default billPaymentService;
+
+// "data": {
+//   "customerId": "0136201464",
+//   "billPaymentProductId": "jos_electric_postpaid",
+//   "name": "FLORENCE OKNKWO  ",
+//   "email": null,
+//   "address": null,
+//   "amount": null,
+//   "maximumAmount": null,
+//   "minimumAmount": null
+// }

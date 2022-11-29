@@ -27,7 +27,6 @@ import investmentsReducer from "./slices/investments";
 const persistConfig = {
   key: "root",
   version: 1,
-  whitelist: ["auth"],
   storage,
 };
 

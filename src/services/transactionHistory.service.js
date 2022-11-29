@@ -6,8 +6,8 @@ const getRecentTransactionHistory = async () => {
   return response.data;
 };
 
-const getDatedTransactionHistory = async () => {
-  const response = await api.post(`${UrlRoute.datedTransactionHistory}`);
+const getDatedTransactionHistory = async (values) => {
+  const response = await api.post(UrlRoute.datedTransactionHistory, values);
   return response.data;
 };
 

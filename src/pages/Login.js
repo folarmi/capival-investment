@@ -52,7 +52,7 @@ const Login = () => {
         }
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
         toast.error(err?.message);
       });
   };
@@ -61,9 +61,9 @@ const Login = () => {
     navigate("/forgot-password");
   };
 
-  React.useEffect(() => {
-    dispatch(resetInitialState());
-  }, []);
+  // React.useEffect(() => {
+  //   dispatch(resetInitialState());
+  // }, []);
 
   return (
     <div className="w-full h-screen login-bg">
@@ -102,11 +102,13 @@ const Login = () => {
               ifIcon
             />
           </div>
+
           <Button
             buttonText="Login"
             className="mt-6 rounded-[30px]"
             isLoading={isLoading}
           />
+
           <p
             onClick={gotToForgotPasswordPage}
             className="text-sm font-medium text-blueThree py-6 text-center cursor-pointer"

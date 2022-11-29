@@ -41,7 +41,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <section className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-8 px-6 md:px-10 lg:px-24">
+      <section className="grid grid-cols-2 place-items-center md:grid-cols-3 lg:grid-cols-4 mt-8 px-6 md:px-10 lg:px-24">
         <CircularIcon icon="/assets/icons/loan.svg" path="loans" />
         <CircularIcon icon="/assets/icons/wallet.svg" path="wallet" />
         <CircularIcon

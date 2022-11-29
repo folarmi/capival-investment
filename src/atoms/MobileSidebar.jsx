@@ -18,6 +18,8 @@ const MobileSidebar = ({ setSidebar, sidebar }) => {
     (state) => state.auth?.login?.user?.authorisation?.user_data?.passport
   );
 
+  console.log(userAvatar);
+
   const logoutUser = () => {
     dispatch(logoutAsync());
   };
@@ -40,12 +42,21 @@ const MobileSidebar = ({ setSidebar, sidebar }) => {
       </div>
 
       <div className="ml-[12%] flex whitespace-nowrap items-center mt-4">
-        <img
-          src={userAvatar}
-          alt="avatar"
-          className="w-12 md:h-12 rounded-full"
-          loading="lazy"
-        />
+        {userAvatar ? (
+          <img
+            src={userAvatar}
+            alt="avatar"
+            className="w-12 md:h-12 rounded-full"
+            loading="lazy"
+          />
+        ) : (
+          <img
+            src="/assets/icons/whiteDefaultAvatar.svg"
+            alt="avatar"
+            className="w-8 md:h-8 rounded-full"
+            loading="lazy"
+          />
+        )}
         <div className="pl-4 text-sm font-normal text-white">
           <p className="">
             Hi,{" "}
