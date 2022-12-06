@@ -28,10 +28,10 @@ const DebitCard = () => {
       </div>
 
       <div className="grid grid-cols-2 lg:grid-cols-3 place-content-center items-center mx-2 lg:mx-20 w-full">
-        <DebitButton text="View Debit Card" icon="/assets/icons/star.svg" />
+        {/* <DebitButton text="View Debit Card" icon="/assets/icons/star.svg" /> */}
         <DebitButton
           text="Request Capival Card"
-          icon="/assets/icons/block.svg"
+          icon="/assets/icons/star.svg"
         />
         <PaystackHook />
       </div>

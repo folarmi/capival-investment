@@ -4,7 +4,7 @@ const UserAvatar = ({ initials, userName, onClick }) => {
   return (
     <div
       onClick={onClick}
-      className="mt-4 md:mt-8 lg:mt-0 inline-flex flex-col overflow-hidden relative justify-center items-center w-28 h-28 bg-blueTwo rounded-full dark:bg-blueTwo md:mr-12 cursor-pointer"
+      className="mt-4 md:mt-8 lg:mt-0 inline-flex flex-col overflow-hidden relative justify-center items-center w-14 h-14 lg:w-28 lg:h-28 bg-blueTwo rounded-full dark:bg-blueTwo md:mr-12 cursor-pointer"
     >
       <span className="font-medium text-white text-xl uppercase">
         {initials}

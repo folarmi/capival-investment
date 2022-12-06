@@ -7,7 +7,7 @@ const BillCard = ({ cardName, onClick, path, id }) => {
     <>
       <div
         to={path}
-        className="h-fit cursor-pointer py-4  bg-[#CBE1FD]/50 rounded-2xl"
+        className="h-fit cursor-pointer py-4 bg-[#CBE1FD]/50 rounded-2xl mr-6 lg:mr-0"
         onClick={onClick}
         id={id}
         style={{

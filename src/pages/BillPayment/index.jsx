@@ -52,8 +52,8 @@ const BillPayment = () => {
 
   return (
     <>
-      <div className="mt-8">
-        <div className="flex items-center justify-center">
+      <div className="w-full mt-8">
+        <div className="flex w-full items-center justify-center">
           <WalletDetailsHeader ifTransaction={false} />
           {singleBillPaymentCategoryLoading && (
             <img className="h-6 w-6" src="/assets/icons/loading.svg" />

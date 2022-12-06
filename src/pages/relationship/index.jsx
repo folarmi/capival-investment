@@ -29,8 +29,8 @@ const RelationshipOfficer = () => {
           </p>
 
           <div className="w-full flex items-center pt-8 pb-4 border-b border-blueTwo/30">
-            <p className="text-base font-normal text-blueTwo md:w-[40%] pl-[10%]">
-              Your Relationship Officer is
+            <p className="text-base font-bold text-blueTwo md:w-[40%] pl-[10%]">
+              Your Relationship Officer is:{" "}
             </p>
             <p className="text-base font-normal text-blueTwo md:w-[60%]">
               {officerDetails?.name}
@@ -38,8 +38,8 @@ const RelationshipOfficer = () => {
           </div>
 
           <div className="w-full flex items-center pt-8 pb-4 border-b border-blueTwo/30">
-            <p className="text-base font-normal text-blueTwo md:w-[40%] pl-[10%]">
-              Contact
+            <p className="text-base font-bold text-blueTwo md:w-[40%] pl-[10%]">
+              Contact:{" "}
             </p>
             <p className="text-base font-normal text-blueTwo md:w-[60%]">
               {officerDetails?.phone}
@@ -47,8 +47,8 @@ const RelationshipOfficer = () => {
           </div>
 
           <div className="w-full flex items-center pt-8 pb-4 border-b border-blueTwo/30">
-            <p className="text-base font-normal text-blueTwo md:w-[40%] pl-[10%]">
-              Email
+            <p className="text-base font-bold text-blueTwo md:w-[40%] pl-[10%]">
+              Email:{" "}
             </p>
             <p className="text-base font-normal text-blueTwo md:w-[60%]">
               {officerDetails?.email}
