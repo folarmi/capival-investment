@@ -106,13 +106,13 @@ const PersonalDetails = () => {
   return (
     <form className="w-full h-screen register-bg">
       <div className="m-auto md:w-[80%] lg:w-[70%] xl:w-[54%] mt-16">
-        <p className="text-redOne font-semibold md:text-4xl lg:text-5xl xl:text-[50px] pb-10">
-          Personal Detailsssss
+        <p className="text-redOne font-semibold md:text-4xl lg:text-5xl xl:text-[50px] pb-10 pl-6 md:pl-0">
+          Personal Details
         </p>
       </div>
 
       <section className="bg-blueOne">
-        <div className="m-auto md:w-[80%] lg:w-[70%] xl:w-[54%]">
+        <div className="m-auto md:w-[80%] lg:w-[70%] xl:w-[54%] pl-6 md:pl-0">
           <p className="font-semibold text-lg text-blueTwo py-6">
             What is your name?
           </p>
@@ -122,7 +122,7 @@ const PersonalDetails = () => {
         </div>
       </section>
 
-      <div className="m-auto mt-8 md:w-[80%] lg:w-[70%] xl:w-[54%]">
+      <div className="m-auto mt-8 md:w-[80%] lg:w-[70%] xl:w-[54%] pl-6 md:pl-0">
         <RegisterInput
           placeholder="First Name"
           register={register("firstname")}
@@ -150,7 +150,7 @@ const PersonalDetails = () => {
       </div>
 
       <section className="bg-blueOne mt-11">
-        <div className="m-auto md:w-[80%] lg:w-[70%] xl:w-[54%]">
+        <div className="m-auto md:w-[80%] lg:w-[70%] xl:w-[54%] pl-6 md:pl-0">
           <p className="font-semibold text-lg text-blueTwo py-6">
             More details about you
           </p>
@@ -161,7 +161,7 @@ const PersonalDetails = () => {
         </div>
       </section>
 
-      <div className="m-auto md:w-[80%] lg:w-[70%] xl:w-[54%]">
+      <div className="m-auto md:w-[80%] lg:w-[70%] xl:w-[54%] pl-6 md:pl-0">
         <div className="mt-8">
           <RegisterInput
             placeholder="Date of Birth"
@@ -209,7 +209,7 @@ const PersonalDetails = () => {
           />
         </div>
 
-        <div className="flex justify-between my-16">
+        <div className="flex justify-between my-10 lg:my-16">
           {/* <div className="w-1/2 mr-6">
             <Button
               size="md"
@@ -220,11 +220,11 @@ const PersonalDetails = () => {
             />
           </div> */}
 
-          <div className="w-1/2">
+          <div className="w-full lg:w-1/2">
             <Button
               size="md"
               buttonText="Continue"
-              className="rounded-2xl"
+              className="rounded-2xl mb-10 lg:mb-0"
               onClick={handleSubmit(submitForm)}
             />
           </div>

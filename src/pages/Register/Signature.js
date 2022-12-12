@@ -5,13 +5,13 @@ const Signature = () => {
   return (
     <div className="w-full h-screen register-bg">
       <div className="m-auto md:w-[80%] lg:w-[70%] xl:w-[54%] mt-16">
-        <p className="text-redOne font-semibold md:text-4xl lg:text-5xl xl:text-[50px] pb-10">
+        <p className="text-redOne font-semibold md:text-4xl lg:text-5xl xl:text-[50px] pb-10 pl-6 md:pl-0">
           Upload Signature
         </p>
       </div>
 
       <section className="bg-blueOne">
-        <div className="m-auto md:w-[80%] lg:w-[70%] xl:w-[54%]">
+        <div className="m-auto md:w-[80%] lg:w-[70%] xl:w-[54%] pl-6 md:pl-0">
           <p className="text-blueTwo font-normal text-sm py-6">
             Take a picture of your signature on a piece of paper and proceed to
             upload
@@ -19,7 +19,7 @@ const Signature = () => {
         </div>
       </section>
 
-      <div className="">
+      <div className="pl-6 md:pl-0">
         <WebcamSignature />
 
         {/* <div className="ml-16 w-1/2">

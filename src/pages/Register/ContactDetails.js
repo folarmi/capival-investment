@@ -82,14 +82,14 @@ const ContactDetails = () => {
   return (
     <div className="w-full h-screen register-bg">
       <div className="m-auto md:w-[80%] lg:w-[70%] xl:w-[54%] mt-16">
-        <p className="text-redOne font-semibold md:text-4xl lg:text-5xl xl:text-[50px] pb-10">
+        <p className="text-redOne font-semibold md:text-4xl lg:text-5xl xl:text-[50px] pb-10 pl-6 md:pl-0">
           Contact Details
         </p>
       </div>
 
       <section className="bg-blueOne">
         <div className="m-auto md:w-[80%] lg:w-[70%] xl:w-[54%]">
-          <p className="text-blueTwo font-normal text-sm py-6">
+          <p className="text-blueTwo font-normal text-sm py-6 pl-6 md:pl-0">
             Please provide your address information
           </p>
         </div>
@@ -97,7 +97,7 @@ const ContactDetails = () => {
 
       <form
         // onSubmit={handleSubmit(submitForm)}
-        className="m-auto mt-8 md:w-[80%] lg:w-[70%] xl:w-[54%]"
+        className="m-auto mt-8 md:w-[80%] lg:w-[70%] xl:w-[54%] pl-6 md:pl-0"
       >
         <RegisterInput
           placeholder="Home Address"
@@ -145,7 +145,7 @@ const ContactDetails = () => {
           />
         </div>
 
-        <div className="flex justify-between mt-16 w-1/2">
+        <div className="flex justify-between mt-10 lg:mt-16 w-full lg:w-1/2">
           {/* <Button buttonText="Continue" className="rounded-2xl" />
            */}
 
@@ -159,7 +159,7 @@ const ContactDetails = () => {
             />
           </div> */}
 
-          <div className="w-3/4">
+          <div className="w-full lg:w-3/4">
             <Button
               size="md"
               buttonText="Continue"

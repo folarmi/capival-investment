@@ -22,7 +22,7 @@ const RegisterInput = ({
       <label className="relative text-gray-400  block">
         {ifIcon && (
           <img
-            className="pointer-events-none w-8 h-8 absolute top-1/2 transform -translate-y-1/2 left-[68%]"
+            className="pointer-events-none w-8 h-8 absolute top-1/2 transform -translate-y-1/2 left-[60%] lg:left-[68%]"
             viewBox="0 0 20 20"
             fill="currentColor"
             src={icon}

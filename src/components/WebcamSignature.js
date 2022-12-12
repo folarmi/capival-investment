@@ -88,7 +88,7 @@ export const WebcamSignature = () => {
   };
 
   return (
-    <div className="flex items-center justify-center m-auto mt-9 md:w-[80%] lg:w-[70%] xl:w-[54%]">
+    <div className="lg:flex items-center justify-center m-auto mt-9 md:w-[80%] lg:w-[70%] xl:w-[54%]">
       <SimpleDropZone
         handleChangeStatus={handleChangeStatus}
         statusUpload={statusUpload}
@@ -141,25 +141,29 @@ export const WebcamSignature = () => {
         </div>
       </div> */}
 
-      <div className="ml-16 w-1/2">
-        <Button
-          buttonText="Upload Now"
-          className="rounded-2xl"
-          // isLoading={registerUserIsLoading}
-          isLoading={signature ? registerUserIsLoading : false}
-          // onClick={() => {
-          //   setIfUpload(true);
-          //   registerWithSignature();
-          // }}
-          onClick={registerWithSignature}
-        />
+      <div className="mt-10 lg:mt-0 ml-0 lg:ml-16 flex lg:flex-col w-full lg:w-1/2 pr-6">
+        <div className="w-1/2 pr-3">
+          <Button
+            buttonText="Upload Now"
+            className="rounded-2xl"
+            // isLoading={registerUserIsLoading}
+            isLoading={signature ? registerUserIsLoading : false}
+            // onClick={() => {
+            //   setIfUpload(true);
+            //   registerWithSignature();
+            // }}
+            onClick={registerWithSignature}
+          />
+        </div>
 
-        <Button
-          buttonText="Upload Later"
-          className="rounded-2xl mt-6"
-          isLoading={signature ? false : registerUserIsLoading}
-          onClick={registerWithSignature}
-        />
+        <div className="w-1/2">
+          <Button
+            buttonText="Upload Later"
+            className="rounded-2xl lg:mt-6"
+            isLoading={signature ? false : registerUserIsLoading}
+            onClick={registerWithSignature}
+          />
+        </div>
       </div>
     </div>
   );

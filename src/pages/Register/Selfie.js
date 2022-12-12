@@ -11,21 +11,21 @@ const Selfie = () => {
   return (
     <div className="w-full h-screen register-bg">
       <div className="m-auto md:w-[80%] lg:w-[70%] xl:w-[54%] mt-16">
-        <p className="text-redOne font-semibold md:text-4xl lg:text-5xl xl:text-[50px] pb-10">
+        <p className="text-redOne font-semibold md:text-4xl lg:text-5xl xl:text-[50px] pb-10 pl-6 md:pl-0">
           Upload Selfie
         </p>
       </div>
 
       <section className="bg-blueOne">
         <div className="m-auto md:w-[80%] lg:w-[70%] xl:w-[54%]">
-          <p className="text-blueTwo font-normal text-sm py-6">
+          <p className="text-blueTwo font-normal text-sm py-6 pl-6 md:pl-0">
             Avoid shadows on face or anything blocking face view, no hats, no
             dark lenses, or anything that obscures the face.
           </p>
         </div>
       </section>
 
-      <div className="m-auto mt-9 md:w-[80%] lg:w-[70%] xl:w-[54%]">
+      <div className="m-auto mt-9 md:w-[80%] lg:w-[70%] xl:w-[54%] pl-6 md:pl-0">
         <WebcamCapture />
 
         {/* <div className="mt-8 w-1/2">

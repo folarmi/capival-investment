@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -13,6 +13,12 @@ import {
 
 const ProfileInformation = () => {
   const dispatch = useDispatch();
+
+  const [passwordShown, setPasswordShown] = useState(false);
+
+  const togglePasswordShown = () => {
+    setPasswordShown(!passwordShown);
+  };
 
   const validationSchema = Yup.object().shape({
     email: Yup.string()
@@ -47,20 +53,20 @@ const ProfileInformation = () => {
       className="w-full h-screen register-bg"
     >
       <div className="m-auto md:w-[80%] lg:w-[70%] xl:w-[54%] mt-16">
-        <p className="text-redOne font-semibold md:text-4xl lg:text-5xl xl:text-[50px] pb-10">
+        <p className="text-redOne font-semibold md:text-4xl lg:text-5xl xl:text-[50px] pb-10 pl-6 md:pl-0">
           Create your Profile
         </p>
       </div>
 
       <section className="bg-blueOne">
-        <div className="m-auto md:w-[80%] lg:w-[70%] xl:w-[54%]">
+        <div className="m-auto md:w-[80%] lg:w-[70%] xl:w-[54%] pl-6 md:pl-0">
           <p className="text-blueTwo font-normal text-sm py-6">
             Please enter your profile information
           </p>
         </div>
       </section>
 
-      <div className="m-auto my-12 md:w-[80%] lg:w-[70%] xl:w-[54%]">
+      <div className="m-auto my-12 md:w-[80%] lg:w-[70%] xl:w-[54%] pl-6 md:pl-0">
         <RegisterInput
           placeholder="Email"
           register={register("email")}
@@ -69,7 +75,7 @@ const ProfileInformation = () => {
       </div>
 
       <section className="bg-blueOne">
-        <div className="m-auto md:w-[80%] lg:w-[70%] xl:w-[54%]">
+        <div className="m-auto md:w-[80%] lg:w-[70%] xl:w-[54%] pl-6 md:pl-0">
           <p className="font-semibold text-lg text-blueTwo py-6">
             Set up password
           </p>
@@ -80,12 +86,25 @@ const ProfileInformation = () => {
         </div>
       </section>
 
-      <div className="m-auto mt-12 md:w-[80%] lg:w-[70%] xl:w-[54%]">
-        <div className="mb-12">
+      <div className="m-auto mt-12 md:w-[80%] lg:w-[70%] xl:w-[54%] pl-6 md:pl-0">
+        <div className="mb-12 w-full relative">
+          <i onClick={togglePasswordShown} className="">
+            <img
+              src={
+                passwordShown
+                  ? "/assets/icons/hide.svg"
+                  : "/assets/icons/hide.svg"
+              }
+              onClick={togglePasswordShown}
+              alt="visible"
+              className="w-5 absolute z-30 cursor-pointer mt-4 md:mt-[5%] ml-[65%] lg:ml-[89%]"
+            />
+          </i>
           <RegisterInput
             placeholder="Password"
             register={register("password")}
             error={errors?.password?.message}
+            type={passwordShown ? "text" : "password"}
           />
         </div>
 
