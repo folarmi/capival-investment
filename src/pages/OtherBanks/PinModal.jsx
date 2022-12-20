@@ -10,7 +10,7 @@ import { Button } from "../../atoms";
 import { OTPInput } from "../../components/OTPInput";
 import { saveExternalBeneficiaryAsync } from "../../slices/transactions";
 
-const PinModal = ({ formValues, toggleTransactionPinModal }) => {
+const PinModal = ({ formValues, toggleTransactionPinModal, bankName }) => {
   const dispatch = useDispatch();
   const nagivate = useNavigate();
   const { otherBankTransferLoading } = useSelector(
@@ -26,7 +26,6 @@ const PinModal = ({ formValues, toggleTransactionPinModal }) => {
     }
 
     formValues.pin = otpValues;
-    console.log(formValues);
 
     dispatch(otherBankTransferAsync(formValues))
       .unwrap()
@@ -37,7 +36,7 @@ const PinModal = ({ formValues, toggleTransactionPinModal }) => {
               saveExternalBeneficiaryAsync({
                 beneficiary_account: formValues?.destination_account_no,
                 account_name: formValues?.destination_account_name,
-                bank_name: formValues?.destination_bank,
+                bank_name: bankName,
                 bank_code: formValues?.destination_bank,
               })
             )

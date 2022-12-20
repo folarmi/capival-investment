@@ -23,6 +23,7 @@ const OtherBanksTransfer = () => {
   const dispatch = useDispatch();
 
   const [formValues, setFormValues] = useState("");
+  const [bankName, setBankName] = useState("");
   const [saveAsBeneficiary, setSaveAsBeneficiary] = useState(false);
   const [selectedBeneficiary, setSelectedBeneficiary] = useState();
   const [showTransactionPinModal, setShowTransactionPinModal] = useState(false);
@@ -79,7 +80,6 @@ const OtherBanksTransfer = () => {
     setValue("destination_bank", item?.bank_code);
     // setValue("destination_account_no", item?.beneficiary_account);
     setSelectedBeneficiary(item);
-    console.log(item);
   };
 
   const allBanksData =
@@ -120,7 +120,7 @@ const OtherBanksTransfer = () => {
     let formattedAmount = values?.amount.slice(1);
 
     const variables = {
-      destination_bank: values?.destination_bank,
+      destination_bank: values?.destination_bank.value,
       destination_account_no: values?.destination_account_no,
       destination_account_name: values?.destination_account_name,
       amount: formattedAmount,
@@ -129,6 +129,7 @@ const OtherBanksTransfer = () => {
     };
 
     setFormValues(variables);
+    setBankName(values?.destination_bank.label);
     setShowTransactionPinModal(true);
   };
 
@@ -206,7 +207,7 @@ const OtherBanksTransfer = () => {
                     onBlur={onBlur}
                     value={allBanksData.find((c) => c.value === value)}
                     onChange={(val) => {
-                      onChange(val.value);
+                      onChange(val);
                     }}
                     checked={value}
                     isLoading={getAllBanksLoading}
@@ -332,6 +333,7 @@ const OtherBanksTransfer = () => {
             <PinModal
               toggleTransactionPinModal={toggleTransactionPinModal}
               formValues={formValues}
+              bankName={bankName}
             />
           }
           isOpen={showTransactionPinModal}

@@ -9,8 +9,8 @@ import { Selfie } from "./Selfie";
 import { Signature } from "./Signature";
 
 const Register = () => {
-  // const step = useSelector((state) => state.multiStep.value);
-  let step = 7;
+  const step = useSelector((state) => state.multiStep.value);
+  // let step = 7;
   // console.log(step);
   return (
     <>
