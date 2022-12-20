@@ -177,7 +177,7 @@ const OtherBanksTransfer = () => {
             {getExternalBeneficiaries?.map((item) => {
               return (
                 <UserAvatar
-                  initials="FL"
+                  initials={item?.account_name.slice(0, 2)}
                   userName={item?.account_name}
                   onClick={() => getSelectedBeneficiary(item)}
                 />
