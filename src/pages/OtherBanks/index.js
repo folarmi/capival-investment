@@ -4,7 +4,6 @@ import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 import CurrencyFormat from "react-currency-format";
 
@@ -99,7 +98,7 @@ const OtherBanksTransfer = () => {
     if (e.target.value.length === 10) {
       const variables = {
         account_no: e.target.value,
-        bank_code: getValues("destination_bank"),
+        bank_code: getValues("destination_bank")?.value,
       };
       await dispatch(validateInterAccountAsync(variables))
         .unwrap()
@@ -344,3 +343,4 @@ const OtherBanksTransfer = () => {
 };
 
 export { OtherBanksTransfer };
+
