@@ -27,7 +27,7 @@ const DebitCard = () => {
         </p>
       </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-3 place-content-center items-center mx-2 lg:mx-20 w-full">
+      <div className=" flex flex-col md:flex-row items-center justify-center mx-2 w-full">
         {/* <DebitButton text="View Debit Card" icon="/assets/icons/star.svg" /> */}
         <DebitButton
           text="Request Capival Card"
