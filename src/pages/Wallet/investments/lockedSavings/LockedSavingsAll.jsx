@@ -78,7 +78,7 @@ const LockedSavingsAll = () => {
                       >
                         <p className="text-base text-orange font-medium pl-6">
                           <CurrencyFormat
-                            value={item?.amountLocked}
+                            value={item?.amountLocked && item?.amountLocked}
                             displayType={"text"}
                             thousandSeparator={true}
                             prefix={"₦"}
@@ -86,14 +86,9 @@ const LockedSavingsAll = () => {
                         </p>
 
                         <p className="text-base text-blueTwo font-medium pl-6">
-                          <CurrencyFormat
-                            value={item?.interest_earned}
-                            displayType={"text"}
-                            thousandSeparator={true}
-                            prefix={"₦"}
-                          />
+                          {item?.interest_earned}
                         </p>
-
+                        {console.log(typeof item?.interest_earned)}
                         <p className="text-base text-blueTwo font-medium pl-6">
                           {Number(item?.interest_rate).toFixed(2)}%
                         </p>
@@ -126,20 +121,15 @@ const LockedSavingsAll = () => {
                       </p>
                       <p className="text-white font-medium text-2xl">
                         <CurrencyFormat
-                          value={item?.amountLocked}
+                          value={item?.amountLocked && item?.amountLocked}
                           displayType={"text"}
                           thousandSeparator={true}
                           prefix={"₦"}
                         />
                       </p>
+
                       <p className="text-orange font-medium text-xs whitespace-nowrap">
-                        Interest Earned:{" "}
-                        <CurrencyFormat
-                          value={item?.interest_earned}
-                          displayType={"text"}
-                          thousandSeparator={true}
-                          prefix={"₦"}
-                        />
+                        Interest Earned: {item?.interest_earned}
                       </p>
                     </div>
 

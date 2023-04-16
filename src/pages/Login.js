@@ -7,13 +7,13 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 import { Input, Button, Header } from "../atoms";
-import { loginUserAsync, resetInitialState } from "../slices/auth";
+import { loginUserAsync } from "../slices/auth";
 import tokenService from "../services/token.service";
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isLoading } = useSelector((state) => state?.auth?.login);
+  const isLoading = useSelector((state) => state?.auth?.login?.isLoading);
 
   const [passwordShown, setPasswordShown] = useState(false);
 
@@ -52,7 +52,7 @@ const Login = () => {
         }
       })
       .catch((err) => {
-        // console.log(err);
+        console.log(err);
         toast.error(err?.message);
       });
   };

@@ -272,6 +272,7 @@ const registerSlice = createSlice({
       state.error = action.payload;
     },
     [loginUserAsync.pending]: (state) => {
+      console.log("pending", initialState?.login);
       state.login.isLoading = true;
     },
     [loginUserAsync.fulfilled]: (state, action) => {
@@ -280,6 +281,7 @@ const registerSlice = createSlice({
       state.login.user = action.payload;
     },
     [loginUserAsync.rejected]: (state, action) => {
+      console.log("rejected", initialState?.login);
       state.login.isLoading = false;
       state.error = action.payload;
     },

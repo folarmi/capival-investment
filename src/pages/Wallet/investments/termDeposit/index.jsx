@@ -3,7 +3,12 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { Button, FluentSelect, SavingsInput } from "../../../../atoms";
+import {
+  Button,
+  FluentSelect,
+  FluentSelectTwo,
+  SavingsInput,
+} from "../../../../atoms";
 import { AmountInput } from "../../../../atoms/AmountInput";
 import {
   getInterestRateAsync,
@@ -45,7 +50,6 @@ const TermDeposit = () => {
       amount: formattedAmount,
       tenor: getValues("tenor"),
     };
-
     dispatch(getInterestRateAsync(variables))
       .unwrap()
       .then((res) => {
@@ -87,7 +91,7 @@ const TermDeposit = () => {
           rules={{ required: "Amount is required" }}
         />
 
-        <FluentSelect
+        <FluentSelectTwo
           control={control}
           name="tenor"
           options={termDepositTenureData}
