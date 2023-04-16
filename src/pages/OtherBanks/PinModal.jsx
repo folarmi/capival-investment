@@ -26,6 +26,7 @@ const PinModal = ({ formValues, toggleTransactionPinModal, bankName }) => {
     }
 
     formValues.pin = otpValues;
+    console.log(formValues);
 
     dispatch(otherBankTransferAsync(formValues))
       .unwrap()

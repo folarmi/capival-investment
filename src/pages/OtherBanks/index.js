@@ -119,14 +119,16 @@ const OtherBanksTransfer = () => {
     let formattedAmount = values?.amount.slice(1);
 
     const variables = {
-      destination_bank: values?.destination_bank.value,
+      destination_bank:
+        values?.destination_bank.value || getValues("destination_bank"),
+      // destination_bank: getValues("destination_bank"),
       destination_account_no: values?.destination_account_no,
       destination_account_name: values?.destination_account_name,
       amount: formattedAmount,
       narration: values?.narration,
       saveBeneficiary: saveAsBeneficiary,
     };
-
+    console.log(getValues("destination_bank"));
     setFormValues(variables);
     setBankName(values?.destination_bank.label);
     setShowTransactionPinModal(true);
@@ -343,4 +345,3 @@ const OtherBanksTransfer = () => {
 };
 
 export { OtherBanksTransfer };
-
