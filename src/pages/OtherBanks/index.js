@@ -50,7 +50,7 @@ const OtherBanksTransfer = () => {
       .max(10, "Must be exactly 10 digits"),
     amount: Yup.string().required(),
     narration: Yup.string().matches(
-      /^[0-9a-zA-Z]*$/,
+      /^[0-9a-zA-Z ]*$/,
       "Only alphabets are allowed for this field "
     ),
   });
