@@ -319,7 +319,7 @@ const Loans = () => {
                           {item?.mode}
                         </p>
                         <p className="text-base text-blueTwo font-medium col-span-1">
-                          {item?.status === 0 ? "Inactive" : "Active"}
+                          {item?.status}
                         </p>
 
                         {/* <div className="col-span-3 flex items-center">
@@ -403,7 +403,7 @@ const Loans = () => {
                       <div className="w-full pb-4 flex items-center justify-between">
                         <p className=" text-white">Mode</p>
                         <p className="text-xl text-white font-medium">
-                          {item?.status === 0 ? "Inactive" : "Active"}
+                          {item?.status}
                         </p>
                       </div>
                     </div>
