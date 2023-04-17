@@ -188,6 +188,14 @@ const initialState = {
 export const transactionHistorySlice = createSlice({
   name: "transactionHistory",
   initialState,
+  reducers: {
+    resetOtherBankState: (state) => {
+      state.isInterAccountValidated = "";
+    },
+    resetCapivalTransferState: (state) => {
+      state.isAccountValidated = "";
+    },
+  },
   extraReducers: {
     [getTransactionHistoryAsync.pending]: (state) => {
       state.getTransactionHistoryLoading = true;
@@ -294,5 +302,6 @@ export const transactionHistorySlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-const { reducer } = transactionHistorySlice;
+const { reducer, actions } = transactionHistorySlice;
+export const { resetOtherBankState, resetCapivalTransferState } = actions;
 export default reducer;

@@ -13,6 +13,7 @@ import { getAllBanksAsync } from "../../slices/utils";
 import {
   getExternalBeneficiariesAsync,
   validateInterAccountAsync,
+  resetOtherBankState,
 } from "../../slices/transactionHistory";
 import { colourStyles } from "../../utils/HelperFunctions";
 import ModalPopup from "../../components/ModalPopup";
@@ -149,6 +150,7 @@ const OtherBanksTransfer = () => {
 
   useEffect(() => {
     dispatch(getExternalBeneficiariesAsync());
+    dispatch(resetOtherBankState());
   }, []);
 
   return (

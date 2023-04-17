@@ -8,7 +8,7 @@ import { uploadKYCDocumentsAsync } from "../../slices/auth";
 import Select from "react-select";
 import { colourStyles } from "../../utils/HelperFunctions";
 
-const Documents = () => {
+const Documents = ({ documentStatus }) => {
   const dispatch = useDispatch();
   const { uploadKycDocumentsLoading } = useSelector(
     (state) => state?.auth?.login
@@ -72,7 +72,6 @@ const Documents = () => {
         }
       })
       .catch((err) => {
-        console.log(err);
         toast.error(err?.message);
       });
   };
@@ -126,6 +125,7 @@ const Documents = () => {
                 options={idOptions}
                 placeholder="Driver's License"
                 styles={colourStyles}
+                isDisabled={documentStatus ? true : false}
               />
             </div>
           )}

@@ -185,7 +185,7 @@ const SelectedTransactionHistory = () => {
 
             <div className="w-full mt-10 md:w-[80%] m-auto lg:ml-[60%]">
               <Button
-                buttonText="Generate Statement"
+                buttonText="Fetch Transactions"
                 className="rounded-xl mb-10"
                 size="lg"
                 isLoading={getDatedTransactionHistoryLoading}

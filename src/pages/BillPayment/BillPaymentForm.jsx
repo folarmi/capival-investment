@@ -27,11 +27,11 @@ const BillPaymentForm = () => {
     validateBillerProductLoading,
     getBillerProductsLoading,
     initiateTransactionLoading,
+    validateBillerProduct,
   } = useSelector((state) => state?.billPayment);
   const userObject = useSelector(
     (state) => state.auth.login?.user?.user?.customer_data
   );
-
   const [selectedBillerProduct, setSelectedBillerProduct] = useState();
   const [billPaymentProductId, setBillPaymentProductId] = useState("");
   const [paymentModal, setPaymentModal] = useState(false);
@@ -254,6 +254,16 @@ const BillPaymentForm = () => {
                                 Validating...
                               </span>
                             )}
+                          {validateBillerProduct?.name && (
+                            <SavingsInput
+                              label="Amount"
+                              className="mb-4"
+                              placeholder="Amount"
+                              readOnly={true}
+                              value={validateBillerProduct?.name}
+                              disabled
+                            />
+                          )}
                         </>
                       ) : (
                         <DatePicker

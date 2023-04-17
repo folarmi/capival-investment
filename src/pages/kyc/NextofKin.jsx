@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createNextofKinAsync } from "../../slices/auth";
 import { toast } from "react-toastify";
 
-const NextofKin = ({ setActiveTab }) => {
+const NextofKin = ({ setActiveTab, nextOfKinStatus }) => {
   const dispatch = useDispatch();
   const { createNextofKinLoading } = useSelector((state) => state?.auth?.login);
 
@@ -63,6 +63,7 @@ const NextofKin = ({ setActiveTab }) => {
           label="Full Name"
           register={register("name")}
           error={errors?.name?.message}
+          readOnly={nextOfKinStatus ? true : false}
         />
       </div>
 
@@ -72,6 +73,7 @@ const NextofKin = ({ setActiveTab }) => {
           label="Phone Number"
           register={register("phone")}
           error={errors?.phone?.message}
+          readOnly={nextOfKinStatus ? true : false}
         />
       </div>
 
@@ -81,6 +83,7 @@ const NextofKin = ({ setActiveTab }) => {
           label="Email"
           register={register("email")}
           error={errors?.email?.message}
+          readOnly={nextOfKinStatus ? true : false}
         />
       </div>
 
@@ -93,6 +96,7 @@ const NextofKin = ({ setActiveTab }) => {
           label="Address"
           register={register("address")}
           error={errors?.address?.message}
+          readOnly={nextOfKinStatus ? true : false}
         />
       </div>
 
@@ -102,6 +106,7 @@ const NextofKin = ({ setActiveTab }) => {
           label="Relationship"
           register={register("relationship")}
           error={errors?.relationship?.message}
+          readOnly={nextOfKinStatus ? true : false}
         />
       </div>
 

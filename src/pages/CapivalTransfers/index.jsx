@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getInternalBeneficiariesAsync,
   validateAccountAsync,
+  resetCapivalTransferState,
 } from "../../slices/transactionHistory";
 import { toast } from "react-toastify";
 
@@ -131,6 +132,7 @@ const CapivalTransfer = () => {
 
   useEffect(() => {
     dispatch(getInternalBeneficiariesAsync());
+    dispatch(resetCapivalTransferState());
   }, []);
 
   return (

@@ -15,6 +15,7 @@ const BettingForm = () => {
     (state) => state.mobileTopUp
   );
 
+  console.log(bettingAccountDetails);
   // console.log(bettingAccountDetails);
 
   const { register, handleSubmit, formState, getValues, setValue } = useForm(

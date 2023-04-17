@@ -272,7 +272,6 @@ const registerSlice = createSlice({
       state.error = action.payload;
     },
     [loginUserAsync.pending]: (state) => {
-      console.log("pending", initialState?.login);
       state.login.isLoading = true;
     },
     [loginUserAsync.fulfilled]: (state, action) => {

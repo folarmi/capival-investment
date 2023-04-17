@@ -12,7 +12,7 @@ import { employerInfoAsync } from "../../slices/auth";
 import { colourStyles } from "../../utils/HelperFunctions";
 import { getAllEmployers } from "../../slices/utils";
 
-const Employer = ({ setActiveTab }) => {
+const Employer = ({ setActiveTab, employerStatus }) => {
   const dispatch = useDispatch();
   const { createEmployerInfoLoading } = useSelector(
     (state) => state?.auth?.login
@@ -118,6 +118,7 @@ const Employer = ({ setActiveTab }) => {
           label="Employment Status"
           register={register("employment_status")}
           error={errors?.employment_status?.message}
+          readOnly={employerStatus ? true : false}
         />
       </div>
 
@@ -127,6 +128,7 @@ const Employer = ({ setActiveTab }) => {
           label="Official Email"
           register={register("official_email")}
           error={errors?.official_email?.message}
+          readOnly={employerStatus ? true : false}
         />
       </div>
 
@@ -148,6 +150,7 @@ const Employer = ({ setActiveTab }) => {
                 options={employersData}
                 placeholder="Capival Investment Limited"
                 styles={colourStyles}
+                isDisabled={employerStatus ? true : false}
               />
             </div>
           )}
@@ -173,6 +176,7 @@ const Employer = ({ setActiveTab }) => {
           label="Staff ID"
           register={register("staff_id_no")}
           error={errors?.staff_id_no?.message}
+          readOnly={employerStatus ? true : false}
         />
       </div>
 
@@ -192,6 +196,7 @@ const Employer = ({ setActiveTab }) => {
           label="Monthly Income"
           register={register("monthly_income")}
           error={errors?.monthly_income?.message}
+          readOnly={employerStatus ? true : false}
         />
       </div>
 
@@ -217,6 +222,7 @@ const Employer = ({ setActiveTab }) => {
           label="Existing Loan Repayment"
           register={register("other_loan_repayment")}
           error={errors?.other_loan_repayment?.message}
+          readOnly={employerStatus ? true : false}
         />
       </div>
 

@@ -165,6 +165,9 @@ export const mobileTopUpSlice = createSlice({
     [purchaseAirtimeAsync.pending]: (state) => {
       state.airtimeLoading = true;
     },
+    // [purchaseAirtimeAsync.pending]: (state) => {
+    //   state.airtimeLoading = true;
+    // },
     [purchaseAirtimeAsync.fulfilled]: (state, action) => {
       state.dataProducts = action.payload.data;
       state.airtimeLoading = false;

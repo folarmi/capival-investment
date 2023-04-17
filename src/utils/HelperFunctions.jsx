@@ -1,7 +1,7 @@
 export const colourStyles = {
-  control: (styles) => ({
+  control: (styles, state) => ({
     ...styles,
-    backgroundColor: "rgba(59, 88, 168, 0.2)",
+    backgroundColor: state?.isDisabled ? "#DCDCDC" : "rgba(59, 88, 168, 0.2)",
     borderRadius: "20px",
     minHeight: 49,
     border: "1px solid rgba(59, 88, 168, 0.5)",

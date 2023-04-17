@@ -57,7 +57,7 @@ const UpdateKYC = () => {
           setActiveTab("Bank Details");
         } else if (!!!kycObject?.kyc_document) {
           setActiveTab("Documents");
-        } else return null;
+        } else return setActiveTab("Documents");
       }
     })();
     return () => {
@@ -105,13 +105,29 @@ const UpdateKYC = () => {
 
       <div className="m-auto w-[90%] md:w-[80%] lg:w-[50%] mt-8">
         {activeTab === "Next of kin" && (
-          <NextofKin setActiveTab={setActiveTab} />
+          <NextofKin
+            setActiveTab={setActiveTab}
+            nextOfKinStatus={kycObject?.next_of_kin}
+          />
         )}
-        {activeTab === "Employer" && <Employer setActiveTab={setActiveTab} />}
+        {activeTab === "Employer" && (
+          <Employer
+            setActiveTab={setActiveTab}
+            employerStatus={kycObject?.employer_details}
+          />
+        )}
         {activeTab === "Bank Details" && (
-          <BankDetails setActiveTab={setActiveTab} />
+          <BankDetails
+            setActiveTab={setActiveTab}
+            bankDetailsStatus={kycObject?.bank_account}
+          />
         )}
-        {activeTab === "Documents" && <Documents setActiveTab={setActiveTab} />}
+        {activeTab === "Documents" && (
+          <Documents
+            documentStatus={kycObject?.kyc_document}
+            setActiveTab={setActiveTab}
+          />
+        )}
       </div>
     </div>
   );

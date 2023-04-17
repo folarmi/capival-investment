@@ -11,7 +11,7 @@ import { getAllBanksAsync } from "../../slices/utils";
 import { colourStyles } from "../../utils/HelperFunctions";
 import { validateInterAccountAsync } from "../../slices/transactionHistory";
 
-const BankDetails = ({ setActiveTab }) => {
+const BankDetails = ({ setActiveTab, bankDetailsStatus }) => {
   const dispatch = useDispatch();
   const { validateInterAccountLoading, isInterAccountValidated } = useSelector(
     (state) => state.transactionHistory
@@ -78,8 +78,6 @@ const BankDetails = ({ setActiveTab }) => {
         account_no: e.target.value,
         bank_code: selectedbank,
       };
-
-      console.log(getValues("bank_code")?.value);
 
       await dispatch(validateInterAccountAsync(variables))
         .unwrap()
@@ -157,6 +155,7 @@ const BankDetails = ({ setActiveTab }) => {
               {...field}
               options={allBanksData}
               onChange={getSelectedBank}
+              isDisabled={bankDetailsStatus ? true : false}
             />
           )}
         />
@@ -171,6 +170,7 @@ const BankDetails = ({ setActiveTab }) => {
             onChange: (e) => handleValidateAccount(e),
           })}
           error={errors?.account_no?.message}
+          readOnly={bankDetailsStatus ? true : false}
         />
       </div>
 
@@ -195,6 +195,7 @@ const BankDetails = ({ setActiveTab }) => {
           label="Account Type"
           register={register("bank_account_type")}
           error={errors?.bank_account_type?.message}
+          readOnly={bankDetailsStatus ? true : false}
         />
       </div>
 

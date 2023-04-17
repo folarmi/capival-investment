@@ -1,13 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getDebitCardsAsync } from "../../slices/debitCard";
 
 import { DebitButton } from "./DebitButton";
 import { PaystackHook } from "./PayStackHook";
+import ModalPopup from "../../components/ModalPopup";
+import { RequestCapivalCard } from "./RequestCapivalCard";
 
 const DebitCard = () => {
   const dispatch = useDispatch();
   const { allDebitCards } = useSelector((state) => state?.debitCard);
+
+  const [openModal, setOpenModal] = useState(false);
+
+  const toggleRequestCardModal = () => {
+    setOpenModal(!openModal);
+  };
 
   useEffect(() => {
     dispatch(getDebitCardsAsync());
@@ -32,6 +40,7 @@ const DebitCard = () => {
         <DebitButton
           text="Request Capival Card"
           icon="/assets/icons/star.svg"
+          onClick={toggleRequestCardModal}
         />
         <PaystackHook />
       </div>
@@ -46,6 +55,15 @@ const DebitCard = () => {
             );
           })}
       </div>
+
+      <ModalPopup
+        modalHeight="250px"
+        modalWidth="300px"
+        children={
+          <RequestCapivalCard toggleRequestCardModal={toggleRequestCardModal} />
+        }
+        isOpen={openModal}
+      />
     </>
   );
 };

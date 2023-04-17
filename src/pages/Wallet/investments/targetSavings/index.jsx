@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Button, FluentSelect, SavingsInput } from "../../../../atoms";
+import {
+  Button,
+  FluentSelect,
+  FluentSelectTwo,
+  SavingsInput,
+} from "../../../../atoms";
 import { useForm } from "react-hook-form";
 import { AmountInput } from "../../../../atoms/AmountInput";
 import { DatePicker } from "../../../../atoms/Datepicker";
@@ -112,7 +117,7 @@ const TargetSavings = () => {
           error={errors?.title?.message}
         />
 
-        <FluentSelect
+        <FluentSelectTwo
           control={control}
           name="category"
           options={targetCategoriesData}
@@ -132,7 +137,7 @@ const TargetSavings = () => {
           rules={{ required: "Target Amount is required" }}
         />
 
-        <FluentSelect
+        <FluentSelectTwo
           control={control}
           name="savings_frequency"
           options={savingsFrequency}
@@ -156,7 +161,7 @@ const TargetSavings = () => {
         />
 
         {selectedSavingsFrequency !== "Daily" && (
-          <FluentSelect
+          <FluentSelectTwo
             control={control}
             name={
               selectedSavingsFrequency === "Weekly"
@@ -189,7 +194,7 @@ const TargetSavings = () => {
           />
         )}
 
-        <FluentSelect
+        <FluentSelectTwo
           control={control}
           name="preferred_time"
           options={preferredTimeData}
@@ -222,7 +227,7 @@ const TargetSavings = () => {
           rules={{ required: "Withdrawal Date  is required" }}
         />
 
-        <FluentSelect
+        <FluentSelectTwo
           control={control}
           name="primary_source"
           options={sourceOfFundData}

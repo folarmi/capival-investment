@@ -47,7 +47,11 @@ const BillPaymentModal = ({ response, toggleBillModal }) => {
         <p>Remita Fee: ₦{response?.fee || 0}</p>
         <p>Total: ₦{response?.amount || 0}</p>
         <p>Transaction Pin</p>
-        <OTPInput otpValues={otpValues} setOtpValues={setOtpValues} />
+        <OTPInput
+          otpValues={otpValues}
+          setOtpValues={setOtpValues}
+          isInputSecure
+        />
         <Button
           isLoading={processPaymentLoading}
           buttonText="Make Payment"
