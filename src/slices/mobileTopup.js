@@ -126,7 +126,7 @@ const initialState = {
   getAirtimeBillersLoading: false,
   getAllDataBillersLoading: false,
   getDataProductsLoading: false,
-  airtimeLoading: false,
+  airtimePurchaseIsLoading: false,
   buyDataLoading: false,
   bettingBillersLoading: false,
   validateBettingAccountLoading: false,
@@ -168,14 +168,14 @@ export const mobileTopUpSlice = createSlice({
       state.getDataProductsLoading = false;
     },
     [purchaseAirtimeAsync.pending]: (state) => {
-      state.airtimeLoading = true;
+      state.airtimePurchaseIsLoading = true;
     },
     [purchaseAirtimeAsync.fulfilled]: (state, action) => {
       state.dataProducts = action.payload.data;
-      state.airtimeLoading = false;
+      state.airtimePurchaseIsLoading = false;
     },
     [purchaseAirtimeAsync.rejected]: (state) => {
-      state.airtimeLoading = false;
+      state.airtimePurchaseIsLoading = false;
     },
     [getAllBettingBillersAsync.pending]: (state) => {
       state.bettingBillersLoading = true;

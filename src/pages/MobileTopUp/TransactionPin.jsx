@@ -14,11 +14,14 @@ const TransactionPin = ({ formValues, togglePinModal }) => {
   const navigate = useNavigate();
   const [otpValues, setOtpValues] = useState("");
 
-  const { airtimeLoading, buyDataLoading } = useSelector(
+  const { airtimePurchaseIsLoading, buyDataLoading } = useSelector(
     (state) => state?.mobileTopUp
   );
 
-  // console.log("Airtime loading status is", airtimeLoading);
+  const testing = useSelector((state) => state?.mobileTopUp);
+  console.log("test", testing?.airtimePurchaseIsLoading);
+
+  // console.log("Airtime loading status is", airtimePurchaseIsLoading);
   const submitForm = (e) => {
     e.preventDefault();
 
@@ -89,8 +92,8 @@ const TransactionPin = ({ formValues, togglePinModal }) => {
         onClick={submitForm}
         className="rounded-xl mt-6"
         buttonText="Top up"
-        isLoading={airtimeLoading || buyDataLoading}
-        disabled={airtimeLoading || buyDataLoading}
+        isLoading={airtimePurchaseIsLoading || buyDataLoading}
+        disabled={airtimePurchaseIsLoading || buyDataLoading}
       />
     </div>
   );
