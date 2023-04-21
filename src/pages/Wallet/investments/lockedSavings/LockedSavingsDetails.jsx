@@ -39,28 +39,36 @@ const LockedSavingsDetails = () => {
           <p className="text-base font-medium text-blueTwo md:w-[40%] pl-[10%]">
             Amount
           </p>
-          <p className="pl-[10%] md:pl-0 text-base font-normal text-blueTwo md:w-[60%]">
-            <CurrencyFormat
-              value={state?.amountLocked}
-              displayType={"text"}
-              thousandSeparator={true}
-              prefix={"₦"}
-            />
-          </p>
+          {state?.amountLocked ? (
+            <p className="pl-[10%] md:pl-0 text-base font-normal text-blueTwo md:w-[60%]">
+              <CurrencyFormat
+                value={state?.amountLocked}
+                displayType={"text"}
+                thousandSeparator={true}
+                prefix={"₦"}
+              />
+            </p>
+          ) : (
+            "-"
+          )}
         </div>
 
         <div className="w-full md:flex md:items-center border-b border-blueTwo/30 pt-8 pb-4">
           <p className="text-base font-medium text-blueTwo md:w-[40%] pl-[10%]">
             Interest Earned
           </p>
-          <p className="pl-[10%] md:pl-0 text-base font-normal text-blueTwo md:w-[60%]">
-            <CurrencyFormat
-              value={state?.interest_earned}
-              displayType={"text"}
-              thousandSeparator={true}
-              prefix={"₦"}
-            />
-          </p>
+          {state?.interest_earned ? (
+            <p className="pl-[10%] md:pl-0 text-base font-normal text-blueTwo md:w-[60%]">
+              <CurrencyFormat
+                value={state?.interest_earned}
+                displayType={"text"}
+                thousandSeparator={true}
+                prefix={"₦"}
+              />
+            </p>
+          ) : (
+            "-"
+          )}
         </div>
 
         <div className="w-full md:flex md:items-center border-b border-blueTwo/30 pt-8 pb-4">

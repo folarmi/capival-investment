@@ -3,16 +3,12 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import {
-  Button,
-  FluentSelect,
-  FluentSelectTwo,
-  SavingsInput,
-} from "../../../../atoms";
+import { Button, FluentSelectTwo, SavingsInput } from "../../../../atoms";
 import { AmountInput } from "../../../../atoms/AmountInput";
 import {
   getInterestRateAsync,
   getTermDepositTenureAsync,
+  resetInterestRates,
 } from "../../../../slices/investments";
 
 const TermDeposit = () => {
@@ -25,12 +21,19 @@ const TermDeposit = () => {
     termDepositTenure,
     getTermDepositTenureLoading,
   } = useSelector((state) => state.investments);
-  const { register, handleSubmit, formState, control, getValues, setValue } =
-    useForm({
-      defaultValues: {
-        rate: interestRates && `${interestRates?.rate}% per annum`,
-      },
-    });
+  const {
+    register,
+    handleSubmit,
+    formState,
+    control,
+    getValues,
+    setValue,
+    watch,
+  } = useForm({
+    defaultValues: {
+      rate: interestRates && `${interestRates?.rate}% per annum`,
+    },
+  });
   const { errors } = formState;
 
   const termDepositTenureData =
@@ -44,8 +47,9 @@ const TermDeposit = () => {
     });
 
   const getInterestRateData = () => {
-    let formattedAmount = getValues("amount").slice(1);
+    console.log(getValues("tenor"));
 
+    let formattedAmount = getValues("amount").slice(1);
     const variables = {
       amount: formattedAmount,
       tenor: getValues("tenor"),
@@ -62,12 +66,31 @@ const TermDeposit = () => {
       });
   };
 
+  const getInterestRateDataForAmount = () => {
+    console.log(getValues("tenor"));
+    if (getValues("tenor") !== undefined) {
+      let formattedAmount = getValues("amount").slice(1);
+      const variables = {
+        amount: formattedAmount,
+        tenor: getValues("tenor"),
+      };
+      dispatch(getInterestRateAsync(variables))
+        .unwrap()
+        .then((res) => {
+          if (res?.status) {
+            toast(res?.message);
+          }
+        })
+        .catch((err) => {
+          toast.error(err?.message);
+        });
+    }
+  };
+
   const submitForm = (values) => {
     navigate("/dashboard/wallet/investments/saving-type/term-deposit/preview", {
       state: values,
     });
-
-    console.log(values);
   };
 
   useEffect(() => {
@@ -76,6 +99,7 @@ const TermDeposit = () => {
 
   useEffect(() => {
     dispatch(getTermDepositTenureAsync());
+    dispatch(resetInterestRates());
   }, []);
 
   return (
@@ -89,6 +113,12 @@ const TermDeposit = () => {
           min={"100,000"}
           error={errors?.amount?.message}
           rules={{ required: "Amount is required" }}
+          customOnChange={getInterestRateDataForAmount}
+          // customOnBlur={
+          //   watch("amount") !== undefined &&
+          //   watch("tenor") !== undefined &&
+          //   getInterestRateData
+          // }
         />
 
         <FluentSelectTwo
@@ -101,6 +131,19 @@ const TermDeposit = () => {
           error={errors?.tenor?.message}
           rules={{ required: "Tenure is required" }}
           onBlur={getInterestRateData}
+          // onBlur={
+          //   watch("amount") !== undefined &&
+          //   watch("tenor") !== undefined &&
+          //   getInterestRateData
+          // }
+          // onBlur={watch(
+          //   (value) => {
+          //     value?.amount !== undefined &&
+          //       value?.tenor !== undefined &&
+          //       getInterestRateData();
+          //   },
+          //   [watch]
+          // )}
         />
 
         <SavingsInput

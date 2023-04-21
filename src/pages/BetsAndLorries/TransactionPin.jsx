@@ -47,7 +47,11 @@ const TransactionPin = ({ formValues, togglePinModal }) => {
       <p className="text-blueTwo font-medium text-base pb-6 text-center uppercase">
         Set a Transaction Pin
       </p>
-      <OTPInput otpValues={otpValues} setOtpValues={setOtpValues} />
+      <OTPInput
+        otpValues={otpValues}
+        setOtpValues={setOtpValues}
+        isInputSecure
+      />
       <Button
         onClick={submitForm}
         className="rounded-xl mt-6"

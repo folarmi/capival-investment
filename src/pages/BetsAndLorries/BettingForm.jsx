@@ -5,7 +5,10 @@ import { useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Button, SavingsInput } from "../../atoms";
 import ModalPopup from "../../components/ModalPopup";
-import { validateBettingAccountAsync } from "../../slices/mobileTopup";
+import {
+  resetBettingAccountDetails,
+  validateBettingAccountAsync,
+} from "../../slices/mobileTopup";
 import { TransactionPin } from "./TransactionPin";
 
 const BettingForm = () => {
@@ -14,9 +17,6 @@ const BettingForm = () => {
   const { validateBettingAccountLoading, bettingAccountDetails } = useSelector(
     (state) => state.mobileTopUp
   );
-
-  console.log(bettingAccountDetails);
-  // console.log(bettingAccountDetails);
 
   const { register, handleSubmit, formState, getValues, setValue } = useForm(
     {}
@@ -62,6 +62,10 @@ const BettingForm = () => {
   useEffect(() => {
     setValue("account_name", bettingAccountDetails?.name);
   }, [bettingAccountDetails]);
+
+  useEffect(() => {
+    dispatch(resetBettingAccountDetails());
+  }, []);
 
   return (
     <form

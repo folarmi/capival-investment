@@ -116,6 +116,27 @@ const OtherBanksTransfer = () => {
     }
   };
 
+  const handleValidateAccountBank = async () => {
+    if (getValues("destination_account_no") !== undefined) {
+      const variables = {
+        account_no: getValues("destination_account_no"),
+        bank_code: getValues("destination_bank")?.value,
+      };
+      await dispatch(validateInterAccountAsync(variables))
+        .unwrap()
+        .then((res) => {
+          if (res?.status) {
+            toast(res?.message);
+            // reset();
+          }
+        })
+        .catch((err) => {
+          toast.error(err?.message);
+          reset();
+        });
+    }
+  };
+
   const submitForm = (values) => {
     let formattedAmount = values?.amount.slice(1);
 
@@ -169,8 +190,6 @@ const OtherBanksTransfer = () => {
           )}
         </div>
 
-        {/* getExternalBeneficiaries */}
-
         {getExternalBeneficiaries?.length === 0 ? (
           <p className="text-center my-10 text-blueTwo text-xl">
             No Recent Beneficiaries
@@ -200,7 +219,6 @@ const OtherBanksTransfer = () => {
             <Controller
               control={control}
               name="destination_bank"
-              // defaultValue=""
               render={({ field: { onChange, onBlur, value, ref } }) => (
                 <div>
                   <label className="text-sm font-normal text-blueTwo">
@@ -211,6 +229,7 @@ const OtherBanksTransfer = () => {
                     value={allBanksData.find((c) => c.value === value)}
                     onChange={(val) => {
                       onChange(val);
+                      handleValidateAccountBank();
                     }}
                     checked={value}
                     isLoading={getAllBanksLoading}

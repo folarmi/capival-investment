@@ -209,6 +209,7 @@ const TargetSavingsPreview = () => {
           size="lg"
           onClick={submitForm}
           isLoading={createTargetSavingsLoading}
+          disabled={createTargetSavingsLoading}
         />
       </div>
     </div>

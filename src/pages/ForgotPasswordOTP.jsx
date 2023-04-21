@@ -70,6 +70,7 @@ const ForgotPasswordOTP = () => {
             buttonText="Continue"
             className="mb-10 mt-4 rounded-[30px]"
             isLoading={forgotPasswordLoadingOTP}
+            disabled={forgotPasswordLoadingOTP}
           />
         </form>
       </div>

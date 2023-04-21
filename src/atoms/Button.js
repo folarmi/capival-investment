@@ -34,6 +34,7 @@ const Button = ({
             : size === "sm"
             ? "40%"
             : "100%",
+        backgroundColor: disabled ? "#DCDCDC" : "",
       }}
     >
       {isLoading ? (

@@ -12,6 +12,7 @@ const SimpleDropZone = ({
   statusUpload,
   imgAvatar,
   viewType,
+  disabled,
 }) => {
   let bgColor;
 
@@ -27,6 +28,7 @@ const SimpleDropZone = ({
     <Switch
       onChangeStatus={handleChangeStatus}
       accept="image/*"
+      disabled={disabled}
       inputContent={(files, extra) =>
         extra.reject ? (
           "Maximium file size is 2mb"

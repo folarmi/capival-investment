@@ -324,6 +324,11 @@ const initialState = {
 export const investmentsSlice = createSlice({
   name: "investments",
   initialState,
+  reducers: {
+    resetInterestRates: (state) => {
+      state.interestRates = "";
+    },
+  },
   extraReducers: {
     [createTargetSavingsAsync.pending]: (state) => {
       state.createTargetSavingsLoading = true;
@@ -519,5 +524,6 @@ export const investmentsSlice = createSlice({
   },
 });
 
-const { reducer } = investmentsSlice;
+const { reducer, actions } = investmentsSlice;
+export const { resetInterestRates } = actions;
 export default reducer;

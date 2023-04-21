@@ -107,6 +107,7 @@ const Login = () => {
             buttonText="Login"
             className="mt-6 rounded-[30px]"
             isLoading={isLoading}
+            disabled={isLoading}
           />
 
           <p

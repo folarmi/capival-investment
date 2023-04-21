@@ -1,10 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  Button,
-  FluentSelect,
-  FluentSelectTwo,
-  SavingsInput,
-} from "../../../../atoms";
+import { Button, FluentSelectTwo, SavingsInput } from "../../../../atoms";
 import { useForm } from "react-hook-form";
 import { AmountInput } from "../../../../atoms/AmountInput";
 import { DatePicker } from "../../../../atoms/Datepicker";
@@ -35,7 +30,7 @@ const TargetSavings = () => {
 
   const [selectedSavingsFrequency, setSelectedSavingsFrequency] =
     useState("Daily");
-  const { register, handleSubmit, formState, control } = useForm();
+  const { register, handleSubmit, formState, control, getValues } = useForm();
   const { errors } = formState;
 
   const getSelectedFrequency = (item) => {
@@ -223,6 +218,7 @@ const TargetSavings = () => {
           control={control}
           minDate={new Date()}
           className="mt-4"
+          placeholderText={"04/01/2023"}
           error={errors?.withdrawal_date?.message}
           rules={{ required: "Withdrawal Date  is required" }}
         />

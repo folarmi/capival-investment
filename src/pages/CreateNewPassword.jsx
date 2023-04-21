@@ -87,6 +87,7 @@ const CreateNewPassword = () => {
             buttonText="Continue"
             className="mb-10 mt-4 rounded-[30px]"
             isLoading={changePasswordLoading}
+            disabled={changePasswordLoading}
           />
         </form>
       </div>

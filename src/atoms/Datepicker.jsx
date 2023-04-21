@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDatePicker from "react-datepicker";
 import { useController } from "react-hook-form";
 
@@ -10,14 +10,9 @@ const DatePicker = ({
   control,
   error,
   minDate,
+  placeholderText,
 }) => {
   const { field } = useController({ name, control, rules });
-
-  const newDateOptions = {
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-  };
 
   return (
     <div className={`${className}`}>
@@ -42,7 +37,9 @@ const DatePicker = ({
           //     date && date?.toLocaleString("en-US", newDateOptions)
           //   )
           // }
-          selected={field.value || new Date()}
+          selected={field.value}
+          // placeholderText={placeholderText}
+          placeholderText={"Please select a date"}
           inputProps={{
             placeholder: "MM-DD-YYYY HH:mm",
           }}

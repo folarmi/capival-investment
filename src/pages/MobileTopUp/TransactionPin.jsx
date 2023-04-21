@@ -18,7 +18,7 @@ const TransactionPin = ({ formValues, togglePinModal }) => {
     (state) => state?.mobileTopUp
   );
 
-  console.log(airtimeLoading, buyDataLoading);
+  // console.log("Airtime loading status is", airtimeLoading);
   const submitForm = (e) => {
     e.preventDefault();
 
@@ -89,8 +89,8 @@ const TransactionPin = ({ formValues, togglePinModal }) => {
         onClick={submitForm}
         className="rounded-xl mt-6"
         buttonText="Top up"
-        // isLoading={airtimeLoading || buyDataLoading}
-        // disabled={airtimeLoading || buyDataLoading}
+        isLoading={airtimeLoading || buyDataLoading}
+        disabled={airtimeLoading || buyDataLoading}
       />
     </div>
   );

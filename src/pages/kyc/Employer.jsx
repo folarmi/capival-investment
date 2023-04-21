@@ -55,7 +55,6 @@ const Employer = ({ setActiveTab, employerStatus }) => {
       employment_status: values?.employment_status,
       staff_id_no: values?.staff_id_no,
       monthly_income: values?.monthly_income,
-      monthly_income: values?.monthly_income,
       date_of_employment: employmentDate?.toLocaleString(
         "en-US",
         newDateOptions

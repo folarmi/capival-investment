@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
@@ -142,12 +142,14 @@ const Documents = ({ documentStatus }) => {
           statusUpload={statusUpload}
           imgAvatar="/assets/icons/frontView.svg"
           viewType="*Front Page"
+          disabled={documentStatus ? true : false}
         />
         <SimpleDropZone
           handleChangeStatus={handledriverBackStatus}
           statusUpload={driverBackStatusUpload}
           imgAvatar="/assets/icons/backView.svg"
           viewType="*Back Page"
+          disabled={documentStatus ? true : false}
         />
       </div>
 
@@ -163,12 +165,14 @@ const Documents = ({ documentStatus }) => {
           statusUpload={govtIdStatus}
           imgAvatar="/assets/icons/frontView.svg"
           viewType="*Front Page"
+          disabled={documentStatus ? true : false}
         />
         <SimpleDropZone
           handleChangeStatus={handlegovtIDBackStatus}
           statusUpload={govtIdBackStatus}
           imgAvatar="/assets/icons/backView.svg"
           viewType="*Back Page"
+          disabled={documentStatus ? true : false}
         />
       </div>
 

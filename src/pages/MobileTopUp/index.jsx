@@ -92,7 +92,6 @@ const MobileTopUp = () => {
       state: values,
     });
   };
-
   return (
     <div className="mt-8">
       <WalletDetailsHeader ifTransaction={false} />
@@ -157,6 +156,10 @@ const MobileTopUp = () => {
             error={errors?.phone?.message}
             register={register("phone", {
               required: "Phone Number is required",
+              pattern: {
+                value: /^[0-9]{11}$/,
+                message: "Please enter a valid phone number",
+              },
             })}
             className="mt-4"
           />

@@ -12,6 +12,8 @@ const AmountInput = ({
   min,
   readOnly,
   className,
+  customOnChange,
+  customOnBlur,
 }) => {
   const { field } = useController({ name, control, rules });
 
@@ -32,7 +34,16 @@ const AmountInput = ({
           min={min}
           readOnly={readOnly}
           prefix={"₦"}
-          onChange={field.onChange}
+          // onChange={field.onChange}
+          onChange={(val) => {
+            customOnChange && customOnChange(val);
+            field.onChange(val);
+          }}
+          // onBlur={field.onBlur}
+          onBlur={(val) => {
+            customOnBlur && customOnBlur(val);
+            field.onBlur(val);
+          }}
         />
       </div>
       {error && <span className="text-red-500 text-xs">{error}</span>}

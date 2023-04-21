@@ -64,6 +64,7 @@ const ForgotPassword = () => {
             buttonText="Continue"
             className="mb-10 mt-4 rounded-[30px]"
             isLoading={forgotPasswordLoading}
+            disabled={forgotPasswordLoading}
           />
         </form>
       </div>

@@ -141,6 +141,11 @@ const initialState = {
 export const mobileTopUpSlice = createSlice({
   name: "mobileTopUp",
   initialState,
+  reducers: {
+    resetBettingAccountDetails: (state) => {
+      state.bettingAccountDetails = "";
+    },
+  },
   extraReducers: {
     [getAirtimeBillersAsync.pending]: (state) => {
       state.getAirtimeBillersLoading = true;
@@ -165,9 +170,6 @@ export const mobileTopUpSlice = createSlice({
     [purchaseAirtimeAsync.pending]: (state) => {
       state.airtimeLoading = true;
     },
-    // [purchaseAirtimeAsync.pending]: (state) => {
-    //   state.airtimeLoading = true;
-    // },
     [purchaseAirtimeAsync.fulfilled]: (state, action) => {
       state.dataProducts = action.payload.data;
       state.airtimeLoading = false;
@@ -227,5 +229,6 @@ export const mobileTopUpSlice = createSlice({
   },
 });
 
-const { reducer } = mobileTopUpSlice;
+const { reducer, actions } = mobileTopUpSlice;
+export const { resetBettingAccountDetails } = actions;
 export default reducer;

@@ -88,7 +88,6 @@ const LockedSavingsAll = () => {
                         <p className="text-base text-blueTwo font-medium pl-6">
                           {item?.interest_earned}
                         </p>
-                        {console.log(typeof item?.interest_earned)}
                         <p className="text-base text-blueTwo font-medium pl-6">
                           {Number(item?.interest_rate).toFixed(2)}%
                         </p>
