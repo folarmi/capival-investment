@@ -12,10 +12,10 @@ const TermDepositPreview = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { createTermDepositLoading } = useSelector(
-    (state) => state.investments
-  );
-  // createTermDepositLoading
+  const { createTermDepositLoading, termDepositTermsAndCondition } =
+    useSelector((state) => state.investments);
+
+  console.log(termDepositTermsAndCondition);
 
   const [agreeOne, setAgreeOne] = useState(false);
 
@@ -87,7 +87,14 @@ const TermDepositPreview = () => {
       </div>
 
       <ToggleButton
-        toggleText={`I agree to Capival’s Terms & Conditions`}
+        toggleText={
+          <a
+            href="https://demo-ibank.capival.com/fixed-deposit/terms-and-conditions"
+            target="_blank"
+          >
+            I agree to Capival’s Terms & Conditions
+          </a>
+        }
         onChange={toggleOne}
       />
 

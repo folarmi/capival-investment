@@ -90,6 +90,7 @@ const purchaseData = "bills-payment/purchase-data-bundle";
 const validateBettingAccount = "bills-payment/validate-betting-customer";
 const fundBettingWallet = "bills-payment/fund-betting-wallet";
 const getAllDataBillers = "bills-payment/get-data-billers";
+const getTermDepositTermsAndCondition = "fixed-deposit/terms-and-conditions";
 
 const UrlRoute = {
   verifyBVN,
@@ -180,6 +181,7 @@ const UrlRoute = {
   validateBettingAccount,
   fundBettingWallet,
   getAllDataBillers,
+  getTermDepositTermsAndCondition,
 };
 
 export default UrlRoute;
