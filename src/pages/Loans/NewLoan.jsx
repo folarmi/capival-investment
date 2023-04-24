@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import CurrencyFormat from "react-currency-format";
-import { FluentSelect } from "../../atoms/FluentSelect";
 
 import { Button, FluentSelectTwo, SavingsInput } from "../../atoms";
 import {

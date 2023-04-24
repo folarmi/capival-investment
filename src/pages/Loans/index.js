@@ -83,8 +83,9 @@ const Loans = () => {
           className="flex items-center justify-around bg-center bg-no-repeat py-6 lg:py-12 rounded-xl"
           style={{ backgroundImage: `url(${"/assets/images/card.svg"})` }}
         >
-          <p className="text-white font-normal lg:font-semibold text-base lg:text-xl px-3 md:px-0 max-w-[15rem] md:max-w-none">
-            You are now qualified for loans up to N 500,000
+          <p className="text-white text-center font-normal lg:font-semibold text-base lg:text-lg px-3 md:px-0 max-w-[15rem] md:max-w-none">
+            Achieve your goals in no time with quick and seamless personal
+            loans.
           </p>
           <p
             onClick={goToNewLoanPage}
