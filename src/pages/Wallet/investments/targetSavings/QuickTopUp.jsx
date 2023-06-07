@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { Button, FluentSelect } from "../../../../atoms";
+import { Button, FluentSelect, FluentSelectTwo } from "../../../../atoms";
 import { AmountInput } from "../../../../atoms/AmountInput";
 import { quickTopUpAsync } from "../../../../slices/investments";
 import { getFundingSourceAsync } from "../../../../slices/utils";
@@ -78,7 +78,7 @@ const QuickTopUp = ({ toggleQuickTopUpModal, savingsId }) => {
           rules={{ required: "Amount is required" }}
         />
 
-        <FluentSelect
+        <FluentSelectTwo
           control={control}
           name="source"
           options={sourceOfFundData}
