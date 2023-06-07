@@ -100,61 +100,62 @@ const TargetSavingsAll = () => {
               ) : (
                 <>
                   {" "}
-                  {allTargetSavings?.map((item) => {
-                    return (
-                      <div
-                        key={item?.id}
-                        className="flex flex-col items-center justify-between mb-4 rounded-xl p-4"
-                        style={{
-                          backgroundColor: "#3B58A8",
-                          boxShadow: "0px 1px 2px 0px #02733626",
-                        }}
-                      >
-                        <div className="w-full pb-4 mb-3 flex items-center justify-between border-b border-[#6A77AC]">
-                          <p className="text-white">{item?.title}</p>
-                          <p className="text-xl font-medium">
-                            <CurrencyFormat
-                              value={item?.target_amount}
-                              displayType={"text"}
-                              thousandSeparator={true}
-                              prefix={"₦"}
+                  {Array.isArray(allTargetSavings) &&
+                    allTargetSavings?.map((item) => {
+                      return (
+                        <div
+                          key={item?.id}
+                          className="flex flex-col items-center justify-between mb-4 rounded-xl p-4"
+                          style={{
+                            backgroundColor: "#3B58A8",
+                            boxShadow: "0px 1px 2px 0px #02733626",
+                          }}
+                        >
+                          <div className="w-full pb-4 mb-3 flex items-center justify-between border-b border-[#6A77AC]">
+                            <p className="text-white">{item?.title}</p>
+                            <p className="text-xl font-medium">
+                              <CurrencyFormat
+                                value={item?.target_amount}
+                                displayType={"text"}
+                                thousandSeparator={true}
+                                prefix={"₦"}
+                              />
+                            </p>
+                          </div>
+
+                          <div className="w-full pb-4 flex items-center justify-between">
+                            <p className=" text-white">Amount Paid</p>
+                            <p className="text-xl text-white font-medium">
+                              <CurrencyFormat
+                                value={item?.totalPayment}
+                                displayType={"text"}
+                                thousandSeparator={true}
+                                prefix={"₦"}
+                              />
+                            </p>
+                          </div>
+
+                          <div className="w-full mb-5 bg-white py-2 px-3 rounded-md">
+                            <ProgressBar
+                              width={`${
+                                item?.progress > 100 ? 100 : item?.progress
+                              }%`}
                             />
-                          </p>
+                          </div>
+
+                          <section className="w-full items-center flex justify-between">
+                            <button
+                              className="py-4 font-medium text-sm bg-white rounded-lg px-6 text-[#33458D]"
+                              onClick={() => goToSingleTargetSavings(item?.id)}
+                            >
+                              See More
+                            </button>
+
+                            <p className=" text-white">{item?.status}</p>
+                          </section>
                         </div>
-
-                        <div className="w-full pb-4 flex items-center justify-between">
-                          <p className=" text-white">Amount Paid</p>
-                          <p className="text-xl text-white font-medium">
-                            <CurrencyFormat
-                              value={item?.totalPayment}
-                              displayType={"text"}
-                              thousandSeparator={true}
-                              prefix={"₦"}
-                            />
-                          </p>
-                        </div>
-
-                        <div className="w-full mb-5 bg-white py-2 px-3 rounded-md">
-                          <ProgressBar
-                            width={`${
-                              item?.progress > 100 ? 100 : item?.progress
-                            }%`}
-                          />
-                        </div>
-
-                        <section className="w-full items-center flex justify-between">
-                          <button
-                            className="py-4 font-medium text-sm bg-white rounded-lg px-6 text-[#33458D]"
-                            onClick={() => goToSingleTargetSavings(item?.id)}
-                          >
-                            See More
-                          </button>
-
-                          <p className=" text-white">{item?.status}</p>
-                        </section>
-                      </div>
-                    );
-                  })}
+                      );
+                    })}
                 </>
               )}
             </section>

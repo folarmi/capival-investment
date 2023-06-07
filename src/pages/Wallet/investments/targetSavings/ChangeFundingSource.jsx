@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { Button, FluentSelect } from "../../../../atoms";
+import { Button, FluentSelectTwo } from "../../../../atoms";
 import { changeFundingSourceAsync } from "../../../../slices/investments";
 import { getFundingSourceAsync } from "../../../../slices/utils";
 
@@ -18,7 +18,7 @@ const ChangeFundingSource = ({ toggleChangeSourceModal, savingsId }) => {
     (state) => state.investments
   );
 
-  const { handleSubmit, formState, control, reset } = useForm();
+  const { handleSubmit, formState, control } = useForm();
 
   const { errors } = formState;
 
@@ -65,7 +65,7 @@ const ChangeFundingSource = ({ toggleChangeSourceModal, savingsId }) => {
       </p>
 
       <form onSubmit={handleSubmit(submitForm)}>
-        <FluentSelect
+        <FluentSelectTwo
           control={control}
           name="source"
           options={sourceOfFundData}

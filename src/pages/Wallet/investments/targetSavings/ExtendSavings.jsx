@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, FluentSelect, SavingsInput } from "../../../../atoms";
+import {
+  Button,
+  FluentSelect,
+  FluentSelectTwo,
+  SavingsInput,
+} from "../../../../atoms";
 import { AmountInput } from "../../../../atoms/AmountInput";
 import { daysOfTheMonth, daysOfTheWeek } from "../../../../utils/data";
 import { getSavingsFrequencyAsync } from "../../../../slices/utils";
@@ -101,7 +106,7 @@ const ExtendSavings = ({ toggleExtendModal, savingsId }) => {
           rules={{ required: "Amount is required" }}
         />
 
-        <FluentSelect
+        <FluentSelectTwo
           control={control}
           name="savings_frequency"
           options={savingsFrequency}
@@ -125,7 +130,7 @@ const ExtendSavings = ({ toggleExtendModal, savingsId }) => {
         />
 
         {selectedSavingsFrequency !== "Daily" && (
-          <FluentSelect
+          <FluentSelectTwo
             control={control}
             name={
               selectedSavingsFrequency === "Weekly"

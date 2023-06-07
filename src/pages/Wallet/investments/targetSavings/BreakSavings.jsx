@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { Button, FluentSelect, SavingsInput } from "../../../../atoms";
+import { Button, FluentSelectTwo, SavingsInput } from "../../../../atoms";
 import { TextArea } from "../../../../atoms/TextArea";
 import { breakTargetSavingsAsync } from "../../../../slices/investments";
 import { reasonForBreakingAsync } from "../../../../slices/utils";
@@ -70,7 +70,7 @@ const BreakSavings = ({
       </p>
 
       <form onSubmit={handleSubmit(submitForm)}>
-        <FluentSelect
+        <FluentSelectTwo
           control={control}
           name="reason"
           options={
