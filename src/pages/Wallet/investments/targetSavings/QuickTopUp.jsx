@@ -66,7 +66,7 @@ const QuickTopUp = ({ toggleQuickTopUpModal, savingsId }) => {
         Top up
       </p>
       <p className="text-sm text-blueTwo fon-normal">
-        Instantly top up this savings target
+        Instantly top up this savings targetnvjdfbfkjbkfj
       </p>
       <form onSubmit={handleSubmit(submitForm)}>
         <AmountInput
