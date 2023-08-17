@@ -17,6 +17,8 @@ const QuickTopUp = ({ toggleQuickTopUpModal, savingsId }) => {
   const { handleSubmit, formState, control } = useForm();
   const { errors } = formState;
 
+  console.log(errors);
+
   const sourceOfFundData =
     fundingSource &&
     fundingSource?.map((source) => {
@@ -66,7 +68,7 @@ const QuickTopUp = ({ toggleQuickTopUpModal, savingsId }) => {
         Top up
       </p>
       <p className="text-sm text-blueTwo fon-normal">
-        Instantly top up this savings target
+        Instantly top up this savings targetfff
       </p>
       <form onSubmit={handleSubmit(submitForm)}>
         <AmountInput
